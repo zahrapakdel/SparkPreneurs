@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SparkPreneurs — Design System E: Hybrid (A Template × B Color)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* ===== COLOR TOKENS — from Direction B (Workshop Notebook) ===== */
+    --blueprint-ink: #1E3A5F;
+    --blueprint-ink-deep: #142842;
+    --graph-line: #C3D9E8;
+    --signal-orange: #E8622C;
+    --signal-orange-deep: #C74E1E;
+    --kraft-tan: #D9C7A8;
+    --paper-white: #FAF9F5;
+    --paper-white-alt: #F1EEE6;
+    --graphite: #3D3D3D;
+    --graphite-soft: #6B6B63;
+    --white: #FFFFFF;
+
+    /* ===== TYPE TOKENS — from Direction A (Spark & Craft) ===== */
+    --font-display: 'Baloo 2', sans-serif;
+    --font-body: 'Work Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+
+    /* ===== SHAPE TOKENS — from Direction A ===== */
+    --radius-card: 16px;
+    --radius-btn: 10px;
+    --radius-tag: 100px;
+    --shadow-card: 0 4px 14px rgba(30, 58, 95, 0.10);
+    --shadow-card-hover: 0 10px 24px rgba(30, 58, 95, 0.16);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper-white);
+    color: var(--graphite);
+    font-family: var(--font-body);
+    line-height: 1.5;
+  }
+
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 64px 24px 120px; }
+
+  header.intro { margin-bottom: 72px; }
+  header.intro .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--signal-orange-deep);
+    font-weight: 600;
+  }
+  header.intro h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 46px;
+    margin: 10px 0 12px;
+    letter-spacing: -0.01em;
+    color: var(--blueprint-ink);
+  }
+  header.intro p {
+    color: var(--graphite-soft);
+    font-size: 17px;
+    max-width: 600px;
+    margin: 0;
+  }
+
+  section { margin-bottom: 72px; }
+  section > h2 {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    color: var(--blueprint-ink);
+  }
+  section > .section-note {
+    color: var(--graphite-soft);
+    font-size: 14px;
+    margin: 0 0 28px;
+    max-width: 640px;
+  }
+
+  /* ===== COLOR SWATCHES — A's rounded card shape ===== */
+  .swatch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .swatch {
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    background: var(--white);
+  }
+  .swatch .fill { height: 84px; }
+  .swatch .label { padding: 12px 14px 14px; }
+  .swatch .name { font-weight: 600; font-size: 14px; }
+  .swatch .hex { font-family: var(--font-mono); font-size: 12px; color: var(--graphite-soft); margin-top: 2px; }
+
+  /* ===== TYPE SCALE ===== */
+  .type-row { display: flex; align-items: baseline; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--paper-white-alt); }
+  .type-row:first-child { padding-top: 0; }
+  .type-meta { font-family: var(--font-mono); font-size: 12px; color: var(--graphite-soft); width: 150px; flex-shrink: 0; }
+  .type-sample.display { font-family: var(--font-display); font-weight: 700; color: var(--blueprint-ink); }
+  .type-sample.body { font-family: var(--font-body); font-weight: 500; }
+
+  /* ===== BUTTONS — A's offset-shadow shape, B's colors ===== */
+  .btn-row { display: flex; flex-wrap: nowrap; gap: 14px; align-items: center; }
+  .btn {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: var(--radius-btn);
+    padding: 13px 24px;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+  }
+  .btn-primary { background: var(--signal-orange); color: var(--white); box-shadow: 0 4px 0 var(--signal-orange-deep); }
+  .btn-secondary { background: var(--blueprint-ink); color: var(--white); box-shadow: 0 4px 0 var(--blueprint-ink-deep); }
+  .btn-ghost { background: transparent; color: var(--blueprint-ink); border: 2px solid var(--blueprint-ink); padding: 11px 22px; }
+
+  /* ===== TAGS — A's pill shape, B's colors ===== */
+  .tag-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .tag { font-family: var(--font-mono); font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: var(--radius-tag); letter-spacing: 0.02em; }
+  .tag-ink { background: rgba(30,58,95,0.10); color: var(--blueprint-ink); }
+  .tag-orange { background: rgba(232,98,44,0.14); color: var(--signal-orange-deep); }
+  .tag-kraft { background: rgba(217,199,168,0.35); color: #7A5F32; }
+
+  /* ===== PROGRAM CARDS — A's stripe+radius+shadow, hybridized with B's corner marks ===== */
+  .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .prog-card {
+    background: var(--white);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    overflow: visible;
+    position: relative;
+  }
+  .prog-card .stripe { height: 6px; border-radius: var(--radius-card) var(--radius-card) 0 0; }
+  .stripe.orange { background: var(--signal-orange); }
+  .stripe.ink { background: var(--blueprint-ink); }
+  .stripe.kraft { background: var(--kraft-tan); }
+  .prog-card .body-inner { padding: 18px; border-radius: 0 0 var(--radius-card) var(--radius-card); position: relative; overflow: hidden; }
+  .prog-card .corner-mark {
+    position: absolute; width: 12px; height: 12px;
+    border-top: 2px solid var(--signal-orange); border-left: 2px solid var(--signal-orange);
+    top: 8px; left: 8px; opacity: 0.7;
+  }
+  .prog-card .corner-mark.br {
+    top: auto; left: auto; bottom: 8px; right: 8px;
+    border-top: none; border-left: none;
+    border-bottom: 2px solid var(--signal-orange); border-right: 2px solid var(--signal-orange);
+  }
+  .prog-card .photo {
+    height: 110px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--white);
+    margin-bottom: 14px;
+  }
+  .photo-orange { background: linear-gradient(135deg, var(--signal-orange), var(--signal-orange-deep)); }
+  .photo-ink { background: linear-gradient(135deg, var(--blueprint-ink), var(--blueprint-ink-deep)); }
+  .prog-card h3 { font-family: var(--font-display); font-size: 18px; margin: 0 0 6px; color: var(--blueprint-ink); }
+  .prog-card p { font-size: 13.5px; color: var(--graphite-soft); margin: 0 0 12px; }
+  .prog-card .meta-row { display: flex; justify-content: space-between; align-items: center; }
+  .prog-card .price { font-family: var(--font-mono); font-weight: 600; font-size: 14px; color: var(--blueprint-ink); }
+
+  /* ===== SPACING SCALE ===== */
+  .space-row { display: flex; align-items: flex-end; gap: 18px; }
+  .space-block { background: var(--signal-orange); border-radius: 4px; }
+  .space-item { text-align: center; }
+  .space-item .num { font-family: var(--font-mono); font-size: 11px; color: var(--graphite-soft); margin-top: 8px; }
+
+  footer.note { border-top: 1px solid var(--paper-white-alt); padding-top: 24px; font-size: 13px; color: var(--graphite-soft); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="intro">
+    <div class="eyebrow">Design System · Version 3 </div>
+    <h1>SparkPreneurs</h1>
+    <p>Direction A's shapes — rounded cards, pill tags, offset-shadow buttons — recolored entirely in Direction B's blueprint palette, set in Direction A's typefaces, with a touch of B's corner registration marks carried over as a hybrid detail.</p>
+  </header>
+
+  <section>
+    <h2>Color — from Direction B</h2>
+    <p class="section-note">Unchanged from the Workshop Notebook palette: Blueprint Ink for structure and headings, Signal Orange as the one primary action color, Kraft Tan for warmth. Only the shapes holding these colors have changed.</p>
+    <div class="swatch-grid">
+      <div class="swatch"><div class="fill" style="background:var(--blueprint-ink)"></div><div class="label"><div class="name">Blueprint Ink</div><div class="hex">#1E3A5F</div></div></div>
+      <div class="swatch"><div class="fill" style="background:var(--signal-orange)"></div><div class="label"><div class="name">Signal Orange</div><div class="hex">#E8622C</div></div></div>
+      <div class="swatch"><div class="fill" style="background:var(--kraft-tan)"></div><div class="label"><div class="name">Kraft Tan</div><div class="hex">#D9C7A8</div></div></div>
+      <div class="swatch"><div class="fill" style="background:var(--graph-line)"></div><div class="label"><div class="name">Graph Line</div><div class="hex">#C3D9E8</div></div></div>
+      <div class="swatch"><div class="fill" style="background:var(--paper-white-alt)"></div><div class="label"><div class="name">Paper White</div><div class="hex">#FAF9F5</div></div></div>
+      <div class="swatch"><div class="fill" style="background:var(--graphite)"></div><div class="label"><div class="name">Graphite</div><div class="hex">#3D3D3D</div></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Type — from Direction A</h2>
+    <p class="section-note">Baloo 2 keeps its warm, rounded, kid-friendly headline presence, now in Blueprint Ink instead of navy. Work Sans carries body copy. IBM Plex Mono still handles prices, ages, and schedule details.</p>
+    <div class="type-row">
+      <div class="type-meta">Display / 46px / 800</div>
+      <div class="type-sample display" style="font-size:46px;">Let's build something.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">H2 / 30px / 700</div>
+      <div class="type-sample display" style="font-size:30px;">Pottery Wheel Basics</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">H3 / 20px / 600</div>
+      <div class="type-sample display" style="font-size:20px; font-weight:600;">Ages 6–9 · Saturdays</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">Body / 16px / 500</div>
+      <div class="type-sample body" style="font-size:16px;">Kids learn to center clay on the wheel and shape their first bowl, no experience needed.</div>
+    </div>
+    <div class="type-row">
+      <div class="type-meta">Mono / 13px / 600</div>
+      <div class="type-sample" style="font-family:var(--font-mono); font-size:13px; font-weight:600;">$189 · 6 SESSIONS · AGES 6–9</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Buttons — A's shape, B's color</h2>
+    <p class="section-note">Same offset "press" shadow and pill radius as Direction A, now in Signal Orange / Blueprint Ink instead of Spark Yellow / Ink Navy.</p>
+    <div class="btn-row">
+      <button class="btn btn-primary">Register Now</button>
+      <button class="btn btn-secondary">View Schedule</button>
+      <button class="btn btn-ghost">Learn More</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Tags — A's shape, B's color</h2>
+    <p class="section-note">Pill tags from Direction A, recolored to Blueprint Ink, Signal Orange, and Kraft Tan.</p>
+    <div class="tag-row">
+      <span class="tag tag-ink">AGES 8–12</span>
+      <span class="tag tag-orange">POTTERY</span>
+      <span class="tag tag-kraft">SUMMER CAMP</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>Program Cards — the hybrid</h2>
+    <p class="section-note">Direction A's rounded card, soft shadow, and colored top-stripe — plus Direction B's corner registration marks carried over as a small hybrid detail in the top-left and bottom-right corners.</p>
+    <div class="card-grid">
+      <div class="prog-card">
+        <div class="stripe orange"></div>
+        <div class="body-inner">
+          <div class="corner-mark"></div><div class="corner-mark br"></div>
+          <div class="photo photo-orange">Pottery Wheel</div>
+          <h3>Pottery — Wheel</h3>
+          <p>Hands-on wheel throwing for first-timers and returning artists.</p>
+          <div class="meta-row">
+            <span class="price">$189</span>
+            <span class="tag tag-orange">AGES 6–9</span>
+          </div>
+        </div>
+      </div>
+      <div class="prog-card">
+        <div class="stripe ink"></div>
+        <div class="body-inner">
+          <div class="corner-mark"></div><div class="corner-mark br"></div>
+          <div class="photo photo-ink">Robotics Lab</div>
+          <h3>Robotics Lab</h3>
+          <p>Build and code a working robot over six weeks.</p>
+          <div class="meta-row">
+            <span class="price">$210</span>
+            <span class="tag tag-ink">AGES 9–13</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Spacing</h2>
+    <p class="section-note">Same 8px base scale used across every direction.</p>
+    <div class="space-row">
+      <div class="space-item"><div class="space-block" style="width:8px; height:8px;"></div><div class="num">4</div></div>
+      <div class="space-item"><div class="space-block" style="width:16px; height:16px;"></div><div class="num">8</div></div>
+      <div class="space-item"><div class="space-block" style="width:24px; height:24px;"></div><div class="num">16</div></div>
+      <div class="space-item"><div class="space-block" style="width:32px; height:32px;"></div><div class="num">24</div></div>
+      <div class="space-item"><div class="space-block" style="width:48px; height:48px;"></div><div class="num">32</div></div>
+      <div class="space-item"><div class="space-block" style="width:64px; height:64px;"></div><div class="num">48</div></div>
+    </div>
+  </section>
+
+  <footer class="note">
+    Template (shapes/radius/shadow) from Direction A. Color tokens from Direction B. Fonts from Direction A. Corner marks borrowed from Direction B as the one hybrid accent.
+  </footer>
+
+</div>
+</body>
+</html>

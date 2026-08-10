@@ -1,0 +1,256 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const legacy = 'https://sparkpreneurs.github.io';
+const programs = [
+  {
+    title: 'Kids & Youth',
+    description: 'After-school programs, camps, PA days, and seasonal workshops built for curious minds.',
+    image: '/images/kids.jpg',
+    alt: 'A child creating art at SparkPreneurs',
+    tag: 'AGES 4–14',
+    tone: 'orange',
+    href: `${legacy}/camps/`,
+  },
+  {
+    title: 'Adult Studio',
+    description: 'Painting, mixed media, pottery, papier-mâché, and 3D printing in a welcoming studio.',
+    image: '/images/adults.png',
+    alt: 'Adults taking part in a creative SparkPreneurs program',
+    tag: 'ADULTS',
+    tone: 'ink',
+    href: `${legacy}/art-studio/`,
+  },
+  {
+    title: 'Movement & Wellness',
+    description: 'Dance, Zumba, yoga, and movement experiences that build energy and connection.',
+    image: '/images/zumba.jpg',
+    alt: 'A movement class at SparkPreneurs',
+    tag: 'ALL LEVELS',
+    tone: 'kraft',
+    href: `${legacy}/zumba/`,
+  },
+  {
+    title: 'Events & Celebrations',
+    description: 'Creative birthdays, private workshops, community gatherings, and studio rentals.',
+    image: '/images/events.jpg',
+    alt: 'A creative event setup at SparkPreneurs',
+    tag: 'YOUR EVENT',
+    tone: 'orange',
+    href: `${legacy}/book-your-event/`,
+  },
+];
+
+const gallery = [
+  ['/images/gallery-pottery.jpg', 'Adult hand-building pottery workshop'],
+  ['/images/gallery-kids-clay.jpg', 'Kids showing their clay face projects'],
+  ['/images/gallery-robotics.jpg', 'A robotics activity at SparkPreneurs'],
+  ['/images/studio.jpg', 'The SparkPreneurs studio space'],
+];
+---
+
+<BaseLayout
+  title="SparkPreneurs | Creative Programs for Kids & Adults in Toronto"
+  description="A Midtown Toronto community studio for art, pottery, technology, movement, kids programs, adult workshops, and creative events."
+>
+  <header class="site-header" data-header>
+    <div class="nav-shell">
+      <a class="brand" href="#top" aria-label="SparkPreneurs home">
+        <img src="/images/logo.png" alt="SparkPreneurs" width="188" height="80" />
+      </a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button>
+        <span class="sr-only">Toggle menu</span>
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="primary-nav" class="primary-nav" aria-label="Main navigation" data-menu>
+        <a href="#programs">Programs</a>
+        <a href="#about">Our studio</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+        <a class="nav-cta" href={`${legacy}/camp/`}>View camps</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero section-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">CREATIVE COMMUNITY STUDIO · TORONTO</span>
+        <h1>Where every idea gets a chance to <em>spark.</em></h1>
+        <p class="hero-lede">Art, wellness, and tech programs for kids, teens, and adults—made for exploring new passions, building real skills, and having a lot of fun along the way.</p>
+        <div class="button-row">
+          <a class="button button-primary" href="#programs">Explore programs <span aria-hidden="true">→</span></a>
+          <a class="button button-ghost" href={`${legacy}/book-your-event/`}>Book your event</a>
+        </div>
+        <dl class="hero-facts">
+          <div><dt>All ages</dt><dd>Kids to adults</dd></div>
+          <div><dt>Hands-on</dt><dd>Learn by making</dd></div>
+          <div><dt>Midtown</dt><dd>3445 Yonge St.</dd></div>
+        </dl>
+      </div>
+      <div class="hero-art" data-hero-slider aria-label="A look inside SparkPreneurs">
+        <div class="registration-mark top-left"></div>
+        <div class="hero-slides">
+          <figure class="hero-slide is-active" data-slide>
+            <img src="/images/hero-collage.jpg" alt="Kids and adults creating together at SparkPreneurs" width="1080" height="1080" />
+            <figcaption><span>CREATIVE COMMUNITY</span><strong>Make together</strong></figcaption>
+          </figure>
+          <figure class="hero-slide" data-slide aria-hidden="true">
+            <img src="/images/gallery-pottery.jpg" alt="An adult hand-building pottery at SparkPreneurs" loading="lazy" />
+            <figcaption><span>ART &amp; POTTERY</span><strong>Shape new ideas</strong></figcaption>
+          </figure>
+          <figure class="hero-slide" data-slide aria-hidden="true">
+            <img src="/images/gallery-robotics.jpg" alt="A robotics activity at SparkPreneurs" loading="lazy" />
+            <figcaption><span>TECH &amp; MAKING</span><strong>Build with curiosity</strong></figcaption>
+          </figure>
+          <figure class="hero-slide" data-slide aria-hidden="true">
+            <img src="/images/events.jpg" alt="A creative community event at SparkPreneurs" loading="lazy" />
+            <figcaption><span>EVENTS &amp; CELEBRATIONS</span><strong>Gather creatively</strong></figcaption>
+          </figure>
+        </div>
+        <div class="slider-controls">
+          <button type="button" class="slider-arrow" data-slider-prev aria-label="Previous studio activity">←</button>
+          <div class="slider-dots" aria-label="Choose a studio activity">
+            <button type="button" class="is-active" data-slider-dot="0" aria-label="Show creative community" aria-current="true"></button>
+            <button type="button" data-slider-dot="1" aria-label="Show art and pottery"></button>
+            <button type="button" data-slider-dot="2" aria-label="Show technology and making"></button>
+            <button type="button" data-slider-dot="3" aria-label="Show events and celebrations"></button>
+          </div>
+          <button type="button" class="slider-arrow" data-slider-next aria-label="Next studio activity">→</button>
+        </div>
+        <div class="spark-shape" aria-hidden="true">✦</div>
+      </div>
+    </section>
+
+    <section class="audience-strip" aria-label="Programs for everyone">
+      <p>One studio. Lots of ways to grow.</p>
+      <div class="audience-links">
+        <a href={`${legacy}/camps/`}><span>01</span> For kids & teens <b>→</b></a>
+        <a href={`${legacy}/art-studio/`}><span>02</span> For adults <b>→</b></a>
+        <a href={`${legacy}/book-your-event/`}><span>03</span> For your community <b>→</b></a>
+      </div>
+    </section>
+
+    <section id="programs" class="section-shell programs-section">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">FIND YOUR NEXT THING</span>
+          <h2>Programs that make room for curiosity.</h2>
+        </div>
+        <p>Try something new or go deeper into what you already love. Our instructors make every experience approachable, social, and genuinely hands-on.</p>
+      </div>
+      <div class="program-grid">
+        {programs.map((program) => (
+          <a class={`program-card ${program.tone}`} href={program.href}>
+            <span class="card-stripe"></span>
+            <div class="card-image"><img src={program.image} alt={program.alt} loading="lazy" /></div>
+            <div class="card-copy">
+              <span class="tag">{program.tag}</span>
+              <h3>{program.title}</h3>
+              <p>{program.description}</p>
+              <span class="text-link">Learn more <b aria-hidden="true">↗</b></span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section id="about" class="about-section">
+      <div class="about-image">
+        <img src="/images/studio.jpg" alt="The warm, creative SparkPreneurs studio" loading="lazy" />
+        <span class="image-label">OUR SPACE · MIDTOWN TORONTO</span>
+      </div>
+      <div class="about-copy">
+        <span class="eyebrow">MORE THAN AN ART STUDIO</span>
+        <h2>A place to make, move, and belong.</h2>
+        <p>SparkPreneurs is a community where art, wellness, creativity, and entrepreneurial thinking come together.</p>
+        <p>We welcome children, teens, and adults to discover new passions, develop creative skills, and build confidence in a warm, inspiring environment.</p>
+        <ul class="check-list">
+          <li>Small groups and supportive instruction</li>
+          <li>Creative experiences for every skill level</li>
+          <li>A bright, flexible community studio</li>
+        </ul>
+        <a class="button button-secondary" href={`${legacy}/about-us/`}>Meet SparkPreneurs <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
+    <section id="gallery" class="section-shell gallery-section">
+      <div class="section-heading compact">
+        <div><span class="eyebrow">INSIDE THE STUDIO</span><h2>Real people. Real projects. Real joy.</h2></div>
+        <a class="text-link instagram-link" href="https://www.instagram.com/SparkPreneurs.ca" target="_blank" rel="noopener">Follow on Instagram ↗</a>
+      </div>
+      <div class="gallery-grid">
+        {gallery.map(([src, alt], index) => <figure class={`gallery-item item-${index + 1}`}><img src={src} alt={alt} loading="lazy" /></figure>)}
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <span class="eyebrow">YOUR NEXT CREATIVE CHAPTER</span>
+      <h2>Come make something you’re proud of.</h2>
+      <p>Explore upcoming classes, camps, workshops, and community events for every age.</p>
+      <div class="button-row centered">
+        <a class="button button-primary" href="#programs">Find a program <span aria-hidden="true">→</span></a>
+        <a class="button button-light" href="mailto:sparkpreneurs.ca@gmail.com">Ask us a question</a>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" class="site-footer">
+    <div class="footer-main">
+      <div class="footer-brand"><img src="/images/logo.png" alt="SparkPreneurs" /><p>Sparking creativity, one creative spark at a time.</p></div>
+      <div><h3>Visit</h3><p>3445 Yonge St.<br />Second Floor<br />Toronto, ON M4N 2N1</p></div>
+      <div><h3>Contact</h3><p><a href="tel:+14168841393">(416) 884-1393</a><br /><a href="mailto:sparkpreneurs.ca@gmail.com">sparkpreneurs.ca@gmail.com</a><br /><a href="https://www.instagram.com/SparkPreneurs.ca" target="_blank" rel="noopener">@SparkPreneurs.ca</a></p></div>
+      <div><h3>Explore</h3><p><a href="#programs">Programs</a><br /><a href={`${legacy}/camp/`}>Camps</a><br /><a href={`${legacy}/waiver/`}>Waiver</a></p></div>
+    </div>
+    <div class="footer-bottom"><span>© {new Date().getFullYear()} SparkPreneurs</span><span>Art · Wellness · Technology</span></div>
+  </footer>
+
+  <script>
+    const button = document.querySelector('[data-menu-button]');
+    const menu = document.querySelector('[data-menu]');
+    button?.addEventListener('click', () => {
+      const open = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!open));
+      menu?.classList.toggle('is-open', !open);
+    });
+    menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+      button?.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('is-open');
+    }));
+
+    const slider = document.querySelector('[data-hero-slider]');
+    const slides = [...(slider?.querySelectorAll('[data-slide]') ?? [])];
+    const dots = [...(slider?.querySelectorAll('[data-slider-dot]') ?? [])];
+    let activeSlide = 0;
+    let sliderTimer: number | undefined;
+
+    const showSlide = (index: number) => {
+      activeSlide = (index + slides.length) % slides.length;
+      slides.forEach((slide, slideIndex) => {
+        const active = slideIndex === activeSlide;
+        slide.classList.toggle('is-active', active);
+        slide.setAttribute('aria-hidden', String(!active));
+      });
+      dots.forEach((dot, dotIndex) => {
+        const active = dotIndex === activeSlide;
+        dot.classList.toggle('is-active', active);
+        active ? dot.setAttribute('aria-current', 'true') : dot.removeAttribute('aria-current');
+      });
+    };
+
+    const startSlider = () => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      window.clearInterval(sliderTimer);
+      sliderTimer = window.setInterval(() => showSlide(activeSlide + 1), 5000);
+    };
+
+    slider?.querySelector('[data-slider-prev]')?.addEventListener('click', () => { showSlide(activeSlide - 1); startSlider(); });
+    slider?.querySelector('[data-slider-next]')?.addEventListener('click', () => { showSlide(activeSlide + 1); startSlider(); });
+    dots.forEach((dot, index) => dot.addEventListener('click', () => { showSlide(index); startSlider(); }));
+    slider?.addEventListener('mouseenter', () => window.clearInterval(sliderTimer));
+    slider?.addEventListener('mouseleave', startSlider);
+    slider?.addEventListener('focusin', () => window.clearInterval(sliderTimer));
+    slider?.addEventListener('focusout', startSlider);
+    startSlider();
+  </script>
+</BaseLayout>
