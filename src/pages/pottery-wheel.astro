@@ -1,0 +1,294 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProgramHero from '../components/ProgramHero.astro';
+
+const cohorts = [
+  {
+    value: 'pottery-wheel-mon-evening',
+    itemCode: 'POTTERY_WHEEL_MON_EVENING',
+    label: 'Monday Evening Cohort',
+    name: 'Monday Evenings',
+    time: '5:30 PM–7:30 PM',
+    datesText: 'August 10, 17, 24 and 31',
+    dates: [
+      ['2026-08-10', 'August 10'], ['2026-08-17', 'August 17'],
+      ['2026-08-24', 'August 24'], ['2026-08-31', 'August 31'],
+    ],
+  },
+  {
+    value: 'pottery-wheel-tue-daytime',
+    itemCode: 'POTTERY_WHEEL_TUE_DAYTIME',
+    label: 'Tuesday Daytime Cohort',
+    name: 'Tuesday Daytime',
+    time: '11:00 AM–1:00 PM',
+    datesText: 'August 11, 18 and 25; September 1',
+    dates: [
+      ['2026-08-11', 'August 11'], ['2026-08-18', 'August 18'],
+      ['2026-08-25', 'August 25'], ['2026-09-01', 'September 1'],
+    ],
+  },
+  {
+    value: 'pottery-wheel-wed-evening',
+    itemCode: 'POTTERY_WHEEL_WED_EVENING',
+    label: 'Wednesday Evening Cohort',
+    name: 'Wednesday Evenings',
+    time: '5:30 PM–7:30 PM',
+    datesText: 'August 12, 19 and 26; September 2',
+    dates: [
+      ['2026-08-12', 'August 12'], ['2026-08-19', 'August 19'],
+      ['2026-08-26', 'August 26'], ['2026-09-02', 'September 2'],
+    ],
+  },
+  {
+    value: 'pottery-wheel-sat-afternoon',
+    itemCode: 'POTTERY_WHEEL_SAT_AFTERNOON',
+    label: 'Saturday Afternoon Cohort',
+    name: 'Saturday Afternoons',
+    time: '1:00 PM–3:00 PM',
+    datesText: 'August 15, 22 and 29; September 5',
+    dates: [
+      ['2026-08-15', 'August 15'], ['2026-08-22', 'August 22'],
+      ['2026-08-29', 'August 29'], ['2026-09-05', 'September 5'],
+    ],
+  },
+];
+
+const included = [
+  'All clay, tools, and class materials',
+  'Step-by-step instructor guidance',
+  'Glazing and kiln firing for one finished piece',
+  'Use of pottery wheels during class',
+  'Studio cleanup and basic finishing support',
+];
+
+const skills = [
+  'Preparing clay', 'Centring clay on the wheel', 'Opening and shaping a form',
+  'Creating cylinders, bowls, or simple vessels', 'Controlling wall thickness',
+  'Trimming and refining', 'Basic surface decoration',
+  'Preparing one piece for glazing and firing', 'Safe use and care of pottery tools',
+  'Building confidence through practice',
+];
+---
+
+<BaseLayout title="Pottery Wheel Classes for Adults | SparkPreneurs Toronto" description="Join a four-session adult pottery wheel course at SparkPreneurs in Toronto. Learn wheel throwing with clay, tools, guidance, glazing, and firing for one piece included.">
+  <header class="site-header" data-header>
+    <div class="nav-shell">
+      <a class="brand" href="/" aria-label="SparkPreneurs home"><img src="/images/logo.png" alt="SparkPreneurs" width="188" height="80" /></a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button><span class="sr-only">Toggle menu</span><span></span><span></span><span></span></button>
+      <nav id="primary-nav" class="primary-nav" aria-label="Main navigation" data-menu>
+        <a href="/#programs">Programs</a><a href="/#camps">Camps & After-School</a><a href="/#events">Workshops & Events</a><a href="/#about">Our studio</a><a href="/#contact">Contact</a><a class="nav-cta" href="#registration">Register</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="program-page pottery-wheel-page">
+    <ProgramHero
+      eyebrow="ADULT PROGRAM · MIDTOWN TORONTO"
+      title="Pottery Wheel"
+      intro="Explore the creative and calming experience of pottery wheel throwing in a small, supportive class. Participants will learn essential techniques for centring clay, shaping forms, refining their work, and creating functional or decorative pottery pieces. No prior experience is required."
+      image="/images/pottery-wheel-hero.png"
+      imageAlt="Adult shaping clay on a pottery wheel at SparkPreneurs"
+      imageCaption="Make something slowly, with your own hands"
+      programNumber="PROGRAM / 01"
+      facts={[
+        { label: 'Course', value: '4 sessions' },
+        { label: 'Class length', value: '2 hours' },
+        { label: 'Experience', value: 'Beginner friendly' },
+        { label: 'Course fee', value: 'CAD $250' },
+      ]}
+    >
+      <Fragment slot="actions">
+        <a class="button button-primary" href="#registration">Register Now <span aria-hidden="true">→</span></a>
+        <a class="button button-ghost" href="mailto:sparkpreneurs.ca@gmail.com">Ask a Question</a>
+      </Fragment>
+    </ProgramHero>
+
+    <section id="schedule" class="course-section course-schedule" aria-labelledby="pottery-wheel-schedule-title">
+      <div class="program-shell">
+        <div class="course-section-heading">
+          <span class="eyebrow">SELECT YOUR SCHEDULE</span>
+          <h2 id="pottery-wheel-schedule-title">Choose Your Four-Session Cohort</h2>
+          <p>Select one weekly time. Every card shows all four class dates before you register.</p>
+        </div>
+        <fieldset class="course-cohort-grid" data-pottery-wheel-cohorts>
+          <legend class="sr-only">Available Pottery Wheel cohorts</legend>
+          {cohorts.map((cohort) => (
+            <label class="course-cohort-card" data-pottery-wheel-cohort-card>
+              <input type="radio" name="potteryWheelCohort" value={cohort.value} data-item-code={cohort.itemCode} data-cohort-label={cohort.name} data-cohort-time={cohort.time} data-cohort-dates={cohort.datesText} required />
+              <span class="course-cohort-card__top"><span><small>{cohort.label}</small><strong>{cohort.name}</strong></span><span class="course-availability">Open</span></span>
+              <span class="course-cohort-time">{cohort.time}</span>
+              <span class="course-date-label">Four session dates</span>
+              <span class="course-date-list">{cohort.dates.map(([datetime, label]) => <time datetime={datetime}>{label}</time>)}</span>
+              <span class="course-select-label"><i aria-hidden="true"></i> Select {cohort.name.toLowerCase()}</span>
+            </label>
+          ))}
+        </fieldset>
+      </div>
+    </section>
+
+    <section id="registration" class="course-section course-registration" aria-labelledby="pottery-wheel-registration-title">
+      <div class="program-shell">
+        <div class="course-section-heading course-section-heading--left">
+          <span class="eyebrow">REGISTRATION</span>
+          <h2 id="pottery-wheel-registration-title">Reserve Your Place</h2>
+          <p>Choose a cohort, complete your details, and continue to secure payment.</p>
+        </div>
+        <div class="course-registration-grid" data-pottery-wheel-registration data-apps-script-url="https://script.google.com/macros/s/AKfycbwFjroZMc49w0S5ARgEY1X-pB-ZSkVnzlLEwtXm_re_tUUx9SfgPX3t4t8B2AG_yW31/exec" data-program-code="august_september_2026_pottery_wheel" data-required-stripe-mode="live">
+          <div class="course-selection-panel">
+            <span class="eyebrow">YOUR SELECTION</span>
+            <div class="course-selection-heading"><h3>Pottery Wheel · 4 Sessions</h3><strong>CAD $250</strong></div>
+            <article class="course-selected-card">
+              <span>Selected cohort</span>
+              <h3 data-pottery-wheel-selected-name>Select a schedule above</h3>
+              <p data-pottery-wheel-selected-time>Choose one weekly time and attend four consecutive sessions.</p>
+              <p data-pottery-wheel-selected-dates>All four dates will appear here after you choose a cohort.</p>
+              <a href="#schedule">Change schedule ↑</a>
+            </article>
+            <div class="course-price-note"><span>Course fee</span><strong>CAD $250</strong><small>Glazing and kiln firing for one piece included.</small></div>
+          </div>
+
+          <aside class="course-registration-card" aria-label="Complete your Pottery Wheel registration">
+            <span class="eyebrow">YOUR DETAILS</span>
+            <h3>Complete your registration</h3>
+            <form data-pottery-wheel-form novalidate>
+              <div class="course-form-row">
+                <label>First name<input type="text" name="firstName" autocomplete="given-name" required /></label>
+                <label>Last name<input type="text" name="lastName" autocomplete="family-name" required /></label>
+              </div>
+              <label>Email<input type="email" name="email" autocomplete="email" required /></label>
+              <label>Phone<input type="tel" name="phone" autocomplete="tel" required /></label>
+              <label>Experience level<select name="experienceLevel" required><option value="">Choose one</option><option value="beginner">Beginner</option><option value="some-experience">Some experience</option><option value="experienced">Experienced</option></select></label>
+              <label>Message <em>(optional)</em><textarea name="message" rows="3"></textarea></label>
+              <label class="course-consent"><input type="checkbox" name="consent" value="yes" required /><span>I agree to the registration and privacy terms.</span></label>
+            </form>
+            <p class="course-registration-note">Your cohort is not held until payment is verified.</p>
+            <p class="course-registration-status" data-pottery-wheel-status role="status" aria-live="polite"></p>
+            <button class="button button-primary course-checkout" type="button" data-pottery-wheel-submit disabled>Continue to Secure Payment</button>
+            <button class="course-clear" type="button" data-pottery-wheel-clear>Clear selection</button>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="course-section course-materials" aria-labelledby="pottery-wheel-included-title">
+      <div class="program-shell">
+        <div class="course-section-heading"><span class="eyebrow">COURSE MATERIALS</span><h2 id="pottery-wheel-included-title">What’s Included</h2></div>
+        <ul class="course-feature-grid">{included.map((item, index) => <li><span>{String(index + 1).padStart(2, '0')}</span>{item}</li>)}</ul>
+        <p class="course-section-note"><span aria-hidden="true">✦</span> Glazing and kiln firing for one selected piece are included in the course fee. Additional pieces may be glazed and kiln-fired for an extra fee.</p>
+      </div>
+    </section>
+
+    <section class="course-section course-skills" aria-labelledby="pottery-wheel-learning-title">
+      <div class="program-shell course-skills-layout">
+        <div class="course-section-heading course-section-heading--left"><span class="eyebrow">SKILLS AND TECHNIQUES</span><h2 id="pottery-wheel-learning-title">What You’ll Learn</h2><p>Build confidence at the wheel through guided practice, one technique at a time.</p></div>
+        <ul class="course-skill-list">{skills.map((skill) => <li><span aria-hidden="true">✦</span>{skill}</li>)}</ul>
+      </div>
+    </section>
+
+    <section class="course-section course-process" aria-labelledby="pottery-wheel-finished-title">
+      <div class="program-shell course-process-panel">
+        <div><span class="eyebrow">FINISHED PIECES</span><h2 id="pottery-wheel-finished-title">From Clay to Finished Piece</h2></div>
+        <div><p>During the four-session course, participants will create and refine pottery on the wheel. One selected piece will be glazed and professionally kiln-fired as part of the course fee. Additional pieces can be glazed and fired for an extra fee.</p><p>Finished work is professionally kiln-fired through our ceramic firing service. Kiln firing requires additional processing time. Pickup timing for completed pieces will be shared during the course.</p></div>
+      </div>
+    </section>
+
+    <section class="course-final-cta" aria-labelledby="pottery-wheel-cta-title">
+      <div class="program-shell"><div><span class="eyebrow">READY TO CREATE?</span><h2 id="pottery-wheel-cta-title">Start Your Pottery Wheel Course</h2><p>Choose the weekly schedule that works for you, then build confidence on the wheel through four guided sessions.</p></div><div class="course-final-actions"><a class="button button-primary" href="#schedule">Choose a Schedule</a><a class="button button-light" href="mailto:sparkpreneurs.ca@gmail.com">Ask a Question</a></div></div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="footer-main"><div class="footer-brand"><img src="/images/logo.png" alt="SparkPreneurs" /><p>Sparking creativity, one creative spark at a time.</p></div><div><h3>Visit</h3><p>3445 Yonge St.<br />Second Floor<br />Toronto, ON M4N 2N1</p></div><div><h3>Contact</h3><p><a href="tel:+14168841393">(416) 884-1393</a><br /><a href="mailto:sparkpreneurs.ca@gmail.com">sparkpreneurs.ca@gmail.com</a></p></div></div><div class="footer-bottom"><span>© {new Date().getFullYear()} SparkPreneurs</span><span>Art · Wellness · Technology</span></div></footer>
+
+  <script is:inline>
+    (() => {
+      const menuButton = document.querySelector('[data-menu-button]');
+      const menu = document.querySelector('[data-menu]');
+      menuButton?.addEventListener('click', () => { const open = menuButton.getAttribute('aria-expanded') === 'true'; menuButton.setAttribute('aria-expanded', String(!open)); menu?.classList.toggle('is-open', !open); });
+
+      const registration = document.querySelector('[data-pottery-wheel-registration]');
+      const cohortInputs = [...document.querySelectorAll('[data-pottery-wheel-cohorts] input[type="radio"]')];
+      if (!registration || !cohortInputs.length) return;
+
+      const form = registration.querySelector('[data-pottery-wheel-form]');
+      const selectedName = registration.querySelector('[data-pottery-wheel-selected-name]');
+      const selectedTime = registration.querySelector('[data-pottery-wheel-selected-time]');
+      const selectedDates = registration.querySelector('[data-pottery-wheel-selected-dates]');
+      const submitButton = registration.querySelector('[data-pottery-wheel-submit]');
+      const clearButton = registration.querySelector('[data-pottery-wheel-clear]');
+      const status = registration.querySelector('[data-pottery-wheel-status]');
+      const appsScriptUrl = registration.dataset.appsScriptUrl || '';
+      const programCode = registration.dataset.programCode || '';
+      const requiredStripeMode = registration.dataset.requiredStripeMode || 'test';
+      const returnPageUrl = 'https://sparkpreneurs.ca/pottery-wheel/';
+      let backendReady = false;
+      let isSubmitting = false;
+
+      const setStatus = (message, type = '') => { status.textContent = message || ''; status.dataset.status = type; };
+      const selectedInput = () => cohortInputs.find((input) => input.checked) || null;
+      const updateSelection = () => {
+        const input = selectedInput();
+        cohortInputs.forEach((item) => item.closest('[data-pottery-wheel-cohort-card]')?.classList.toggle('is-selected', item.checked));
+        if (!input) {
+          selectedName.textContent = 'Select a schedule above';
+          selectedTime.textContent = 'Choose one weekly time and attend four consecutive sessions.';
+          selectedDates.textContent = 'All four dates will appear here after you choose a cohort.';
+          submitButton.disabled = true;
+          clearButton.disabled = isSubmitting;
+          return;
+        }
+        selectedName.textContent = input.dataset.cohortLabel || '';
+        selectedTime.textContent = input.dataset.cohortTime || '';
+        selectedDates.textContent = input.dataset.cohortDates || '';
+        submitButton.disabled = !backendReady || isSubmitting;
+        clearButton.disabled = isSubmitting;
+      };
+      const post = async (payload) => {
+        const response = await fetch(appsScriptUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+        const responseText = await response.text();
+        let result;
+        try { result = JSON.parse(responseText); } catch { throw new Error('The registration service did not return a readable response.'); }
+        if (!response.ok || result.success === false) throw new Error(result.error || 'The registration service could not process this request.');
+        return result;
+      };
+      const checkBackend = async () => {
+        if (!appsScriptUrl || !programCode) { setStatus('Secure checkout is temporarily unavailable. Please contact SparkPreneurs.', 'warning'); updateSelection(); return; }
+        setStatus('Preparing secure checkout…', 'pending');
+        try { const result = await post({ action: 'ping', programCode }); backendReady = result.programCode === programCode && result.stripeMode === requiredStripeMode; setStatus(backendReady ? '' : 'Secure checkout is temporarily unavailable. Please contact SparkPreneurs.', backendReady ? '' : 'warning'); }
+        catch { backendReady = false; setStatus('Secure checkout is temporarily unavailable. Please contact SparkPreneurs.', 'warning'); }
+        updateSelection();
+      };
+      const replaceCheckoutQuery = () => { const url = new URL(location.href); url.searchParams.delete('session_id'); url.searchParams.delete('payment'); history.replaceState({}, document.title, url.pathname + url.search + url.hash); };
+      const verifyReturn = async () => {
+        const params = new URLSearchParams(location.search); const sessionId = params.get('session_id'); const payment = params.get('payment');
+        if (payment === 'cancelled' || payment === 'canceled') { setStatus('Payment was canceled. Your cohort selection is still available when you are ready.', 'warning'); registration.scrollIntoView({ behavior: 'smooth', block: 'start' }); replaceCheckoutQuery(); return; }
+        if (!sessionId || !appsScriptUrl) return;
+        setStatus('Checking payment status…', 'pending'); registration.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        try { const result = await post({ action: 'verifyCheckoutSession', programCode, stripeSessionId: sessionId }); if (result.paymentStatus !== 'paid') throw new Error('Payment could not be verified yet. Please contact SparkPreneurs.'); setStatus(result.message || 'Payment verified. Your registration has been received.', 'success'); }
+        catch (error) { setStatus(error.message || 'Payment could not be verified yet. Please contact SparkPreneurs.', 'error'); }
+        finally { replaceCheckoutQuery(); }
+      };
+      const beginCheckout = async () => {
+        const input = selectedInput();
+        if (!input) { setStatus('Please choose one four-session cohort before continuing.', 'warning'); document.querySelector('#schedule')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+        if (!backendReady) { setStatus('Secure checkout is temporarily unavailable. Please contact SparkPreneurs.', 'warning'); return; }
+        if (!form.reportValidity()) { setStatus('Please complete the required registration fields before continuing.', 'warning'); return; }
+        const values = new FormData(form);
+        const itemCode = input.dataset.itemCode;
+        if (!itemCode) { setStatus('Please choose a valid cohort before continuing.', 'warning'); return; }
+        isSubmitting = true; submitButton.textContent = 'Opening Secure Payment…'; updateSelection(); setStatus('Checking your cohort and registration total…', 'pending');
+        try {
+          const result = await post({ action: 'createCheckoutSession', programCode, selectedItemCodes: [itemCode], displayedAmountCents: 25000, successUrl: `${returnPageUrl}?payment=success&session_id={CHECKOUT_SESSION_ID}`, cancelUrl: `${returnPageUrl}?payment=cancelled#registration`, firstName: String(values.get('firstName') || '').trim(), lastName: String(values.get('lastName') || '').trim(), email: String(values.get('email') || '').trim(), phone: String(values.get('phone') || '').trim(), experienceLevel: String(values.get('experienceLevel') || '').trim(), message: String(values.get('message') || '').trim(), consent: values.get('consent') === 'yes' });
+          const checkoutUrl = new URL(result.checkoutUrl);
+          if (checkoutUrl.protocol !== 'https:' || checkoutUrl.hostname !== 'checkout.stripe.com') throw new Error('Stripe returned an invalid payment link.');
+          location.assign(checkoutUrl.href);
+        } catch (error) { isSubmitting = false; submitButton.textContent = 'Continue to Secure Payment'; setStatus(error.message || 'Payment could not be started. Please try again.', 'error'); updateSelection(); }
+      };
+
+      cohortInputs.forEach((input) => input.addEventListener('change', () => { setStatus(''); updateSelection(); }));
+      clearButton.addEventListener('click', () => { cohortInputs.forEach((input) => { input.checked = false; }); form.reset(); setStatus('Your cohort selection and form details were cleared.', 'warning'); updateSelection(); });
+      form.addEventListener('submit', (event) => { event.preventDefault(); beginCheckout(); });
+      submitButton.addEventListener('click', beginCheckout);
+      updateSelection(); checkBackend(); verifyReturn();
+    })();
+  </script>
+</BaseLayout>
