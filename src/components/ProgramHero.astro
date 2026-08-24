@@ -1,0 +1,66 @@
+---
+interface Fact {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  image?: string;
+  imageAlt?: string;
+  imageCaption?: string;
+  programNumber?: string;
+  backHref?: string;
+  backLabel?: string;
+  facts?: Fact[];
+}
+
+const {
+  eyebrow,
+  title,
+  intro,
+  image,
+  imageAlt = '',
+  imageCaption,
+  programNumber = 'PROGRAM',
+  backHref = '/#programs',
+  backLabel = 'All programs',
+  facts = [],
+} = Astro.props;
+---
+
+<section class:list={['course-hero', { 'course-hero--without-image': !image }]} aria-labelledby="course-hero-title">
+  <div class="program-shell">
+    <a class="course-back-link" href={backHref}><span aria-hidden="true">←</span> {backLabel}</a>
+    <div class="course-hero__frame">
+      <div class="course-hero__copy">
+        <span class="course-hero__number">{programNumber}</span>
+        <span class="eyebrow">{eyebrow}</span>
+        <h1 id="course-hero-title">{title}</h1>
+        <p>{intro}</p>
+        <div class="course-hero__actions"><slot name="actions" /></div>
+      </div>
+
+      {image ? (
+        <figure class="course-hero__media">
+          <img src={image} alt={imageAlt} width="1600" height="900" fetchpriority="high" decoding="async" />
+          {imageCaption && <figcaption><span aria-hidden="true">✦</span>{imageCaption}</figcaption>}
+        </figure>
+      ) : (
+        <div class="course-hero__motif" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      )}
+
+      {facts.length > 0 && (
+        <dl class="course-hero__facts">
+          {facts.map((fact, index) => (
+            <div><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><dt>{fact.label}</dt><dd>{fact.value}</dd></div>
+          ))}
+        </dl>
+      )}
+    </div>
+  </div>
+</section>

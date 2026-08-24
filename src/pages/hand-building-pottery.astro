@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProgramHero from '../components/ProgramHero.astro';
+
+const classes = [
+  { code: 'HB4SUN', name: 'Hand-Building Pottery: 4 Sunday Sessions (10:30 AM-12:30 PM)', schedule: 'Sundays, 10:30 AM-12:30 PM', button: 'Add Sunday Class to Cart' },
+  { code: 'HB4MON', name: 'Hand-Building Pottery: 4 Monday Evening Sessions (5:30 PM-7:30 PM)', schedule: 'Monday Evenings, 5:30 PM-7:30 PM', button: 'Add Monday Class to Cart' },
+  { code: 'HB4WED', name: 'Hand-Building Pottery: 4 Wednesday Evening Sessions (5:30 PM-7:30 PM)', schedule: 'Wednesday Evenings, 5:30 PM-7:30 PM', button: 'Add Wednesday Class to Cart' },
+];
+---
+
+<BaseLayout title="Hand-Building Pottery | SparkPreneurs" description="Four-session pottery classes for adults, focused on shaping clay by hand and building finished pieces with instructor guidance.">
+  <header class="site-header" data-header>
+    <div class="nav-shell">
+      <a class="brand" href="/" aria-label="SparkPreneurs home"><img src="/images/logo.png" alt="SparkPreneurs" width="188" height="80" /></a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button><span class="sr-only">Toggle menu</span><span></span><span></span><span></span></button>
+      <nav id="primary-nav" class="primary-nav" aria-label="Main navigation" data-menu>
+        <a href="/#programs">Programs</a><a href="/#camps">Camps & After-School</a><a href="/#events">Workshops & Events</a><a href="/#about">Our studio</a><a href="/#contact">Contact</a><a class="nav-cta" href="#registration">Register</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="program-page hand-building-page">
+    <ProgramHero eyebrow="ADULT POTTERY CLASS · MIDTOWN TORONTO" title="Hand-Building Pottery" intro="Four-session pottery classes for adults, focused on shaping clay by hand and building finished pieces with instructor guidance." programNumber="PROGRAM / 02" backHref="https://sparkpreneurs.github.io/art-studio/" backLabel="Back to Adult Art Studio" facts={[{ label: 'Course', value: '4 sessions' }, { label: 'Class length', value: '2 hours' }, { label: 'Experience', value: 'Adult class' }, { label: 'Offer', value: '$195 + HST' }]}>
+      <Fragment slot="actions"><a class="button button-primary" href="#schedule">Choose a Class <span aria-hidden="true">→</span></a><a class="button button-ghost" href="mailto:sparkpreneurs.ca@gmail.com">Ask a Question</a></Fragment>
+    </ProgramHero>
+
+    <section id="schedule" class="course-section hand-class-section" aria-labelledby="hand-building-class-title">
+      <div class="program-shell">
+        <div class="course-section-heading"><span class="eyebrow">AVAILABLE NOW</span><h2 id="hand-building-class-title">Choose a 4-Session Class</h2><p>Choose one weekly schedule.</p></div>
+        <div class="hand-class-grid" data-hand-building-classes>
+          {classes.map((course) => (
+            <article class="hand-class-card" data-course-card data-course-item-code={course.code} data-course-item-name={course.name} data-course-price-cents="19500">
+              <div class="hand-class-card__image"><img src="/images/hand-building-pottery.jpg" alt="Hand-building pottery at SparkPreneurs" width="1200" height="1800" loading="lazy" /></div>
+              <div class="hand-class-card__body">
+                <div class="hand-class-card__label-row"><span class="tag">Adult Class</span><span class="course-availability">Open</span></div>
+                <h3>Hand-Building Pottery</h3><p class="hand-class-schedule">{course.schedule}</p>
+                <p class="hand-class-price"><span>Regular price <s>$240</s></span><strong>$195 <small>for 4 sessions</small></strong><em>Limited-time offer</em></p>
+                <p class="hand-class-note">Includes four instructor-led sessions. Pottery pieces will be kiln-fired through SparkPreneurs' ceramic partner.</p>
+                <button class="button button-ghost" type="button" data-course-add aria-pressed="false">{course.button}</button>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="registration" class="course-section course-registration" aria-labelledby="hand-building-registration-title">
+      <div class="program-shell">
+        <div class="course-section-heading course-section-heading--left"><span class="eyebrow">REGISTRATION</span><h2 id="hand-building-registration-title">Complete Your Registration</h2><p>Add one class schedule, enter your details, and continue to secure payment.</p></div>
+        <div class="course-registration-grid" data-course-registration data-program-code="adult_hand_building_pottery" data-tax-rate-percent="13" data-apps-script-url="https://script.google.com/macros/s/AKfycby8E59BM8-SvzPh6kYmc8QAAwDU24gb1bJ2MvWmJZpQi1yXgkUQk8qnKNtVvnRT7JEO/exec" data-return-url="https://sparkpreneurs.ca/hand-building-pottery/">
+          <div class="course-selection-panel hand-cart-panel">
+            <span class="eyebrow">YOUR SELECTION</span><h3>Hand-Building Pottery · 4 Sessions</h3>
+            <ul class="hand-cart-list" data-course-cart-list><li class="hand-cart-empty">No class added yet.</li></ul>
+            <div class="hand-cart-totals" data-course-cart-totals hidden><p><span>Subtotal</span><strong data-course-subtotal>$0.00</strong></p><p><span data-course-tax-label>HST 13%</span><strong data-course-tax>$0.00</strong></p><p class="hand-cart-total"><span>Total</span><strong data-course-grand-total>$0.00</strong></p></div>
+            <p class="hand-cart-firing"><span aria-hidden="true">✦</span> Pottery pieces will be kiln-fired through SparkPreneurs' ceramic partner.</p>
+          </div>
+          <aside class="course-registration-card" aria-label="Complete your Hand-Building Pottery registration">
+            <span class="eyebrow">YOUR DETAILS</span><h3>Contact information</h3>
+            <form data-course-registration-form novalidate><label>Participant name<input type="text" name="studentName" autocomplete="name" required /></label><label>Contact name<input type="text" name="parentName" autocomplete="name" required /></label><label>Contact email<input type="email" name="parentEmail" autocomplete="email" required /></label><label>Phone<input type="tel" name="phone" autocomplete="tel" required /></label></form>
+            <p class="course-registration-note">Registration is confirmed after payment is verified.</p><p class="course-registration-status" data-course-status role="status" aria-live="polite"></p>
+            <button class="button button-primary course-checkout" type="button" data-course-purchase disabled>Continue to Secure Payment</button><button class="course-clear" type="button" data-course-clear disabled>Clear Cart</button>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="course-final-cta" aria-labelledby="hand-building-cta-title"><div class="program-shell"><div><span class="eyebrow">QUESTIONS?</span><h2 id="hand-building-cta-title">We’ll help with registration details.</h2><p>Questions about Hand-Building Pottery? Contact SparkPreneurs and we will help with registration details.</p></div><div class="course-final-actions"><a class="button button-primary" href="#schedule">Choose a Class</a><a class="button button-light" href="mailto:sparkpreneurs.ca@gmail.com">Contact Us</a></div></div></section>
+  </main>
+
+  <footer class="site-footer"><div class="footer-main"><div class="footer-brand"><img src="/images/logo.png" alt="SparkPreneurs" /><p>Sparking creativity, one creative spark at a time.</p></div><div><h3>Visit</h3><p>3445 Yonge St.<br />Second Floor<br />Toronto, ON M4N 2N1</p></div><div><h3>Contact</h3><p><a href="tel:+14168841393">(416) 884-1393</a><br /><a href="mailto:sparkpreneurs.ca@gmail.com">sparkpreneurs.ca@gmail.com</a></p></div></div><div class="footer-bottom"><span>© {new Date().getFullYear()} SparkPreneurs</span><span>Art · Wellness · Technology</span></div></footer>
+
+  <script is:inline>
+    (() => {
+      const menuButton = document.querySelector('[data-menu-button]'); const menu = document.querySelector('[data-menu]');
+      menuButton?.addEventListener('click', () => { const open = menuButton.getAttribute('aria-expanded') === 'true'; menuButton.setAttribute('aria-expanded', String(!open)); menu?.classList.toggle('is-open', !open); });
+      const registration = document.querySelector('[data-course-registration]'); const cards = [...document.querySelectorAll('[data-course-card]')]; if (!registration || !cards.length) return;
+      const choices = cards.map((card) => ({ card, button: card.querySelector('[data-course-add]'), code: String(card.dataset.courseItemCode || '').trim().toUpperCase(), name: String(card.dataset.courseItemName || '').trim(), priceCents: Number(card.dataset.coursePriceCents || 0) }));
+      const form = registration.querySelector('[data-course-registration-form]'); const cartList = registration.querySelector('[data-course-cart-list]'); const totalsPanel = registration.querySelector('[data-course-cart-totals]'); const subtotalEl = registration.querySelector('[data-course-subtotal]'); const taxEl = registration.querySelector('[data-course-tax]'); const totalEl = registration.querySelector('[data-course-grand-total]'); const purchaseButton = registration.querySelector('[data-course-purchase]'); const clearButton = registration.querySelector('[data-course-clear]'); const status = registration.querySelector('[data-course-status]'); const programCode = registration.dataset.programCode || ''; const appsScriptUrl = registration.dataset.appsScriptUrl || ''; const returnPageUrl = registration.dataset.returnUrl || ''; const taxRate = Number(registration.dataset.taxRatePercent || 0) / 100;
+      let selectedCode = ''; let backendReady = false; let isSubmitting = false;
+      const selectedItem = () => choices.find((choice) => choice.code === selectedCode) || null; const money = (cents) => new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(cents / 100); const amounts = (item) => { const subtotal = item ? item.priceCents : 0; const tax = Math.round(subtotal * taxRate); return { subtotal, tax, total: subtotal + tax }; }; const setStatus = (message, type = '') => { status.textContent = message || ''; status.dataset.status = type; };
+      const render = () => { const item = selectedItem(); const total = amounts(item); choices.forEach((choice) => { const active = choice.code === selectedCode; choice.card.classList.toggle('is-selected', active); choice.button.classList.toggle('is-added', active); choice.button.setAttribute('aria-pressed', String(active)); choice.button.textContent = active ? 'Added' : choice.button.dataset.originalLabel; }); cartList.replaceChildren(); if (!item) { const empty = document.createElement('li'); empty.className = 'hand-cart-empty'; empty.textContent = 'No class added yet.'; cartList.appendChild(empty); totalsPanel.hidden = true; purchaseButton.disabled = true; clearButton.disabled = true; return; } const row = document.createElement('li'); const name = document.createElement('span'); const remove = document.createElement('button'); name.textContent = `${item.name} — ${money(item.priceCents)}`; remove.type = 'button'; remove.dataset.courseRemove = 'true'; remove.textContent = 'Remove'; row.append(name, remove); cartList.appendChild(row); subtotalEl.textContent = money(total.subtotal); taxEl.textContent = money(total.tax); totalEl.textContent = money(total.total); totalsPanel.hidden = false; purchaseButton.disabled = isSubmitting || !backendReady; clearButton.disabled = isSubmitting; };
+      const post = async (payload) => { const response = await fetch(appsScriptUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) }); const responseText = await response.text(); let result; try { result = JSON.parse(responseText); } catch { throw new Error('The registration service did not return a readable response.'); } if (!response.ok || result.success === false) throw new Error(result.error || 'The registration service could not process this request.'); return result; };
+      const checkBackend = async () => { if (!appsScriptUrl) { setStatus('Secure checkout is temporarily unavailable. Please contact SparkPreneurs.', 'warning'); render(); return; } try { const result = await post({ action: 'ping' }); backendReady = result.programCode === programCode || (Array.isArray(result.programs) && result.programs.includes(programCode)); setStatus(backendReady ? '' : 'Secure checkout is temporarily unavailable. Please contact SparkPreneurs.', backendReady ? '' : 'warning'); } catch { backendReady = false; setStatus('Secure checkout is temporarily unavailable. Please contact SparkPreneurs.', 'warning'); } render(); };
+      const clearQuery = () => history.replaceState({}, document.title, location.pathname + '#registration');
+      const verifyReturn = async () => { const params = new URLSearchParams(location.search); const sessionId = params.get('session_id'); const payment = params.get('payment'); if (payment === 'canceled') { setStatus('Payment was canceled. Your class selection is still available when you are ready.', 'warning'); registration.scrollIntoView({ behavior: 'smooth', block: 'start' }); clearQuery(); return; } if (payment !== 'success' || !sessionId || !appsScriptUrl) return; setStatus('Checking payment status…', 'pending'); registration.scrollIntoView({ behavior: 'smooth', block: 'start' }); try { const result = await post({ action: 'verifyCheckoutSession', stripeSessionId: sessionId }); if (result.paymentStatus !== 'paid') throw new Error('Payment could not be verified yet. Please contact SparkPreneurs.'); setStatus(result.message || 'Payment verified. Your registration has been received.', 'success'); } catch (error) { setStatus(error.message || 'Payment could not be verified yet. Please contact SparkPreneurs.', 'error'); } finally { clearQuery(); } };
+      const beginCheckout = async () => { const item = selectedItem(); if (!backendReady) { setStatus('Secure checkout is temporarily unavailable. Please contact SparkPreneurs.', 'warning'); return; } if (!item) { setStatus('Please add one class schedule to your cart first.', 'warning'); document.querySelector('#schedule')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; } if (!form.reportValidity()) { setStatus('Please complete the registration fields before payment.', 'warning'); return; } const values = new FormData(form); const total = amounts(item); isSubmitting = true; purchaseButton.textContent = 'Opening Secure Payment…'; setStatus('Checking the registration total…', 'pending'); render(); try { const result = await post({ action: 'createCheckoutSession', programCode, selectedItemCodes: [item.code], selectedWeeks: [item.code], selectedWeekDetails: [{ code: item.code, name: item.name, displayedPriceCents: item.priceCents }], displayedAmountCents: total.total, successUrl: `${returnPageUrl}?payment=success&session_id={CHECKOUT_SESSION_ID}`, cancelUrl: `${returnPageUrl}?payment=canceled#registration`, studentName: String(values.get('studentName') || '').trim(), parentName: String(values.get('parentName') || '').trim(), parentEmail: String(values.get('parentEmail') || '').trim(), phone: String(values.get('phone') || '').trim() }); const checkoutUrl = new URL(result.checkoutUrl); if (checkoutUrl.protocol !== 'https:' || checkoutUrl.hostname !== 'checkout.stripe.com') throw new Error('Stripe returned an invalid payment link.'); location.assign(checkoutUrl.href); } catch (error) { isSubmitting = false; purchaseButton.textContent = 'Continue to Secure Payment'; setStatus(error.message || 'Payment could not be started. Please try again.', 'error'); render(); } };
+      choices.forEach((choice) => { choice.button.dataset.originalLabel = choice.button.textContent.trim(); choice.button.addEventListener('click', () => { selectedCode = selectedCode === choice.code ? '' : choice.code; if (backendReady) setStatus(''); render(); if (selectedCode) document.querySelector('#registration')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }); });
+      cartList.addEventListener('click', (event) => { if (!event.target.closest('[data-course-remove]')) return; selectedCode = ''; render(); }); clearButton.addEventListener('click', () => { selectedCode = ''; render(); }); form.addEventListener('submit', (event) => { event.preventDefault(); beginCheckout(); }); purchaseButton.addEventListener('click', beginCheckout); render(); checkBackend(); verifyReturn();
+    })();
+  </script>
+</BaseLayout>
