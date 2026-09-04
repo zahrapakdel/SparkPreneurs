@@ -1,0 +1,193 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProgramDiscoveryCard from '../../components/ProgramDiscoveryCard.astro';
+import ProgramNav from '../../components/ProgramNav.astro';
+import { adultPrograms } from '../../data/programs';
+
+const potteryComparison = [
+  {
+    number: '01',
+    title: 'Pottery Wheel',
+    approach: 'Shape clay on the wheel with an emphasis on centring, control, and form.',
+    techniques: ['Centring clay', 'Shaping on the wheel', 'Glazing'],
+    image: '/images/pottery-wheel-hero.png',
+    href: '/pottery-wheel/',
+  },
+  {
+    number: '02',
+    title: 'Hand-Building Pottery',
+    approach: 'Build forms directly by hand for a tactile, sculptural way of working with clay.',
+    techniques: ['Pinching & coiling', 'Slab-building', 'Texture & sculpture'],
+    image: '/images/hand-building-pottery.jpg',
+    href: '/hand-building-pottery/',
+  },
+];
+---
+
+<BaseLayout
+  title="Adult Creative Programs | SparkPreneurs Toronto"
+  description="Explore adult pottery and creative program options at SparkPreneurs in Midtown Toronto, including wheel and hand-building pottery courses."
+>
+  <a class="programs-skip-link" href="#current-programs">Skip to current programs</a>
+
+  <header class="site-header programs-header" data-header>
+    <div class="nav-shell">
+      <a class="brand" href="/" aria-label="SparkPreneurs home"><img src="/images/logo.png" alt="SparkPreneurs" width="188" height="80" /></a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button><span class="sr-only">Menu</span><span></span><span></span><span></span></button>
+      <nav id="primary-nav" class="primary-nav" aria-label="Main navigation" data-menu>
+        <a href="/programs/" aria-current="page">Programs</a>
+        <a href="/camps/">Camps</a>
+        <a href="/after-school/">After School</a>
+        <a href="/#events">Events</a>
+        <a href="/#studio-rental">Studio Rental</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
+        <a class="nav-cta" href="#current-programs">View Current Programs</a>
+      </nav>
+    </div>
+  </header>
+
+  <ProgramNav current="adults" />
+
+  <main class="adults-page">
+    <section class="adults-hero" aria-labelledby="adults-title">
+      <div class="programs-shell">
+        <nav class="programs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/programs/">Programs</a><span aria-hidden="true">/</span><span>Adults</span></nav>
+        <div class="adults-hero-frame">
+          <div class="adults-hero-copy">
+            <span class="eyebrow">ADULT PROGRAMS · MIDTOWN TORONTO</span>
+            <h1 id="adults-title">Make time to make <em>something.</em></h1>
+            <p>Step away from the everyday and work with clay in a guided, hands-on setting. Compare SparkPreneurs' two current adult pottery courses or ask about other creative interests.</p>
+            <div class="button-row">
+              <a class="button button-primary" href="#current-programs">View Current Programs <span aria-hidden="true">↓</span></a>
+              <a class="button button-ghost" href="/programs/pottery/">Compare Pottery Formats</a>
+            </div>
+          </div>
+          <figure class="adults-hero-image"><img src="/images/gallery-pottery.jpg" alt="An adult working with clay at SparkPreneurs" /><figcaption><span aria-hidden="true">✦</span> Hands-on creative time</figcaption></figure>
+          <dl class="adults-hero-facts">
+            <div><dt>Current focus</dt><dd>Adult pottery</dd></div>
+            <div><dt>Choose between</dt><dd>Wheel or hand-building</dd></div>
+            <div><dt>Course format</dt><dd>Four sessions</dd></div>
+            <div><dt>Studio</dt><dd>3445 Yonge St.</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section id="current-programs" class="adults-current" aria-labelledby="adults-current-title">
+      <div class="programs-shell">
+        <div class="adults-section-heading">
+          <div><span class="eyebrow">CURRENT ADULT PROGRAMS</span><h2 id="adults-current-title">Two ways to work with clay.</h2></div>
+          <p>Both current adult paths are four-session pottery courses. Open either program to review its latest schedules, price, and registration options.</p>
+        </div>
+        <div class="programs-card-grid adults-program-grid">
+          {adultPrograms.map((program, index) => <ProgramDiscoveryCard program={program} eager={index === 0} />)}
+        </div>
+      </div>
+    </section>
+
+    <section id="compare-pottery" class="adults-comparison" aria-labelledby="comparison-title">
+      <div class="programs-shell">
+        <div class="adults-comparison-heading">
+          <span class="eyebrow">WHEEL OR HAND-BUILDING?</span>
+          <h2 id="comparison-title">Choose how you want to shape clay.</h2>
+          <p>The main difference is the making process. Compare the emphasis of each course, then check its detail page for current practical information.</p>
+        </div>
+        <div class="adults-comparison-grid">
+          {potteryComparison.map((option) => (
+            <article class="adults-comparison-card">
+              <div class="adults-comparison-image"><img src={option.image} alt="" loading="lazy" /><span>{option.number}</span></div>
+              <div class="adults-comparison-copy">
+                <h3>{option.title}</h3>
+                <p>{option.approach}</p>
+                <ul>{option.techniques.map((technique) => <li><span aria-hidden="true">✦</span>{technique}</li>)}</ul>
+                <a href={option.href}>Explore {option.title} <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div class="adults-comparison-note"><span aria-hidden="true">i</span><p><strong>Before registering:</strong> review the selected program page for current schedules, pricing, firing information, and pickup details.</p></div>
+      </div>
+    </section>
+
+    <section class="adults-interest" aria-labelledby="adults-interest-title">
+      <div class="programs-shell adults-interest-layout">
+        <div class="adults-interest-copy">
+          <span class="eyebrow">BY REQUEST & INTEREST</span>
+          <h2 id="adults-interest-title">Interested in another creative direction?</h2>
+          <p>Acrylic painting, watercolour, drawing, and sketching are request or interest areas. Papier-Mâché and adult 3D Printing still require current availability confirmation, so they are not presented as bookable programs.</p>
+          <a class="button button-primary" href="mailto:sparkpreneurs.ca@gmail.com?subject=Adult%20Program%20Interest">Share Your Interest <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="adults-interest-list" aria-label="Adult creative interest areas">
+          <div><span>01</span><strong>Acrylic & Watercolour</strong><small>By request / interest</small></div>
+          <div><span>02</span><strong>Drawing & Sketching</strong><small>By request / interest</small></div>
+          <div><span>03</span><strong>Papier-Mâché</strong><small>Availability to confirm</small></div>
+          <div><span>04</span><strong>Adult 3D Printing</strong><small>Availability to confirm</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="adults-gallery" aria-labelledby="adults-gallery-title">
+      <div class="programs-shell">
+        <div class="adults-section-heading compact">
+          <div><span class="eyebrow">AT THE STUDIO</span><h2 id="adults-gallery-title">Hands-on, social, and creative.</h2></div>
+          <p>Explore materials, develop techniques, and make something tangible in SparkPreneurs' Midtown Toronto studio.</p>
+        </div>
+        <div class="adults-gallery-grid">
+          <figure><img src="/images/gallery-pottery.jpg" alt="An adult hand-building with clay at SparkPreneurs" loading="lazy" /></figure>
+          <figure><img src="/images/pottery-wheel-hero.png" alt="Clay being shaped on a pottery wheel" loading="lazy" /></figure>
+          <figure><img src="/images/studio.jpg" alt="The SparkPreneurs creative studio" loading="lazy" /></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="adults-faq" aria-labelledby="adults-faq-title">
+      <div class="programs-shell adults-faq-layout">
+        <div><span class="eyebrow">CHOOSING A PROGRAM</span><h2 id="adults-faq-title">A few useful distinctions.</h2><p>For schedule-specific questions, use the current details on the relevant program page.</p></div>
+        <div class="adults-faq-list">
+          <details><summary>What is the difference between wheel and hand-building pottery?</summary><p>Wheel pottery focuses on centring and shaping clay while it rotates. Hand-building creates forms directly through techniques such as pinching, coiling, and slab-building.</p></details>
+          <details><summary>Where can I find current dates and prices?</summary><p>Open the individual pottery program page. Current cohorts, schedules, pricing, and registration actions belong there rather than on this audience overview.</p></details>
+          <details><summary>Can I ask about painting or drawing?</summary><p>Yes. These are interest or by-request areas rather than confirmed current programs. Email SparkPreneurs with the medium you are interested in and your general availability.</p></details>
+          <details><summary>Where do adult programs take place?</summary><p>SparkPreneurs is at 3445 Yonge Street, Second Floor, Toronto. Contact the studio if you need directions or access information before visiting.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="programs-help" aria-labelledby="adults-help-title">
+      <div class="programs-shell">
+        <div><span class="eyebrow">HELP CHOOSING</span><h2 id="adults-help-title">Wheel, hand-building, or something else?</h2><p>Tell SparkPreneurs what you would like to make, your experience level, and the schedule that could work for you.</p></div>
+        <a class="button button-light" href="mailto:sparkpreneurs.ca@gmail.com?subject=Help%20Choosing%20an%20Adult%20Program">Email SparkPreneurs</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-brand"><img src="/images/logo.png" alt="SparkPreneurs" /><p>Sparking creativity, one creative spark at a time.</p></div>
+      <div><h3>Visit</h3><p>3445 Yonge St.<br />Second Floor<br />Toronto, ON M4N 2N1</p></div>
+      <div><h3>Contact</h3><p><a href="tel:+14168841393">(416) 884-1393</a><br /><a href="mailto:sparkpreneurs.ca@gmail.com">sparkpreneurs.ca@gmail.com</a><br /><a href="https://www.instagram.com/SparkPreneurs.ca" target="_blank" rel="noopener">@SparkPreneurs.ca</a></p></div>
+      <div><h3>Programs</h3><p><a href="/programs/">All Programs</a><br /><a href="/programs/kids-youth/">Kids & Youth</a><br /><a href="/programs/adults/">Adults</a><br /><a href="/programs/pottery/">Pottery</a><br /><a href="/workshops/">Workshops</a><br /><a href="/after-school/">After School</a></p></div>
+    </div>
+    <div class="footer-bottom"><span>© {new Date().getFullYear()} SparkPreneurs</span><span>Art · Wellness · Technology</span></div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector<HTMLButtonElement>('[data-menu-button]');
+    const menu = document.querySelector<HTMLElement>('[data-menu]');
+    menuButton?.addEventListener('click', () => {
+      const open = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!open));
+      menu?.classList.toggle('is-open', !open);
+    });
+    menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+      menuButton?.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('is-open');
+    }));
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape' || menuButton?.getAttribute('aria-expanded') !== 'true') return;
+      menuButton.setAttribute('aria-expanded', 'false');
+      menu?.classList.remove('is-open');
+      menuButton.focus();
+    });
+  </script>
+</BaseLayout>

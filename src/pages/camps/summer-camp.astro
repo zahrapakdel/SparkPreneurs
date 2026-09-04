@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const weeks = [
+  {
+    week: '01',
+    dates: 'July 6–10, 2026',
+    theme: 'Young Chef Creations',
+    image: '/images/summer-camp-week-1.png',
+    description: 'Cook, create, and explore handmade chocolate, food art, clay food, 3D crafts, packaging, and selling.',
+  },
+  {
+    week: '02',
+    dates: 'July 13–17, 2026',
+    theme: '3D Storybook Makers',
+    image: '/images/summer-camp-week-2.png',
+    description: 'Design a 3D book by illustrating scenes, sculpting characters, making accessories, and creating a cover.',
+  },
+  {
+    week: '03',
+    dates: 'July 20–24, 2026',
+    theme: 'Around the World',
+    image: '/images/summer-camp-week-3.png',
+    description: 'Explore cultures through food, traditional clothing, flags, art, dance, building, and shared celebration.',
+  },
+  {
+    week: '04',
+    dates: 'July 27–31, 2026',
+    theme: 'Dream House Designers',
+    image: '/images/summer-camp-week-4.png',
+    description: 'Move from idea to model by sketching, building, sculpting furniture, and designing a dream house.',
+  },
+  {
+    week: '05',
+    dates: 'August 4–7, 2026',
+    theme: 'Fashion Week',
+    image: '/images/summer-camp-week-5.png',
+    description: 'Create fashion sketches, T-shirt designs, accessories, and a final catwalk presentation.',
+    note: 'Four-day week',
+  },
+  {
+    week: '06',
+    dates: 'August 10–14, 2026',
+    theme: 'Young Chef Creations 2',
+    image: '/images/summer-camp-week-6.png',
+    description: 'Continue the cooking theme with handmade chocolate, food art, clay food, 3D crafts, and packaging.',
+  },
+  {
+    week: '07',
+    dates: 'August 17–21, 2026',
+    theme: '3D Storybook Makers',
+    image: '/images/summer-camp-week-7.png',
+    description: 'Design a 3D book, illustrate imaginative scenes, and create memorable sculpted characters.',
+    note: 'August offer',
+  },
+  {
+    week: '08',
+    dates: 'August 24–28, 2026',
+    theme: 'Dream House Designers',
+    image: '/images/summer-camp-week-8.png',
+    description: 'Design a dream house by sketching, building, and decorating an original model.',
+    note: 'August offer',
+  },
+];
+
+const sessionOptions = [
+  { label: 'Morning', time: '10 AM–12 PM', regular: '$210', offer: '$105' },
+  { label: 'Afternoon', time: '1–3 PM', regular: '$210', offer: '$105' },
+  { label: 'Full Day', time: '10 AM–3 PM', regular: '$420', offer: '$210' },
+];
+
+const registrationFields = ['Participant name', 'Contact name', 'Contact email', 'Phone'];
+---
+
+<BaseLayout
+  title="Summer Camp Ages 4–10 | SparkPreneurs Toronto"
+  description="Explore the completed 2026 SparkPreneurs Summer Camp themes, schedule, session times, and registration details for ages 4–10."
+>
+  <a class="programs-skip-link" href="#camp-weeks">Skip to camp weeks</a>
+
+  <header class="site-header programs-header" data-header>
+    <div class="nav-shell">
+      <a class="brand" href="/" aria-label="SparkPreneurs home"><img src="/images/logo.png" alt="SparkPreneurs" width="188" height="80" /></a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button><span class="sr-only">Menu</span><span></span><span></span><span></span></button>
+      <nav id="primary-nav" class="primary-nav" aria-label="Main navigation" data-menu>
+        <a href="/programs/">Programs</a>
+        <a href="/camps/" aria-current="page">Camps</a>
+        <a href="/after-school/">After School</a>
+        <a href="/#events">Events</a>
+        <a href="/#studio-rental">Studio Rental</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
+        <a class="nav-cta" href="mailto:sparkpreneurs.ca@gmail.com?subject=Next%20Summer%20Camp%20Dates">Ask About Next Dates</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="summer-detail-page">
+    <section class="summer-detail-hero" aria-labelledby="summer-title">
+      <div class="programs-shell">
+        <nav class="programs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/camps/">Camps</a><span aria-hidden="true">/</span><span>Summer Camp</span></nav>
+        <div class="summer-detail-hero-frame">
+          <div class="summer-detail-hero-copy">
+            <span class="summer-detail-status">2026 sessions ended</span>
+            <span class="eyebrow">SUMMER CAMP · AGES 4–10</span>
+            <h1 id="summer-title">Eight weeks of making, stories, food, fashion, and <em>design.</em></h1>
+            <p>The 2026 program invited families to choose a themed week, select a morning, afternoon, or full-day session, and complete registration online.</p>
+            <div class="button-row">
+              <a class="button button-primary" href="#camp-weeks">Explore All Eight Weeks <span aria-hidden="true">→</span></a>
+              <a class="button button-ghost" href="mailto:sparkpreneurs.ca@gmail.com?subject=Next%20Summer%20Camp%20Dates">Ask About Next Dates</a>
+            </div>
+          </div>
+          <figure class="summer-detail-hero-image summer-detail-hero-poster"><img src="/images/summer-camp-week-8.png" alt="Week 8 Dream House Designers Summer Camp poster" /><figcaption><span aria-hidden="true">✦</span> Original camp artwork</figcaption></figure>
+          <dl class="summer-detail-facts">
+            <div><dt>Audience</dt><dd>Ages 4–10</dd></div>
+            <div><dt>2026 season</dt><dd>July 6–August 28</dd></div>
+            <div><dt>Session choices</dt><dd>Morning, afternoon, full day</dd></div>
+            <div><dt>Current status</dt><dd>2026 sessions ended</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="summer-detail-status-panel" aria-labelledby="summer-status-title">
+      <div class="programs-shell">
+        <span aria-hidden="true">i</span>
+        <div><span class="eyebrow">REGISTRATION STATUS</span><h2 id="summer-status-title">The published 2026 camp dates have passed.</h2><p>The original registration page is preserved below as program information. Expired sessions are not presented as available for checkout.</p></div>
+        <a class="button button-secondary" href="mailto:sparkpreneurs.ca@gmail.com?subject=Summer%20Camp%20Updates">Request Camp Updates</a>
+      </div>
+    </section>
+
+    <section id="camp-weeks" class="summer-detail-schedule" aria-labelledby="camp-weeks-title">
+      <div class="programs-shell">
+        <div class="summer-detail-section-heading">
+          <div><span class="eyebrow">2026 THEMED SCHEDULE</span><h2 id="camp-weeks-title">A different creative world each week.</h2></div>
+          <p>These are the eight original themes and dates from the previous Summer Camp registration page. Select any poster to view its full artwork.</p>
+        </div>
+        <div class="summer-week-grid summer-week-grid-with-art">
+          {weeks.map((item) => (
+            <article>
+              <a class="summer-week-art" href={item.image} target="_blank" rel="noopener">
+                <img src={item.image} alt={`Week ${Number(item.week)} ${item.theme} Summer Camp poster`} loading="lazy" />
+                <span>View poster</span>
+              </a>
+              <div class="summer-week-copy">
+                <div class="summer-week-meta"><span>WEEK {item.week}</span><b>Ended</b></div>
+                <h3>{item.theme}</h3>
+                <p class="summer-week-date">{item.dates}</p>
+                <p>{item.description}</p>
+                {item.note && <small>{item.note}</small>}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="summer-detail-sessions" aria-labelledby="session-options-title">
+      <div class="programs-shell summer-detail-sessions-layout">
+        <div><span class="eyebrow">LIMITED-TIME AUGUST OFFER</span><h2 id="session-options-title">Three ways to structure the camp day.</h2><p>The previous page offered these session times and promotional prices for the final August weeks. Prices shown are historical and do not apply to future camp dates.</p></div>
+        <div class="summer-session-grid">
+          {sessionOptions.map((session, index) => <article><span>{String(index + 1).padStart(2, '0')}</span><h3>{session.label}</h3><strong>{session.time}</strong><p><s>{session.regular}</s> {session.offer}</p><small>2026 offer price + HST</small></article>)}
+          <p class="summer-session-note"><strong>Four-day Fashion Week:</strong> August 4–7 was priced at $84 + HST for morning or afternoon and $168 + HST for the full day.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="summer-registration-summary" aria-labelledby="registration-summary-title">
+      <div class="programs-shell summer-registration-layout">
+        <div>
+          <span class="eyebrow">HOW 2026 REGISTRATION WORKED</span>
+          <h2 id="registration-summary-title">Choose sessions, provide contact details, then pay securely.</h2>
+          <p>Families added one or more weekly sessions, completed the participant and contact information, reviewed the subtotal and 13% HST, and continued to Stripe. Registration was confirmed only after payment verification.</p>
+        </div>
+        <div class="summer-registration-card">
+          <span>REQUIRED INFORMATION</span>
+          <ul>{registrationFields.map((field) => <li><span aria-hidden="true">✓</span>{field}</li>)}</ul>
+          <div><span>Tax</span><strong>HST 13%</strong></div>
+          <div><span>Payment</span><strong>Secure Stripe checkout</strong></div>
+          <p>This is an archive of the previous registration flow, not an active registration form.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="programs-help" aria-labelledby="summer-help-title">
+      <div class="programs-shell">
+        <div><span class="eyebrow">NEXT CAMP SEASON</span><h2 id="summer-help-title">Questions about Summer Camp?</h2><p>Contact SparkPreneurs for the next confirmed dates and help choosing the right sessions.</p></div>
+        <a class="button button-light" href="mailto:sparkpreneurs.ca@gmail.com?subject=Next%20Summer%20Camp%20Dates">Contact SparkPreneurs</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-brand"><img src="/images/logo.png" alt="SparkPreneurs" /><p>Sparking creativity, one creative spark at a time.</p></div>
+      <div><h3>Visit</h3><p>3445 Yonge St.<br />Second Floor<br />Toronto, ON M4N 2N1</p></div>
+      <div><h3>Contact</h3><p><a href="tel:+14168841393">(416) 884-1393</a><br /><a href="mailto:sparkpreneurs.ca@gmail.com">sparkpreneurs.ca@gmail.com</a><br /><a href="https://www.instagram.com/SparkPreneurs.ca" target="_blank" rel="noopener">@SparkPreneurs.ca</a></p></div>
+      <div><h3>Family Programs</h3><p><a href="/camps/">Camps</a><br /><a href="/camps/summer-camp/">Summer Camp</a><br /><a href="/after-school/">After School</a><br /><a href="/workshops/">Workshops</a><br /><a href="/programs/kids-youth/">Kids & Youth</a></p></div>
+    </div>
+    <div class="footer-bottom"><span>© {new Date().getFullYear()} SparkPreneurs</span><span>Art · Wellness · Technology</span></div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector<HTMLButtonElement>('[data-menu-button]');
+    const menu = document.querySelector<HTMLElement>('[data-menu]');
+    menuButton?.addEventListener('click', () => {
+      const open = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!open));
+      menu?.classList.toggle('is-open', !open);
+    });
+    menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+      menuButton?.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('is-open');
+    }));
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape' || menuButton?.getAttribute('aria-expanded') !== 'true') return;
+      menuButton.setAttribute('aria-expanded', 'false');
+      menu?.classList.remove('is-open');
+      menuButton.focus();
+    });
+  </script>
+</BaseLayout>

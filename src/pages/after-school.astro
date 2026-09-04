@@ -6,23 +6,43 @@ const plans = [
   { code: 'AFTER4', name: '4 days/week', label: 'Balanced', price: 8800, regularPrice: 10400, description: 'For steady creative time through most of the school week.' },
   { code: 'AFTER5', name: '5 days/week', label: 'Full week', price: 10000, regularPrice: 12000, description: 'For families who need consistent weekday coverage.' },
 ];
+
+const parentEssentials = [
+  { number: '01', title: 'Ages & grades', detail: '[CONTENT REQUIRED FROM BUSINESS: exact eligible ages and grades]' },
+  { number: '02', title: 'Program calendar', detail: '[CONTENT REQUIRED FROM BUSINESS: start date, end date, and closure dates]' },
+  { number: '03', title: 'School pick-up', detail: 'Available from select neighbourhood schools. Contact SparkPreneurs to confirm whether your school is eligible.' },
+  { number: '04', title: 'Family pick-up', detail: 'The program runs from 3 PM to 5 PM. [CONTENT REQUIRED FROM BUSINESS: pickup and late-pickup policy]' },
+];
+
+const afternoonHighlights = [
+  { number: '01', title: 'Make', detail: 'Explore hands-on creative projects in a welcoming studio.' },
+  { number: '02', title: 'Move', detail: 'Include movement and active time as part of the afternoon.' },
+  { number: '03', title: 'Connect', detail: 'Unwind and spend time with friends before family pick-up.' },
+];
+
+const registrationSteps = [
+  { number: '01', title: 'Choose a weekly plan', detail: 'Select the 3-, 4-, or 5-day option that fits your family. Every registration begins with a four-week minimum.' },
+  { number: '02', title: 'Share your details', detail: 'Enter the student and parent contact information needed to start registration.' },
+  { number: '03', title: 'Complete secure payment', detail: 'The registration service validates the selected plan and total before opening Stripe Checkout.' },
+];
 ---
 
 <BaseLayout title="After-School Program | SparkPreneurs" description="Creative after-school care in Midtown Toronto, with weekly schedules, hands-on activities, and eligible neighbourhood school pick-up.">
+  <a class="after-school-skip-link" href="#main-content">Skip to main content</a>
   <header class="site-header" data-header>
     <div class="nav-shell">
       <a class="brand" href="/" aria-label="SparkPreneurs home"><img src="/images/logo.png" alt="SparkPreneurs" width="188" height="80" /></a>
       <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button><span class="sr-only">Toggle menu</span><span></span><span></span><span></span></button>
       <nav id="primary-nav" class="primary-nav" aria-label="Main navigation" data-menu>
-        <a href="/#programs">Programs</a><a href="/#camps">Camps & After-School</a><a href="/#events">Workshops & Events</a><a href="/#about">Our studio</a><a href="/#contact">Contact</a><a class="nav-cta" href="#register">Register</a>
+        <a href="/programs/">Programs</a><a href="/camps/">Camps</a><a href="/after-school/" aria-current="page">After School</a><a href="/#events">Events</a><a href="/#about">About</a><a href="/#contact">Contact</a><a class="nav-cta" href="#register">Register</a>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="main-content">
     <section class="after-school-hero">
       <div class="after-school-shell">
-        <a class="back-link" href="/#camps">← All camps & after-school programs</a>
+        <a class="back-link" href="/camps/">← Looking for Camps?</a>
         <div class="program-detail-hero">
           <div class="program-title-panel">
             <span class="program-index">PROGRAM / 02</span>
@@ -56,6 +76,34 @@ const plans = [
       </div>
     </section>
 
+    <section class="after-school-details" aria-labelledby="parent-essentials-title">
+      <div class="after-school-shell">
+        <div class="section-heading">
+          <div><span class="eyebrow">PARENT ESSENTIALS</span><h2 id="parent-essentials-title">What families need to know.</h2></div>
+          <p>Review the practical details below before choosing a schedule. Items awaiting confirmation are marked clearly so families are not asked to rely on assumptions.</p>
+        </div>
+        <div class="after-school-essential-grid">
+          {parentEssentials.map((item) => (
+            <article class:list={['after-school-essential-card', { 'has-content-gap': item.detail.includes('[CONTENT REQUIRED') }]}>
+              <span>{item.number}</span>
+              <h3>{item.title}</h3>
+              <p>{item.detail}</p>
+            </article>
+          ))}
+        </div>
+        <p class="after-school-verification-note"><span aria-hidden="true">✦</span><strong>Before registering:</strong> contact SparkPreneurs to confirm age/grade fit, school pick-up eligibility, and the current program calendar.</p>
+      </div>
+    </section>
+
+    <section class="after-school-afternoon" aria-labelledby="afternoon-title">
+      <div class="after-school-shell after-school-afternoon-layout">
+        <div class="after-school-afternoon-heading"><span class="eyebrow">A CREATIVE AFTERNOON</span><h2 id="afternoon-title">Time to make, move, and connect.</h2><p>The program is designed as a supportive transition from school to home, with room for creativity, active time, and friendships.</p></div>
+        <ol class="after-school-highlight-list">
+          {afternoonHighlights.map((item) => <li><span>{item.number}</span><div><h3>{item.title}</h3><p>{item.detail}</p></div></li>)}
+        </ol>
+      </div>
+    </section>
+
     <section id="register" class="after-school-register" data-after-school-shop data-program-code="after_school_program" data-minimum-weeks="4" data-endpoint="https://script.google.com/macros/s/AKfycbwtCEfAlRW_uljANPNBRf8X0ZuRLc_lpzdh4uowBp4P4mIQmJnqYS3grjiIwkG7hWlS/exec">
       <div class="after-school-shell">
         <div class="section-heading">
@@ -64,7 +112,7 @@ const plans = [
         </div>
         <div class="early-bird-banner" aria-label="Early Bird pricing">
           <div><span class="early-bird-star">✦</span><p class="eyebrow">EARLY BIRD PRICING</p><h3>Register early and save on your weekly program.</h3></div>
-          <p><strong>Four-week minimum purchase:</strong> prices are shown per week, and your cart automatically includes all four weeks.</p>
+          <p><strong>Four-week minimum purchase:</strong> prices are shown per week, and your cart automatically includes all four weeks.<br /><span class="content-required-inline">[CONTENT REQUIRED FROM BUSINESS: early-bird deadline and current enrollment period]</span></p>
         </div>
         <div class="after-school-shop-grid">
           <div class="plan-grid">
@@ -72,26 +120,52 @@ const plans = [
               <article class="schedule-plan" data-plan data-code={plan.code} data-name={plan.name} data-price={plan.price}>
                 <div class="plan-label-row"><span class="tag">{plan.label}</span><span class="early-bird-badge">Early Bird</span></div><h3>{plan.name}</h3><p>{plan.description}</p>
                 <ul><li>Monday–Friday options</li><li>3 PM–5 PM</li><li>School pick-up may be available</li></ul>
-                <div class="plan-bottom"><p class="regular-price">Regular <s>${plan.regularPrice / 100}/week</s></p><p class="plan-price">${plan.price / 100}<small>/week + HST</small></p><p class="minimum-price">4-week minimum: ${(plan.price * 4 / 100).toLocaleString('en-CA', { style: 'currency', currency: 'CAD' })} + HST</p><button type="button" class="button button-ghost" data-select-plan>Select this option</button></div>
+                <div class="plan-bottom"><p class="regular-price">Regular <s>${plan.regularPrice / 100}/week</s></p><p class="plan-price">${plan.price / 100}<small>/week + HST</small></p><p class="minimum-price">4-week minimum: {(plan.price * 4 / 100).toLocaleString('en-CA', { style: 'currency', currency: 'CAD' })} + HST</p><button type="button" class="button button-ghost" data-select-plan>Select this option</button></div>
               </article>
             ))}
           </div>
 
           <aside class="registration-card" aria-labelledby="registration-title">
             <span class="eyebrow">YOUR REGISTRATION</span><h3 id="registration-title">Complete your details</h3>
-            <div class="selected-plan" data-selected-plan><p>No weekly plan selected yet.</p></div>
-            <form data-registration-form>
+            <div class="selected-plan" data-selected-plan aria-live="polite"><p>No weekly plan selected yet.</p></div>
+            <form id="after-school-registration-form" data-registration-form>
               <label>Student name<input name="studentName" type="text" autocomplete="name" required /></label>
               <label>Parent name<input name="parentName" type="text" autocomplete="name" required /></label>
               <label>Parent email<input name="parentEmail" type="email" autocomplete="email" required /></label>
               <label>Phone<input name="phone" type="tel" autocomplete="tel" required /></label>
             </form>
             <div class="registration-totals" data-totals hidden><p><span>Subtotal (4 weeks)</span><strong data-subtotal></strong></p><p><span>HST</span><strong data-tax></strong></p><p class="total"><span>Total</span><strong data-total></strong></p></div>
-            <p class="registration-note">Only one weekly option can be checked out at a time. A minimum purchase of four weeks is required, and the total includes all four weeks. Contact us to confirm eligible school pick-up.</p>
-            <p class="registration-status" data-status role="status" aria-live="polite"></p>
-            <button class="button button-primary checkout-button" type="button" data-checkout disabled>Continue to secure payment</button>
+            <p id="after-school-registration-note" class="registration-note">Only one weekly option can be checked out at a time. A minimum purchase of four weeks is required, and the total includes all four weeks. The backend validates the selected plan and total before payment. Contact us to confirm eligible school pick-up.</p>
+            <p id="after-school-registration-status" class="registration-status" data-status role="status" aria-live="polite"></p>
+            <button class="button button-primary checkout-button" type="submit" form="after-school-registration-form" data-checkout aria-describedby="after-school-registration-note after-school-registration-status" disabled>Continue to secure payment</button>
             <button class="clear-plan" type="button" data-clear disabled>Clear selection</button>
           </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="after-school-registration-guide" aria-labelledby="registration-guide-title">
+      <div class="after-school-shell">
+        <div class="section-heading">
+          <div><span class="eyebrow">HOW REGISTRATION WORKS</span><h2 id="registration-guide-title">From schedule to confirmation.</h2></div>
+          <p>Registration is complete only after the payment session is verified. If secure checkout is unavailable, the page keeps payment disabled and directs families to contact SparkPreneurs.</p>
+        </div>
+        <ol class="after-school-step-grid">
+          {registrationSteps.map((step) => <li><span>{step.number}</span><h3>{step.title}</h3><p>{step.detail}</p></li>)}
+        </ol>
+      </div>
+    </section>
+
+    <section class="after-school-faq" aria-labelledby="after-school-faq-title">
+      <div class="after-school-shell after-school-faq-layout">
+        <div><span class="eyebrow">COMMON QUESTIONS</span><h2 id="after-school-faq-title">Before you choose a plan.</h2><p>These answers use information already confirmed by the existing registration page. Missing operational details remain clearly identified.</p></div>
+        <div class="after-school-faq-list">
+          <details><summary>What time does the program run?</summary><p>Every displayed weekly option runs from 3 PM to 5 PM.</p></details>
+          <details><summary>How long is the minimum registration?</summary><p>Every option requires a minimum purchase of four weeks. The registration total automatically includes those four weeks.</p></details>
+          <details><summary>How are the specific weekdays selected?</summary><p>[CONTENT REQUIRED FROM BUSINESS: available weekday combinations and how families confirm their selected days]</p></details>
+          <details><summary>Is school pick-up available?</summary><p>Pick-up may be available from select neighbourhood schools. Contact SparkPreneurs before registering to confirm whether your school is eligible.</p></details>
+          <details><summary>Which ages and grades can attend?</summary><p>[CONTENT REQUIRED FROM BUSINESS: exact eligible ages and grades]</p></details>
+          <details><summary>What are the cancellation and late-pickup rules?</summary><p>[CONTENT REQUIRED FROM BUSINESS: approved registration, cancellation, transfer, missed-day, and late-pickup policies]</p></details>
         </div>
       </div>
     </section>
@@ -106,6 +180,8 @@ const plans = [
       const menuButton = document.querySelector('[data-menu-button]');
       const menu = document.querySelector('[data-menu]');
       menuButton?.addEventListener('click', () => { const open = menuButton.getAttribute('aria-expanded') === 'true'; menuButton.setAttribute('aria-expanded', String(!open)); menu?.classList.toggle('is-open', !open); });
+      menu?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { menuButton?.setAttribute('aria-expanded', 'false'); menu.classList.remove('is-open'); }));
+      document.addEventListener('keydown', event => { if (event.key !== 'Escape' || menuButton?.getAttribute('aria-expanded') !== 'true') return; menuButton.setAttribute('aria-expanded', 'false'); menu?.classList.remove('is-open'); menuButton.focus(); });
 
       const shop = document.querySelector('[data-after-school-shop]');
       if (!shop) return;
@@ -137,7 +213,7 @@ const plans = [
       const post = async payload => { const response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) }); const data = await response.json(); if (!response.ok || data.success === false) throw new Error(data.error || 'Registration could not be processed.'); return data; };
       const checkBackend = async () => { try { const response = await fetch(endpoint); const data = await response.json(); backendReady = Boolean(data.success && data.programCode === programCode && Number(data.minimumWeeks) === minimumWeeks && data.stripeMode === 'live'); if (!backendReady) setStatus('Secure checkout is being updated for the four-week minimum. Please try again shortly or contact SparkPreneurs.', 'warning'); } catch { setStatus('Secure checkout is temporarily unavailable. Please contact SparkPreneurs.', 'warning'); } render(); };
       const verifyReturn = async () => { const params = new URLSearchParams(location.search); if (params.get('payment') === 'canceled') { setStatus('Payment was canceled. You can select a plan again when ready.', 'warning'); shop.scrollIntoView(); history.replaceState({}, document.title, location.pathname + '#register'); return; } const sessionId = params.get('session_id'); if (params.get('payment') !== 'success' || !sessionId) return; setStatus('Confirming your payment…', 'pending'); shop.scrollIntoView(); try { const data = await post({ action: 'verifyCheckoutSession', sessionId }); setStatus(data.paid ? 'Payment received. Your after-school registration is confirmed.' : 'Payment is still processing. Please contact us if this does not update.', data.paid ? 'success' : 'warning'); history.replaceState({}, document.title, location.pathname + '#register'); } catch { setStatus('We could not confirm the payment automatically. Please contact us with your receipt.', 'warning'); } };
-      checkout.addEventListener('click', async () => { if (!selected || !backendReady || !form.reportValidity()) { if (!selected) setStatus('Please select a weekly plan.', 'warning'); return; } const fields = Object.fromEntries(new FormData(form)); const amounts = calculate(); submitting = true; checkout.textContent = 'Opening secure payment…'; setStatus('Checking your registration total…', 'pending'); render(); try { const pageUrl = location.origin + location.pathname; const data = await post({ action: 'createCheckoutSession', programCode, selectedItemCodes: [selected.code], displayedAmountCents: amounts.total, successUrl: pageUrl + '?payment=success', cancelUrl: pageUrl + '?payment=canceled#register', ...fields }); if (!data.checkoutUrl || new URL(data.checkoutUrl).hostname !== 'checkout.stripe.com') throw new Error('Secure payment did not return a valid link.'); location.href = data.checkoutUrl; } catch (error) { submitting = false; checkout.textContent = 'Continue to secure payment'; setStatus(error.message || 'Payment could not be started. Please try again.', 'error'); render(); } });
+      form.addEventListener('submit', async event => { event.preventDefault(); if (!selected || !backendReady || !form.reportValidity()) { if (!selected) setStatus('Please select a weekly plan.', 'warning'); return; } const fields = Object.fromEntries(new FormData(form)); const amounts = calculate(); submitting = true; checkout.textContent = 'Opening secure payment…'; setStatus('Checking your registration total…', 'pending'); render(); try { const pageUrl = location.origin + location.pathname; const data = await post({ action: 'createCheckoutSession', programCode, selectedItemCodes: [selected.code], displayedAmountCents: amounts.total, successUrl: pageUrl + '?payment=success', cancelUrl: pageUrl + '?payment=canceled#register', ...fields }); if (!data.checkoutUrl || new URL(data.checkoutUrl).hostname !== 'checkout.stripe.com') throw new Error('Secure payment did not return a valid link.'); location.href = data.checkoutUrl; } catch (error) { submitting = false; checkout.textContent = 'Continue to secure payment'; setStatus(error.message || 'Payment could not be started. Please try again.', 'error'); render(); } });
       render(); verifyReturn(); checkBackend();
     })();
   </script>

@@ -1,0 +1,204 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProgramDiscoveryCard from '../../components/ProgramDiscoveryCard.astro';
+import ProgramNav from '../../components/ProgramNav.astro';
+import { kidsYouthPrograms } from '../../data/programs';
+
+const byTitle = (title: string) => kidsYouthPrograms.find((program) => program.title === title);
+const formatRoutes = [
+  {
+    number: '01',
+    label: 'RECURRING CLASS',
+    title: 'Build skills over several sessions',
+    description: 'Choose 3D Printing for a structured six-session creative technology experience.',
+    program: byTitle('3D Printing'),
+  },
+  {
+    number: '02',
+    label: 'SCHOOL BREAKS',
+    title: 'Make the most of time away from school',
+    description: 'Choose Summer Camp for creative, active days during the summer break.',
+    program: byTitle('Summer Camp'),
+  },
+  {
+    number: '03',
+    label: 'WEEKDAY AFTERNOONS',
+    title: 'Add creativity to the school week',
+    description: 'Choose After School for recurring weekday care with three-, four-, or five-day plans.',
+    program: byTitle('After-School Program'),
+  },
+];
+---
+
+<BaseLayout
+  title="Kids & Youth Programs | SparkPreneurs Toronto"
+  description="Explore creative classes, summer camp, and after-school programs for kids and youth at SparkPreneurs in Midtown Toronto."
+>
+  <a class="programs-skip-link" href="#current-programs">Skip to current programs</a>
+
+  <header class="site-header programs-header" data-header>
+    <div class="nav-shell">
+      <a class="brand" href="/" aria-label="SparkPreneurs home"><img src="/images/logo.png" alt="SparkPreneurs" width="188" height="80" /></a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button><span class="sr-only">Menu</span><span></span><span></span><span></span></button>
+      <nav id="primary-nav" class="primary-nav" aria-label="Main navigation" data-menu>
+        <a href="/programs/" aria-current="page">Programs</a>
+        <a href="/camps/">Camps</a>
+        <a href="/after-school/">After School</a>
+        <a href="/#events">Events</a>
+        <a href="/#studio-rental">Studio Rental</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
+        <a class="nav-cta" href="#current-programs">View Current Programs</a>
+      </nav>
+    </div>
+  </header>
+
+  <ProgramNav current="kids-youth" />
+
+  <main class="kids-page">
+    <section class="kids-hero" aria-labelledby="kids-title">
+      <div class="programs-shell">
+        <nav class="programs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/programs/">Programs</a><span aria-hidden="true">/</span><span>Kids & Youth</span></nav>
+        <div class="kids-hero-grid">
+          <div class="kids-hero-copy">
+            <span class="eyebrow">KIDS & YOUTH · MIDTOWN TORONTO</span>
+            <h1 id="kids-title">Make, imagine, and <em>grow.</em></h1>
+            <p>Explore hands-on ways for young makers to try creative technology, enjoy school-break activities, and add creativity to weekday afternoons.</p>
+            <div class="button-row">
+              <a class="button button-primary" href="#current-programs">View Current Programs <span aria-hidden="true">↓</span></a>
+              <a class="button button-ghost" href="#choose-format">Choose by Format</a>
+            </div>
+            <ul class="kids-hero-facts" aria-label="Available program formats">
+              <li><span>01</span><strong>Weekly classes</strong></li>
+              <li><span>02</span><strong>School-break camp</strong></li>
+              <li><span>03</span><strong>After-school care</strong></li>
+            </ul>
+          </div>
+          <div class="kids-hero-gallery" aria-hidden="true">
+            <figure class="kids-hero-gallery-main"><img src="/images/gallery-kids-clay.jpg" alt="" /></figure>
+            <figure class="kids-hero-gallery-top"><img src="/images/gallery-robotics.jpg" alt="" /></figure>
+            <figure class="kids-hero-gallery-bottom"><img src="/images/kids.jpg" alt="" /></figure>
+            <span>✦</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="kids-fit-note" aria-labelledby="kids-fit-title">
+      <div class="programs-shell">
+        <span aria-hidden="true">i</span>
+        <div><h2 id="kids-fit-title">Check the fit before registering.</h2><p>Exact ages, dates, and eligibility can vary by offering. Review the current program details or contact SparkPreneurs if your child's age or schedule is close to a listed boundary.</p></div>
+        <a href="mailto:sparkpreneurs.ca@gmail.com?subject=Kids%20Program%20Fit">Ask About Fit <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
+    <section id="current-programs" class="kids-current" aria-labelledby="kids-current-title">
+      <div class="programs-shell">
+        <div class="kids-section-heading">
+          <div><span class="eyebrow">CURRENT PATHS</span><h2 id="kids-current-title">Programs for kids and youth.</h2></div>
+          <p>These are the children's program paths supported by the current site information. Open a card to confirm registration details and availability.</p>
+        </div>
+        <div class="programs-card-grid kids-program-grid">
+          {kidsYouthPrograms.map((program, index) => <ProgramDiscoveryCard program={program} eager={index === 0} />)}
+        </div>
+      </div>
+    </section>
+
+    <section id="choose-format" class="kids-formats" aria-labelledby="kids-formats-title">
+      <div class="programs-shell kids-formats-layout">
+        <div class="kids-formats-heading">
+          <span class="eyebrow">CHOOSE BY FORMAT</span>
+          <h2 id="kids-formats-title">What does your family need?</h2>
+          <p>Start with the kind of commitment or schedule you are looking for, then confirm the details on the program page.</p>
+        </div>
+        <div class="kids-format-list">
+          {formatRoutes.map((route) => route.program && (
+            <a href={route.program.href}>
+              <span>{route.number}</span>
+              <div><small>{route.label}</small><h3>{route.title}</h3><p>{route.description}</p></div>
+              <b aria-hidden="true">{route.program.external ? '↗' : '→'}</b>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="kids-interest" aria-labelledby="kids-interest-title">
+      <div class="programs-shell kids-interest-layout">
+        <div class="kids-interest-copy">
+          <span class="eyebrow">INTEREST & UPCOMING IDEAS</span>
+          <h2 id="kids-interest-title">Looking for another creative activity?</h2>
+          <p>Painting, drawing, kids pottery, and Papier-Mâché are interest areas—not confirmed current classes. Tell SparkPreneurs what your child would like to explore so the team can share relevant options or note your interest.</p>
+          <a class="button button-secondary" href="mailto:sparkpreneurs.ca@gmail.com?subject=Kids%20Program%20Interest">Share Your Interest <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="kids-interest-board" aria-label="Creative interest areas">
+          <span>Painting</span><span>Drawing</span><span>Kids Pottery</span><span>Papier-Mâché</span>
+          <p>Interest areas · schedule not confirmed</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="kids-gallery-preview" aria-labelledby="kids-gallery-title">
+      <div class="programs-shell">
+        <div class="kids-section-heading compact">
+          <div><span class="eyebrow">HANDS-ON EXPLORATION</span><h2 id="kids-gallery-title">Room to try, make, and discover.</h2></div>
+          <p>Creative activities can take many forms—from clay and visual art to technology and collaborative projects.</p>
+        </div>
+        <div class="kids-gallery-grid">
+          <figure><img src="/images/gallery-kids-clay.jpg" alt="Children showing clay projects at SparkPreneurs" loading="lazy" /></figure>
+          <figure><img src="/images/gallery-robotics.jpg" alt="A child working on a creative technology project" loading="lazy" /></figure>
+          <figure><img src="/images/after-school-activity.png" alt="A creative after-school activity at SparkPreneurs" loading="lazy" /></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="kids-faq" aria-labelledby="kids-faq-title">
+      <div class="programs-shell kids-faq-layout">
+        <div><span class="eyebrow">FAMILY QUESTIONS</span><h2 id="kids-faq-title">Before you choose.</h2><p>Start with these distinctions, then check the relevant program page for current offering details.</p></div>
+        <div class="kids-faq-list">
+          <details><summary>How do I know whether a program fits my child's age?</summary><p>Age information varies by program and offering. Check the current registration details, and contact SparkPreneurs before registering if the age range is unclear.</p></details>
+          <details><summary>Are Summer Camp and After School the same program?</summary><p>No. Summer Camp is a school-break format. After School is recurring weekday programming with three-, four-, and five-day plan options.</p></details>
+          <details><summary>What if the activity we want is not currently listed?</summary><p>Email SparkPreneurs with the activity and your child's age. Painting, drawing, kids pottery, and Papier-Mâché are currently treated as interest areas until a real schedule is confirmed.</p></details>
+          <details><summary>Where do programs take place?</summary><p>SparkPreneurs is at 3445 Yonge Street, Second Floor, Toronto. Contact the studio if you need directions or access information before visiting.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="programs-help" aria-labelledby="kids-help-title">
+      <div class="programs-shell">
+        <div><span class="eyebrow">HELP CHOOSING</span><h2 id="kids-help-title">Tell us what your child enjoys.</h2><p>Share their age, interests, and the schedule that works for your family. SparkPreneurs can point you toward the most relevant current path.</p></div>
+        <a class="button button-light" href="mailto:sparkpreneurs.ca@gmail.com?subject=Help%20Choosing%20a%20Kids%20Program">Email SparkPreneurs</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-brand"><img src="/images/logo.png" alt="SparkPreneurs" /><p>Sparking creativity, one creative spark at a time.</p></div>
+      <div><h3>Visit</h3><p>3445 Yonge St.<br />Second Floor<br />Toronto, ON M4N 2N1</p></div>
+      <div><h3>Contact</h3><p><a href="tel:+14168841393">(416) 884-1393</a><br /><a href="mailto:sparkpreneurs.ca@gmail.com">sparkpreneurs.ca@gmail.com</a><br /><a href="https://www.instagram.com/SparkPreneurs.ca" target="_blank" rel="noopener">@SparkPreneurs.ca</a></p></div>
+      <div><h3>Programs</h3><p><a href="/programs/">All Programs</a><br /><a href="/programs/kids-youth/">Kids & Youth</a><br /><a href="/programs/adults/">Adults</a><br /><a href="/workshops/">Workshops</a><br /><a href="/after-school/">After School</a><br /><a href="/camps/">Camps</a></p></div>
+    </div>
+    <div class="footer-bottom"><span>© {new Date().getFullYear()} SparkPreneurs</span><span>Art · Wellness · Technology</span></div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector<HTMLButtonElement>('[data-menu-button]');
+    const menu = document.querySelector<HTMLElement>('[data-menu]');
+    menuButton?.addEventListener('click', () => {
+      const open = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!open));
+      menu?.classList.toggle('is-open', !open);
+    });
+    menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+      menuButton?.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('is-open');
+    }));
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape' || menuButton?.getAttribute('aria-expanded') !== 'true') return;
+      menuButton.setAttribute('aria-expanded', 'false');
+      menu?.classList.remove('is-open');
+      menuButton.focus();
+    });
+  </script>
+</BaseLayout>

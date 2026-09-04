@@ -1,92 +1,55 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ProgramNav from '../components/ProgramNav.astro';
 
 const legacy = 'https://sparkpreneurs.github.io';
 
-const programs = [
+const audienceChoices = [
+  {
+    title: 'Kids & Youth',
+    description: 'Explore creative programs, workshops, camps, and after-school experiences for young makers.',
+    href: '/programs/kids-youth/',
+    label: 'PROGRAMS BY AUDIENCE',
+    number: '01',
+  },
+  {
+    title: 'Adults',
+    description: 'Find hands-on creative experiences, from pottery to guided art workshops.',
+    href: '/programs/adults/',
+    label: 'PROGRAMS BY AUDIENCE',
+    number: '02',
+  },
+];
+
+const programHighlights = [
   {
     title: 'Pottery — Wheel',
-    description: 'Learn centering, shaping, and glazing while creating functional pottery on the wheel.',
+    description: 'Learn centring, shaping, and glazing through a guided four-session adult course.',
     image: '/images/gallery-pottery.jpg',
     alt: 'Pottery being shaped at SparkPreneurs',
-    tag: 'POTTERY',
+    tag: 'ADULT POTTERY',
     tone: 'orange',
     href: '/pottery-wheel/',
   },
   {
     title: 'Pottery — Hand-Building',
-    description: 'Explore clay through pinching, coiling, slab-building, texture, and creative sculpture.',
+    description: 'Build pottery by hand through pinching, coiling, slab-building, texture, and sculpture.',
     image: '/images/gallery-kids-clay.jpg',
     alt: 'Hand-built clay projects at SparkPreneurs',
-    tag: 'POTTERY',
+    tag: 'ADULT POTTERY',
     tone: 'ink',
     href: '/hand-building-pottery/',
   },
-  {
-    title: 'Art Studio',
-    description: 'Draw, paint, and experiment with mixed media in a welcoming creative studio.',
-    image: '/images/adults.png',
-    alt: 'Artists creating together at SparkPreneurs',
-    tag: 'VISUAL ARTS',
-    tone: 'kraft',
-    href: `${legacy}/art-studio/`,
-  },
-  {
-    title: 'Robotics Lab',
-    description: 'Build, test, and problem-solve through hands-on robotics and engineering challenges.',
-    image: '/images/gallery-robotics.jpg',
-    alt: 'A robotics activity at SparkPreneurs',
-    tag: 'TECHNOLOGY',
-    tone: 'orange',
-    href: `${legacy}/robotics-lab/`,
-  },
-  {
-    title: '3D Printing',
-    description: 'Turn digital ideas into real objects while learning design, modelling, and fabrication.',
-    image: '/images/studio.jpg',
-    alt: 'The creative technology studio at SparkPreneurs',
-    tag: 'DESIGN & MAKE',
-    tone: 'ink',
-    href: `${legacy}/3d-printing/`,
-  },
-  {
-    title: 'Music Club',
-    description: 'Build confidence, rhythm, and creative expression through collaborative music-making.',
-    image: '/images/kids.jpg',
-    alt: 'Children taking part in a SparkPreneurs activity',
-    tag: 'MUSIC',
-    tone: 'kraft',
-    href: `${legacy}/music-club/`,
-  },
-  {
-    title: 'Yoga & Gymnastics',
-    description: 'Develop balance, flexibility, coordination, and confidence through joyful movement.',
-    image: '/images/zumba.jpg',
-    alt: 'A movement class at SparkPreneurs',
-    tag: 'MOVEMENT',
-    tone: 'orange',
-    href: `${legacy}/yoga-gymnastics/`,
-  },
-  {
-    title: 'Zumba',
-    description: 'Move to energetic music in an upbeat dance-fitness experience for every level.',
-    image: '/images/zumba.jpg',
-    alt: 'A Zumba class at SparkPreneurs',
-    tag: 'DANCE & FITNESS',
-    tone: 'ink',
-    href: `${legacy}/zumba/`,
-  },
 ];
 
-const formats = [
-  { title: 'Summer Camp', description: 'Creative, active summer days filled with art, making, technology, and new friendships.', href: `${legacy}/summer-camp/`, label: 'CAMPS & AFTER-SCHOOL' },
-  { title: 'After-School Program', description: 'Supportive weekday programs where kids explore interests and build practical creative skills.', href: '/after-school/', label: 'CAMPS & AFTER-SCHOOL' },
-  { title: 'Seasonal Camps', description: 'Engaging PA Day, March Break, winter, and other school-break experiences.', href: `${legacy}/camps/`, label: 'CAMPS & AFTER-SCHOOL' },
+const familyPrograms = [
+  { title: 'Camps', description: 'Explore creative seasonal camp experiences and check currently available sessions.', href: '/camps/', label: 'SCHOOL-BREAK PROGRAMS' },
+  { title: 'After-School Program', description: 'Compare 3-, 4-, and 5-day weekly options for creative afternoons from 3 PM to 5 PM.', href: '/after-school/', label: 'WEEKDAY PROGRAM' },
 ];
 
-const events = [
-  { title: 'Workshops', description: 'Focused, hands-on creative sessions for trying something new or developing a skill.', href: `${legacy}/workshops/` },
-  { title: 'Book Your Event', description: 'Creative birthdays, private workshops, group bookings, and community celebrations.', href: `${legacy}/book-your-event/` },
+const eventChoices = [
+  { title: 'Hosted Events', description: 'Explore creative birthdays, private gatherings, corporate events, and bridal showers led by SparkPreneurs.', href: `${legacy}/book-your-event/`, label: 'ACTIVITY + SPACE', id: 'hosted-events' },
+  { title: 'Studio Rental', description: 'Ask about using the studio space for your own class, meeting, creative work, or gathering.', href: 'mailto:sparkpreneurs.ca@gmail.com?subject=Studio%20Rental%20Inquiry', label: 'SPACE-ONLY INQUIRY', id: 'studio-rental' },
 ];
 
 const gallery = [
@@ -101,9 +64,10 @@ const gallery = [
   title="SparkPreneurs | Creative Programs for Kids & Adults in Toronto"
   description="A Midtown Toronto community studio for art, pottery, technology, movement, kids programs, adult workshops, and creative events."
 >
-  <header class="site-header" data-header>
+  <a class="home-skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header home-header" data-header>
     <div class="nav-shell">
-      <a class="brand" href="#top" aria-label="SparkPreneurs home">
+      <a class="brand" href="/" aria-label="SparkPreneurs home">
         <img src="/images/logo.png" alt="SparkPreneurs" width="188" height="80" />
       </a>
       <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button>
@@ -111,28 +75,32 @@ const gallery = [
         <span></span><span></span><span></span>
       </button>
       <nav id="primary-nav" class="primary-nav" aria-label="Main navigation" data-menu>
-        <a href="#programs">Programs</a>
-        <a href="#camps">Camps & After-School</a>
-        <a href="#events">Workshops & Events</a>
-        <a href="#about">Our studio</a>
+        <a href="/programs/">Programs</a>
+        <a href="/camps/">Camps</a>
+        <a href="/after-school/">After School</a>
+        <a href="#events">Events</a>
+        <a href="#studio-rental">Studio Rental</a>
+        <a href="#about">About</a>
         <a href="#contact">Contact</a>
-        <a class="nav-cta" href="#programs">Register</a>
+        <a class="nav-cta" href="/programs/">Find a Program</a>
       </nav>
     </div>
   </header>
 
-  <main id="top">
+  <ProgramNav />
+
+  <main id="main-content" class="home-page">
     <section class="hero section-grid">
       <div class="hero-copy">
         <span class="eyebrow">CREATIVE COMMUNITY STUDIO · TORONTO</span>
         <h1>Where every idea gets a chance to <em>spark.</em></h1>
         <p class="hero-lede">Art, wellness, and tech programs for kids, teens, and adults—made for exploring new passions, building real skills, and having a lot of fun along the way.</p>
         <div class="button-row">
-          <a class="button button-primary" href="#programs">Register now <span aria-hidden="true">→</span></a>
-          <a class="button button-ghost" href={`${legacy}/book-your-event/`}>Book your event</a>
+          <a class="button button-primary" href="/programs/">Find a Program <span aria-hidden="true">→</span></a>
+          <a class="button button-ghost" href="#events">Plan an Event</a>
         </div>
         <dl class="hero-facts">
-          <div><dt>All ages</dt><dd>Kids to adults</dd></div>
+          <div><dt>Kids + adults</dt><dd>Choose your audience</dd></div>
           <div><dt>Hands-on</dt><dd>Learn by making</dd></div>
           <div><dt>Midtown</dt><dd>3445 Yonge St.</dd></div>
         </dl>
@@ -165,6 +133,7 @@ const gallery = [
             <button type="button" data-slider-dot="2" aria-label="Show technology and making"></button>
             <button type="button" data-slider-dot="3" aria-label="Show events and celebrations"></button>
           </div>
+          <button type="button" class="slider-toggle" data-slider-toggle aria-label="Pause slideshow" aria-pressed="false">Ⅱ</button>
           <button type="button" class="slider-arrow" data-slider-next aria-label="Next studio activity">→</button>
         </div>
         <div class="spark-shape" aria-hidden="true">✦</div>
@@ -172,24 +141,44 @@ const gallery = [
     </section>
 
     <section class="audience-strip" aria-label="Programs for everyone">
-      <p>One studio. Lots of ways to grow.</p>
+      <p>Start with what you need.</p>
       <div class="audience-links">
-        <a href="#programs"><span>01</span> Explore programs <b>→</b></a>
-        <a href="#camps"><span>02</span> Camps & after-school <b>→</b></a>
-        <a href="#events"><span>03</span> Workshops & events <b>→</b></a>
+        <a href="#programs"><span>01</span> Programs <b>→</b></a>
+        <a href="/camps/"><span>02</span> Camps <b>→</b></a>
+        <a href="/workshops/"><span>03</span> Workshops <b>→</b></a>
+        <a href="#studio-rental"><span>04</span> Studio rental <b>→</b></a>
       </div>
     </section>
 
-    <section id="programs" class="section-shell programs-section">
+    <section id="programs" class="section-shell home-journeys">
       <div class="section-heading">
         <div>
-          <span class="eyebrow">FIND YOUR NEXT THING</span>
-          <h2>Programs that make room for curiosity.</h2>
+          <span class="eyebrow">PROGRAMS BY AUDIENCE</span>
+          <h2>Find the right starting point.</h2>
         </div>
-        <p>Try something new or go deeper into what you already love. Our instructors make every experience approachable, social, and genuinely hands-on.</p>
+        <p>Start with who the program is for. Each audience path brings together relevant activities, formats, and current registration options.</p>
       </div>
-      <div class="program-grid">
-        {programs.map((program) => (
+      <div class="home-journey-grid">
+        {audienceChoices.map((choice) => (
+          <a class="home-journey-card" href={choice.href}>
+            <span class="home-journey-number">{choice.number}</span>
+            <span class="eyebrow">{choice.label}</span>
+            <h3>{choice.title}</h3>
+            <p>{choice.description}</p>
+            <span class="text-link">Explore {choice.title} <b aria-hidden="true">↗</b></span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section id="program-highlights" class="home-program-highlights">
+      <div class="section-shell">
+        <div class="section-heading">
+          <div><span class="eyebrow">PROGRAM HIGHLIGHTS</span><h2>Two ways to work with clay.</h2></div>
+          <p>Compare the two locally implemented adult pottery programs. Open each program page to review its current schedule, price, and registration status. <a class="home-pottery-link" href="/programs/pottery/">Compare both pottery formats <b aria-hidden="true">→</b></a></p>
+        </div>
+        <div class="program-grid">
+          {programHighlights.map((program) => (
           <a class={`program-card ${program.tone}`} href={program.href}>
             <span class="card-stripe"></span>
             <div class="card-image"><img src={program.image} alt={program.alt} loading="lazy" /></div>
@@ -197,37 +186,53 @@ const gallery = [
               <span class="tag">{program.tag}</span>
               <h3>{program.title}</h3>
               <p>{program.description}</p>
-              <span class="text-link">Learn more <b aria-hidden="true">↗</b></span>
+              <span class="text-link">View program <b aria-hidden="true">↗</b></span>
             </div>
           </a>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
 
-    <section id="camps" class="category-section section-shell">
-      <div class="section-heading">
-        <div><span class="eyebrow">LEARN BEYOND THE SCHOOL DAY</span><h2>Camps & after-school.</h2></div>
-        <p>Choose the format that fits your family, from weekly programs to full creative days during school breaks.</p>
-      </div>
-      <div class="category-grid category-grid-three">
-        {formats.map((item) => (
-          <a class="category-card" href={item.href}>
-            <span class="eyebrow">{item.label}</span><h3>{item.title}</h3><p>{item.description}</p><span class="text-link">View details <b aria-hidden="true">↗</b></span>
-          </a>
-        ))}
-      </div>
-    </section>
-
-    <section id="events" class="category-section category-section-alt">
+    <section id="camps" class="category-section home-family-section">
       <div class="section-shell">
         <div class="section-heading">
-          <div><span class="eyebrow">CREATE & CELEBRATE TOGETHER</span><h2>Workshops & events.</h2></div>
-          <p>Join a guided workshop or make the studio yours for a memorable group experience.</p>
+          <div><span class="eyebrow">FAMILY PROGRAMS</span><h2>Camps and After School are different choices.</h2></div>
+          <p>Use Camps for school-break programming and After School for recurring weekday care. Each path answers a different set of family questions.</p>
         </div>
         <div class="category-grid">
-          {events.map((item) => (
+          {familyPrograms.map((item) => (
             <a class="category-card" href={item.href}>
-              <h3>{item.title}</h3><p>{item.description}</p><span class="text-link">Learn more <b aria-hidden="true">↗</b></span>
+              <span class="eyebrow">{item.label}</span><h3>{item.title}</h3><p>{item.description}</p><span class="text-link">View details <b aria-hidden="true">↗</b></span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="workshops" class="category-section category-section-alt home-workshops-section">
+      <div class="section-shell">
+        <div class="section-heading">
+          <div><span class="eyebrow">SHORT CREATIVE EXPERIENCES</span><h2>Workshops.</h2></div>
+          <p>Workshops are focused, hands-on sessions for trying an activity without committing to a recurring program.</p>
+        </div>
+        <a class="home-workshop-card" href="/workshops/">
+          <div><span class="tag">INTEREST LIST OPEN</span><h3>Explore Workshops</h3><p>See the previous kids workshop and ask about future art, pottery, seasonal, and creative technology sessions.</p></div>
+          <span class="button button-secondary">View Workshops <span aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </section>
+
+    <section id="events" class="category-section home-events-section">
+      <div class="section-shell">
+        <div class="section-heading">
+          <div><span class="eyebrow">GATHER AT SPARKPRENEURS</span><h2>Hosted event or space-only rental?</h2></div>
+          <p>Choose Events when SparkPreneurs leads the experience. Choose Studio Rental when you primarily need access to the space.</p>
+        </div>
+        <div class="category-grid">
+          {eventChoices.map((item) => (
+            <a id={item.id} class="category-card home-event-card" href={item.href}>
+              <span class="eyebrow">{item.label}</span><h3>{item.title}</h3><p>{item.description}</p><span class="text-link">{item.title === 'Studio Rental' ? 'Request rental information' : 'Explore hosted events'} <b aria-hidden="true">↗</b></span>
             </a>
           ))}
         </div>
@@ -244,11 +249,6 @@ const gallery = [
         <h2>A place to make, move, and belong.</h2>
         <p>SparkPreneurs is a community where art, wellness, creativity, and entrepreneurial thinking come together.</p>
         <p>We welcome children, teens, and adults to discover new passions, develop creative skills, and build confidence in a warm, inspiring environment.</p>
-        <ul class="check-list">
-          <li>Small groups and supportive instruction</li>
-          <li>Creative experiences for every skill level</li>
-          <li>A bright, flexible community studio</li>
-        </ul>
         <a class="button button-secondary" href={`${legacy}/about-us/`}>Meet SparkPreneurs <span aria-hidden="true">→</span></a>
       </div>
     </section>
@@ -264,11 +264,11 @@ const gallery = [
     </section>
 
     <section class="cta-section">
-      <span class="eyebrow">YOUR NEXT CREATIVE CHAPTER</span>
-      <h2>Come make something you’re proud of.</h2>
-      <p>Explore upcoming classes, camps, workshops, and community events for every age.</p>
+      <span class="eyebrow">CHOOSE YOUR NEXT STEP</span>
+      <h2>Find the path that fits.</h2>
+      <p>Start with Kids & Youth or Adults, then review the current schedule and next action on the relevant program page.</p>
       <div class="button-row centered">
-        <a class="button button-primary" href="#programs">Register now <span aria-hidden="true">→</span></a>
+        <a class="button button-primary" href="/programs/">Find a Program <span aria-hidden="true">→</span></a>
         <a class="button button-light" href="mailto:sparkpreneurs.ca@gmail.com">Ask us a question</a>
       </div>
     </section>
@@ -279,13 +279,13 @@ const gallery = [
       <div class="footer-brand"><img src="/images/logo.png" alt="SparkPreneurs" /><p>Sparking creativity, one creative spark at a time.</p></div>
       <div><h3>Visit</h3><p>3445 Yonge St.<br />Second Floor<br />Toronto, ON M4N 2N1</p></div>
       <div><h3>Contact</h3><p><a href="tel:+14168841393">(416) 884-1393</a><br /><a href="mailto:sparkpreneurs.ca@gmail.com">sparkpreneurs.ca@gmail.com</a><br /><a href="https://www.instagram.com/SparkPreneurs.ca" target="_blank" rel="noopener">@SparkPreneurs.ca</a></p></div>
-      <div><h3>Explore</h3><p><a href="#programs">Programs & Registration</a><br /><a href="#camps">Camps</a><br /><a href="#events">Events</a><br /><a href={`${legacy}/waiver/`}>Waiver</a></p></div>
+      <div><h3>Explore</h3><p><a href="/programs/">Programs</a><br /><a href="/programs/pottery/">Pottery</a><br /><a href="/workshops/">Workshops</a><br /><a href="/camps/">Camps</a><br /><a href="/after-school/">After School</a><br /><a href="#events">Events & Rental</a><br /><a href={`${legacy}/waiver/`}>Waiver</a></p></div>
     </div>
     <div class="footer-bottom"><span>© {new Date().getFullYear()} SparkPreneurs</span><span>Art · Wellness · Technology</span></div>
   </footer>
 
   <script>
-    const button = document.querySelector('[data-menu-button]');
+    const button = document.querySelector<HTMLButtonElement>('[data-menu-button]');
     const menu = document.querySelector('[data-menu]');
     button?.addEventListener('click', () => {
       const open = button.getAttribute('aria-expanded') === 'true';
@@ -296,12 +296,21 @@ const gallery = [
       button?.setAttribute('aria-expanded', 'false');
       menu.classList.remove('is-open');
     }));
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape' || button?.getAttribute('aria-expanded') !== 'true') return;
+      button.setAttribute('aria-expanded', 'false');
+      menu?.classList.remove('is-open');
+      button.focus();
+    });
 
     const slider = document.querySelector('[data-hero-slider]');
     const slides = [...(slider?.querySelectorAll('[data-slide]') ?? [])];
     const dots = [...(slider?.querySelectorAll('[data-slider-dot]') ?? [])];
+    const sliderToggle = slider?.querySelector('[data-slider-toggle]');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let activeSlide = 0;
     let sliderTimer: number | undefined;
+    let sliderPaused = reducedMotion.matches;
 
     const showSlide = (index: number) => {
       activeSlide = (index + slides.length) % slides.length;
@@ -317,19 +326,28 @@ const gallery = [
       });
     };
 
+    const updateSliderToggle = () => {
+      if (!sliderToggle) return;
+      sliderToggle.textContent = sliderPaused ? '▶' : 'Ⅱ';
+      sliderToggle.setAttribute('aria-label', sliderPaused ? 'Play slideshow' : 'Pause slideshow');
+      sliderToggle.setAttribute('aria-pressed', String(sliderPaused));
+    };
+
     const startSlider = () => {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       window.clearInterval(sliderTimer);
+      if (sliderPaused) return;
       sliderTimer = window.setInterval(() => showSlide(activeSlide + 1), 5000);
     };
 
     slider?.querySelector('[data-slider-prev]')?.addEventListener('click', () => { showSlide(activeSlide - 1); startSlider(); });
     slider?.querySelector('[data-slider-next]')?.addEventListener('click', () => { showSlide(activeSlide + 1); startSlider(); });
     dots.forEach((dot, index) => dot.addEventListener('click', () => { showSlide(index); startSlider(); }));
+    sliderToggle?.addEventListener('click', () => { sliderPaused = !sliderPaused; updateSliderToggle(); startSlider(); });
     slider?.addEventListener('mouseenter', () => window.clearInterval(sliderTimer));
     slider?.addEventListener('mouseleave', startSlider);
     slider?.addEventListener('focusin', () => window.clearInterval(sliderTimer));
     slider?.addEventListener('focusout', startSlider);
+    updateSliderToggle();
     startSlider();
   </script>
 </BaseLayout>

@@ -1,0 +1,201 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProgramDiscoveryCard from '../../components/ProgramDiscoveryCard.astro';
+import ProgramNav from '../../components/ProgramNav.astro';
+import { adultPrograms } from '../../data/programs';
+
+const potteryPrograms = adultPrograms.filter((program) => program.activity === 'pottery');
+
+const comparisonRows = [
+  { label: 'Making method', wheel: 'Shape clay while it rotates on the wheel.', hand: 'Build and shape clay directly by hand.' },
+  { label: 'Core techniques', wheel: 'Centring, opening, pulling, shaping, and glazing.', hand: 'Pinching, coiling, slab-building, texture, and sculpture.' },
+  { label: 'Experience', wheel: 'Beginner friendly; no prior experience required.', hand: 'Adult class; ask about fit if you are completely new to clay.' },
+  { label: 'Course format', wheel: 'Four guided sessions, two hours each.', hand: 'Four guided sessions, two hours each.' },
+  { label: 'Finishing', wheel: 'Glazing and kiln firing for one selected piece are included.', hand: 'Kiln firing through a ceramic partner is confirmed; verify glazing and included-piece details.' },
+];
+---
+
+<BaseLayout
+  title="Adult Pottery Programs | Wheel & Hand-Building | SparkPreneurs"
+  description="Compare adult pottery wheel and hand-building courses at SparkPreneurs in Midtown Toronto, then choose the clay-making format that fits you."
+>
+  <a class="programs-skip-link" href="#pottery-comparison">Skip to pottery comparison</a>
+
+  <header class="site-header programs-header" data-header>
+    <div class="nav-shell">
+      <a class="brand" href="/" aria-label="SparkPreneurs home"><img src="/images/logo.png" alt="SparkPreneurs" width="188" height="80" /></a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button><span class="sr-only">Menu</span><span></span><span></span><span></span></button>
+      <nav id="primary-nav" class="primary-nav" aria-label="Main navigation" data-menu>
+        <a href="/programs/" aria-current="page">Programs</a>
+        <a href="/camps/">Camps</a>
+        <a href="/after-school/">After School</a>
+        <a href="/#events">Events</a>
+        <a href="/#studio-rental">Studio Rental</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
+        <a class="nav-cta" href="#current-pottery-programs">View Pottery Programs</a>
+      </nav>
+    </div>
+  </header>
+
+  <ProgramNav current="pottery" />
+
+  <main class="pottery-page">
+    <section class="pottery-hero" aria-labelledby="pottery-title">
+      <div class="programs-shell">
+        <nav class="programs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/programs/">Programs</a><span aria-hidden="true">/</span><span>Pottery</span></nav>
+        <div class="pottery-hero-grid">
+          <div class="pottery-hero-copy">
+            <span class="eyebrow">ADULT POTTERY · MIDTOWN TORONTO</span>
+            <h1 id="pottery-title">Same material. Two ways to <em>make.</em></h1>
+            <p>Choose the wheel for the rhythm and control of shaping spinning clay, or build directly by hand for a tactile, sculptural approach.</p>
+            <div class="button-row">
+              <a class="button button-primary" href="#pottery-comparison">Compare the Programs <span aria-hidden="true">↓</span></a>
+              <a class="button button-ghost" href="#current-pottery-programs">View Current Programs</a>
+            </div>
+          </div>
+          <div class="pottery-hero-visual" aria-hidden="true">
+            <figure class="pottery-hero-wheel"><img src="/images/pottery-wheel-hero.png" alt="" /></figure>
+            <figure class="pottery-hero-hand"><img src="/images/hand-building-pottery.jpg" alt="" /></figure>
+            <div class="pottery-hero-divider"><span>01</span><b>OR</b><span>02</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pottery-intro" aria-labelledby="pottery-intro-title">
+      <div class="programs-shell pottery-intro-grid">
+        <div><span class="eyebrow">THE SHARED STARTING POINT</span><h2 id="pottery-intro-title">Four sessions to explore clay.</h2></div>
+        <div><p>Both current programs are adult courses with four two-hour sessions. The key decision is not which one is “better”—it is whether you want to shape clay on a wheel or construct forms directly with your hands.</p><a href="#pottery-comparison">See the differences <span aria-hidden="true">↓</span></a></div>
+      </div>
+    </section>
+
+    <section id="pottery-comparison" class="pottery-comparison" aria-labelledby="pottery-comparison-title">
+      <div class="programs-shell">
+        <div class="pottery-section-heading">
+          <div><span class="eyebrow">SIDE-BY-SIDE</span><h2 id="pottery-comparison-title">Wheel or hand-building?</h2></div>
+          <p>Compare the making method, techniques, experience guidance, format, and currently documented finishing details.</p>
+        </div>
+        <div class="pottery-table" role="table" aria-label="Pottery program comparison">
+          <div class="pottery-table-head" role="row">
+            <div role="columnheader"><span>Compare</span></div>
+            <div role="columnheader"><span>01</span><strong>Pottery Wheel</strong><a href="/pottery-wheel/">View program →</a></div>
+            <div role="columnheader"><span>02</span><strong>Hand-Building</strong><a href="/hand-building-pottery/">View program →</a></div>
+          </div>
+          {comparisonRows.map((row) => (
+            <div class="pottery-table-row" role="row">
+              <div role="rowheader">{row.label}</div>
+              <div role="cell">{row.wheel}</div>
+              <div role="cell">{row.hand}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="pottery-guidance" aria-labelledby="pottery-guidance-title">
+      <div class="programs-shell">
+        <div class="pottery-guidance-heading"><span class="eyebrow">A SIMPLE WAY TO CHOOSE</span><h2 id="pottery-guidance-title">Which process sounds more like you?</h2></div>
+        <div class="pottery-guidance-grid">
+          <article>
+            <span>01 · CHOOSE THE WHEEL IF...</span><h3>You want to learn the rhythm of throwing.</h3>
+            <ul><li>You are curious about centring and controlling spinning clay.</li><li>You want to practise forming rounded vessels.</li><li>You like repetition, refinement, and learning a tool-led process.</li></ul>
+            <a class="button button-secondary" href="/pottery-wheel/">Explore Pottery Wheel <span aria-hidden="true">→</span></a>
+          </article>
+          <article>
+            <span>02 · CHOOSE HAND-BUILDING IF...</span><h3>You want to construct and sculpt directly.</h3>
+            <ul><li>You are drawn to pinching, coiling, and slab-building.</li><li>You want to explore texture and sculptural forms.</li><li>You prefer shaping clay directly without a wheel.</li></ul>
+            <a class="button button-secondary" href="/hand-building-pottery/">Explore Hand-Building <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="current-pottery-programs" class="pottery-current" aria-labelledby="pottery-current-title">
+      <div class="programs-shell">
+        <div class="pottery-section-heading">
+          <div><span class="eyebrow">CURRENT PROGRAMS</span><h2 id="pottery-current-title">Open a course to choose your schedule.</h2></div>
+          <p>Program pages contain the latest course options and registration actions. Confirm dates, price, and availability there before registering.</p>
+        </div>
+        <div class="programs-card-grid pottery-program-grid">
+          {potteryPrograms.map((program, index) => <ProgramDiscoveryCard program={program} eager={index === 0} />)}
+        </div>
+      </div>
+    </section>
+
+    <section class="pottery-finishing" aria-labelledby="pottery-finishing-title">
+      <div class="programs-shell pottery-finishing-layout">
+        <div class="pottery-finishing-image"><img src="/images/gallery-pottery.jpg" alt="Clay work being shaped by hand at SparkPreneurs" loading="lazy" /><span>✦</span></div>
+        <div class="pottery-finishing-copy">
+          <span class="eyebrow">FIRING & FINISHING</span><h2 id="pottery-finishing-title">Your work continues after shaping.</h2>
+          <p>Pottery must be kiln-fired after it is made. The two current course pages document their finishing inclusions differently:</p>
+          <dl>
+            <div><dt>Pottery Wheel</dt><dd>Glazing and kiln firing for one selected piece are included. Additional pieces can be finished for an extra fee. Pickup timing is shared during the course.</dd></div>
+            <div><dt>Hand-Building</dt><dd>Pieces are kiln-fired through SparkPreneurs' ceramic partner. Confirm glazing, included-piece limits, processing time, extra fees, and pickup details before registering.</dd></div>
+          </dl>
+          <p class="pottery-verification-note"><strong>Why the distinction?</strong> These details must be reconciled across both programs before the site can present one shared finishing policy.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pottery-gallery" aria-labelledby="pottery-gallery-title">
+      <div class="programs-shell">
+        <div class="pottery-section-heading compact"><div><span class="eyebrow">CLAY AT THE STUDIO</span><h2 id="pottery-gallery-title">Shape, texture, refine.</h2></div><p>See both the precise motion of the wheel and the direct, tactile possibilities of building by hand.</p></div>
+        <div class="pottery-gallery-grid">
+          <figure><img src="/images/pottery-wheel-hero.png" alt="Clay being shaped on a pottery wheel" loading="lazy" /></figure>
+          <figure><img src="/images/hand-building-pottery.jpg" alt="A hand-built clay vessel" loading="lazy" /></figure>
+          <figure><img src="/images/gallery-pottery.jpg" alt="An adult hand-building with clay at SparkPreneurs" loading="lazy" /></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="pottery-faq" aria-labelledby="pottery-faq-title">
+      <div class="programs-shell pottery-faq-layout">
+        <div><span class="eyebrow">POTTERY QUESTIONS</span><h2 id="pottery-faq-title">Before you decide.</h2><p>Open the individual program page for current schedules, prices, and registration status.</p></div>
+        <div class="pottery-faq-list">
+          <details><summary>Can a complete beginner take a pottery course?</summary><p>The Pottery Wheel course explicitly welcomes beginners and requires no prior experience. Contact SparkPreneurs to confirm the best fit for a first Hand-Building course.</p></details>
+          <details><summary>Are both courses the same length?</summary><p>Yes. The current Wheel and Hand-Building programs each run as four two-hour sessions.</p></details>
+          <details><summary>Is firing included?</summary><p>Wheel includes glazing and firing for one selected piece. Hand-Building confirms partner kiln firing, but its glazing, quantity, fee, processing, and pickup details should be confirmed before registration.</p></details>
+          <details><summary>Where do the classes take place?</summary><p>Both programs take place at SparkPreneurs, 3445 Yonge Street, Second Floor, Toronto.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="programs-help" aria-labelledby="pottery-help-title">
+      <div class="programs-shell">
+        <div><span class="eyebrow">STILL DECIDING?</span><h2 id="pottery-help-title">Tell us what you want to make.</h2><p>Share your experience level and what draws you to pottery. SparkPreneurs can help you choose between the wheel and hand-building.</p></div>
+        <a class="button button-light" href="mailto:sparkpreneurs.ca@gmail.com?subject=Help%20Choosing%20a%20Pottery%20Program">Ask About Pottery</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-brand"><img src="/images/logo.png" alt="SparkPreneurs" /><p>Sparking creativity, one creative spark at a time.</p></div>
+      <div><h3>Visit</h3><p>3445 Yonge St.<br />Second Floor<br />Toronto, ON M4N 2N1</p></div>
+      <div><h3>Contact</h3><p><a href="tel:+14168841393">(416) 884-1393</a><br /><a href="mailto:sparkpreneurs.ca@gmail.com">sparkpreneurs.ca@gmail.com</a><br /><a href="https://www.instagram.com/SparkPreneurs.ca" target="_blank" rel="noopener">@SparkPreneurs.ca</a></p></div>
+      <div><h3>Programs</h3><p><a href="/programs/">All Programs</a><br /><a href="/programs/adults/">Adults</a><br /><a href="/programs/pottery/">Pottery</a><br /><a href="/workshops/">Workshops</a><br /><a href="/pottery-wheel/">Pottery Wheel</a><br /><a href="/hand-building-pottery/">Hand-Building</a></p></div>
+    </div>
+    <div class="footer-bottom"><span>© {new Date().getFullYear()} SparkPreneurs</span><span>Art · Wellness · Technology</span></div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector<HTMLButtonElement>('[data-menu-button]');
+    const menu = document.querySelector<HTMLElement>('[data-menu]');
+    menuButton?.addEventListener('click', () => {
+      const open = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!open));
+      menu?.classList.toggle('is-open', !open);
+    });
+    menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+      menuButton?.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('is-open');
+    }));
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape' || menuButton?.getAttribute('aria-expanded') !== 'true') return;
+      menuButton.setAttribute('aria-expanded', 'false');
+      menu?.classList.remove('is-open');
+      menuButton.focus();
+    });
+  </script>
+</BaseLayout>
