@@ -1,0 +1,232 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProgramDiscoveryCard from '../../components/ProgramDiscoveryCard.astro';
+import ProgramNav from '../../components/ProgramNav.astro';
+import { programs } from '../../data/programs';
+---
+
+<BaseLayout
+  title="All Programs | SparkPreneurs Toronto"
+  description="Explore current creative programs for kids, youth, and adults at SparkPreneurs in Midtown Toronto. Filter by audience, activity, format, and availability."
+>
+  <a class="programs-skip-link" href="#program-list">Skip to programs</a>
+
+  <header class="site-header programs-header" data-header>
+    <div class="nav-shell">
+      <a class="brand" href="/" aria-label="SparkPreneurs home">
+        <img src="/images/logo.png" alt="SparkPreneurs" width="188" height="80" />
+      </a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button>
+        <span class="sr-only">Menu</span><span></span><span></span><span></span>
+      </button>
+      <nav id="primary-nav" class="primary-nav" aria-label="Main navigation" data-menu>
+        <a href="/programs/" aria-current="page">Programs</a>
+        <a href="/camps/">Camps</a>
+        <a href="/after-school/">After School</a>
+        <a href="/#events">Events</a>
+        <a href="/#studio-rental">Studio Rental</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
+        <a class="nav-cta" href="#program-list">Find a Program</a>
+      </nav>
+    </div>
+  </header>
+
+  <ProgramNav current="all" />
+
+  <main class="programs-page">
+    <section class="programs-hero" aria-labelledby="programs-title">
+      <div class="programs-shell programs-hero-grid">
+        <div class="programs-hero-copy">
+          <nav class="programs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>Programs</span></nav>
+          <span class="eyebrow">ALL PROGRAMS · MIDTOWN TORONTO</span>
+          <h1 id="programs-title">Find your next <em>creative spark.</em></h1>
+          <p>Browse the programs currently supported by SparkPreneurs' published information. Start with an audience or use the filters to narrow the list.</p>
+          <div class="button-row">
+            <a class="button button-primary" href="#program-list">Browse Programs <span aria-hidden="true">↓</span></a>
+            <a class="button button-ghost" href="mailto:sparkpreneurs.ca@gmail.com?subject=Help%20Choosing%20a%20Program">Help Me Choose</a>
+          </div>
+        </div>
+        <div class="programs-hero-visual" aria-hidden="true">
+          <div class="programs-hero-image programs-hero-image-main"><img src="/images/hero-collage.jpg" alt="" /></div>
+          <div class="programs-hero-image programs-hero-image-small"><img src="/images/gallery-pottery.jpg" alt="" /></div>
+          <span class="programs-hero-mark">✦</span>
+          <p><strong>6</strong><span>program paths to explore</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="programs-audience" aria-labelledby="choose-audience-title">
+      <div class="programs-shell programs-audience-grid">
+        <div>
+          <span class="eyebrow">START WITH WHO IT'S FOR</span>
+          <h2 id="choose-audience-title">Choose an audience.</h2>
+        </div>
+        <a class="programs-audience-card" href="/programs/kids-youth/">
+          <span>01</span><strong>Kids & Youth</strong><small>Classes, camp, and after-school experiences</small><b aria-hidden="true">→</b>
+        </a>
+        <a class="programs-audience-card" href="/programs/adults/">
+          <span>02</span><strong>Adults</strong><small>Pottery and current creative experiences</small><b aria-hidden="true">→</b>
+        </a>
+      </div>
+    </section>
+
+    <section id="program-list" class="programs-listing" aria-labelledby="program-list-title">
+      <div class="programs-shell">
+        <div class="programs-list-heading">
+          <div><span class="eyebrow">EXPLORE THE CURRENT LIST</span><h2 id="program-list-title">All programs.</h2></div>
+          <p>Schedules and registration can change. Open a program to confirm its current options before making plans.</p>
+        </div>
+
+        <div class="programs-filter-panel" aria-label="Filter programs" data-program-filters>
+          <div class="programs-filter-group">
+            <span id="audience-filter-label">Audience</span>
+            <div role="group" aria-labelledby="audience-filter-label">
+              <button type="button" data-filter-group="audience" data-filter-value="all" aria-pressed="true">All</button>
+              <button type="button" data-filter-group="audience" data-filter-value="kids-youth" aria-pressed="false">Kids & Youth</button>
+              <button type="button" data-filter-group="audience" data-filter-value="adults" aria-pressed="false">Adults</button>
+            </div>
+          </div>
+          <div class="programs-filter-group">
+            <span id="activity-filter-label">Activity</span>
+            <div role="group" aria-labelledby="activity-filter-label">
+              <button type="button" data-filter-group="activity" data-filter-value="all" aria-pressed="true">All</button>
+              <button type="button" data-filter-group="activity" data-filter-value="art-mixed-media" aria-pressed="false">Creative Mix</button>
+              <button type="button" data-filter-group="activity" data-filter-value="pottery" aria-pressed="false">Pottery</button>
+              <button type="button" data-filter-group="activity" data-filter-value="creative-technology" aria-pressed="false">Creative Technology</button>
+              <button type="button" data-filter-group="activity" data-filter-value="wellness-movement" aria-pressed="false">Wellness & Movement</button>
+            </div>
+          </div>
+          <div class="programs-filter-group">
+            <span id="format-filter-label">Format</span>
+            <div role="group" aria-labelledby="format-filter-label">
+              <button type="button" data-filter-group="format" data-filter-value="all" aria-pressed="true">All</button>
+              <button type="button" data-filter-group="format" data-filter-value="class" aria-pressed="false">Class</button>
+              <button type="button" data-filter-group="format" data-filter-value="workshop" aria-pressed="false">Workshop</button>
+              <button type="button" data-filter-group="format" data-filter-value="camp" aria-pressed="false">Camp</button>
+              <button type="button" data-filter-group="format" data-filter-value="after-school" aria-pressed="false">After School</button>
+              <button type="button" data-filter-group="format" data-filter-value="seasonal-pass" aria-pressed="false">Seasonal Pass</button>
+            </div>
+          </div>
+          <div class="programs-filter-group">
+            <span id="availability-filter-label">Availability</span>
+            <div role="group" aria-labelledby="availability-filter-label">
+              <button type="button" data-filter-group="availability" data-filter-value="all" aria-pressed="true">All</button>
+              <button type="button" data-filter-group="availability" data-filter-value="registration" aria-pressed="false">Registration Available</button>
+              <button type="button" data-filter-group="availability" data-filter-value="interest-list" aria-pressed="false">Interest List</button>
+              <button type="button" data-filter-group="availability" data-filter-value="ended" aria-pressed="false">Ended</button>
+              <button type="button" data-filter-group="availability" data-filter-value="check-schedule" aria-pressed="false">Check Schedule</button>
+            </div>
+          </div>
+          <div class="programs-filter-summary">
+            <p data-results-count aria-live="polite">Showing all {programs.length} programs</p>
+            <button type="button" data-filter-reset>Reset filters</button>
+          </div>
+        </div>
+
+        <a class="programs-pottery-guide" href="/programs/pottery/">
+          <div><span class="eyebrow">NEED TO CHOOSE A POTTERY FORMAT?</span><strong>Compare Wheel and Hand-Building side by side.</strong></div>
+          <span>Open the Pottery Guide <b aria-hidden="true">→</b></span>
+        </a>
+
+        <div class="programs-card-grid" data-program-grid>
+          {programs.map((program, index) => <ProgramDiscoveryCard program={program} eager={index < 2} />)}
+        </div>
+
+        <div class="programs-empty" data-filter-empty hidden>
+          <span aria-hidden="true">✦</span>
+          <h3>No programs match all those filters.</h3>
+          <p>Try removing one filter, or ask us about the kind of experience you have in mind.</p>
+          <button type="button" class="button button-secondary" data-filter-reset>Show All Programs</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="programs-interest" aria-labelledby="interest-title">
+      <div class="programs-shell programs-interest-grid">
+        <div>
+          <span class="eyebrow">DON'T SEE THE RIGHT FIT?</span>
+          <h2 id="interest-title">Tell us what you want to explore.</h2>
+          <p>Some creative interests are offered by request or return when enough people are interested. Ask about painting, drawing, kids pottery, Papier-Mâché, and other creative workshops.</p>
+          <a class="button button-primary" href="mailto:sparkpreneurs.ca@gmail.com?subject=Program%20Interest">Ask About a Program <span aria-hidden="true">→</span></a>
+        </div>
+        <ul aria-label="Interest areas">
+          <li><span>01</span>Painting & Watercolour</li>
+          <li><span>02</span>Drawing & Sketching</li>
+          <li><span>03</span>Kids Pottery</li>
+          <li><span>04</span>Papier-Mâché</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="programs-help" aria-labelledby="programs-help-title">
+      <div class="programs-shell">
+        <div><span class="eyebrow">HELP CHOOSING</span><h2 id="programs-help-title">Not sure where to begin?</h2><p>Tell us who the program is for, what they enjoy, and the schedule that could work. We will point you toward the most relevant current option.</p></div>
+        <a class="button button-light" href="mailto:sparkpreneurs.ca@gmail.com?subject=Help%20Choosing%20a%20Program">Email SparkPreneurs</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-brand"><img src="/images/logo.png" alt="SparkPreneurs" /><p>Sparking creativity, one creative spark at a time.</p></div>
+      <div><h3>Visit</h3><p>3445 Yonge St.<br />Second Floor<br />Toronto, ON M4N 2N1</p></div>
+      <div><h3>Contact</h3><p><a href="tel:+14168841393">(416) 884-1393</a><br /><a href="mailto:sparkpreneurs.ca@gmail.com">sparkpreneurs.ca@gmail.com</a><br /><a href="https://www.instagram.com/SparkPreneurs.ca" target="_blank" rel="noopener">@SparkPreneurs.ca</a></p></div>
+      <div><h3>Explore</h3><p><a href="/programs/">All Programs</a><br /><a href="/programs/kids-youth/">Kids & Youth</a><br /><a href="/programs/adults/">Adults</a><br /><a href="/programs/pottery/">Pottery</a><br /><a href="/workshops/">Workshops</a><br /><a href="/camps/">Camps</a><br /><a href="/after-school/">After School</a><br /><a href="/#events">Events & Rental</a></p></div>
+    </div>
+    <div class="footer-bottom"><span>© {new Date().getFullYear()} SparkPreneurs</span><span>Art · Wellness · Technology</span></div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector<HTMLButtonElement>('[data-menu-button]');
+    const menu = document.querySelector<HTMLElement>('[data-menu]');
+    menuButton?.addEventListener('click', () => {
+      const open = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!open));
+      menu?.classList.toggle('is-open', !open);
+    });
+    menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+      menuButton?.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('is-open');
+    }));
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape' || menuButton?.getAttribute('aria-expanded') !== 'true') return;
+      menuButton.setAttribute('aria-expanded', 'false');
+      menu?.classList.remove('is-open');
+      menuButton.focus();
+    });
+
+    type FilterGroup = 'audience' | 'activity' | 'format' | 'availability';
+    const cards = [...document.querySelectorAll<HTMLElement>('[data-program-card]')];
+    const filterButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-filter-group]')];
+    const resetButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-filter-reset]')];
+    const resultCount = document.querySelector<HTMLElement>('[data-results-count]');
+    const emptyState = document.querySelector<HTMLElement>('[data-filter-empty]');
+    const selections: Record<FilterGroup, string> = { audience: 'all', activity: 'all', format: 'all', availability: 'all' };
+
+    const updateFilters = () => {
+      let visible = 0;
+      cards.forEach((card) => {
+        const matches = (Object.entries(selections) as [FilterGroup, string][]).every(([group, value]) => value === 'all' || card.dataset[group] === value);
+        card.hidden = !matches;
+        if (matches) visible += 1;
+      });
+      filterButtons.forEach((button) => {
+        const group = button.dataset.filterGroup as FilterGroup;
+        button.setAttribute('aria-pressed', String(selections[group] === button.dataset.filterValue));
+      });
+      if (resultCount) resultCount.textContent = visible === cards.length ? `Showing all ${visible} programs` : `Showing ${visible} of ${cards.length} programs`;
+      if (emptyState) emptyState.hidden = visible !== 0;
+    };
+
+    filterButtons.forEach((button) => button.addEventListener('click', () => {
+      const group = button.dataset.filterGroup as FilterGroup;
+      selections[group] = button.dataset.filterValue || 'all';
+      updateFilters();
+    }));
+    resetButtons.forEach((button) => button.addEventListener('click', () => {
+      (Object.keys(selections) as FilterGroup[]).forEach((key) => { selections[key] = 'all'; });
+      updateFilters();
+    }));
+  </script>
+</BaseLayout>

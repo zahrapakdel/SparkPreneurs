@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProgramHero from '../components/ProgramHero.astro';
+import ProgramNav from '../components/ProgramNav.astro';
 
 const classes = [
   { code: 'HB4SUN', name: 'Hand-Building Pottery: 4 Sunday Sessions (10:30 AM-12:30 PM)', schedule: 'Sundays, 10:30 AM-12:30 PM', button: 'Add Sunday Class to Cart' },
@@ -15,13 +16,15 @@ const classes = [
       <a class="brand" href="/" aria-label="SparkPreneurs home"><img src="/images/logo.png" alt="SparkPreneurs" width="188" height="80" /></a>
       <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button><span class="sr-only">Toggle menu</span><span></span><span></span><span></span></button>
       <nav id="primary-nav" class="primary-nav" aria-label="Main navigation" data-menu>
-        <a href="/#programs">Programs</a><a href="/#camps">Camps & After-School</a><a href="/#events">Workshops & Events</a><a href="/#about">Our studio</a><a href="/#contact">Contact</a><a class="nav-cta" href="#registration">Register</a>
+        <a href="/programs/">Programs</a><a href="/camps/">Camps</a><a href="/after-school/">After School</a><a href="/#events">Events</a><a href="/#about">About</a><a href="/#contact">Contact</a><a class="nav-cta" href="#registration">Register</a>
       </nav>
     </div>
   </header>
 
+  <ProgramNav current="pottery" />
+
   <main class="program-page hand-building-page">
-    <ProgramHero eyebrow="ADULT POTTERY CLASS · MIDTOWN TORONTO" title="Hand-Building Pottery" intro="Four-session pottery classes for adults, focused on shaping clay by hand and building finished pieces with instructor guidance." programNumber="PROGRAM / 02" backHref="https://sparkpreneurs.github.io/art-studio/" backLabel="Back to Adult Art Studio" facts={[{ label: 'Course', value: '4 sessions' }, { label: 'Class length', value: '2 hours' }, { label: 'Experience', value: 'Adult class' }, { label: 'Offer', value: '$195 + HST' }]}>
+    <ProgramHero eyebrow="ADULT POTTERY CLASS · MIDTOWN TORONTO" title="Hand-Building Pottery" intro="Four-session pottery classes for adults, focused on shaping clay by hand and building finished pieces with instructor guidance." programNumber="PROGRAM / 02" backHref="/programs/pottery/" backLabel="Back to Pottery Programs" facts={[{ label: 'Course', value: '4 sessions' }, { label: 'Class length', value: '2 hours' }, { label: 'Experience', value: 'Adult class' }, { label: 'Offer', value: '$195 + HST' }]}>
       <Fragment slot="actions"><a class="button button-primary" href="#schedule">Choose a Class <span aria-hidden="true">→</span></a><a class="button button-ghost" href="mailto:sparkpreneurs.ca@gmail.com">Ask a Question</a></Fragment>
     </ProgramHero>
 

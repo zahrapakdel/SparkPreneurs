@@ -1,0 +1,26 @@
+---
+interface Props {
+  current?: 'all' | 'kids-youth' | 'adults' | 'pottery' | 'workshops';
+}
+
+const { current } = Astro.props;
+
+const links = [
+  { key: 'all', label: 'All Programs', href: '/programs/' },
+  { key: 'kids-youth', label: 'Kids & Youth', href: '/programs/kids-youth/' },
+  { key: 'adults', label: 'Adults', href: '/programs/adults/' },
+  { key: 'pottery', label: 'Pottery', href: '/programs/pottery/' },
+  { key: 'workshops', label: 'Workshops', href: '/workshops/' },
+] as const;
+---
+
+<nav class="program-route-nav" aria-label="Program pages">
+  <div class="program-route-nav__inner">
+    <span>Explore Programs</span>
+    <div>
+      {links.map((link) => (
+        <a href={link.href} aria-current={current === link.key ? 'page' : undefined}>{link.label}</a>
+      ))}
+    </div>
+  </div>
+</nav>

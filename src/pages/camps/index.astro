@@ -1,0 +1,192 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const summerCampUrl = '/camps/summer-camp/';
+
+const parentEssentials = [
+  { number: '01', title: 'Age fit', detail: 'The current Summer Camp detail references ages 4–10, while older hub content mentions another range. Confirm the eligible age for the session you choose.' },
+  { number: '02', title: 'Dates & hours', detail: 'Review the Summer Camp status page for the completed 2026 schedule, then request the next confirmed dates and daily hours.' },
+  { number: '03', title: 'Drop-off & pickup', detail: 'Confirm arrival, authorized pickup, late-pickup, and any extended-care arrangements before registration.' },
+  { number: '04', title: 'Food & what to bring', detail: 'Ask for the current lunch, snack, water, clothing, and personal-item guidance for the selected session.' },
+  { number: '05', title: 'Health & safety', detail: 'Confirm medication, allergy, emergency-contact, illness, and participant support procedures.' },
+  { number: '06', title: 'Changes & cancellations', detail: 'Review the applicable cancellation, refund, transfer, and missed-day policy before payment.' },
+];
+
+const campActivities = [
+  { number: '01', title: 'Create', detail: 'Explore art and creative projects through hands-on making.' },
+  { number: '02', title: 'Move', detail: 'Balance focused creative time with movement and active experiences.' },
+  { number: '03', title: 'Connect', detail: 'Spend school-break days creating alongside other young makers.' },
+];
+---
+
+<BaseLayout
+  title="Creative Camps for Kids | SparkPreneurs Toronto"
+  description="Explore current creative school-break camp options for children at SparkPreneurs in Midtown Toronto and review the details families should confirm before registering."
+>
+  <a class="programs-skip-link" href="#current-camp">Skip to current camp</a>
+
+  <header class="site-header programs-header" data-header>
+    <div class="nav-shell">
+      <a class="brand" href="/" aria-label="SparkPreneurs home"><img src="/images/logo.png" alt="SparkPreneurs" width="188" height="80" /></a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button><span class="sr-only">Menu</span><span></span><span></span><span></span></button>
+      <nav id="primary-nav" class="primary-nav" aria-label="Main navigation" data-menu>
+        <a href="/programs/">Programs</a>
+        <a href="/camps/" aria-current="page">Camps</a>
+        <a href="/after-school/">After School</a>
+        <a href="/#events">Events</a>
+        <a href="/#studio-rental">Studio Rental</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
+        <a class="nav-cta" href={summerCampUrl}>View Summer Camp Status</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="camps-page">
+    <section class="camps-hero" aria-labelledby="camps-title">
+      <div class="programs-shell">
+        <nav class="programs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>Camps</span></nav>
+        <div class="camps-hero-grid">
+          <div class="camps-hero-copy">
+            <span class="eyebrow">SCHOOL-BREAK PROGRAMS · MIDTOWN TORONTO</span>
+            <h1 id="camps-title">Creative days beyond the <em>school day.</em></h1>
+            <p>Explore the currently supported Summer Camp path, then confirm the session-specific ages, dates, hours, and family essentials before registering.</p>
+            <div class="button-row">
+              <a class="button button-primary" href={summerCampUrl}>View Summer Camp Status <span aria-hidden="true">→</span></a>
+              <a class="button button-ghost" href="#parent-essentials">Parent Essentials</a>
+            </div>
+          </div>
+          <div class="camps-hero-visual" aria-hidden="true">
+            <figure class="camps-hero-main"><img src="/images/kids.jpg" alt="" /></figure>
+            <figure class="camps-hero-small"><img src="/images/gallery-kids-clay.jpg" alt="" /></figure>
+            <span>✦</span>
+            <p><strong>Summer</strong><small>Current camp season</small></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="camps-task-switch" aria-label="Choose between Camps and After School">
+      <div class="programs-shell">
+        <p>What does your family need?</p>
+        <a href="/camps/" aria-current="page"><span>01</span><strong>Camps</strong><small>School-break days</small></a>
+        <a href="/after-school/"><span>02</span><strong>After School</strong><small>Recurring weekdays</small></a>
+      </div>
+    </section>
+
+    <section id="current-camp" class="camps-current" aria-labelledby="current-camp-title">
+      <div class="programs-shell">
+        <div class="camps-section-heading">
+          <div><span class="eyebrow">CURRENT CAMP PATH</span><h2 id="current-camp-title">Summer Camp.</h2></div>
+          <p>Summer Camp is the only camp offering currently supported by the content inventory. Other school-break camp pages will be added only when real sessions are confirmed.</p>
+        </div>
+        <article class="camps-feature-card">
+          <div class="camps-feature-image"><img src="/images/hero-collage.jpg" alt="Children and adults creating together at SparkPreneurs" loading="lazy" /><span>2026 sessions ended</span></div>
+          <div class="camps-feature-copy">
+            <span class="eyebrow">CREATIVE SUMMER DAYS</span>
+            <h3>Summer Camp</h3>
+            <p>Creative school-break days that bring together art, hands-on making, movement, and time with other young makers.</p>
+            <dl>
+              <div><dt>Audience</dt><dd>Children · confirm age by session</dd></div>
+              <div><dt>Format</dt><dd>Seasonal camp</dd></div>
+              <div><dt>Location</dt><dd>3445 Yonge St., Toronto</dd></div>
+            </dl>
+            <a class="button button-secondary" href={summerCampUrl}>View Summer Camp Details <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="camps-experience" aria-labelledby="camp-experience-title">
+      <div class="programs-shell camps-experience-layout">
+        <div><span class="eyebrow">THE SUPPORTED EXPERIENCE</span><h2 id="camp-experience-title">Create, move, and connect.</h2><p>Current source material supports these broad experience areas. Exact themes, projects, and daily timing should be confirmed for each camp session.</p></div>
+        <ol>
+          {campActivities.map((activity) => <li><span>{activity.number}</span><div><h3>{activity.title}</h3><p>{activity.detail}</p></div></li>)}
+        </ol>
+      </div>
+    </section>
+
+    <section id="parent-essentials" class="camps-essentials" aria-labelledby="camp-essentials-title">
+      <div class="programs-shell">
+        <div class="camps-section-heading">
+          <div><span class="eyebrow">PARENT ESSENTIALS</span><h2 id="camp-essentials-title">Confirm before registration.</h2></div>
+          <p>These practical details vary by offering or still require business confirmation. Families should not have to rely on assumptions.</p>
+        </div>
+        <div class="camps-essential-grid">
+          {parentEssentials.map((item) => <article><span>{item.number}</span><h3>{item.title}</h3><p>{item.detail}</p></article>)}
+        </div>
+        <div class="camps-contact-note"><span aria-hidden="true">i</span><p><strong>Need a clear answer?</strong> Contact SparkPreneurs with your child's age and the session you are considering.</p><a href="mailto:sparkpreneurs.ca@gmail.com?subject=Summer%20Camp%20Question">Ask a Camp Question →</a></div>
+      </div>
+    </section>
+
+    <section class="camps-compare" aria-labelledby="camp-compare-title">
+      <div class="programs-shell camps-compare-layout">
+        <div><span class="eyebrow">CAMP OR AFTER SCHOOL?</span><h2 id="camp-compare-title">Two different family needs.</h2><p>Camps and After School are connected by audience, but they answer different scheduling and care questions.</p></div>
+        <div class="camps-compare-grid">
+          <a href="/camps/" aria-current="page"><span>School breaks</span><h3>Camps</h3><p>Seasonal programming during time away from school. Choose a session, then confirm dates, ages, and daily logistics.</p><b>View Camps ↑</b></a>
+          <a href="/after-school/"><span>Weekday afternoons</span><h3>After School</h3><p>Recurring care from 3 PM to 5 PM with three-, four-, and five-day weekly plan options.</p><b>View After School →</b></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="camps-gallery" aria-labelledby="camp-gallery-title">
+      <div class="programs-shell">
+        <div class="camps-section-heading compact"><div><span class="eyebrow">CREATIVE SCHOOL BREAKS</span><h2 id="camp-gallery-title">Time to explore.</h2></div><p>Camp experiences can bring together visual art, clay, creative technology, movement, and collaborative making.</p></div>
+        <div class="camps-gallery-grid">
+          <figure><img src="/images/kids.jpg" alt="Children taking part in a SparkPreneurs activity" loading="lazy" /></figure>
+          <figure><img src="/images/gallery-kids-clay.jpg" alt="Children showing their clay projects" loading="lazy" /></figure>
+          <figure><img src="/images/gallery-robotics.jpg" alt="A child working on a creative technology activity" loading="lazy" /></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="camps-faq" aria-labelledby="camp-faq-title">
+      <div class="programs-shell camps-faq-layout">
+        <div><span class="eyebrow">CAMP QUESTIONS</span><h2 id="camp-faq-title">Before you register.</h2><p>Use the current Summer Camp page for available sessions and ask the studio about anything not clearly specified.</p></div>
+        <div class="camps-faq-list">
+          <details><summary>What ages can attend Summer Camp?</summary><p>The current detail page references ages 4–10, but older content mentions another range. Confirm the eligible ages for the exact session before registering.</p></details>
+          <details><summary>What does a camp day include?</summary><p>The supported overview includes art, creativity, hands-on making, movement, and social time. Exact projects, themes, and daily schedules must be confirmed by session.</p></details>
+          <details><summary>Are PA Day or March Break camps available?</summary><p>No separate current offerings are supported by the available content. SparkPreneurs can confirm whether another school-break session is planned.</p></details>
+          <details><summary>Where does camp take place?</summary><p>Camp is associated with the SparkPreneurs studio at 3445 Yonge Street, Second Floor, Toronto. Confirm any session-specific location details before attending.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="programs-help" aria-labelledby="camp-help-title">
+      <div class="programs-shell">
+        <div><span class="eyebrow">LOOKING AHEAD?</span><h2 id="camp-help-title">Review the latest Summer Camp status.</h2><p>The 2026 sessions have ended. Review the completed offering, then ask SparkPreneurs when the next dates are confirmed.</p></div>
+        <a class="button button-light" href={summerCampUrl}>View Summer Camp Details →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-brand"><img src="/images/logo.png" alt="SparkPreneurs" /><p>Sparking creativity, one creative spark at a time.</p></div>
+      <div><h3>Visit</h3><p>3445 Yonge St.<br />Second Floor<br />Toronto, ON M4N 2N1</p></div>
+      <div><h3>Contact</h3><p><a href="tel:+14168841393">(416) 884-1393</a><br /><a href="mailto:sparkpreneurs.ca@gmail.com">sparkpreneurs.ca@gmail.com</a><br /><a href="https://www.instagram.com/SparkPreneurs.ca" target="_blank" rel="noopener">@SparkPreneurs.ca</a></p></div>
+      <div><h3>Family Programs</h3><p><a href="/camps/">Camps</a><br /><a href={summerCampUrl}>Summer Camp</a><br /><a href="/after-school/">After School</a><br /><a href="/workshops/">Workshops</a><br /><a href="/programs/kids-youth/">Kids & Youth</a></p></div>
+    </div>
+    <div class="footer-bottom"><span>© {new Date().getFullYear()} SparkPreneurs</span><span>Art · Wellness · Technology</span></div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector<HTMLButtonElement>('[data-menu-button]');
+    const menu = document.querySelector<HTMLElement>('[data-menu]');
+    menuButton?.addEventListener('click', () => {
+      const open = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!open));
+      menu?.classList.toggle('is-open', !open);
+    });
+    menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+      menuButton?.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('is-open');
+    }));
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape' || menuButton?.getAttribute('aria-expanded') !== 'true') return;
+      menuButton.setAttribute('aria-expanded', 'false');
+      menu?.classList.remove('is-open');
+      menuButton.focus();
+    });
+  </script>
+</BaseLayout>

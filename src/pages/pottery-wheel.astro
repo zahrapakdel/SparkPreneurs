@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProgramHero from '../components/ProgramHero.astro';
+import ProgramNav from '../components/ProgramNav.astro';
 
 const cohorts = [
   {
@@ -76,10 +77,12 @@ const skills = [
       <a class="brand" href="/" aria-label="SparkPreneurs home"><img src="/images/logo.png" alt="SparkPreneurs" width="188" height="80" /></a>
       <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button><span class="sr-only">Toggle menu</span><span></span><span></span><span></span></button>
       <nav id="primary-nav" class="primary-nav" aria-label="Main navigation" data-menu>
-        <a href="/#programs">Programs</a><a href="/#camps">Camps & After-School</a><a href="/#events">Workshops & Events</a><a href="/#about">Our studio</a><a href="/#contact">Contact</a><a class="nav-cta" href="#registration">Register</a>
+        <a href="/programs/">Programs</a><a href="/camps/">Camps</a><a href="/after-school/">After School</a><a href="/#events">Events</a><a href="/#about">About</a><a href="/#contact">Contact</a><a class="nav-cta" href="#registration">Register</a>
       </nav>
     </div>
   </header>
+
+  <ProgramNav current="pottery" />
 
   <main class="program-page pottery-wheel-page">
     <ProgramHero
@@ -90,6 +93,8 @@ const skills = [
       imageAlt="Adult shaping clay on a pottery wheel at SparkPreneurs"
       imageCaption="Make something slowly, with your own hands"
       programNumber="PROGRAM / 01"
+      backHref="/programs/pottery/"
+      backLabel="Back to Pottery Programs"
       facts={[
         { label: 'Course', value: '4 sessions' },
         { label: 'Class length', value: '2 hours' },
