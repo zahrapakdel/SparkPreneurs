@@ -1,0 +1,20 @@
+---
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+---
+
+<footer {id} class="site-footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <img src="/images/logo.png" alt="SparkPreneurs" />
+      <p>Sparking creativity, one creative spark at a time.</p>
+    </div>
+    <div><h3>Visit</h3><p>3445 Yonge St.<br />Second Floor<br />Toronto, ON M4N 2N1</p></div>
+    <div><h3>Contact</h3><p><a href="tel:+14168841393">(416) 884-1393</a><br /><a href="mailto:sparkpreneurs.ca@gmail.com">sparkpreneurs.ca@gmail.com</a><br /><a href="https://www.instagram.com/SparkPreneurs.ca" target="_blank" rel="noopener">@SparkPreneurs.ca</a></p></div>
+    <div><h3>Explore</h3><p><a href="/programs/">All Programs</a><br /><a href="/programs/kids-youth/">Kids & Youth</a><br /><a href="/programs/adults/">Adults</a><br /><a href="/workshops/">Workshops</a><br /><a href="/camps/">Camps</a><br /><a href="/after-school/">After School</a><br /><a href="/events/">Events</a><br /><a href="/studio-rental/">Studio Rental</a><br /><a href="/gallery/">Gallery</a><br /><a href="/about/">About</a><br /><a href="/contact/">Contact</a></p></div>
+  </div>
+  <div class="footer-bottom"><span>© {new Date().getFullYear()} SparkPreneurs</span><span>Art · Wellness · Technology</span></div>
+</footer>

@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+
+<BaseLayout title="About SparkPreneurs | Creative Community Studio Toronto" description="Learn about SparkPreneurs' mission to build creativity, confidence, well-being, and entrepreneurial thinking through hands-on experiences in Midtown Toronto.">
+  <SiteHeader current="about" />
+  <main class="standard-page about-detail-page">
+    <section class="standard-hero">
+      <div class="standard-shell standard-hero-grid">
+        <div><nav class="programs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>About</span></nav><span class="eyebrow">ABOUT SPARKPRENEURS</span><h1>Every great idea begins with a <em>spark.</em></h1><p class="standard-lede">Our mission is to inspire creativity, confidence, well-being, and entrepreneurial thinking through hands-on experiences that empower people of all ages.</p><div class="button-row"><a class="button button-primary" href="/programs/">Explore Programs <span aria-hidden="true">→</span></a><a class="button button-ghost" href="/contact/">Contact Us</a></div></div>
+        <figure><img src="/images/studio.jpg" alt="The SparkPreneurs studio space in Midtown Toronto" /><figcaption>3445 Yonge St. · Second Floor · Toronto</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="standard-section"><div class="standard-shell story-grid"><div><span class="eyebrow">OUR MISSION</span><h2>A welcoming place to learn, create, and grow.</h2></div><div><p>We believe creativity is more than making art. It is about discovering ideas, solving problems, expressing yourself, building confidence, and turning imagination into opportunity.</p><p>Our goal is to create an environment where every individual feels inspired to explore and develop their abilities.</p></div></div></section>
+
+    <section class="standard-section standard-section-alt"><div class="standard-shell"><div class="standard-heading"><span class="eyebrow">WHY SPARKPRENEURS?</span><h2>Creativity with an entrepreneurial mindset.</h2><p>Our name reflects the way ideas become meaningful experiences.</p></div><div class="value-grid"><article><span>01</span><h3>Spark</h3><p>The beginning of every creative idea—the moment curiosity turns into something worth exploring.</p></article><article><span>02</span><h3>Preneurs</h3><p>Inspired by entrepreneurs: people who think creatively, take initiative, and turn ideas into reality.</p></article><article><span>03</span><h3>More than business</h3><p>Entrepreneurship is a mindset built through confidence, collaboration, problem-solving, and action.</p></article></div></div></section>
+
+    <section class="standard-section"><div class="standard-shell story-grid"><div><span class="eyebrow">MORE THAN CREATIVITY</span><h2>Skills that travel beyond the studio.</h2></div><div><p>Through painting, pottery, dance, yoga, and creative technology, participants can strengthen communication, resilience, problem-solving, confidence, and creative thinking.</p><ul class="check-list"><li>Explore new interests through hands-on work</li><li>Build confidence by learning and practising</li><li>Connect and collaborate with other people</li><li>Transform imagination into meaningful projects</li></ul></div></div></section>
+
+    <section class="standard-section standard-section-dark"><div class="standard-shell story-grid"><div><span class="eyebrow">CREATE & CONNECT</span><h2>A studio for programs and gatherings.</h2></div><div><p>SparkPreneurs supports creative programs, celebrations, workshops, community gatherings, and space-only rental. Hosted events include SparkPreneurs-led activities; studio rental is for groups primarily seeking access to the space.</p><div class="button-row"><a class="button button-primary" href="/events/">Explore Gatherings</a><a class="button button-light" href="/contact/">Plan a Visit</a></div></div></div></section>
+  </main>
+  <SiteFooter />
+  <script is:inline>(()=>{const b=document.querySelector('[data-menu-button]'),m=document.querySelector('[data-menu]');b?.addEventListener('click',()=>{const o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!o));m?.classList.toggle('is-open',!o);});})();</script>
+</BaseLayout>

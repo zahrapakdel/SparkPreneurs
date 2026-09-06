@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 import ProgramNav from '../components/ProgramNav.astro';
-
-const legacy = 'https://sparkpreneurs.github.io';
 
 const audienceChoices = [
   {
@@ -29,7 +29,7 @@ const programHighlights = [
     alt: 'Pottery being shaped at SparkPreneurs',
     tag: 'ADULT POTTERY',
     tone: 'orange',
-    href: '/pottery-wheel/',
+    href: '/programs/pottery-wheel/',
   },
   {
     title: 'Pottery — Hand-Building',
@@ -38,7 +38,7 @@ const programHighlights = [
     alt: 'Hand-built clay projects at SparkPreneurs',
     tag: 'ADULT POTTERY',
     tone: 'ink',
-    href: '/hand-building-pottery/',
+    href: '/programs/hand-building-pottery/',
   },
 ];
 
@@ -48,8 +48,8 @@ const familyPrograms = [
 ];
 
 const eventChoices = [
-  { title: 'Hosted Events', description: 'Explore creative birthdays, private gatherings, corporate events, and bridal showers led by SparkPreneurs.', href: `${legacy}/book-your-event/`, label: 'ACTIVITY + SPACE', id: 'hosted-events' },
-  { title: 'Studio Rental', description: 'Ask about using the studio space for your own class, meeting, creative work, or gathering.', href: 'mailto:sparkpreneurs.ca@gmail.com?subject=Studio%20Rental%20Inquiry', label: 'SPACE-ONLY INQUIRY', id: 'studio-rental' },
+  { title: 'Hosted Events', description: 'Explore creative birthdays, private gatherings, corporate events, and bridal showers led by SparkPreneurs.', href: '/events/', label: 'ACTIVITY + SPACE', id: 'hosted-events' },
+  { title: 'Studio Rental', description: 'Ask about using the studio space for your own class, meeting, creative work, or gathering.', href: '/studio-rental/', label: 'SPACE-ONLY INQUIRY', id: 'studio-rental' },
 ];
 
 const gallery = [
@@ -65,27 +65,7 @@ const gallery = [
   description="A Midtown Toronto community studio for art, pottery, technology, movement, kids programs, adult workshops, and creative events."
 >
   <a class="home-skip-link" href="#main-content">Skip to main content</a>
-  <header class="site-header home-header" data-header>
-    <div class="nav-shell">
-      <a class="brand" href="/" aria-label="SparkPreneurs home">
-        <img src="/images/logo.png" alt="SparkPreneurs" width="188" height="80" />
-      </a>
-      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button>
-        <span class="sr-only">Toggle menu</span>
-        <span></span><span></span><span></span>
-      </button>
-      <nav id="primary-nav" class="primary-nav" aria-label="Main navigation" data-menu>
-        <a href="/programs/">Programs</a>
-        <a href="/camps/">Camps</a>
-        <a href="/after-school/">After School</a>
-        <a href="#events">Events</a>
-        <a href="#studio-rental">Studio Rental</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <a class="nav-cta" href="/programs/">Find a Program</a>
-      </nav>
-    </div>
-  </header>
+  <SiteHeader variant="home" />
 
   <ProgramNav />
 
@@ -249,14 +229,14 @@ const gallery = [
         <h2>A place to make, move, and belong.</h2>
         <p>SparkPreneurs is a community where art, wellness, creativity, and entrepreneurial thinking come together.</p>
         <p>We welcome children, teens, and adults to discover new passions, develop creative skills, and build confidence in a warm, inspiring environment.</p>
-        <a class="button button-secondary" href={`${legacy}/about-us/`}>Meet SparkPreneurs <span aria-hidden="true">→</span></a>
+        <a class="button button-secondary" href="/about/">Meet SparkPreneurs <span aria-hidden="true">→</span></a>
       </div>
     </section>
 
     <section id="gallery" class="section-shell gallery-section">
       <div class="section-heading compact">
         <div><span class="eyebrow">INSIDE THE STUDIO</span><h2>Real people. Real projects. Real joy.</h2></div>
-        <a class="text-link instagram-link" href="https://www.instagram.com/SparkPreneurs.ca" target="_blank" rel="noopener">Follow on Instagram ↗</a>
+        <a class="text-link instagram-link" href="/gallery/">View Full Gallery →</a>
       </div>
       <div class="gallery-grid">
         {gallery.map(([src, alt], index) => <figure class={`gallery-item item-${index + 1}`}><img src={src} alt={alt} loading="lazy" /></figure>)}
@@ -274,15 +254,7 @@ const gallery = [
     </section>
   </main>
 
-  <footer id="contact" class="site-footer">
-    <div class="footer-main">
-      <div class="footer-brand"><img src="/images/logo.png" alt="SparkPreneurs" /><p>Sparking creativity, one creative spark at a time.</p></div>
-      <div><h3>Visit</h3><p>3445 Yonge St.<br />Second Floor<br />Toronto, ON M4N 2N1</p></div>
-      <div><h3>Contact</h3><p><a href="tel:+14168841393">(416) 884-1393</a><br /><a href="mailto:sparkpreneurs.ca@gmail.com">sparkpreneurs.ca@gmail.com</a><br /><a href="https://www.instagram.com/SparkPreneurs.ca" target="_blank" rel="noopener">@SparkPreneurs.ca</a></p></div>
-      <div><h3>Explore</h3><p><a href="/programs/">Programs</a><br /><a href="/programs/pottery/">Pottery</a><br /><a href="/workshops/">Workshops</a><br /><a href="/camps/">Camps</a><br /><a href="/after-school/">After School</a><br /><a href="#events">Events & Rental</a><br /><a href={`${legacy}/waiver/`}>Waiver</a></p></div>
-    </div>
-    <div class="footer-bottom"><span>© {new Date().getFullYear()} SparkPreneurs</span><span>Art · Wellness · Technology</span></div>
-  </footer>
+  <SiteFooter id="contact" />
 
   <script>
     const button = document.querySelector<HTMLButtonElement>('[data-menu-button]');

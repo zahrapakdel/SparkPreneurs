@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import { eventTypes } from '../../data/events';
+---
+
+<BaseLayout title="Creative Events & Celebrations | SparkPreneurs Toronto" description="Compare creative birthday parties, private gatherings, corporate events, and bridal showers at SparkPreneurs in Midtown Toronto.">
+  <SiteHeader current="events" ctaHref="#event-types" ctaLabel="Choose an Event" />
+  <main class="standard-page events-page">
+    <section class="standard-hero"><div class="standard-shell standard-hero-grid"><div><nav class="programs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>Events</span></nav><span class="eyebrow">HOSTED CREATIVE EXPERIENCES</span><h1>Gather, make, and <em>celebrate.</em></h1><p class="standard-lede">Host a creative gathering with art, pottery, 3D printing, movement, or hands-on activities planned around your guests.</p><div class="button-row"><a class="button button-primary" href="#event-types">Choose Your Event <span aria-hidden="true">↓</span></a><a class="button button-ghost" href="mailto:sparkpreneurs.ca@gmail.com?subject=Event%20Inquiry">Start an Inquiry</a></div></div><figure><img src="/images/events.jpg" alt="A SparkPreneurs event setup with creative supplies" /><figcaption>Creative events · Midtown Toronto</figcaption></figure></div></section>
+
+    <section id="event-types" class="standard-section"><div class="standard-shell"><div class="standard-heading"><span class="eyebrow">CHOOSE THE OCCASION</span><h2>Four ways to gather.</h2><p>Open the closest event type, then share your date, guest count, and activity interests.</p></div><div class="event-type-grid">{eventTypes.map((eventType,index)=><a class="event-type-card" href={`/events/${eventType.slug}/`}><span>{String(index+1).padStart(2,'0')}</span><h3>{eventType.title}</h3><p>{eventType.shortDescription}</p><b>Explore this event <span aria-hidden="true">→</span></b></a>)}</div></div></section>
+
+    <section class="standard-section standard-section-alt"><div class="standard-shell story-grid"><div><span class="eyebrow">WHAT WE CAN PLAN</span><h2>Built around the group.</h2></div><div><ul class="event-confirmed-list"><li>Art, pottery, 3D printing, wellness, and movement activities</li><li>Custom event timing based on group size and activity choices</li><li>A studio setup supporting making, gathering, photos, and celebration time</li></ul><p>Packages, capacity, inclusions, food rules, deposits, and accessibility requirements are confirmed as part of the inquiry.</p></div></div></section>
+
+    <section class="standard-section standard-section-dark"><div class="standard-shell story-grid"><div><span class="eyebrow">HOW TO BOOK</span><h2>Start with four details.</h2></div><div><ol class="event-steps"><li><span>01</span>Choose the closest event type.</li><li><span>02</span>Share your preferred date and timing.</li><li><span>03</span>Include your estimated guest count.</li><li><span>04</span>Tell us which activities interest you.</li></ol><a class="button button-primary" href="mailto:sparkpreneurs.ca@gmail.com?subject=Event%20Inquiry&body=Event%20type%3A%0APreferred%20date%3A%0AGuest%20count%3A%0AActivity%20interests%3A">Start Event Inquiry</a></div></div></section>
+  </main>
+  <SiteFooter />
+  <script is:inline>(()=>{const b=document.querySelector('[data-menu-button]'),m=document.querySelector('[data-menu]');b?.addEventListener('click',()=>{const o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!o));m?.classList.toggle('is-open',!o);});})();</script>
+</BaseLayout>

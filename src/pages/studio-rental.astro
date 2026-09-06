@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { studioRental } from '../data/events';
+
+const mailto = `mailto:sparkpreneurs.ca@gmail.com?subject=${encodeURIComponent(studioRental.inquirySubject)}&body=${encodeURIComponent('Intended use:\nPreferred date and time:\nDuration:\nGroup size:\nSetup or equipment needs:\nAccessibility needs:\nOther details:\n')}`;
+---
+
+<BaseLayout title={studioRental.seoTitle} description={studioRental.seoDescription}>
+  <SiteHeader current="studio-rental" ctaHref="#rental-inquiry" ctaLabel="Request Availability" />
+  <main class="standard-page rental-page">
+    <section class="standard-hero"><div class="standard-shell standard-hero-grid"><div><nav class="programs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>Studio Rental</span></nav><span class="eyebrow">SPACE-ONLY BOOKING</span><h1>A flexible studio for your <em>plans.</em></h1><p class="standard-lede">{studioRental.shortDescription}</p><div class="button-row"><a class="button button-primary" href="#rental-inquiry">Request Rental Availability</a><a class="button button-ghost" href="/events/">Need a Hosted Event?</a></div></div><figure><img src={studioRental.primaryImage.src} alt={studioRental.primaryImage.alt} /><figcaption>3445 Yonge St. · Second Floor · Toronto</figcaption></figure></div></section>
+
+    <section class="rental-distinction"><div class="standard-shell"><div><span>SPACE ONLY</span><strong>Studio Rental</strong><p>You primarily need access to the space for your own use.</p></div><a href="/events/"><span>ACTIVITY + SPACE</span><strong>Hosted Events</strong><p>SparkPreneurs helps plan and lead the creative experience.</p></a></div></section>
+
+    <section class="standard-section"><div class="standard-shell"><div class="standard-heading"><span class="eyebrow">POSSIBLE USES</span><h2>What could the studio support?</h2><p>Share your intended use so SparkPreneurs can confirm whether the space, setup, and timing fit.</p></div><div class="event-idea-grid">{studioRental.intendedUses.map((use,index)=><article><span>{String(index+1).padStart(2,'0')}</span><h3>{use}</h3></article>)}</div></div></section>
+
+    <section class="standard-section standard-section-alt"><div class="standard-shell story-grid"><div><span class="eyebrow">BOOKING FORMAT</span><h2>Hourly or daily rental.</h2><p>Rates and minimum booking requirements are confirmed for your requested date and use.</p></div><div><ul class="event-confirmed-list">{studioRental.confirmedFeatures.map((feature)=><li>{feature}</li>)}</ul></div></div></section>
+
+    <section id="rental-inquiry" class="standard-section"><div class="standard-shell event-inquiry-panel"><div><span class="eyebrow">REQUEST AVAILABILITY</span><h2>Help us understand your setup.</h2><p>Send the intended use, preferred date, duration, and group size. SparkPreneurs will confirm fit, availability, rates, and requirements.</p><a class="button button-primary" href={mailto}>Start Rental Inquiry</a></div><div><h3>What the studio will confirm</h3><ul>{studioRental.questionsToConfirm.map((question)=><li><span aria-hidden="true">✦</span>{question}</li>)}</ul></div></div></section>
+  </main>
+  <SiteFooter />
+  <script is:inline>(()=>{const b=document.querySelector('[data-menu-button]'),m=document.querySelector('[data-menu]');b?.addEventListener('click',()=>{const o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!o));m?.classList.toggle('is-open',!o);});})();</script>
+</BaseLayout>

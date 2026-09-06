@@ -4,3 +4,62 @@
 
 [build.environment]
   NODE_VERSION = "22"
+
+[[redirects]]
+  from = "/pottery-wheel/"
+  to = "/programs/pottery-wheel/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/pottery-wheel/index.html"
+  to = "/programs/pottery-wheel/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/hand-building-pottery/"
+  to = "/programs/hand-building-pottery/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/hand-building-pottery/index.html"
+  to = "/programs/hand-building-pottery/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/3d-printing/*"
+  to = "/programs/3d-printing/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/zumba/*"
+  to = "/programs/zumba/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/about-us/*"
+  to = "/about/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/book-your-event/*"
+  to = "/events/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/waiver/index.html"
+  to = "/waiver/"
+  status = 301
+  force = true
+
+[[headers]]
+  for = "/waiver/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, follow"
