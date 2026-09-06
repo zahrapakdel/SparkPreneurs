@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProgramHero from '../../components/ProgramHero.astro';
+import ProgramNav from '../../components/ProgramNav.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import { getProgramById } from '../../data/programs';
+import { getOfferingsForProgram } from '../../data/offerings';
+
+const program = getProgramById('zumba');
+const passes = getOfferingsForProgram('zumba');
+if (!program || passes.length !== 3) throw new Error('The Zumba program or pass offerings are incomplete.');
+
+const endpoint = 'https://script.google.com/macros/s/AKfycbwWLU2PRBNSAQWhfSXZDhA_YpXE2jv8V3_bKU7jLk8x4PtyYgFBhP8B9qnsyQjeJeu1/exec';
+const classTimes = [
+  ['AUG19_WED_1200', '2026-08-19', 'Wednesday, August 19', '12:00 PM–1:00 PM'], ['AUG20_THU_1730', '2026-08-20', 'Thursday, August 20', '5:30 PM–6:30 PM'],
+  ['AUG21_FRI_1200', '2026-08-21', 'Friday, August 21', '12:00 PM–1:00 PM'], ['AUG22_SAT_1100', '2026-08-22', 'Saturday, August 22', '11:00 AM–12:00 PM'],
+  ['AUG25_TUE_1730', '2026-08-25', 'Tuesday, August 25', '5:30 PM–6:30 PM'], ['AUG26_WED_1200', '2026-08-26', 'Wednesday, August 26', '12:00 PM–1:00 PM'],
+  ['AUG27_THU_1730', '2026-08-27', 'Thursday, August 27', '5:30 PM–6:30 PM'], ['AUG28_FRI_1200', '2026-08-28', 'Friday, August 28', '12:00 PM–1:00 PM'],
+  ['AUG29_SAT_1100', '2026-08-29', 'Saturday, August 29', '11:00 AM–12:00 PM'], ['SEP01_TUE_1730', '2026-09-01', 'Tuesday, September 1', '5:30 PM–6:30 PM'],
+  ['SEP02_WED_1200', '2026-09-02', 'Wednesday, September 2', '12:00 PM–1:00 PM'], ['SEP03_THU_1730', '2026-09-03', 'Thursday, September 3', '5:30 PM–6:30 PM'],
+  ['SEP04_FRI_1200', '2026-09-04', 'Friday, September 4', '12:00 PM–1:00 PM'], ['SEP05_SAT_1100', '2026-09-05', 'Saturday, September 5', '11:00 AM–12:00 PM'],
+  ['SEP08_TUE_1730', '2026-09-08', 'Tuesday, September 8', '5:30 PM–6:30 PM'], ['SEP09_WED_1200', '2026-09-09', 'Wednesday, September 9', '12:00 PM–1:00 PM'],
+  ['SEP10_THU_1730', '2026-09-10', 'Thursday, September 10', '5:30 PM–6:30 PM'], ['SEP11_FRI_1200', '2026-09-11', 'Friday, September 11', '12:00 PM–1:00 PM'],
+  ['SEP12_SAT_1100', '2026-09-12', 'Saturday, September 12', '11:00 AM–12:00 PM'], ['SEP15_TUE_1730', '2026-09-15', 'Tuesday, September 15', '5:30 PM–6:30 PM'],
+  ['SEP16_WED_1200', '2026-09-16', 'Wednesday, September 16', '12:00 PM–1:00 PM'], ['SEP17_THU_1730', '2026-09-17', 'Thursday, September 17', '5:30 PM–6:30 PM'],
+  ['SEP18_FRI_1200', '2026-09-18', 'Friday, September 18', '12:00 PM–1:00 PM'], ['SEP19_SAT_1100', '2026-09-19', 'Saturday, September 19', '11:00 AM–12:00 PM'],
+] as const;
+const money = (cents: number) => new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(cents / 100);
+---
+
+<BaseLayout title={program.seoTitle} description={program.seoDescription}>
+  <SiteHeader current="programs" ctaHref="#zumba-registration" ctaLabel="View Passes" />
+  <ProgramNav current="zumba" />
+
+  <main class="program-page zumba-detail-page">
+    <ProgramHero eyebrow="MOVEMENT PROGRAM · MIDTOWN TORONTO" title="Zumba" intro="Choose a rhythm that works for you with one-hour morning and evening classes through September 19." image={program.primaryImage.src} imageAlt={program.primaryImage.alt} imageCaption="Move, recharge, and have fun" programNumber="PROGRAM / 04" backHref="/programs/" backLabel="Back to All Programs" facts={[{ label: 'Current window', value: 'Aug 19–Sep 19, 2026' }, { label: 'Class length', value: '1 hour' }, { label: 'Passes', value: '1, 4, or 8 sessions' }, { label: 'For', value: 'All ages' }]}>
+      <Fragment slot="actions"><a class="button button-primary" href="#zumba-registration">Choose a Pass <span aria-hidden="true">→</span></a><a class="button button-ghost" href="mailto:sparkpreneurs.ca@gmail.com?subject=Zumba%20Question">Ask a Question</a></Fragment>
+    </ProgramHero>
+
+    <section class="course-section course-materials" aria-labelledby="zumba-schedule-title">
+      <div class="program-shell"><div class="course-section-heading"><span class="eyebrow">WEEKLY RHYTHM</span><h2 id="zumba-schedule-title">Morning and evening options.</h2></div><ul class="course-feature-grid"><li><span>01</span>Tuesday · 5:30–6:30 PM</li><li><span>02</span>Wednesday · 12–1 PM</li><li><span>03</span>Thursday · 5:30–6:30 PM</li><li><span>04</span>Friday · 12–1 PM</li><li><span>05</span>Saturday · 11 AM–12 PM</li></ul></div>
+    </section>
+
+    <section id="zumba-registration" class="course-section course-registration" aria-labelledby="zumba-registration-title">
+      <div class="program-shell">
+        <div class="course-section-heading course-section-heading--left"><span class="eyebrow">REGISTRATION</span><h2 id="zumba-registration-title">Choose your pass and class times.</h2><p>Select exactly the number of dates included in your pass. Past dates are disabled automatically.</p></div>
+        <div class="zumba-shop" data-zumba-shop data-endpoint={endpoint} data-program-code="august_september_2026_zumba" data-return-url="https://sparkpreneurs.ca/programs/zumba/">
+          <div>
+            <div class="zumba-pass-grid">
+              {passes.map((pass) => <article class="zumba-pass-card" data-zumba-pass data-code={pass.itemCode} data-price={pass.price} data-count={pass.numberOfSessions}><span class="eyebrow">{pass.discountLabel ?? 'SESSION PASS'}</span><h3>{pass.label}</h3><p>{pass.numberOfSessions === 1 ? 'Choose any one available class.' : `Choose any ${pass.numberOfSessions} available classes.`}</p><div>{pass.originalPrice && <s>{money(pass.originalPrice)}</s>}<strong>{money(pass.price ?? 0)}</strong></div><button class="button button-ghost" type="button" data-zumba-add>Add to Cart</button></article>)}
+            </div>
+            <fieldset class="zumba-time-picker" data-zumba-time-picker disabled><legend>Choose class times</legend><p data-zumba-time-help>Add a pass first.</p><div class="zumba-time-grid">{classTimes.map(([code, date, label, time]) => <label data-class-date={date}><input type="checkbox" value={code} data-zumba-time /><span><strong>{label}</strong><small>{time}</small></span></label>)}</div></fieldset>
+          </div>
+          <aside class="course-registration-card">
+            <span class="eyebrow">YOUR DETAILS</span><h3>Complete your registration</h3>
+            <p data-zumba-selection>No pass selected.</p>
+            <div class="zumba-totals" data-zumba-totals hidden><p><span>Subtotal</span><strong data-zumba-subtotal></strong></p><p><span>HST 13%</span><strong data-zumba-tax></strong></p><p><span>Total</span><strong data-zumba-total></strong></p></div>
+            <form data-zumba-form novalidate><label>Participant name<input type="text" name="studentName" autocomplete="name" required /></label><label>Contact name<input type="text" name="parentName" autocomplete="name" required /></label><label>Contact email<input type="email" name="parentEmail" autocomplete="email" required /></label><label>Phone<input type="tel" name="phone" autocomplete="tel" required /></label></form>
+            <p class="course-registration-note">Registration is confirmed only after Stripe verifies payment.</p><p class="course-registration-status" data-zumba-status role="status" aria-live="polite"></p>
+            <button class="button button-primary course-checkout" type="button" data-zumba-checkout disabled>Continue to Secure Payment</button><button class="course-clear" type="button" data-zumba-clear disabled>Clear Selection</button>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+
+  <script is:inline>
+    (() => {
+      const menuButton = document.querySelector('[data-menu-button]'); const menu = document.querySelector('[data-menu]'); menuButton?.addEventListener('click', () => { const open = menuButton.getAttribute('aria-expanded') === 'true'; menuButton.setAttribute('aria-expanded', String(!open)); menu?.classList.toggle('is-open', !open); });
+      const shop = document.querySelector('[data-zumba-shop]'); if (!shop) return;
+      const cards = [...shop.querySelectorAll('[data-zumba-pass]')]; const timePicker = shop.querySelector('[data-zumba-time-picker]'); const times = [...shop.querySelectorAll('[data-zumba-time]')]; const help = shop.querySelector('[data-zumba-time-help]'); const form = shop.querySelector('[data-zumba-form]'); const selection = shop.querySelector('[data-zumba-selection]'); const totals = shop.querySelector('[data-zumba-totals]'); const subtotal = shop.querySelector('[data-zumba-subtotal]'); const tax = shop.querySelector('[data-zumba-tax]'); const total = shop.querySelector('[data-zumba-total]'); const checkout = shop.querySelector('[data-zumba-checkout]'); const clear = shop.querySelector('[data-zumba-clear]'); const status = shop.querySelector('[data-zumba-status]');
+      const endpoint = shop.dataset.endpoint || ''; const programCode = shop.dataset.programCode || ''; const returnUrl = shop.dataset.returnUrl || location.origin + location.pathname; let selected = null; let ready = false; let submitting = false;
+      times.forEach(input => { const date = input.closest('[data-class-date]')?.dataset.classDate; if (date && new Date(`${date}T23:59:59-04:00`) < new Date()) { input.disabled = true; input.closest('label')?.classList.add('is-past'); } });
+      const money = cents => new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(cents / 100); const picked = () => times.filter(input => input.checked); const setStatus = (message, type = '') => { status.textContent = message; status.dataset.status = type; };
+      const render = () => { cards.forEach(card => { const active = card === selected; card.classList.toggle('is-selected', active); const button = card.querySelector('[data-zumba-add]'); button.textContent = active ? 'Added' : 'Add to Cart'; button.setAttribute('aria-pressed', String(active)); }); const count = selected ? Number(selected.dataset.count) : 0; const price = selected ? Number(selected.dataset.price) : 0; timePicker.disabled = !selected; times.forEach(input => { if (!selected) input.checked = false; }); const chosen = picked().length; help.textContent = selected ? `${chosen} of ${count} class times selected. Choose ${Math.max(0, count - chosen)} more.` : 'Add a pass first.'; selection.textContent = selected ? selected.querySelector('h3').textContent : 'No pass selected.'; totals.hidden = !selected; if (selected) { const hst = Math.round(price * .13); subtotal.textContent = money(price); tax.textContent = money(hst); total.textContent = money(price + hst); } checkout.disabled = !selected || chosen !== count || !ready || submitting; clear.disabled = !selected || submitting; };
+      const post = async payload => { const response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) }); const text = await response.text(); let result; try { result = JSON.parse(text); } catch { throw new Error('The registration service returned an unreadable response.'); } if (!response.ok || result.success === false) throw new Error(result.error || 'Registration could not be processed.'); return result; };
+      cards.forEach(card => card.querySelector('[data-zumba-add]').addEventListener('click', () => { selected = selected === card ? null : card; times.forEach(input => input.checked = false); if (ready) setStatus(''); render(); }));
+      timePicker.addEventListener('change', event => { const input = event.target.closest('[data-zumba-time]'); if (!input || !selected) return; const count = Number(selected.dataset.count); if (input.checked && picked().length > count) { input.checked = false; setStatus(`This pass includes ${count} class time${count === 1 ? '' : 's'}.`, 'warning'); } else if (picked().length === count) setStatus(''); render(); });
+      clear.addEventListener('click', () => { selected = null; times.forEach(input => input.checked = false); setStatus(''); render(); });
+      const checkBackend = async () => { try { const result = await post({ action: 'ping', programCode }); ready = Boolean(result.version) && result.programCode === programCode && result.stripeMode === 'live'; if (!ready) setStatus('Secure checkout is being updated. Please contact SparkPreneurs.', 'warning'); } catch { setStatus('Secure checkout is temporarily unavailable. Please contact SparkPreneurs.', 'warning'); } render(); };
+      const clearQuery = () => history.replaceState({}, document.title, location.pathname + '#zumba-registration'); const verifyReturn = async () => { const params = new URLSearchParams(location.search); if (params.get('payment') === 'canceled') { setStatus('Payment was canceled. No charge was made.', 'warning'); clearQuery(); return; } const sessionId = params.get('session_id'); if (params.get('payment') !== 'success' || !sessionId) return; setStatus('Checking payment status…', 'pending'); try { const result = await post({ action: 'verifyCheckoutSession', programCode, stripeSessionId: sessionId }); if (!result.paid || result.paymentStatus !== 'paid') throw new Error('Stripe has not confirmed this payment yet.'); selected = null; times.forEach(input => input.checked = false); setStatus('Payment verified. Your Zumba registration has been received.', 'success'); } catch (error) { setStatus(error.message || 'Payment could not be verified.', 'error'); } finally { clearQuery(); render(); } };
+      checkout.addEventListener('click', async () => { if (!selected || !ready || !form.reportValidity()) return; const count = Number(selected.dataset.count); if (picked().length !== count) { setStatus(`Choose exactly ${count} class time${count === 1 ? '' : 's'}.`, 'warning'); return; } const price = Number(selected.dataset.price); const hst = Math.round(price * .13); const values = new FormData(form); submitting = true; checkout.textContent = 'Opening Secure Payment…'; setStatus('Checking your pass, class times, and total…', 'pending'); render(); try { const result = await post({ action: 'createCheckoutSession', programCode, selectedItemCodes: [selected.dataset.code], displayedAmountCents: price + hst, successUrl: returnUrl + '?payment=success&session_id={CHECKOUT_SESSION_ID}', cancelUrl: returnUrl + '?payment=canceled#zumba-registration', studentName: String(values.get('studentName') || '').trim(), parentName: String(values.get('parentName') || '').trim(), parentEmail: String(values.get('parentEmail') || '').trim(), phone: String(values.get('phone') || '').trim(), selectedClassTimes: picked().map(input => input.value) }); const url = new URL(result.checkoutUrl); if (url.protocol !== 'https:' || url.hostname !== 'checkout.stripe.com') throw new Error('Stripe returned an invalid payment link.'); location.assign(url.href); } catch (error) { submitting = false; checkout.textContent = 'Continue to Secure Payment'; setStatus(error.message || 'Payment could not be started.', 'error'); render(); } });
+      render(); verifyReturn(); checkBackend();
+    })();
+  </script>
+</BaseLayout>

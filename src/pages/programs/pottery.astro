@@ -2,9 +2,11 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProgramDiscoveryCard from '../../components/ProgramDiscoveryCard.astro';
 import ProgramNav from '../../components/ProgramNav.astro';
-import { adultPrograms } from '../../data/programs';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import { adultProgramCards } from '../../data/program-catalog';
 
-const potteryPrograms = adultPrograms.filter((program) => program.activity === 'pottery');
+const potteryPrograms = adultProgramCards.filter((program) => program.activity === 'pottery');
 
 const comparisonRows = [
   { label: 'Making method', wheel: 'Shape clay while it rotates on the wheel.', hand: 'Build and shape clay directly by hand.' },
@@ -21,22 +23,7 @@ const comparisonRows = [
 >
   <a class="programs-skip-link" href="#pottery-comparison">Skip to pottery comparison</a>
 
-  <header class="site-header programs-header" data-header>
-    <div class="nav-shell">
-      <a class="brand" href="/" aria-label="SparkPreneurs home"><img src="/images/logo.png" alt="SparkPreneurs" width="188" height="80" /></a>
-      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button><span class="sr-only">Menu</span><span></span><span></span><span></span></button>
-      <nav id="primary-nav" class="primary-nav" aria-label="Main navigation" data-menu>
-        <a href="/programs/" aria-current="page">Programs</a>
-        <a href="/camps/">Camps</a>
-        <a href="/after-school/">After School</a>
-        <a href="/#events">Events</a>
-        <a href="/#studio-rental">Studio Rental</a>
-        <a href="/#about">About</a>
-        <a href="/#contact">Contact</a>
-        <a class="nav-cta" href="#current-pottery-programs">View Pottery Programs</a>
-      </nav>
-    </div>
-  </header>
+  <SiteHeader current="programs" variant="programs" ctaHref="#current-pottery-programs" ctaLabel="View Pottery Programs" />
 
   <ProgramNav current="pottery" />
 
@@ -79,8 +66,8 @@ const comparisonRows = [
         <div class="pottery-table" role="table" aria-label="Pottery program comparison">
           <div class="pottery-table-head" role="row">
             <div role="columnheader"><span>Compare</span></div>
-            <div role="columnheader"><span>01</span><strong>Pottery Wheel</strong><a href="/pottery-wheel/">View program →</a></div>
-            <div role="columnheader"><span>02</span><strong>Hand-Building</strong><a href="/hand-building-pottery/">View program →</a></div>
+            <div role="columnheader"><span>01</span><strong>Pottery Wheel</strong><a href="/programs/pottery-wheel/">View program →</a></div>
+            <div role="columnheader"><span>02</span><strong>Hand-Building</strong><a href="/programs/hand-building-pottery/">View program →</a></div>
           </div>
           {comparisonRows.map((row) => (
             <div class="pottery-table-row" role="row">
@@ -100,12 +87,12 @@ const comparisonRows = [
           <article>
             <span>01 · CHOOSE THE WHEEL IF...</span><h3>You want to learn the rhythm of throwing.</h3>
             <ul><li>You are curious about centring and controlling spinning clay.</li><li>You want to practise forming rounded vessels.</li><li>You like repetition, refinement, and learning a tool-led process.</li></ul>
-            <a class="button button-secondary" href="/pottery-wheel/">Explore Pottery Wheel <span aria-hidden="true">→</span></a>
+            <a class="button button-secondary" href="/programs/pottery-wheel/">Explore Pottery Wheel <span aria-hidden="true">→</span></a>
           </article>
           <article>
             <span>02 · CHOOSE HAND-BUILDING IF...</span><h3>You want to construct and sculpt directly.</h3>
             <ul><li>You are drawn to pinching, coiling, and slab-building.</li><li>You want to explore texture and sculptural forms.</li><li>You prefer shaping clay directly without a wheel.</li></ul>
-            <a class="button button-secondary" href="/hand-building-pottery/">Explore Hand-Building <span aria-hidden="true">→</span></a>
+            <a class="button button-secondary" href="/programs/hand-building-pottery/">Explore Hand-Building <span aria-hidden="true">→</span></a>
           </article>
         </div>
       </div>
@@ -169,15 +156,7 @@ const comparisonRows = [
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-main">
-      <div class="footer-brand"><img src="/images/logo.png" alt="SparkPreneurs" /><p>Sparking creativity, one creative spark at a time.</p></div>
-      <div><h3>Visit</h3><p>3445 Yonge St.<br />Second Floor<br />Toronto, ON M4N 2N1</p></div>
-      <div><h3>Contact</h3><p><a href="tel:+14168841393">(416) 884-1393</a><br /><a href="mailto:sparkpreneurs.ca@gmail.com">sparkpreneurs.ca@gmail.com</a><br /><a href="https://www.instagram.com/SparkPreneurs.ca" target="_blank" rel="noopener">@SparkPreneurs.ca</a></p></div>
-      <div><h3>Programs</h3><p><a href="/programs/">All Programs</a><br /><a href="/programs/adults/">Adults</a><br /><a href="/programs/pottery/">Pottery</a><br /><a href="/workshops/">Workshops</a><br /><a href="/pottery-wheel/">Pottery Wheel</a><br /><a href="/hand-building-pottery/">Hand-Building</a></p></div>
-    </div>
-    <div class="footer-bottom"><span>© {new Date().getFullYear()} SparkPreneurs</span><span>Art · Wellness · Technology</span></div>
-  </footer>
+  <SiteFooter />
 
   <script>
     const menuButton = document.querySelector<HTMLButtonElement>('[data-menu-button]');

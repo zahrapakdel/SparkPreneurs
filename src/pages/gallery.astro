@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { galleryItems } from '../data/gallery';
+---
+
+<BaseLayout title="Gallery | SparkPreneurs Toronto" description="See creative programs, camps, gatherings, projects, and studio moments from SparkPreneurs in Midtown Toronto.">
+  <SiteHeader />
+  <main class="standard-page gallery-detail-page">
+    <section class="standard-hero standard-hero-compact"><div class="standard-shell"><nav class="programs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>Gallery</span></nav><span class="eyebrow">INSIDE SPARKPRENEURS</span><h1>Real projects. Creative <em>moments.</em></h1><p class="standard-lede">Explore programs, camps, gatherings, and the Midtown Toronto studio where ideas take shape.</p></div></section>
+    <section class="standard-section gallery-catalog"><div class="standard-shell">
+      <div class="gallery-filter" role="group" aria-label="Filter gallery"><button type="button" data-gallery-filter="all" aria-pressed="true">All</button><button type="button" data-gallery-filter="programs" aria-pressed="false">Programs</button><button type="button" data-gallery-filter="camps" aria-pressed="false">Camps</button><button type="button" data-gallery-filter="events" aria-pressed="false">Events</button><button type="button" data-gallery-filter="studio" aria-pressed="false">Studio</button></div>
+      <div class="gallery-catalog-grid" data-gallery-grid>{galleryItems.map((item) => <figure data-gallery-item data-category={item.category}><div><img src={item.src} alt={item.alt} loading="lazy" /></div><figcaption><span>{item.caption}</span>{item.href && <a href={item.href}>Explore <span aria-hidden="true">→</span></a>}</figcaption></figure>)}</div>
+      <p class="gallery-empty" data-gallery-empty hidden>No images match this filter.</p>
+    </div></section>
+    <section class="standard-section standard-section-dark"><div class="standard-shell story-grid"><div><span class="eyebrow">SEE WHAT'S CURRENT</span><h2>Follow the studio.</h2></div><div><p>For recent projects, announcements, and studio moments, visit SparkPreneurs on Instagram.</p><a class="button button-primary" href="https://www.instagram.com/SparkPreneurs.ca" target="_blank" rel="noopener">Follow @SparkPreneurs.ca <span aria-hidden="true">↗</span></a></div></div></section>
+  </main>
+  <SiteFooter />
+  <script>
+    const menuButton = document.querySelector<HTMLButtonElement>('[data-menu-button]'); const menu = document.querySelector<HTMLElement>('[data-menu]'); menuButton?.addEventListener('click',()=>{const open=menuButton.getAttribute('aria-expanded')==='true';menuButton.setAttribute('aria-expanded',String(!open));menu?.classList.toggle('is-open',!open);});
+    const buttons=[...document.querySelectorAll<HTMLButtonElement>('[data-gallery-filter]')]; const items=[...document.querySelectorAll<HTMLElement>('[data-gallery-item]')]; const empty=document.querySelector<HTMLElement>('[data-gallery-empty]'); buttons.forEach(button=>button.addEventListener('click',()=>{const value=button.dataset.galleryFilter;let visible=0;buttons.forEach(item=>item.setAttribute('aria-pressed',String(item===button)));items.forEach(item=>{const show=value==='all'||item.dataset.category===value;item.hidden=!show;if(show)visible+=1;});if(empty)empty.hidden=visible!==0;}));
+  </script>
+</BaseLayout>

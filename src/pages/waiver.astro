@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const contactEmail = 'sparkpreneurs.ca@gmail.com';
+const contactSubject = encodeURIComponent('Participant waiver request');
+---
+
+<BaseLayout
+  title="Participant Waiver | SparkPreneurs"
+  description="Read the SparkPreneurs participant and guardian waiver and contact the studio for the current completion process."
+  noindex
+>
+  <SiteHeader ctaHref="mailto:sparkpreneurs.ca@gmail.com?subject=Participant%20waiver%20request" ctaLabel="Request Waiver" />
+
+  <main class="waiver-page">
+    <section class="waiver-hero">
+      <div class="standard-shell waiver-hero-grid">
+        <div>
+          <span class="eyebrow">PARTICIPANT UTILITY</span>
+          <h1>Participant &amp; Guardian Waiver</h1>
+          <p class="waiver-lede">Review the current waiver terms below. Online waiver submission is not connected yet, so please contact SparkPreneurs for the current completion process.</p>
+          <div class="button-row">
+            <a class="button button-primary" href={`mailto:${contactEmail}?subject=${contactSubject}`}>Request the Waiver <span aria-hidden="true">→</span></a>
+            <a class="button button-ghost" href="tel:+14168841393">Call (416) 884-1393</a>
+          </div>
+        </div>
+        <aside class="waiver-status-card" aria-labelledby="waiver-status-title">
+          <span>WORKFLOW STATUS</span>
+          <h2 id="waiver-status-title">Do not enter medical information on this page.</h2>
+          <p>This page does not collect or store participant, emergency-contact, medical, signature, or photo-consent information.</p>
+          <p>Contact the studio to receive the current authorized completion method.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="waiver-content" aria-labelledby="waiver-terms-title">
+      <div class="standard-shell waiver-layout">
+        <aside class="waiver-meta">
+          <span class="eyebrow">DOCUMENT DETAILS</span>
+          <dl>
+            <div><dt>Organization</dt><dd>SparkPreneurs Inc.</dd></div>
+            <div><dt>Document</dt><dd>Participant/Guardian Waiver, Consent and Medical Information Form</dd></div>
+            <div><dt>Version</dt><dd>June 15, 2026</dd></div>
+            <div><dt>Completion</dt><dd>Contact the studio</dd></div>
+          </dl>
+          <p>This utility page is intentionally excluded from search indexing and general site navigation.</p>
+        </aside>
+
+        <article class="waiver-terms">
+          <header>
+            <span class="eyebrow">APPROVED WAIVER · VERSION JUNE 15, 2026</span>
+            <h2 id="waiver-terms-title">Please read before signing.</h2>
+            <p>The following content reproduces the approved waiver currently published by SparkPreneurs.</p>
+          </header>
+
+          <section>
+            <h3>Participant Information</h3>
+            <p>The waiver requires the participant's full name and date of birth; the participant's or guardian's full name, phone number, and email address; and an emergency contact's name, phone number, and relationship to the participant.</p>
+          </section>
+
+          <section>
+            <h3>Medical Information</h3>
+            <p>Please identify any medical conditions, allergies, medications, dietary restrictions, accessibility needs, or other information that may affect the participant's safe involvement. Enter “None” when there is nothing to report.</p>
+            <p>I confirm that I have provided complete and accurate medical and emergency information and will notify SparkPreneurs Inc. of any changes.</p>
+          </section>
+
+          <section>
+            <h3>Acknowledgement and Assumption of Risk</h3>
+            <p>I understand that participation in SparkPreneurs Inc. programs may include art, pottery, movement, dance, yoga, 3D printing, cooking, outdoor activities, games, camps, workshops, and the use of program-appropriate tools and materials.</p>
+            <p>I understand that participation may involve ordinary risks, including slips, falls, minor cuts, allergic reactions, contact with art materials, physical exertion, equipment use, and other minor injuries.</p>
+            <p>I voluntarily consent to participation and agree to inform SparkPreneurs Inc. of any activity the participant should not join.</p>
+          </section>
+
+          <section>
+            <h3>Safety and Conduct</h3>
+            <p>I understand that the participant must follow the safety instructions and behaviour expectations provided by SparkPreneurs Inc. staff.</p>
+            <p>SparkPreneurs Inc. reserves the right to contact a parent or guardian and require early pick-up if a participant's behaviour creates a safety risk to themselves or others.</p>
+          </section>
+
+          <section>
+            <h3>Emergency Medical Consent</h3>
+            <p>If I cannot be reached during an emergency, I authorize SparkPreneurs Inc. staff to provide reasonable first aid; contact emergency medical services; arrange transportation to a medical facility when necessary; and share relevant medical information with emergency responders.</p>
+            <p>I understand that I am responsible for any medical or transportation expenses not covered by insurance.</p>
+          </section>
+
+          <section>
+            <h3>Release and Indemnity</h3>
+            <p>To the extent permitted by law, I agree not to hold SparkPreneurs Inc., its directors, employees, instructors, contractors, volunteers, partners, or venue providers responsible for claims arising from the ordinary and inherent risks of participation.</p>
+            <p>This section does not release any party from liability that cannot legally be excluded, including gross negligence or intentional misconduct.</p>
+          </section>
+
+          <section>
+            <h3>Personal Belongings</h3>
+            <p>I understand that SparkPreneurs Inc. is not responsible for lost, stolen, or damaged personal belongings. Participants should not bring valuable items unless required for the program.</p>
+          </section>
+
+          <section>
+            <h3>Photo and Video Consent — Optional</h3>
+            <p>Please select one. Refusing photo consent will not affect the participant's ability to participate.</p>
+            <p><strong>Yes:</strong> I authorize SparkPreneurs Inc. to photograph or record the participant during programs and use selected images or videos for its website, social media, advertisements, printed materials, and other promotional purposes.</p>
+            <p><strong>No:</strong> I do not authorize the use of identifiable photographs or videos of the participant for promotional purposes.</p>
+          </section>
+
+          <section>
+            <h3>Pick-Up Authorization</h3>
+            <p>List at least one person authorized to pick up the participant when required. Identification may be requested before the participant is released.</p>
+          </section>
+
+          <section>
+            <h3>Participant/Guardian Confirmation</h3>
+            <p>By signing below, I confirm that I am the participant or the participant's parent/legal guardian; I have read and understood this form; the information I provided is complete and accurate; I consent to participation; and I agree that my electronic signature has the same effect as a handwritten signature.</p>
+            <p>I have read and agree to the acknowledgements, consents, release, and confirmation above.</p>
+            <p>The waiver requires the participant's or guardian's full name, electronic signature, and signing date.</p>
+          </section>
+
+          <div class="waiver-next-step">
+            <div>
+              <span class="eyebrow">READY TO COMPLETE IT?</span>
+              <h3>Request the current waiver method.</h3>
+              <p>Include the participant's name and program in your message. Do not send medical details by ordinary email unless SparkPreneurs specifically instructs you to.</p>
+            </div>
+            <a class="button button-primary" href={`mailto:${contactEmail}?subject=${contactSubject}`}>Contact SparkPreneurs</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

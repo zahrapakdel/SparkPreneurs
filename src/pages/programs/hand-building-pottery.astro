@@ -1,7 +1,9 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import ProgramHero from '../components/ProgramHero.astro';
-import ProgramNav from '../components/ProgramNav.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProgramHero from '../../components/ProgramHero.astro';
+import ProgramNav from '../../components/ProgramNav.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
 
 const classes = [
   { code: 'HB4SUN', name: 'Hand-Building Pottery: 4 Sunday Sessions (10:30 AM-12:30 PM)', schedule: 'Sundays, 10:30 AM-12:30 PM', button: 'Add Sunday Class to Cart' },
@@ -11,15 +13,7 @@ const classes = [
 ---
 
 <BaseLayout title="Hand-Building Pottery | SparkPreneurs" description="Four-session pottery classes for adults, focused on shaping clay by hand and building finished pieces with instructor guidance.">
-  <header class="site-header" data-header>
-    <div class="nav-shell">
-      <a class="brand" href="/" aria-label="SparkPreneurs home"><img src="/images/logo.png" alt="SparkPreneurs" width="188" height="80" /></a>
-      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button><span class="sr-only">Toggle menu</span><span></span><span></span><span></span></button>
-      <nav id="primary-nav" class="primary-nav" aria-label="Main navigation" data-menu>
-        <a href="/programs/">Programs</a><a href="/camps/">Camps</a><a href="/after-school/">After School</a><a href="/#events">Events</a><a href="/#about">About</a><a href="/#contact">Contact</a><a class="nav-cta" href="#registration">Register</a>
-      </nav>
-    </div>
-  </header>
+  <SiteHeader current="programs" ctaHref="#registration" ctaLabel="Register" />
 
   <ProgramNav current="pottery" />
 
@@ -51,7 +45,7 @@ const classes = [
     <section id="registration" class="course-section course-registration" aria-labelledby="hand-building-registration-title">
       <div class="program-shell">
         <div class="course-section-heading course-section-heading--left"><span class="eyebrow">REGISTRATION</span><h2 id="hand-building-registration-title">Complete Your Registration</h2><p>Add one class schedule, enter your details, and continue to secure payment.</p></div>
-        <div class="course-registration-grid" data-course-registration data-program-code="adult_hand_building_pottery" data-tax-rate-percent="13" data-apps-script-url="https://script.google.com/macros/s/AKfycby8E59BM8-SvzPh6kYmc8QAAwDU24gb1bJ2MvWmJZpQi1yXgkUQk8qnKNtVvnRT7JEO/exec" data-return-url="https://sparkpreneurs.ca/hand-building-pottery/">
+        <div class="course-registration-grid" data-course-registration data-program-code="adult_hand_building_pottery" data-tax-rate-percent="13" data-apps-script-url="https://script.google.com/macros/s/AKfycby8E59BM8-SvzPh6kYmc8QAAwDU24gb1bJ2MvWmJZpQi1yXgkUQk8qnKNtVvnRT7JEO/exec" data-return-url="https://sparkpreneurs.ca/programs/hand-building-pottery/">
           <div class="course-selection-panel hand-cart-panel">
             <span class="eyebrow">YOUR SELECTION</span><h3>Hand-Building Pottery · 4 Sessions</h3>
             <ul class="hand-cart-list" data-course-cart-list><li class="hand-cart-empty">No class added yet.</li></ul>
@@ -71,7 +65,7 @@ const classes = [
     <section class="course-final-cta" aria-labelledby="hand-building-cta-title"><div class="program-shell"><div><span class="eyebrow">QUESTIONS?</span><h2 id="hand-building-cta-title">We’ll help with registration details.</h2><p>Questions about Hand-Building Pottery? Contact SparkPreneurs and we will help with registration details.</p></div><div class="course-final-actions"><a class="button button-primary" href="#schedule">Choose a Class</a><a class="button button-light" href="mailto:sparkpreneurs.ca@gmail.com">Contact Us</a></div></div></section>
   </main>
 
-  <footer class="site-footer"><div class="footer-main"><div class="footer-brand"><img src="/images/logo.png" alt="SparkPreneurs" /><p>Sparking creativity, one creative spark at a time.</p></div><div><h3>Visit</h3><p>3445 Yonge St.<br />Second Floor<br />Toronto, ON M4N 2N1</p></div><div><h3>Contact</h3><p><a href="tel:+14168841393">(416) 884-1393</a><br /><a href="mailto:sparkpreneurs.ca@gmail.com">sparkpreneurs.ca@gmail.com</a></p></div></div><div class="footer-bottom"><span>© {new Date().getFullYear()} SparkPreneurs</span><span>Art · Wellness · Technology</span></div></footer>
+  <SiteFooter />
 
   <script is:inline>
     (() => {

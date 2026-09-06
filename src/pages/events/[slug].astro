@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import { eventTypes } from '../../data/events';
+import type { EventType } from '../../data/content-models';
+
+export const getStaticPaths = () => eventTypes.map((eventType) => ({ params: { slug: eventType.slug }, props: { eventType } }));
+
+interface Props { eventType: EventType; }
+const { eventType } = Astro.props;
+const mailto = `mailto:sparkpreneurs.ca@gmail.com?subject=${encodeURIComponent(eventType.inquirySubject)}&body=${encodeURIComponent('Preferred date:\nGuest count:\nParticipant age range (if relevant):\nActivity interests:\nSetup or access needs:\nOther details:\n')}`;
+---
+
+<BaseLayout title={eventType.seoTitle} description={eventType.seoDescription}>
+  <SiteHeader current="events" ctaHref="#inquiry" ctaLabel="Request Availability" />
+  <main class="standard-page event-detail-page">
+    <section class="standard-hero"><div class="standard-shell standard-hero-grid"><div><nav class="programs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/events/">Events</a><span aria-hidden="true">/</span><span>{eventType.title}</span></nav><span class="eyebrow">HOSTED CREATIVE EVENT</span><h1>{eventType.title}</h1><p class="standard-lede">{eventType.shortDescription}</p><div class="button-row"><a class="button button-primary" href="#inquiry">Request Availability <span aria-hidden="true">→</span></a><a class="button button-ghost" href="/events/">Compare Events</a></div></div><figure><img src={eventType.primaryImage.src} alt={eventType.primaryImage.alt} /><figcaption>{eventType.audience}</figcaption></figure></div></section>
+
+    <section class="standard-section"><div class="standard-shell story-grid"><div><span class="eyebrow">THE EXPERIENCE</span><h2>Shape the event around your group.</h2></div><div><p>SparkPreneurs plans the activity and timing around the occasion, group size, and creative interests shared in your inquiry.</p><ul class="event-confirmed-list">{eventType.confirmedFeatures.map((item)=><li>{item}</li>)}</ul></div></div></section>
+
+    <section class="standard-section standard-section-alt"><div class="standard-shell"><div class="standard-heading"><span class="eyebrow">ACTIVITY IDEAS</span><h2>What could your group make or do?</h2><p>These are supported activity directions, not fixed packages. The studio will confirm what fits your group and date.</p></div><div class="event-idea-grid">{eventType.experienceIdeas.map((idea,index)=><article><span>{String(index+1).padStart(2,'0')}</span><h3>{idea}</h3></article>)}</div></div></section>
+
+    <section id="inquiry" class="standard-section"><div class="standard-shell event-inquiry-panel"><div><span class="eyebrow">REQUEST AVAILABILITY</span><h2>Tell us what you’re planning.</h2><p>Pricing is provided as a custom quote after the studio confirms the date, group, activity, and practical requirements.</p><a class="button button-primary" href={mailto}>Start {eventType.title} Inquiry</a></div><div><h3>Include these details</h3><ul>{eventType.planningPrompts.map((prompt)=><li><span aria-hidden="true">✦</span>{prompt}</li>)}<li><span aria-hidden="true">✦</span>Accessibility or accommodation needs</li></ul></div></div></section>
+  </main>
+  <SiteFooter />
+  <script is:inline>(()=>{const b=document.querySelector('[data-menu-button]'),m=document.querySelector('[data-menu]');b?.addEventListener('click',()=>{const o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!o));m?.classList.toggle('is-open',!o);});})();</script>
+</BaseLayout>

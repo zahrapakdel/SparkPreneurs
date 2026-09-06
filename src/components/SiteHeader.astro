@@ -1,0 +1,39 @@
+---
+type CurrentSection = 'programs' | 'camps' | 'after-school' | 'events' | 'studio-rental' | 'about' | 'contact';
+
+interface Props {
+  current?: CurrentSection;
+  variant?: 'default' | 'home' | 'programs';
+  ctaHref?: string;
+  ctaLabel?: string;
+}
+
+const {
+  current,
+  variant = 'default',
+  ctaHref = '/programs/',
+  ctaLabel = 'Find a Program',
+} = Astro.props;
+
+---
+
+<header class:list={['site-header', variant === 'home' && 'home-header', variant === 'programs' && 'programs-header']} data-header>
+  <div class="nav-shell">
+    <a class="brand" href="/" aria-label="SparkPreneurs home">
+      <img src="/images/logo.png" alt="SparkPreneurs" width="188" height="80" />
+    </a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button>
+      <span class="sr-only">Toggle menu</span><span></span><span></span><span></span>
+    </button>
+    <nav id="primary-nav" class="primary-nav" aria-label="Main navigation" data-menu>
+      <a href="/programs/" aria-current={current === 'programs' ? 'page' : undefined}>Programs</a>
+      <a href="/camps/" aria-current={current === 'camps' ? 'page' : undefined}>Camps</a>
+      <a href="/after-school/" aria-current={current === 'after-school' ? 'page' : undefined}>After School</a>
+      <a href="/events/" aria-current={current === 'events' ? 'page' : undefined}>Events</a>
+      <a href="/studio-rental/" aria-current={current === 'studio-rental' ? 'page' : undefined}>Studio Rental</a>
+      <a href="/about/" aria-current={current === 'about' ? 'page' : undefined}>About</a>
+      <a href="/contact/" aria-current={current === 'contact' ? 'page' : undefined}>Contact</a>
+      <a class="nav-cta" href={ctaHref}>{ctaLabel}</a>
+    </nav>
+  </div>
+</header>

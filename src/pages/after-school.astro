@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 
 const plans = [
   { code: 'AFTER3', name: '3 days/week', label: 'Flexible', price: 7200, regularPrice: 8400, description: 'For families who want a lighter after-school schedule.' },
@@ -29,15 +31,7 @@ const registrationSteps = [
 
 <BaseLayout title="After-School Program | SparkPreneurs" description="Creative after-school care in Midtown Toronto, with weekly schedules, hands-on activities, and eligible neighbourhood school pick-up.">
   <a class="after-school-skip-link" href="#main-content">Skip to main content</a>
-  <header class="site-header" data-header>
-    <div class="nav-shell">
-      <a class="brand" href="/" aria-label="SparkPreneurs home"><img src="/images/logo.png" alt="SparkPreneurs" width="188" height="80" /></a>
-      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button><span class="sr-only">Toggle menu</span><span></span><span></span><span></span></button>
-      <nav id="primary-nav" class="primary-nav" aria-label="Main navigation" data-menu>
-        <a href="/programs/">Programs</a><a href="/camps/">Camps</a><a href="/after-school/" aria-current="page">After School</a><a href="/#events">Events</a><a href="/#about">About</a><a href="/#contact">Contact</a><a class="nav-cta" href="#register">Register</a>
-      </nav>
-    </div>
-  </header>
+  <SiteHeader current="after-school" ctaHref="#register" ctaLabel="Register" />
 
   <main id="main-content">
     <section class="after-school-hero">
@@ -173,7 +167,7 @@ const registrationSteps = [
     <section class="after-school-help"><div class="after-school-shell"><div><span class="eyebrow">QUESTIONS?</span><h2>Let’s find the right schedule.</h2><p>We can help confirm school pick-up availability, timing, and registration details.</p></div><a class="button button-secondary" href="mailto:sparkpreneurs.ca@gmail.com">Contact SparkPreneurs</a></div></section>
   </main>
 
-  <footer class="site-footer"><div class="footer-main"><div class="footer-brand"><img src="/images/logo.png" alt="SparkPreneurs" /><p>Sparking creativity, one creative spark at a time.</p></div><div><h3>Visit</h3><p>3445 Yonge St.<br />Second Floor<br />Toronto, ON M4N 2N1</p></div><div><h3>Contact</h3><p><a href="tel:+14168841393">(416) 884-1393</a><br /><a href="mailto:sparkpreneurs.ca@gmail.com">sparkpreneurs.ca@gmail.com</a></p></div></div><div class="footer-bottom"><span>© {new Date().getFullYear()} SparkPreneurs</span><span>Art · Wellness · Technology</span></div></footer>
+  <SiteFooter />
 
   <script is:inline>
     (() => {

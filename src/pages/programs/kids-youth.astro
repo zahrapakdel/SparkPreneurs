@@ -2,9 +2,11 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProgramDiscoveryCard from '../../components/ProgramDiscoveryCard.astro';
 import ProgramNav from '../../components/ProgramNav.astro';
-import { kidsYouthPrograms } from '../../data/programs';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import { kidsYouthProgramCards } from '../../data/program-catalog';
 
-const byTitle = (title: string) => kidsYouthPrograms.find((program) => program.title === title);
+const byTitle = (title: string) => kidsYouthProgramCards.find((program) => program.title === title);
 const formatRoutes = [
   {
     number: '01',
@@ -36,22 +38,7 @@ const formatRoutes = [
 >
   <a class="programs-skip-link" href="#current-programs">Skip to current programs</a>
 
-  <header class="site-header programs-header" data-header>
-    <div class="nav-shell">
-      <a class="brand" href="/" aria-label="SparkPreneurs home"><img src="/images/logo.png" alt="SparkPreneurs" width="188" height="80" /></a>
-      <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-button><span class="sr-only">Menu</span><span></span><span></span><span></span></button>
-      <nav id="primary-nav" class="primary-nav" aria-label="Main navigation" data-menu>
-        <a href="/programs/" aria-current="page">Programs</a>
-        <a href="/camps/">Camps</a>
-        <a href="/after-school/">After School</a>
-        <a href="/#events">Events</a>
-        <a href="/#studio-rental">Studio Rental</a>
-        <a href="/#about">About</a>
-        <a href="/#contact">Contact</a>
-        <a class="nav-cta" href="#current-programs">View Current Programs</a>
-      </nav>
-    </div>
-  </header>
+  <SiteHeader current="programs" variant="programs" ctaHref="#current-programs" ctaLabel="View Current Programs" />
 
   <ProgramNav current="kids-youth" />
 
@@ -99,7 +86,7 @@ const formatRoutes = [
           <p>These are the children's program paths supported by the current site information. Open a card to confirm registration details and availability.</p>
         </div>
         <div class="programs-card-grid kids-program-grid">
-          {kidsYouthPrograms.map((program, index) => <ProgramDiscoveryCard program={program} eager={index === 0} />)}
+          {kidsYouthProgramCards.map((program, index) => <ProgramDiscoveryCard program={program} eager={index === 0} />)}
         </div>
       </div>
     </section>
@@ -172,15 +159,7 @@ const formatRoutes = [
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-main">
-      <div class="footer-brand"><img src="/images/logo.png" alt="SparkPreneurs" /><p>Sparking creativity, one creative spark at a time.</p></div>
-      <div><h3>Visit</h3><p>3445 Yonge St.<br />Second Floor<br />Toronto, ON M4N 2N1</p></div>
-      <div><h3>Contact</h3><p><a href="tel:+14168841393">(416) 884-1393</a><br /><a href="mailto:sparkpreneurs.ca@gmail.com">sparkpreneurs.ca@gmail.com</a><br /><a href="https://www.instagram.com/SparkPreneurs.ca" target="_blank" rel="noopener">@SparkPreneurs.ca</a></p></div>
-      <div><h3>Programs</h3><p><a href="/programs/">All Programs</a><br /><a href="/programs/kids-youth/">Kids & Youth</a><br /><a href="/programs/adults/">Adults</a><br /><a href="/workshops/">Workshops</a><br /><a href="/after-school/">After School</a><br /><a href="/camps/">Camps</a></p></div>
-    </div>
-    <div class="footer-bottom"><span>© {new Date().getFullYear()} SparkPreneurs</span><span>Art · Wellness · Technology</span></div>
-  </footer>
+  <SiteFooter />
 
   <script>
     const menuButton = document.querySelector<HTMLButtonElement>('[data-menu-button]');

@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProgramHero from '../../components/ProgramHero.astro';
+import ProgramNav from '../../components/ProgramNav.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import { getProgramById } from '../../data/programs';
+import { getOfferingsForProgram } from '../../data/offerings';
+
+const program = getProgramById('3d-printing');
+const offering = getOfferingsForProgram('3d-printing')[0];
+if (!program || !offering || !offering.programCode || !offering.itemCode || offering.price === null) {
+  throw new Error('The 3D Printing program or offering is incomplete.');
+}
+
+const money = new Intl.NumberFormat('en-CA', { style: 'currency', currency: offering.currency }).format(offering.price / 100);
+const endpoint = 'https://script.google.com/macros/s/AKfycbwVPX0ZPegfSM4mZzcrOrVJ628CrQMaC4B9nvtAxWzEP5DUj7E-RIdzcjefuNN_klOe/exec';
+---
+
+<BaseLayout title={program.seoTitle} description={program.seoDescription}>
+  <SiteHeader current="programs" ctaHref="#registration" ctaLabel="Register" />
+  <ProgramNav current="3d-printing" />
+
+  <main class="program-page printing-page">
+    <ProgramHero
+      eyebrow="KIDS & YOUTH CLASS · MIDTOWN TORONTO"
+      title={program.title}
+      intro={program.overview}
+      image={program.primaryImage.src}
+      imageAlt={program.primaryImage.alt}
+      imageCaption="Explore. Design. Create."
+      programNumber="PROGRAM / 03"
+      backHref="/programs/kids-youth/"
+      backLabel="Back to Kids & Youth Programs"
+      facts={[
+        { label: 'Course', value: program.sessionOverview },
+        { label: 'Class length', value: offering.duration ?? 'Confirm with the studio' },
+        { label: 'Schedule', value: 'Monday or Sunday' },
+        { label: 'Course fee', value: money },
+      ]}
+    >
+      <Fragment slot="actions"><a class="button button-primary" href="#registration">Register Now <span aria-hidden="true">→</span></a><a class="button button-ghost" href="mailto:sparkpreneurs.ca@gmail.com?subject=3D%20Printing%20Question">Ask a Question</a></Fragment>
+    </ProgramHero>
+
+    <section class="course-section course-process" aria-labelledby="printing-experience-title">
+      <div class="program-shell course-process-panel">
+        <div><span class="eyebrow">THE EXPERIENCE</span><h2 id="printing-experience-title">From idea to finished creation.</h2></div>
+        <div><p>Participants move from brainstorming and basic digital design to preparing and producing a 3D-printed project. Guided instruction, experimentation, and creative problem-solving are part of each session.</p><ul class="check-list">{program.learningOrExperienceHighlights.map((item) => <li>{item}</li>)}</ul></div>
+      </div>
+    </section>
+
+    <section id="registration" class="course-section course-registration" aria-labelledby="printing-registration-title">
+      <div class="program-shell">
+        <div class="course-section-heading course-section-heading--left"><span class="eyebrow">REGISTRATION</span><h2 id="printing-registration-title">Reserve a place in 3D Printing.</h2><p>Select the course, enter the participant and parent or guardian details, then continue to secure payment.</p></div>
+        <div class="course-registration-grid" data-printing-registration data-endpoint={endpoint} data-program-code={offering.programCode} data-item-code={offering.itemCode} data-price={offering.price} data-return-url="https://sparkpreneurs.ca/programs/3d-printing/">
+          <div class="course-selection-panel">
+            <span class="eyebrow">SIX HANDS-ON SESSIONS</span>
+            <h3>Kids 3D Printing</h3>
+            <p>Choose from these scheduled class times:</p>
+            <ul class="course-skill-list">
+              <li><span aria-hidden="true">✦</span>Monday, either 4:00–5:00 PM or 5:30–6:30 PM</li>
+              <li><span aria-hidden="true">✦</span>Sunday, 1:30–2:30 PM</li>
+            </ul>
+            <p class="course-section-note">The Monday time is confirmed by email. Dates, exact age group, and capacity are confirmed by SparkPreneurs before registration.</p>
+            <div class="course-price-note"><span>Course fee</span><strong>{money}</strong><small>Tax included</small></div>
+            <button class="button button-ghost" type="button" data-printing-select aria-pressed="false">Add Course</button>
+          </div>
+          <aside class="course-registration-card" aria-label="Complete your 3D Printing registration">
+            <span class="eyebrow">YOUR DETAILS</span><h3>Complete your registration</h3>
+            <form data-printing-form novalidate>
+              <label>Participant name<input type="text" name="studentName" autocomplete="name" required /></label>
+              <label>Parent/guardian name<input type="text" name="parentName" autocomplete="name" required /></label>
+              <label>Parent/guardian email<input type="email" name="parentEmail" autocomplete="email" required /></label>
+              <label>Parent/guardian phone<input type="tel" name="phone" autocomplete="tel" required /></label>
+            </form>
+            <p class="course-registration-note">Registration is confirmed only after Stripe verifies payment.</p>
+            <p class="course-registration-status" data-printing-status role="status" aria-live="polite"></p>
+            <button class="button button-primary course-checkout" type="button" data-printing-checkout disabled>Continue to Secure Payment</button>
+            <button class="course-clear" type="button" data-printing-clear disabled>Clear Selection</button>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+
+  <script is:inline>
+    (() => {
+      const menuButton = document.querySelector('[data-menu-button]'); const menu = document.querySelector('[data-menu]');
+      menuButton?.addEventListener('click', () => { const open = menuButton.getAttribute('aria-expanded') === 'true'; menuButton.setAttribute('aria-expanded', String(!open)); menu?.classList.toggle('is-open', !open); });
+      const shop = document.querySelector('[data-printing-registration]'); if (!shop) return;
+      const select = shop.querySelector('[data-printing-select]'); const form = shop.querySelector('[data-printing-form]');
+      const checkout = shop.querySelector('[data-printing-checkout]'); const clear = shop.querySelector('[data-printing-clear]'); const status = shop.querySelector('[data-printing-status]');
+      const endpoint = shop.dataset.endpoint || ''; const programCode = shop.dataset.programCode || ''; const itemCode = shop.dataset.itemCode || ''; const price = Number(shop.dataset.price || 0); const returnUrl = shop.dataset.returnUrl || location.origin + location.pathname;
+      let selected = false; let ready = false; let submitting = false;
+      const setStatus = (message, type = '') => { status.textContent = message; status.dataset.status = type; };
+      const render = () => { select.textContent = selected ? 'Added' : 'Add Course'; select.setAttribute('aria-pressed', String(selected)); checkout.disabled = !selected || !ready || submitting; clear.disabled = !selected || submitting; };
+      const post = async (payload) => { const response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) }); const text = await response.text(); let result; try { result = JSON.parse(text); } catch { throw new Error('The registration service returned an unreadable response.'); } if (!response.ok || result.success === false) throw new Error(result.error || 'Registration could not be processed.'); return result; };
+      const checkBackend = async () => { try { const result = await post({ action: 'ping', programCode }); ready = result.programCode === programCode && result.stripeMode === 'live'; if (!ready) setStatus('Secure checkout is being updated. Please contact SparkPreneurs.', 'warning'); } catch { setStatus('Secure checkout is temporarily unavailable. Please contact SparkPreneurs.', 'warning'); } render(); };
+      const clearQuery = () => history.replaceState({}, document.title, location.pathname + '#registration');
+      const verifyReturn = async () => { const params = new URLSearchParams(location.search); if (params.get('payment') === 'canceled') { setStatus('Payment was canceled. No charge was made.', 'warning'); clearQuery(); return; } const sessionId = params.get('session_id'); if (params.get('payment') !== 'success' || !sessionId) return; setStatus('Checking payment status…', 'pending'); try { const result = await post({ action: 'verifyCheckoutSession', programCode, stripeSessionId: sessionId }); if (!(result.paid || result.paymentStatus === 'paid')) throw new Error('Stripe has not confirmed this payment yet.'); selected = false; setStatus('Payment verified. Your registration has been received.', 'success'); } catch (error) { setStatus(error.message || 'Payment could not be verified. Please contact SparkPreneurs.', 'error'); } finally { clearQuery(); render(); } };
+      select.addEventListener('click', () => { selected = !selected; if (ready) setStatus(''); render(); }); clear.addEventListener('click', () => { selected = false; setStatus(''); render(); });
+      checkout.addEventListener('click', async () => { if (!selected || !ready || !form.reportValidity()) return; const values = new FormData(form); submitting = true; checkout.textContent = 'Opening Secure Payment…'; setStatus('Checking your registration total…', 'pending'); render(); try { const result = await post({ action: 'createCheckoutSession', programCode, selectedItemCodes: [itemCode], displayedAmountCents: price, successUrl: returnUrl + '?payment=success&session_id={CHECKOUT_SESSION_ID}', cancelUrl: returnUrl + '?payment=canceled#registration', studentName: String(values.get('studentName') || '').trim(), parentName: String(values.get('parentName') || '').trim(), parentEmail: String(values.get('parentEmail') || '').trim(), phone: String(values.get('phone') || '').trim() }); const url = new URL(result.checkoutUrl); if (url.protocol !== 'https:' || url.hostname !== 'checkout.stripe.com') throw new Error('Stripe returned an invalid payment link.'); location.assign(url.href); } catch (error) { submitting = false; checkout.textContent = 'Continue to Secure Payment'; setStatus(error.message || 'Payment could not be started.', 'error'); render(); } });
+      render(); verifyReturn(); checkBackend();
+    })();
+  </script>
+</BaseLayout>

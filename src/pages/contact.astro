@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const inquiries = [
+  { number: '01', title: 'Programs', description: 'Ask about age fit, schedules, availability, or choosing the right program.', subject: 'Program Inquiry' },
+  { number: '02', title: 'Events', description: 'Share the occasion, preferred date, group size, and activities you are considering.', subject: 'Event Inquiry' },
+  { number: '03', title: 'Studio Rental', description: 'Tell us your intended use, date, duration, group size, and setup needs.', subject: 'Studio Rental Inquiry' },
+];
+---
+
+<BaseLayout title="Contact & Visit SparkPreneurs | Midtown Toronto" description="Contact SparkPreneurs and find the creative studio at 3445 Yonge Street, Second Floor, Toronto, Ontario.">
+  <SiteHeader current="contact" ctaHref="mailto:sparkpreneurs.ca@gmail.com" ctaLabel="Email Us" />
+  <main class="standard-page contact-detail-page">
+    <section class="standard-hero"><div class="standard-shell standard-hero-grid"><div><nav class="programs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>Contact</span></nav><span class="eyebrow">CONTACT & VISIT</span><h1>Let’s find your next <em>step.</em></h1><p class="standard-lede">Contact SparkPreneurs for program fit, event planning, rental questions, or help preparing for a studio visit.</p><div class="button-row"><a class="button button-primary" href="mailto:sparkpreneurs.ca@gmail.com">Email SparkPreneurs</a><a class="button button-ghost" href="tel:+14168841393">Call (416) 884-1393</a></div></div><div class="contact-card"><span class="eyebrow">SPARKPRENEURS</span><h2>3445 Yonge St.</h2><p>Second Floor<br />Toronto, Ontario<br />M4N 2N1</p><a class="text-link" href="https://www.google.com/maps/search/?api=1&query=3445+Yonge+St+Toronto+ON+M4N+2N1" target="_blank" rel="noopener">Open in Google Maps <span aria-hidden="true">↗</span></a></div></div></section>
+    <section class="standard-section standard-section-alt"><div class="standard-shell"><div class="standard-heading"><span class="eyebrow">CHOOSE AN INQUIRY</span><h2>Include the details that help us respond.</h2><p>Starting with the right context makes it easier for the studio to confirm fit and next steps.</p></div><div class="value-grid">{inquiries.map((item)=><article><span>{item.number}</span><h3>{item.title}</h3><p>{item.description}</p><a class="text-link" href={`mailto:sparkpreneurs.ca@gmail.com?subject=${encodeURIComponent(item.subject)}`}>Start email <span aria-hidden="true">→</span></a></article>)}</div></div></section>
+    <section class="standard-section"><div class="standard-shell contact-info-grid"><div><span class="eyebrow">CONTACT</span><h2>Reach the studio.</h2><dl><div><dt>Email</dt><dd><a href="mailto:sparkpreneurs.ca@gmail.com">sparkpreneurs.ca@gmail.com</a></dd></div><div><dt>Phone</dt><dd><a href="tel:+14168841393">(416) 884-1393</a></dd></div><div><dt>Instagram</dt><dd><a href="https://www.instagram.com/SparkPreneurs.ca" target="_blank" rel="noopener">@SparkPreneurs.ca</a></dd></div></dl></div><div class="visit-note"><span aria-hidden="true">i</span><h3>Before visiting</h3><p>Contact SparkPreneurs to confirm current studio hours, appointment requirements, parking or transit guidance, entrance details, and any accessibility needs. The studio is located on the second floor.</p></div></div></section>
+  </main>
+  <SiteFooter />
+  <script is:inline>(()=>{const b=document.querySelector('[data-menu-button]'),m=document.querySelector('[data-menu]');b?.addEventListener('click',()=>{const o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!o));m?.classList.toggle('is-open',!o);});})();</script>
+</BaseLayout>
