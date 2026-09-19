@@ -1,0 +1,83 @@
+---
+import { offerings } from '../data/offerings';
+import { getProgramById } from '../data/programs';
+
+const featuredOffers = [
+  { offeringId: 'after-school-after3', badge: 'Early Bird', age: 'Kids' },
+  { offeringId: 'hand-building-hb4sun', badge: 'Limited-time price', age: 'Adult' },
+  { offeringId: 'zumba-zumba_8', badge: 'Seasonal offer', age: 'Adults & Kids' },
+].flatMap((feature) => {
+  const offering = offerings.find((item) => item.id === feature.offeringId && item.status === 'open');
+  const program = offering ? getProgramById(offering.programId) : undefined;
+  return offering && program && offering.price !== null && offering.originalPrice
+    ? [{ ...feature, offering, program, savings: offering.originalPrice - offering.price }]
+    : [];
+});
+
+const money = (cents: number) => `$${(cents / 100).toFixed(cents % 100 ? 2 : 0)}`;
+---
+
+{featuredOffers.length > 0 && (
+  <dialog class="featured-popup" data-featured-popup aria-labelledby="featured-popup-title">
+    <button class="featured-popup-close" type="button" aria-label="Close featured programs" data-featured-popup-close>×</button>
+    <div class="featured-popup-intro">
+      <span class="featured-popup-spark" aria-hidden="true">✦</span>
+      <p class="eyebrow">FEATURED PROGRAM OFFERS</p>
+      <h2 id="featured-popup-title">Popular ways to join—and save.</h2>
+      <p>Explore special pricing on active Kids and Adult programs.</p>
+    </div>
+
+    <div class="featured-popup-grid">
+      {featuredOffers.map(({ offering, program, badge, age, savings }) => (
+        <article class="featured-popup-card">
+          <div class="featured-popup-card-top">
+            <span class="featured-popup-badge">{badge}</span>
+            <span class="featured-popup-age">{age}</span>
+          </div>
+          <h3>{program.title}</h3>
+          <p>{offering.label}</p>
+          <div class="featured-popup-price">
+            <span><s>{money(offering.originalPrice!)}</s><strong>{money(offering.price!)}</strong></span>
+            <small>Save {money(savings)}</small>
+          </div>
+          <a href={program.canonicalPath}>View program <span aria-hidden="true">→</span></a>
+        </article>
+      ))}
+    </div>
+
+    <div class="featured-popup-footer">
+      <small>Offers and availability may change. Open a program to review its current details.</small>
+      <a href="/programs/">Browse all programs</a>
+    </div>
+  </dialog>
+)}
+
+<script>
+  const popup = document.querySelector<HTMLDialogElement>('[data-featured-popup]');
+  const closeButton = popup?.querySelector<HTMLButtonElement>('[data-featured-popup-close]');
+  const storageKey = 'sparkpreneurs-featured-offers-v1';
+
+  const rememberDismissal = () => {
+    try { sessionStorage.setItem(storageKey, 'dismissed'); } catch {}
+  };
+  const closePopup = () => {
+    rememberDismissal();
+    popup?.close();
+  };
+
+  let dismissed = false;
+  try { dismissed = sessionStorage.getItem(storageKey) === 'dismissed'; } catch {}
+
+  if (popup && !dismissed) {
+    window.setTimeout(() => {
+      if (!popup.open) popup.showModal();
+    }, 900);
+  }
+
+  closeButton?.addEventListener('click', closePopup);
+  popup?.addEventListener('cancel', rememberDismissal);
+  popup?.addEventListener('click', (event) => {
+    if (event.target === popup) closePopup();
+  });
+  popup?.querySelectorAll('a').forEach((link) => link.addEventListener('click', rememberDismissal));
+</script>

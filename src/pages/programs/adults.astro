@@ -83,7 +83,7 @@ const potteryComparison = [
         <div class="adults-comparison-grid">
           {potteryComparison.map((option) => (
             <article class="adults-comparison-card">
-              <div class="adults-comparison-image"><img src={option.image} alt="" loading="lazy" /><span>{option.number}</span></div>
+              <div class="adults-comparison-image"><img src={option.image} alt={`${option.title} pottery process at SparkPreneurs`} loading="lazy" decoding="async" /><span>{option.number}</span></div>
               <div class="adults-comparison-copy">
                 <h3>{option.title}</h3>
                 <p>{option.approach}</p>
