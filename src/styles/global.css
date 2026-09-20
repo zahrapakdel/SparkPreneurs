@@ -561,10 +561,10 @@
 @media(max-width:560px){.waiver-hero{padding:48px 0 62px}.waiver-hero h1{font-size:42px}.waiver-content{padding:68px 0}.waiver-status-card{padding:28px 23px}.waiver-meta dl{grid-template-columns:1fr}.waiver-next-step{padding:25px 21px}}
 /* Age-grouped Programs navigation */
 .nav-programs{position:relative}
-.nav-programs-trigger{display:flex;align-items:center;gap:5px;padding:0;border:0;background:none;color:inherit;font:inherit;font-weight:inherit;cursor:pointer}
-.nav-programs-trigger>span{font-size:14px;transition:transform .2s}
+.nav-programs-trigger{display:flex;align-items:center;gap:7px;padding:0;border:0;background:none;color:inherit;font:inherit;font-weight:inherit;cursor:pointer}
+.nav-programs-chevron{display:block;flex:0 0 16px;width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transform-origin:center;transition:transform .2s}
 .nav-programs-trigger:hover,.nav-programs-trigger[aria-expanded="true"]{color:var(--orange)}
-.nav-programs-trigger[aria-expanded="true"]>span{transform:rotate(180deg)}
+.nav-programs-trigger[aria-expanded="true"]>.nav-programs-chevron{transform:rotate(180deg)}
 .programs-submenu{position:absolute;top:calc(100% + 24px);left:-24px;width:min(620px,calc(100vw - 48px));padding:12px 22px 22px;border:1px solid var(--line);border-top:3px solid var(--orange);border-radius:0 0 16px 16px;background:var(--paper);box-shadow:var(--shadow-hover);opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .18s,transform .18s,visibility .18s}
 .programs-submenu.is-open{opacity:1;visibility:visible;transform:translateY(0)}
 .primary-nav .programs-submenu-all{display:flex;align-items:center;justify-content:space-between;padding:8px 0 12px;border-bottom:1px solid var(--line);color:var(--ink);font-weight:800}
@@ -685,3 +685,9 @@
 @media(max-width:520px){
   .footer-brand img{width:min(55vw,180px)}
 }
+/* Consecutive-week registration controls. */
+.registration-weeks { min-width: 0; margin: 0 0 1rem; padding: 1rem; border: 1px solid #d5d9ca; border-radius: 12px; }
+.registration-weeks legend { padding: 0 .35rem; font-weight: 700; }
+.registration-weeks input { min-width: 0; max-width: 100%; box-sizing: border-box; }
+.registration-weeks p { font-size: .85rem; line-height: 1.5; }
+.registration-weeks ul { max-height: 12rem; overflow-y: auto; padding-left: 1.2rem; font-size: .85rem; line-height: 1.7; }
