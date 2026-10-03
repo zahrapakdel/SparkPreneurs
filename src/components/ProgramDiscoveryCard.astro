@@ -4,9 +4,10 @@ import type { ProgramCardRecord } from '../data/program-catalog';
 interface Props {
   program: ProgramCardRecord;
   eager?: boolean;
+  showDetails?: boolean;
 }
 
-const { program, eager = false } = Astro.props;
+const { program, eager = false, showDetails = true } = Astro.props;
 const ageTag = program.audience === 'adults'
   ? 'Adult'
   : program.audience === 'kids-youth'
@@ -36,10 +37,10 @@ const ageTag = program.audience === 'adults'
     </div>
     <h3><a href={program.href}>{program.title}</a></h3>
     <p>{program.description}</p>
-    <dl>
+    {showDetails && <dl>
       <div><dt>For</dt><dd>{program.audienceLabel}</dd></div>
       <div><dt>Format</dt><dd>{program.formatLabel}</dd></div>
-    </dl>
+    </dl>}
     <a class="programs-card-link" href={program.href}>{program.action} <span aria-hidden="true">{program.external ? '↗' : '→'}</span></a>
   </div>
 </article>
