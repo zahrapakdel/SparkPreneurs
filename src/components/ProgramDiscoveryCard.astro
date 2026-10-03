@@ -7,6 +7,13 @@ interface Props {
 }
 
 const { program, eager = false } = Astro.props;
+const ageTag = program.audience === 'adults'
+  ? 'Adult'
+  : program.audience === 'kids-youth'
+    ? 'Kids'
+    : program.audience === 'all-ages'
+      ? 'Adults & Kids'
+      : 'Age to be confirmed';
 ---
 
 <article
@@ -18,11 +25,15 @@ const { program, eager = false } = Astro.props;
   data-availability={program.availability}
 >
   <a class="programs-card-image" href={program.href} aria-label={`${program.action}: ${program.title}`}>
-    <img src={program.image} alt={program.alt} loading={eager ? 'eager' : 'lazy'} />
+    <img src={program.image} alt={program.alt} loading={eager ? 'eager' : 'lazy'} decoding="async" />
     <span class={`programs-status programs-status-${program.statusTone}`}>{program.status}</span>
   </a>
   <div class="programs-card-copy">
-    <div class="programs-card-tags"><span>{program.activityLabel}</span><span>{program.formatLabel}</span></div>
+    <div class="programs-card-tags">
+      <span class="programs-age-tag">{ageTag}</span>
+      <span>{program.activityLabel}</span>
+      <span>{program.formatLabel}</span>
+    </div>
     <h3><a href={program.href}>{program.title}</a></h3>
     <p>{program.description}</p>
     <dl>

@@ -12,7 +12,7 @@ const potteryComparison = [
     title: 'Pottery Wheel',
     approach: 'Shape clay on the wheel with an emphasis on centring, control, and form.',
     techniques: ['Centring clay', 'Shaping on the wheel', 'Glazing'],
-    image: '/images/pottery-wheel-hero.png',
+    image: '/images/potter-wheel-hero.jpg',
     href: '/programs/pottery-wheel/',
   },
   {
@@ -47,7 +47,6 @@ const potteryComparison = [
             <p>Step away from the everyday and work with clay in a guided, hands-on setting. Compare SparkPreneurs' two current adult pottery courses or ask about other creative interests.</p>
             <div class="button-row">
               <a class="button button-primary" href="#current-programs">View Current Programs <span aria-hidden="true">↓</span></a>
-              <a class="button button-ghost" href="/programs/pottery/">Compare Pottery Formats</a>
             </div>
           </div>
           <figure class="adults-hero-image"><img src="/images/gallery-pottery.jpg" alt="An adult working with clay at SparkPreneurs" /><figcaption><span aria-hidden="true">✦</span> Hands-on creative time</figcaption></figure>
@@ -83,7 +82,7 @@ const potteryComparison = [
         <div class="adults-comparison-grid">
           {potteryComparison.map((option) => (
             <article class="adults-comparison-card">
-              <div class="adults-comparison-image"><img src={option.image} alt="" loading="lazy" /><span>{option.number}</span></div>
+              <div class="adults-comparison-image"><img src={option.image} alt={`${option.title} pottery process at SparkPreneurs`} loading="lazy" decoding="async" /><span>{option.number}</span></div>
               <div class="adults-comparison-copy">
                 <h3>{option.title}</h3>
                 <p>{option.approach}</p>
@@ -122,7 +121,7 @@ const potteryComparison = [
         </div>
         <div class="adults-gallery-grid">
           <figure><img src="/images/gallery-pottery.jpg" alt="An adult hand-building with clay at SparkPreneurs" loading="lazy" /></figure>
-          <figure><img src="/images/pottery-wheel-hero.png" alt="Clay being shaped on a pottery wheel" loading="lazy" /></figure>
+          <figure><img src="/images/potter-wheel-hero.jpg" alt="Clay being shaped on a pottery wheel" loading="lazy" /></figure>
           <figure><img src="/images/studio.jpg" alt="The SparkPreneurs creative studio" loading="lazy" /></figure>
         </div>
       </div>

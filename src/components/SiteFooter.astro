@@ -9,12 +9,40 @@ const { id } = Astro.props;
 <footer {id} class="site-footer">
   <div class="footer-main">
     <div class="footer-brand">
-      <img src="/images/logo.png" alt="SparkPreneurs" />
+      <img src="/images/logo.png" alt="SparkPreneurs" width="900" height="383" loading="lazy" decoding="async" />
       <p>Sparking creativity, one creative spark at a time.</p>
     </div>
     <div><h3>Visit</h3><p>3445 Yonge St.<br />Second Floor<br />Toronto, ON M4N 2N1</p></div>
-    <div><h3>Contact</h3><p><a href="tel:+14168841393">(416) 884-1393</a><br /><a href="mailto:sparkpreneurs.ca@gmail.com">sparkpreneurs.ca@gmail.com</a><br /><a href="https://www.instagram.com/SparkPreneurs.ca" target="_blank" rel="noopener">@SparkPreneurs.ca</a></p></div>
+    <div>
+      <h3>Contact</h3>
+      <p class="footer-contact-links">
+        {[
+          { href: 'tel:+14168841393', label: '(416) 884-1393' },
+          { href: 'tel:+14372203856', label: '(437) 220-3856' },
+        ].map((phone) => (
+          <a href={phone.href}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.96.35 1.91.69 2.81a2 2 0 0 1-.45 2.11L8.08 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.69A2 2 0 0 1 22 16.92Z" /></svg>
+            <span>{phone.label}</span>
+          </a>
+        ))}
+        <a href="mailto:sparkpreneurs.ca@gmail.com">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 6 9 7 9-7" /></svg>
+          <span>sparkpreneurs.ca@gmail.com</span>
+        </a>
+        <a href="https://www.instagram.com/SparkPreneurs.ca" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>
+          <span>@SparkPreneurs.ca</span>
+        </a>
+      </p>
+    </div>
     <div><h3>Explore</h3><p><a href="/programs/">All Programs</a><br /><a href="/programs/kids-youth/">Kids & Youth</a><br /><a href="/programs/adults/">Adults</a><br /><a href="/workshops/">Workshops</a><br /><a href="/camps/">Camps</a><br /><a href="/after-school/">After School</a><br /><a href="/events/">Events</a><br /><a href="/studio-rental/">Studio Rental</a><br /><a href="/gallery/">Gallery</a><br /><a href="/about/">About</a><br /><a href="/contact/">Contact</a></p></div>
   </div>
   <div class="footer-bottom"><span>© {new Date().getFullYear()} SparkPreneurs</span><span>Art · Wellness · Technology</span></div>
 </footer>
+
+<style>
+  .footer-contact-links { display: grid; gap: 8px; }
+  .footer-contact-links a { display: flex; align-items: center; gap: 9px; }
+  .footer-contact-links svg { flex-shrink: 0; }
+  .footer-contact-links span { overflow-wrap: anywhere; }
+</style>

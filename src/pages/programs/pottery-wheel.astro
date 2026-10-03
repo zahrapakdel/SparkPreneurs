@@ -19,15 +19,16 @@ const cohorts = [
     ],
   },
   {
-    value: 'pottery-wheel-tue-daytime',
+    value: 'pottery-wheel-fri-daytime',
+    // Retain the existing checkout product identifier until the backend is migrated.
     itemCode: 'POTTERY_WHEEL_TUE_DAYTIME',
-    label: 'Tuesday Daytime Cohort',
-    name: 'Tuesday Daytime',
+    label: 'Friday Morning Cohort',
+    name: 'Friday Mornings',
     time: '11:00 AM–1:00 PM',
-    datesText: 'August 11, 18 and 25; September 1',
+    datesText: 'August 14, 21 and 28; September 4',
     dates: [
-      ['2026-08-11', 'August 11'], ['2026-08-18', 'August 18'],
-      ['2026-08-25', 'August 25'], ['2026-09-01', 'September 1'],
+      ['2026-08-14', 'August 14'], ['2026-08-21', 'August 21'],
+      ['2026-08-28', 'August 28'], ['2026-09-04', 'September 4'],
     ],
   },
   {
@@ -76,52 +77,61 @@ const skills = [
 <BaseLayout title="Pottery Wheel Classes for Adults | SparkPreneurs Toronto" description="Join a four-session adult pottery wheel course at SparkPreneurs in Toronto. Learn wheel throwing with clay, tools, guidance, glazing, and firing for one piece included.">
   <SiteHeader current="programs" ctaHref="#registration" ctaLabel="Register" />
 
-  <ProgramNav current="pottery" />
+  <ProgramNav current="adults" />
 
   <main class="program-page pottery-wheel-page">
     <ProgramHero
       eyebrow="ADULT PROGRAM · MIDTOWN TORONTO"
       title="Pottery Wheel"
-      intro="Explore the creative and calming experience of pottery wheel throwing in a small, supportive class. Participants will learn essential techniques for centring clay, shaping forms, refining their work, and creating functional or decorative pottery pieces. No prior experience is required."
-      image="/images/pottery-wheel-hero.png"
+      intro="Learn to centre, shape, and finish your own pottery in four guided sessions. Small classes, all materials included, and no experience needed."
+      image="/images/potter-wheel-hero.jpg"
       imageAlt="Adult shaping clay on a pottery wheel at SparkPreneurs"
-      imageCaption="Make something slowly, with your own hands"
-      programNumber="PROGRAM / 01"
-      backHref="/programs/pottery/"
-      backLabel="Back to Pottery Programs"
+      imageCaption="A little clay. A little calm. Something you made."
+      programNumber=""
+      backHref="/programs/adults/"
+      backLabel="Back to Adult Programs"
       facts={[
         { label: 'Course', value: '4 sessions' },
         { label: 'Class length', value: '2 hours' },
         { label: 'Experience', value: 'Beginner friendly' },
-        { label: 'Course fee', value: 'CAD $250' },
+        { label: 'Offer price', originalValue: '$250', value: '$180' },
       ]}
     >
       <Fragment slot="actions">
-        <a class="button button-primary" href="#registration">Register Now <span aria-hidden="true">→</span></a>
+        <a class="button button-primary" href="#schedule">Choose Your Schedule <span aria-hidden="true">→</span></a>
         <a class="button button-ghost" href="mailto:sparkpreneurs.ca@gmail.com">Ask a Question</a>
       </Fragment>
     </ProgramHero>
 
+
+
     <section id="schedule" class="course-section course-schedule" aria-labelledby="pottery-wheel-schedule-title">
       <div class="program-shell">
         <div class="course-section-heading">
-          <span class="eyebrow">SELECT YOUR SCHEDULE</span>
-          <h2 id="pottery-wheel-schedule-title">Choose Your Four-Session Cohort</h2>
-          <p>Select one weekly time. Every card shows all four class dates before you register.</p>
+          <span class="eyebrow">MAKE TIME TO MAKE SOMETHING</span>
+          <h2 id="pottery-wheel-schedule-title">1. Choose Your Schedule</h2>
+          <p>Choose one weekly time. You will attend all four dates shown on your card.</p>
         </div>
         <fieldset class="course-cohort-grid" data-pottery-wheel-cohorts>
           <legend class="sr-only">Available Pottery Wheel cohorts</legend>
           {cohorts.map((cohort) => (
-            <label class="course-cohort-card" data-pottery-wheel-cohort-card>
+            <label class="pottery-schedule-card" data-pottery-wheel-cohort-card>
               <input type="radio" name="potteryWheelCohort" value={cohort.value} data-item-code={cohort.itemCode} data-cohort-label={cohort.name} data-cohort-time={cohort.time} data-cohort-dates={cohort.datesText} required />
-              <span class="course-cohort-card__top"><span><small>{cohort.label}</small><strong>{cohort.name}</strong></span><span class="course-availability">Open</span></span>
-              <span class="course-cohort-time">{cohort.time}</span>
-              <span class="course-date-label">Four session dates</span>
-              <span class="course-date-list">{cohort.dates.map(([datetime, label]) => <time datetime={datetime}>{label}</time>)}</span>
-              <span class="course-select-label"><i aria-hidden="true"></i> Select {cohort.name.toLowerCase()}</span>
+              <span class="pottery-schedule-header">
+                <span class="pottery-session-tag">{cohort.name.split(' ')[1]}</span>
+                <strong class="pottery-schedule-day">{cohort.name.split(' ')[0]}</strong>
+                <span class="pottery-schedule-time">{cohort.time}</span>
+                <svg class="pottery-schedule-art" width="48" height="42" viewBox="0 0 140 120" fill="none" aria-hidden="true"><circle cx="76" cy="64" r="49" stroke="currentColor" stroke-dasharray="3 7"/><ellipse cx="76" cy="43" rx="35" ry="9" stroke="currentColor" stroke-width="2"/><path d="M41 43c3 28 15 42 35 42s32-14 35-42M49 65c14 8 40 8 54 0M64 86v5h24v-5M45 99h62" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M21 25v12m-6-6h12m83 57v12m-6-6h12" stroke="currentColor" stroke-width="2"/></svg>
+              </span>
+              <span class="pottery-schedule-body">
+                <span class="pottery-dates-heading"><strong>Your four studio sessions</strong><span>2 hours each</span></span>
+                <span class="pottery-calendar-dates">{cohort.dates.map(([datetime, label], index) => <time datetime={datetime}><span class="pottery-session-number">{String(index + 1).padStart(2, '0')}</span><strong>{label.split(' ')[1]}</strong><span class="pottery-session-month">{label.split(' ')[0].slice(0, 3)}</span></time>)}</span>
+              </span>
+              <span class="pottery-schedule-footer"><span class="pottery-schedule-select"><span data-pottery-select-label>Choose this schedule</span><span class="pottery-schedule-arrow" aria-hidden="true">&rarr;</span></span></span>
             </label>
           ))}
         </fieldset>
+
       </div>
     </section>
 
@@ -129,35 +139,49 @@ const skills = [
       <div class="program-shell">
         <div class="course-section-heading course-section-heading--left">
           <span class="eyebrow">REGISTRATION</span>
-          <h2 id="pottery-wheel-registration-title">Reserve Your Place</h2>
+          <h2 id="pottery-wheel-registration-title">2. Reserve Your Place</h2>
           <p>Choose a cohort, complete your details, and continue to secure payment.</p>
         </div>
         <div class="course-registration-grid" data-pottery-wheel-registration data-apps-script-url="https://script.google.com/macros/s/AKfycbwFjroZMc49w0S5ARgEY1X-pB-ZSkVnzlLEwtXm_re_tUUx9SfgPX3t4t8B2AG_yW31/exec" data-program-code="august_september_2026_pottery_wheel" data-required-stripe-mode="live">
           <div class="course-selection-panel">
-            <span class="eyebrow">YOUR SELECTION</span>
-            <div class="course-selection-heading"><h3>Pottery Wheel · 4 Sessions</h3><strong>CAD $250</strong></div>
+            <header class="pottery-course-heading">
+              <span class="tag">YOUR COURSE</span>
+              <h3>Pottery Wheel</h3>
+              <dl class="pottery-course-facts">
+                <div><dt>Course length</dt><dd>4 sessions</dd></div>
+                <div><dt>Each session</dt><dd>2 hours</dd></div>
+              </dl>
+            </header>
             <article class="course-selected-card">
-              <span>Selected cohort</span>
-              <h3 data-pottery-wheel-selected-name>Select a schedule above</h3>
-              <p data-pottery-wheel-selected-time>Choose one weekly time and attend four consecutive sessions.</p>
-              <p data-pottery-wheel-selected-dates>All four dates will appear here after you choose a cohort.</p>
-              <a href="#schedule">Change schedule ↑</a>
+              <span>Your schedule</span>
+              <h3 data-pottery-wheel-selected-name>Choose your weekly time</h3>
+              <p data-pottery-wheel-selected-time>Select a schedule above to get started.</p>
+              <p data-pottery-wheel-selected-dates>All four class dates will appear here.</p>
+              <a href="#schedule">Choose or change schedule <span aria-hidden="true">&uarr;</span></a>
             </article>
-            <div class="course-price-note"><span>Course fee</span><strong>CAD $250</strong><small>Glazing and kiln firing for one piece included.</small></div>
+            <div class="pottery-registration-included">
+              <h4>Included in your course</h4>
+              <ul>
+                <li>Clay, tools, and materials</li>
+                <li>Guidance at every session</li>
+                <li>Glazing and firing for one piece</li>
+              </ul>
+            </div>
+            <div class="pottery-registration-price"><div><span class="eyebrow">COURSE OFFER</span><span class="pottery-offer-price"><del>$250</del><strong>$180</strong></span></div><span>For all four sessions</span></div>
           </div>
 
           <aside class="course-registration-card" aria-label="Complete your Pottery Wheel registration">
             <span class="eyebrow">YOUR DETAILS</span>
-            <h3>Complete your registration</h3>
+            <h3>A few details, then you're ready.</h3>
+            <p class="pottery-form-intro">Enter your contact details to continue to payment.</p>
             <form data-pottery-wheel-form novalidate>
               <div class="course-form-row">
                 <label>First name<input type="text" name="firstName" autocomplete="given-name" required /></label>
                 <label>Last name<input type="text" name="lastName" autocomplete="family-name" required /></label>
               </div>
-              <label>Email<input type="email" name="email" autocomplete="email" required /></label>
-              <label>Phone<input type="tel" name="phone" autocomplete="tel" required /></label>
+              <div class="course-form-row"><label>Email<input type="email" name="email" autocomplete="email" required /></label><label>Phone<input type="tel" name="phone" autocomplete="tel" required /></label></div>
               <label>Experience level<select name="experienceLevel" required><option value="">Choose one</option><option value="beginner">Beginner</option><option value="some-experience">Some experience</option><option value="experienced">Experienced</option></select></label>
-              <label>Message <em>(optional)</em><textarea name="message" rows="3"></textarea></label>
+              <details class="pottery-message"><summary>Add a message (optional)</summary><label>Message<textarea name="message" rows="2"></textarea></label></details>
               <label class="course-consent"><input type="checkbox" name="consent" value="yes" required /><span>I agree to the registration and privacy terms.</span></label>
             </form>
             <p class="course-registration-note">Your cohort is not held until payment is verified.</p>
@@ -169,30 +193,25 @@ const skills = [
       </div>
     </section>
 
-    <section class="course-section course-materials" aria-labelledby="pottery-wheel-included-title">
+    <section id="course-details" class="course-section pottery-details" aria-labelledby="pottery-details-title">
       <div class="program-shell">
-        <div class="course-section-heading"><span class="eyebrow">COURSE MATERIALS</span><h2 id="pottery-wheel-included-title">What’s Included</h2></div>
-        <ul class="course-feature-grid">{included.map((item, index) => <li><span>{String(index + 1).padStart(2, '0')}</span>{item}</li>)}</ul>
-        <p class="course-section-note"><span aria-hidden="true">✦</span> Glazing and kiln firing for one selected piece are included in the course fee. Additional pieces may be glazed and kiln-fired for an extra fee.</p>
+        <div class="course-section-heading course-section-heading--left"><h2 id="pottery-details-title">Course Details</h2><p>Everything you need to know before your first class.</p></div>
+        <details class="pottery-detail">
+          <summary>What's included</summary>
+          <ul>{included.map((item) => <li>{item}</li>)}</ul>
+          <p>Additional pieces may be glazed and kiln-fired for an extra fee.</p>
+        </details>
+        <details class="pottery-detail">
+          <summary>What you'll learn</summary>
+          <ul class="pottery-skills">{skills.map((skill) => <li>{skill}</li>)}</ul>
+        </details>
+        <details class="pottery-detail">
+          <summary>Finished pieces &amp; pickup</summary>
+          <p>Create and refine pottery over four sessions. One selected piece will be glazed and professionally kiln-fired as part of your course fee; additional pieces cost extra.</p>
+          <p>Firing takes additional processing time. We'll share pickup timing during the course.</p>
+        </details>
+        <p class="pottery-question">Have a question? <a href="mailto:sparkpreneurs.ca@gmail.com">Email us</a></p>
       </div>
-    </section>
-
-    <section class="course-section course-skills" aria-labelledby="pottery-wheel-learning-title">
-      <div class="program-shell course-skills-layout">
-        <div class="course-section-heading course-section-heading--left"><span class="eyebrow">SKILLS AND TECHNIQUES</span><h2 id="pottery-wheel-learning-title">What You’ll Learn</h2><p>Build confidence at the wheel through guided practice, one technique at a time.</p></div>
-        <ul class="course-skill-list">{skills.map((skill) => <li><span aria-hidden="true">✦</span>{skill}</li>)}</ul>
-      </div>
-    </section>
-
-    <section class="course-section course-process" aria-labelledby="pottery-wheel-finished-title">
-      <div class="program-shell course-process-panel">
-        <div><span class="eyebrow">FINISHED PIECES</span><h2 id="pottery-wheel-finished-title">From Clay to Finished Piece</h2></div>
-        <div><p>During the four-session course, participants will create and refine pottery on the wheel. One selected piece will be glazed and professionally kiln-fired as part of the course fee. Additional pieces can be glazed and fired for an extra fee.</p><p>Finished work is professionally kiln-fired through our ceramic firing service. Kiln firing requires additional processing time. Pickup timing for completed pieces will be shared during the course.</p></div>
-      </div>
-    </section>
-
-    <section class="course-final-cta" aria-labelledby="pottery-wheel-cta-title">
-      <div class="program-shell"><div><span class="eyebrow">READY TO CREATE?</span><h2 id="pottery-wheel-cta-title">Start Your Pottery Wheel Course</h2><p>Choose the weekly schedule that works for you, then build confidence on the wheel through four guided sessions.</p></div><div class="course-final-actions"><a class="button button-primary" href="#schedule">Choose a Schedule</a><a class="button button-light" href="mailto:sparkpreneurs.ca@gmail.com">Ask a Question</a></div></div>
     </section>
   </main>
 
@@ -226,11 +245,16 @@ const skills = [
       const selectedInput = () => cohortInputs.find((input) => input.checked) || null;
       const updateSelection = () => {
         const input = selectedInput();
-        cohortInputs.forEach((item) => item.closest('[data-pottery-wheel-cohort-card]')?.classList.toggle('is-selected', item.checked));
+        cohortInputs.forEach((item) => {
+          const card = item.closest('[data-pottery-wheel-cohort-card]');
+          card?.classList.toggle('is-selected', item.checked);
+          const label = card?.querySelector('[data-pottery-select-label]');
+          if (label) label.textContent = item.checked ? 'Selected schedule' : 'Choose this schedule';
+        });
         if (!input) {
-          selectedName.textContent = 'Select a schedule above';
-          selectedTime.textContent = 'Choose one weekly time and attend four consecutive sessions.';
-          selectedDates.textContent = 'All four dates will appear here after you choose a cohort.';
+          selectedName.textContent = 'Choose your weekly time';
+          selectedTime.textContent = 'Select a schedule above to get started.';
+          selectedDates.textContent = 'All four class dates will appear here.';
           submitButton.disabled = true;
           clearButton.disabled = isSubmitting;
           return;
@@ -291,3 +315,160 @@ const skills = [
     })();
   </script>
 </BaseLayout>
+
+<style>
+  .pottery-offer-price { display: inline-flex; flex-wrap: wrap; gap: 0.5rem; align-items: baseline; }
+  .pottery-offer-price del { color: #b42318; }
+  .pottery-offer-price strong { font-weight: 700; }
+  .pottery-wheel-page :global(.course-hero__copy) { padding: 24px 30px; }
+  .pottery-wheel-page :global(.course-hero__copy h1) { font-size: clamp(36px, 4vw, 50px); }
+  .pottery-wheel-page :global(.course-hero__media img) { position: absolute; inset: 0; }
+  .pottery-wheel-page .course-section { padding: 32px 0; scroll-margin-top: 110px; }
+  .pottery-wheel-page .course-section-heading { margin-bottom: 20px; text-align: left; max-width: none; }
+  .pottery-wheel-page .course-section-heading h2 { margin: 6px 0 8px; font-size: clamp(26px, 3vw, 34px); }
+  .pottery-wheel-page .course-section-heading > p { font-size: 14px; }
+  .course-cohort-grid { gap: 18px; }
+  .course-registration-grid { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 20px; }
+  .course-selection-panel, .course-registration-card { padding: 22px; min-height: 0; }
+  .course-registration-card { position: static; }
+  .course-selection-heading { margin: 10px 0 16px; padding-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+  .course-selection-heading h3 { font-size: 22px; }
+  .course-selected-card { padding: 18px; }
+  .course-selected-card h3 { font-size: 22px; }
+  .course-registration-card h3 { margin-bottom: 16px; font-size: 22px; }
+  .course-registration-card form { gap: 12px; }
+  .course-registration-status:empty { display: none; }
+  .pottery-message summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+  .pottery-message label { margin-top: 10px; }
+  .pottery-detail { border-top: 1px solid var(--line); padding: 16px 0; }
+  .pottery-detail summary { cursor: pointer; color: var(--ink); font-weight: 700; }
+  .pottery-detail ul { padding-left: 22px; margin: 14px 0; color: var(--muted); font-size: 14px; }
+  .pottery-detail li { margin-bottom: 6px; }
+  .pottery-detail p, .pottery-question { font-size: 14px; color: var(--muted); }
+  .pottery-skills { columns: 2; column-gap: 32px; }
+  .pottery-skills li { break-inside: avoid; }
+  .pottery-question a { color: var(--orange-deep); text-decoration: underline; }
+  @media (max-width: 760px) {
+    .pottery-wheel-page :global(.course-hero__copy) { padding: 22px 20px; }
+    .pottery-wheel-page .course-section { padding: 24px 0; }
+    .course-registration-grid { grid-template-columns: 1fr; gap: 14px; }
+    .course-cohort-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 500px) {
+    .course-form-row { grid-template-columns: 1fr; }
+    .pottery-skills { columns: 1; }
+    .course-selection-panel, .course-registration-card { padding: 18px; }
+  }
+  .pottery-wheel-page { --course-clay: #a7593c; --course-cream: #fff5eb; }
+  .pottery-wheel-page :global(.course-hero__copy) { background: radial-gradient(ellipse at 0 100%, #efd5c2, transparent 65%), #fff8f0; }
+  .pottery-wheel-page :global(.course-hero__copy h1) { color: #683f2c; }
+  .pottery-wheel-page :global(.course-hero__media figcaption) { text-transform: none; letter-spacing: 0; font-size: 12px; }
+  .pottery-details { background: #fff8f0; }
+  .pottery-detail { margin-bottom: 10px; padding: 0; border: 1px solid #e6d6c8; border-radius: 12px; background: white; overflow: hidden; }
+  .pottery-detail summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px; list-style: none; }
+  .pottery-detail summary::-webkit-details-marker { display: none; }
+  .pottery-detail summary::after { content: '+'; color: #a7593c; font-size: 22px; font-weight: 400; }
+  .pottery-detail[open] summary::after { content: '\2212'; }
+  .pottery-detail[open] summary { background: #fbf1e8; }
+  .pottery-detail ul { margin: 14px 18px; padding-left: 20px; }
+  .pottery-detail p { margin: 14px 18px; }
+
+
+  /* Registration follows the shared navy, orange, and paper palette. */
+  .course-registration { background: var(--paper); }
+  .course-registration .course-registration-grid { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 0; align-items: stretch; overflow: hidden; border: 1px solid var(--line); border-top: 4px solid var(--ink); border-radius: var(--radius); background: white; box-shadow: var(--shadow); }
+  .course-registration .course-selection-panel { padding: 28px; border-radius: 0; border-right: 1px solid var(--line); background: var(--white); box-shadow: none; color: var(--ink); }
+  .pottery-course-heading { position: relative; margin-bottom: 22px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+  .pottery-course-heading .tag { padding: 5px 10px; font-size: 10px; font-weight: 600; }
+  .course-registration .pottery-course-heading h3 { margin: 14px 0 18px; color: var(--ink); font-size: 25px; line-height: 1.15; letter-spacing: -.02em; }
+  .pottery-course-facts { display: grid; grid-template-columns: 1fr 1fr; margin: 0; }
+  .pottery-course-facts div { padding: 0 16px; border-left: 1px solid var(--line); }
+  .pottery-course-facts div:first-child { padding-left: 0; border-left: 0; }
+  .pottery-course-facts dt { color: var(--muted); font-size: 11px; }
+  .pottery-course-facts dd { margin: 4px 0 0; color: var(--ink); font-size: 15px; font-weight: 700; }
+  .course-registration .course-selected-card { padding: 18px; border: 0; border-left: 3px solid var(--orange); border-radius: 0 10px 10px 0; background: var(--paper); }
+  .course-registration .course-selected-card::after { display: none; }
+  .course-registration .course-selected-card > span { font-size: 10px; }
+  .course-registration .course-selected-card h3 { margin: 10px 0; font-size: 20px; line-height: 1.3; }
+  .course-registration .course-selected-card p { font-size: 13px; line-height: 1.6; }
+  .course-registration .course-selected-card a { margin-top: 12px; font-size: 12px; }
+  .pottery-registration-included { margin: 22px 0; }
+  .pottery-registration-included h4 { margin: 0 0 10px; font-size: 13px; color: var(--ink); }
+  .pottery-registration-included ul { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  .pottery-registration-included li { display: flex; gap: 9px; color: var(--muted); font-size: 13px; }
+  .pottery-registration-included li::before { content: '\2713'; color: var(--orange-deep); font-weight: 700; }
+  .pottery-registration-price { padding-top: 18px; border-top: 1px solid var(--line); }
+  .pottery-registration-price > div { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+  .pottery-registration-price .pottery-offer-price { gap: 8px; }
+  .pottery-registration-price .pottery-offer-price del { color: var(--muted); font-size: 15px; }
+  .pottery-registration-price .pottery-offer-price strong { font-size: 30px; color: var(--ink); line-height: 1.2; }
+  .pottery-registration-price > span { display: block; margin-top: 6px; color: var(--muted); font-size: 12px; }
+  .course-registration .course-registration-card { padding: 28px 32px; border: 0; border-radius: 0; box-shadow: none; background: white; }
+  .course-registration .course-registration-card h3 { margin: 10px 0 8px; font-size: 24px; line-height: 1.25; letter-spacing: -.025em; }
+  .pottery-form-intro { margin: 0 0 22px; color: var(--muted); font-size: 13px; }
+  .course-registration .course-registration-card form { gap: 16px; }
+  .course-registration .course-registration-card label { font-size: 12px; font-weight: 600; gap: 7px; }
+  .course-registration .course-registration-card input,
+  .course-registration .course-registration-card select,
+  .course-registration .course-registration-card textarea { min-width: 0; min-height: 44px; background: var(--paper); border-color: var(--line); font-size: 16px; }
+  .course-registration .course-registration-card .course-consent { gap: 10px; font-size: 12px; line-height: 1.5; }
+  .course-registration .course-consent input { min-height: 0; width: 18px; height: 18px; margin: 0; }
+  .course-registration .pottery-message summary { color: var(--ink); font-size: 12px; }
+  .course-registration .course-registration-note { margin: 20px 0 12px; font-size: 12px; }
+  .course-registration .course-clear { padding: 8px 12px; margin-top: 12px; font-size: 12px; }
+  @media (max-width: 760px) {
+    .course-registration .course-registration-grid { grid-template-columns: 1fr; }
+    .course-registration .course-selection-panel { padding: 22px; border-right: 0; border-bottom: 1px solid var(--line); }
+    .course-registration .course-registration-card { padding: 24px 22px; }
+    .pottery-registration-included { margin-block: 18px; }
+  }
+
+  /* Studio passes: the website's navy, orange, and cream, with a bolder hierarchy. */
+  .pottery-wheel-page .course-schedule { background: var(--paper); }
+  .course-cohort-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .pottery-schedule-card { display: flex; flex-direction: column; position: relative; min-width: 0; padding: 0; border: 2px solid transparent; border-radius: var(--radius); background: var(--white); box-shadow: var(--shadow); overflow: hidden; cursor: pointer; transition: transform .2s, box-shadow .2s, border-color .2s; }
+  .pottery-schedule-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  .pottery-schedule-card:has(input:checked) { border-color: var(--orange); box-shadow: 0 8px 24px rgba(232,98,44,.17); }
+  .pottery-schedule-card:has(input:focus-visible) { outline: 3px solid var(--orange); outline-offset: 4px; }
+  .pottery-schedule-card > input { position: absolute; top: 18px; right: 22px; z-index: 2; width: 20px; height: 20px; margin: 0; accent-color: var(--orange); cursor: pointer; }
+  .pottery-schedule-header { display: flex; flex-direction: column; align-items: flex-start; position: relative; isolation: isolate; min-height: 128px; padding: 16px 18px; overflow: hidden; background: var(--ink); color: white; }
+  .pottery-schedule-header::before { content: ''; position: absolute; width: 230px; height: 230px; border: 1px solid rgba(217,199,168,.2); border-radius: 50%; right: -75px; top: -100px; z-index: -1; }
+  .pottery-session-tag { padding: 4px 10px; border-radius: 100px; background: var(--kraft); color: var(--ink-deep); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; }
+  .pottery-schedule-day { margin: 10px 0 5px; font-size: clamp(22px, 2vw, 27px); line-height: 1.1; letter-spacing: -.035em; }
+  .pottery-schedule-time { font-size: 13px; font-weight: 500; color: white; }
+  .pottery-schedule-art { position: absolute; right: 16px; bottom: 12px; width: 36px; height: 31px; color: var(--kraft); opacity: .65; z-index: -1; }
+  .pottery-schedule-body { display: block; padding: 16px 18px 18px; }
+  .pottery-dates-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 14px; font-size: 11px; color: var(--muted); }
+  .pottery-dates-heading strong { color: var(--ink); font-size: 12px; font-weight: 600; }
+  .pottery-calendar-dates { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; }
+  .pottery-calendar-dates time { display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+  .pottery-session-number { align-self: stretch; padding: 3px; border-bottom: 1px solid var(--line); background: var(--paper-alt); color: var(--muted); font-size: 9px; font-weight: 600; text-align: center; letter-spacing: .08em; }
+  .pottery-calendar-dates strong { margin-top: 7px; color: var(--ink); font-size: 25px; line-height: 1.1; }
+  .pottery-session-month { margin: 3px 0 8px; color: var(--muted); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+  .pottery-schedule-footer { position: relative; display: block; margin-top: auto; padding: 14px 18px 18px; border-top: 1px dashed var(--line); background: var(--paper); }
+  .pottery-schedule-footer::before, .pottery-schedule-footer::after { content: ''; position: absolute; top: -9px; width: 16px; height: 16px; border: 1px solid var(--line); border-radius: 50%; background: var(--paper); }
+  .pottery-schedule-footer::before { left: -10px; }
+  .pottery-schedule-footer::after { right: -10px; }
+  .pottery-schedule-select { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; border-radius: 10px; background: var(--orange); box-shadow: 0 3px 0 var(--orange-deep); color: white; font-size: 13px; font-weight: 700; }
+  .pottery-schedule-arrow { font-size: 20px; line-height: 1; }
+  .pottery-schedule-card:has(input:checked) .pottery-schedule-select { background: var(--ink); box-shadow: 0 3px 0 var(--ink-deep); }
+  .pottery-schedule-card:has(input:checked) .pottery-schedule-arrow { font-size: 0; }
+  .pottery-schedule-card:has(input:checked) .pottery-schedule-arrow::after { content: '\2713'; font-size: 18px; }
+  @media (max-width: 1100px) {
+    .course-cohort-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pottery-schedule-art { right: 20px; width: 40px; height: 35px; opacity: .45; }
+  }
+  @media (max-width: 760px) {
+    .course-cohort-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 500px) {
+    .course-cohort-grid { gap: 16px; }
+    .pottery-schedule-header { padding: 16px 20px; min-height: 128px; }
+    .pottery-schedule-card > input { top: 18px; right: 20px; }
+    .pottery-schedule-art { width: 40px; height: 35px; opacity: .5; }
+    .pottery-schedule-body { padding: 16px 20px 18px; }
+    .pottery-schedule-footer { padding: 14px 20px 18px; }
+    .pottery-calendar-dates { gap: 8px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .pottery-schedule-card { transition: none; } .pottery-schedule-card:hover { transform: none; } }
+</style>

@@ -31,8 +31,8 @@ import { programCards } from '../../data/program-catalog';
           </div>
         </div>
         <div class="programs-hero-visual" aria-hidden="true">
-          <div class="programs-hero-image programs-hero-image-main"><img src="/images/hero-collage.jpg" alt="" /></div>
-          <div class="programs-hero-image programs-hero-image-small"><img src="/images/gallery-pottery.jpg" alt="" /></div>
+          <div class="programs-hero-image programs-hero-image-main"><img src="/images/hero-collage.jpg" alt="Kids and adults exploring creative activities at SparkPreneurs" /></div>
+          <div class="programs-hero-image programs-hero-image-small"><img src="/images/gallery-pottery.jpg" alt="An adult shaping clay by hand at SparkPreneurs" /></div>
           <span class="programs-hero-mark">✦</span>
           <p><strong>{programCards.length}</strong><span>program paths to explore</span></p>
         </div>
@@ -106,11 +106,6 @@ import { programCards } from '../../data/program-catalog';
             <button type="button" data-filter-reset>Reset filters</button>
           </div>
         </div>
-
-        <a class="programs-pottery-guide" href="/programs/pottery/">
-          <div><span class="eyebrow">NEED TO CHOOSE A POTTERY FORMAT?</span><strong>Compare Wheel and Hand-Building side by side.</strong></div>
-          <span>Open the Pottery Guide <b aria-hidden="true">→</b></span>
-        </a>
 
         <div class="programs-card-grid" data-program-grid>
           {programCards.map((program, index) => <ProgramDiscoveryCard program={program} eager={index < 2} />)}

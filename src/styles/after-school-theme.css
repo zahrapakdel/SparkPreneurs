@@ -1,0 +1,90 @@
+/* Use the shared design-system palette with the Camps section treatment. */
+.after-school-compact {
+  background: var(--paper);
+}
+
+.after-school-compact .after-school-hero {
+  background: radial-gradient(circle at 88% 18%, rgba(217, 199, 168, .28), transparent 30%), var(--paper);
+}
+
+.after-school-compact .program-detail-hero {
+  background: var(--paper-alt);
+  border-color: var(--kraft);
+}
+
+.after-school-compact .program-quick-card p,
+.after-school-compact .after-school-essential-card > span {
+  background: var(--paper);
+  border-color: var(--line);
+}
+
+.after-school-compact .early-bird-banner {
+  background: var(--paper-alt);
+  border-color: var(--kraft);
+}
+
+.after-school-compact .early-bird-banner > p {
+  color: var(--muted);
+  border-color: var(--kraft);
+}
+
+.after-school-compact .early-bird-badge {
+  background: rgba(232, 98, 44, .14);
+  color: var(--orange-deep);
+}
+
+.after-school-compact .schedule-plan {
+  border-color: var(--line);
+}
+
+.after-school-compact .schedule-plan.is-selected {
+  background: var(--paper-alt);
+  border-color: var(--orange);
+}
+
+.after-school-compact .after-school-afternoon {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.after-school-compact .after-school-afternoon-heading h2,
+.after-school-compact .after-school-highlight-list h3 {
+  color: var(--white);
+}
+
+.after-school-compact .after-school-afternoon-heading .eyebrow {
+  color: var(--kraft);
+}
+
+.after-school-compact .after-school-afternoon-heading p,
+.after-school-compact .after-school-highlight-list p {
+  color: rgba(255, 255, 255, .74);
+}
+
+.after-school-compact .after-school-highlight-list li {
+  border-color: rgba(255, 255, 255, .2);
+}
+
+.after-school-compact .after-school-highlight-list li > span {
+  background: rgba(217, 199, 168, .14);
+  color: var(--kraft);
+}
+
+.after-school-compact .registration-card {
+  border-color: var(--line);
+  border-top-color: var(--orange);
+}
+
+.after-school-compact .selected-plan strong {
+  color: var(--ink);
+}
+
+.after-school-compact .registration-card input:focus {
+  border-color: var(--orange);
+  outline-color: var(--line);
+}
+
+.after-school-compact :is(a, button, summary):focus-visible {
+  outline: 3px solid var(--line);
+  outline-offset: 4px;
+}

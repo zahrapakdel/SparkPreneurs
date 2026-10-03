@@ -1,4 +1,7 @@
 ---
+import { programCards } from '../data/program-catalog';
+import { eventTypes, studioRental } from '../data/events';
+
 type CurrentSection = 'programs' | 'camps' | 'after-school' | 'events' | 'studio-rental' | 'about' | 'contact';
 
 interface Props {
@@ -10,14 +13,58 @@ interface Props {
 
 const {
   current,
-  variant = 'default',
   ctaHref = '/programs/',
   ctaLabel = 'Find a Program',
 } = Astro.props;
 
+const kidsPrograms = [
+  { label: 'All Kids Programs', href: '/programs/kids-youth/' },
+  { label: '3D Printing', href: '/programs/3d-printing/' },
+  { label: 'Summer Camp', href: '/camps/summer-camp/' },
+  { label: 'After-School', href: '/after-school/' },
+  { label: 'Kids Workshops', href: '/workshops/' },
+];
+
+const adultPrograms = [
+  { label: 'All Adult Programs', href: '/programs/adults/' },
+  { label: 'Pottery Wheel', href: '/programs/pottery-wheel/' },
+  { label: 'Hand-Building Pottery', href: '/programs/hand-building-pottery/' },
+  { label: 'Zumba (Adults & Kids)', href: '/programs/zumba/' },
+];
+
+const searchItems = [
+ ...programCards.map((program) => ({
+  title: program.title,
+  description: program.description,
+  href: program.href,
+  image: program.image,
+  imageAlt: program.alt,
+  type: program.formatLabel,
+  searchText: [program.title, program.description, program.audienceLabel, program.activityLabel, program.formatLabel].join(' '),
+})),
+  ...eventTypes.map((event) => ({
+    title: event.title,
+    description: event.shortDescription,
+    href: `/events/${event.slug}/`,
+    image: event.primaryImage.src,
+    imageAlt: event.primaryImage.alt,
+    type: 'Hosted event',
+    searchText: [event.title, event.shortDescription, event.audience, ...event.experienceIdeas].join(' '),
+  })),
+  {
+    title: studioRental.title,
+    description: studioRental.shortDescription,
+    href: '/studio-rental/',
+    image: studioRental.primaryImage.src,
+    imageAlt: studioRental.primaryImage.alt,
+    type: 'Studio rental',
+    searchText: [studioRental.title, studioRental.shortDescription, ...studioRental.intendedUses].join(' '),
+  },
+];
+
 ---
 
-<header class:list={['site-header', variant === 'home' && 'home-header', variant === 'programs' && 'programs-header']} data-header>
+<header class="site-header" data-header>
   <div class="nav-shell">
     <a class="brand" href="/" aria-label="SparkPreneurs home">
       <img src="/images/logo.png" alt="SparkPreneurs" width="188" height="80" />
@@ -26,14 +73,233 @@ const {
       <span class="sr-only">Toggle menu</span><span></span><span></span><span></span>
     </button>
     <nav id="primary-nav" class="primary-nav" aria-label="Main navigation" data-menu>
-      <a href="/programs/" aria-current={current === 'programs' ? 'page' : undefined}>Programs</a>
+      <div class="nav-programs" data-programs-menu>
+        <button class="nav-programs-trigger" type="button" aria-expanded="false" aria-controls="programs-submenu" aria-current={current === 'programs' ? 'page' : undefined} data-programs-trigger>
+          Programs
+          <svg class="nav-programs-chevron" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </button>
+        <div id="programs-submenu" class="programs-submenu" data-programs-submenu>
+          <a class="programs-submenu-all" href="/programs/">View All Programs <span aria-hidden="true">→</span></a>
+          <div class="programs-submenu-groups">
+            <section aria-labelledby="kids-programs-heading">
+              <h2 id="kids-programs-heading"><span aria-hidden="true">01</span> Kids</h2>
+              {kidsPrograms.map((program) => <a href={program.href}>{program.label}</a>)}
+            </section>
+            <section aria-labelledby="adult-programs-heading">
+              <h2 id="adult-programs-heading"><span aria-hidden="true">02</span> Adult</h2>
+              {adultPrograms.map((program) => <a href={program.href}>{program.label}</a>)}
+            </section>
+          </div>
+        </div>
+      </div>
       <a href="/camps/" aria-current={current === 'camps' ? 'page' : undefined}>Camps</a>
       <a href="/after-school/" aria-current={current === 'after-school' ? 'page' : undefined}>After School</a>
       <a href="/events/" aria-current={current === 'events' ? 'page' : undefined}>Events</a>
       <a href="/studio-rental/" aria-current={current === 'studio-rental' ? 'page' : undefined}>Studio Rental</a>
       <a href="/about/" aria-current={current === 'about' ? 'page' : undefined}>About</a>
       <a href="/contact/" aria-current={current === 'contact' ? 'page' : undefined}>Contact</a>
+      <button class="nav-search-trigger" type="button" aria-label="Search programs and services" title="Search" data-site-search-open>
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+        <span class="nav-search-label">Search</span>
+      </button>
       <a class="nav-cta" href={ctaHref}>{ctaLabel}</a>
     </nav>
   </div>
 </header>
+
+<dialog class="site-search" data-site-search aria-labelledby="site-search-title">
+  <div class="site-search-header">
+    <div>
+      <p class="eyebrow">FIND YOUR NEXT ACTIVITY</p>
+      <h2 id="site-search-title">Search SparkPreneurs</h2>
+    </div>
+    <button class="site-search-close" type="button" aria-label="Close search" data-site-search-close>×</button>
+  </div>
+  <div class="site-search-field">
+    <svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+    <label class="sr-only" for="site-search-input">Search programs and services</label>
+    <input id="site-search-input" type="search" placeholder="Try “pottery”, “kids”, or “after school”" autocomplete="off" data-site-search-input />
+  </div>
+  <div class="site-search-meta">
+    <p data-site-search-count aria-live="polite">Browse all {searchItems.length} options</p>
+    <span>Programs · Camps · Events · Rentals</span>
+  </div>
+  <div class="site-search-results" data-site-search-results>
+    {searchItems.map((item) => (
+      <a class="site-search-result" href={item.href} data-site-search-item data-search={item.searchText.toLocaleLowerCase()}>
+        <img src={item.image} alt={item.imageAlt} loading="lazy" decoding="async" />
+        <span class="site-search-result-copy">
+          <small>{item.type}</small>
+          <strong>{item.title}</strong>
+          <span>{item.description}</span>
+        </span>
+        <b aria-hidden="true">→</b>
+      </a>
+    ))}
+  </div>
+  <div class="site-search-empty" data-site-search-empty hidden>
+    <span aria-hidden="true">?</span>
+    <h3>No matches yet.</h3>
+    <p>Try a broader word, or ask us to help you find the right option.</p>
+    <a href="/contact/">Contact SparkPreneurs</a>
+  </div>
+</dialog>
+
+<style is:global>
+/* One header geometry for every route, regardless of the page's CTA label. */
+html { scrollbar-gutter: stable; }
+
+.site-header .nav-shell {
+  height: 88px;
+  gap: 24px;
+}
+
+.site-header .brand { flex: 0 0 168px; }
+.site-header .brand img { width: 168px; height: auto; }
+.site-header .primary-nav {
+  gap: 16px;
+  font-size: 12px;
+  line-height: 1.6;
+  font-weight: 600;
+}
+.site-header .primary-nav > a,
+.site-header .nav-programs-trigger { white-space: nowrap; }
+.site-header .nav-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 212px;
+  width: 212px;
+  min-height: 44px;
+  padding: 11px 12px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.site-header [aria-current="page"]:not(.nav-cta) { color: var(--orange-deep); }
+.site-header :is(a, button):focus-visible {
+  outline: 3px solid var(--line);
+  outline-offset: 4px;
+}
+
+@media (max-width: 1080px) {
+  .site-header .nav-shell { height: 72px; padding-inline: 18px; }
+  .site-header .brand { flex-basis: 142px; }
+  .site-header .brand img { width: 142px; }
+  .site-header .menu-button { display: block; }
+  .site-header .primary-nav {
+    position: absolute;
+    top: 72px;
+    left: 0;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    max-height: calc(100dvh - 72px);
+    overflow-y: auto;
+    padding: 10px 20px 24px;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow-hover);
+    font-size: 14px;
+  }
+  .site-header .primary-nav.is-open { display: flex; }
+  .site-header .primary-nav > a { padding: 12px; }
+  .site-header .nav-cta {
+    flex: 0 0 auto;
+    width: 100%;
+    margin-top: 8px;
+    font-size: 14px;
+  }
+  .site-header .nav-programs { width: 100%; }
+  .site-header .nav-programs-trigger {
+    width: 100%;
+    justify-content: space-between;
+    padding: 12px;
+  }
+  .site-header .programs-submenu {
+    position: static;
+    width: 100%;
+    max-height: 0;
+    padding: 0 14px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--paper-alt);
+    box-shadow: none;
+    opacity: 1;
+    visibility: hidden;
+    overflow: hidden;
+    transform: none;
+    transition: max-height .25s, padding .25s, visibility .25s;
+  }
+  .site-header .programs-submenu.is-open {
+    max-height: 650px;
+    padding: 10px 14px 16px;
+    visibility: visible;
+  }
+}
+</style>
+
+<script>
+  const programsMenu = document.querySelector<HTMLElement>('[data-programs-menu]');
+  const programsTrigger = programsMenu?.querySelector<HTMLButtonElement>('[data-programs-trigger]');
+  const programsSubmenu = programsMenu?.querySelector<HTMLElement>('[data-programs-submenu]');
+
+  const setProgramsMenuOpen = (open: boolean) => {
+    programsTrigger?.setAttribute('aria-expanded', String(open));
+    programsSubmenu?.classList.toggle('is-open', open);
+  };
+
+  programsTrigger?.addEventListener('click', () => {
+    setProgramsMenuOpen(programsTrigger.getAttribute('aria-expanded') !== 'true');
+  });
+  programsSubmenu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setProgramsMenuOpen(false)));
+  document.addEventListener('click', (event) => {
+    if (programsMenu && !programsMenu.contains(event.target as Node)) setProgramsMenuOpen(false);
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || programsTrigger?.getAttribute('aria-expanded') !== 'true') return;
+    setProgramsMenuOpen(false);
+    programsTrigger.focus();
+  });
+
+  const searchDialog = document.querySelector<HTMLDialogElement>('[data-site-search]');
+  const searchOpen = document.querySelector<HTMLButtonElement>('[data-site-search-open]');
+  const searchClose = searchDialog?.querySelector<HTMLButtonElement>('[data-site-search-close]');
+  const searchInput = searchDialog?.querySelector<HTMLInputElement>('[data-site-search-input]');
+  const searchItems = [...(searchDialog?.querySelectorAll<HTMLElement>('[data-site-search-item]') ?? [])];
+  const searchResults = searchDialog?.querySelector<HTMLElement>('[data-site-search-results]');
+  const searchCount = searchDialog?.querySelector<HTMLElement>('[data-site-search-count]');
+  const searchEmpty = searchDialog?.querySelector<HTMLElement>('[data-site-search-empty]');
+
+  const filterSearch = () => {
+    const terms = (searchInput?.value ?? '').trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
+    let visible = 0;
+    searchItems.forEach((item) => {
+      const matches = terms.every((term) => item.dataset.search?.includes(term));
+      item.hidden = !matches;
+      if (matches) visible += 1;
+    });
+    if (searchCount) searchCount.textContent = terms.length ? `${visible} matching ${visible === 1 ? 'option' : 'options'}` : `Browse all ${searchItems.length} options`;
+    if (searchResults) searchResults.hidden = visible === 0;
+    if (searchEmpty) searchEmpty.hidden = visible > 0;
+  };
+
+  searchOpen?.addEventListener('click', () => {
+    document.querySelectorAll<HTMLDialogElement>('dialog[open]').forEach((dialog) => dialog.close());
+    document.querySelector<HTMLElement>('[data-menu]')?.classList.remove('is-open');
+    document.querySelector<HTMLButtonElement>('[data-menu-button]')?.setAttribute('aria-expanded', 'false');
+    setProgramsMenuOpen(false);
+    if (searchInput) searchInput.value = '';
+    filterSearch();
+    searchDialog?.showModal();
+    window.setTimeout(() => searchInput?.focus(), 0);
+  });
+  searchClose?.addEventListener('click', () => searchDialog?.close());
+  searchInput?.addEventListener('input', filterSearch);
+  searchDialog?.addEventListener('click', (event) => {
+    if (event.target === searchDialog) searchDialog?.close();
+  });
+</script>
