@@ -9,7 +9,7 @@ import { programCards } from '../../data/program-catalog';
 
 <BaseLayout
   title="All Programs | SparkPreneurs Toronto"
-  description="Explore current creative programs for kids, youth, and adults at SparkPreneurs in Midtown Toronto. Filter by audience, activity, format, and availability."
+  description="Explore current creative programs for kids, youth, and adults at SparkPreneurs in Midtown Toronto. Filter by audience, activity, and availability."
 >
   <a class="programs-skip-link" href="#program-list">Skip to programs</a>
 
@@ -64,41 +64,52 @@ import { programCards } from '../../data/program-catalog';
         <div class="programs-filter-panel" aria-label="Filter programs" data-program-filters>
           <div class="programs-filter-group">
             <span id="audience-filter-label">Audience</span>
-            <div role="group" aria-labelledby="audience-filter-label">
-              <button type="button" data-filter-group="audience" data-filter-value="all" aria-pressed="true">All</button>
-              <button type="button" data-filter-group="audience" data-filter-value="kids-youth" aria-pressed="false">Kids & Youth</button>
-              <button type="button" data-filter-group="audience" data-filter-value="adults" aria-pressed="false">Adults</button>
+            <select aria-labelledby="audience-filter-label" data-filter-group="audience">
+              <option value="all">All</option>
+              <option value="kids-youth">Kids & Youth</option>
+              <option value="adults">Adults</option>
+            </select>
+            <button type="button" class="programs-filter-trigger" data-filter-trigger hidden aria-haspopup="listbox" aria-expanded="false" aria-controls="audience-filter-menu" aria-labelledby="audience-filter-label audience-filter-value"><span id="audience-filter-value" data-filter-display>All</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button>
+            <div id="audience-filter-menu" class="programs-filter-menu" data-filter-menu hidden popover="auto" role="listbox" aria-labelledby="audience-filter-label">
+              <button type="button" class="programs-filter-option" role="option" data-filter-option="all" aria-selected="true" tabindex="-1"><span>All</span><span class="filter-option-check" aria-hidden="true">&check;</span></button>
+              <button type="button" class="programs-filter-option" role="option" data-filter-option="kids-youth" aria-selected="false" tabindex="-1"><span>Kids & Youth</span><span class="filter-option-check" aria-hidden="true">&check;</span></button>
+              <button type="button" class="programs-filter-option" role="option" data-filter-option="adults" aria-selected="false" tabindex="-1"><span>Adults</span><span class="filter-option-check" aria-hidden="true">&check;</span></button>
             </div>
           </div>
           <div class="programs-filter-group">
             <span id="activity-filter-label">Activity</span>
-            <div role="group" aria-labelledby="activity-filter-label">
-              <button type="button" data-filter-group="activity" data-filter-value="all" aria-pressed="true">All</button>
-              <button type="button" data-filter-group="activity" data-filter-value="art-mixed-media" aria-pressed="false">Creative Mix</button>
-              <button type="button" data-filter-group="activity" data-filter-value="pottery" aria-pressed="false">Pottery</button>
-              <button type="button" data-filter-group="activity" data-filter-value="creative-technology" aria-pressed="false">Creative Technology</button>
-              <button type="button" data-filter-group="activity" data-filter-value="wellness-movement" aria-pressed="false">Wellness & Movement</button>
-            </div>
-          </div>
-          <div class="programs-filter-group">
-            <span id="format-filter-label">Format</span>
-            <div role="group" aria-labelledby="format-filter-label">
-              <button type="button" data-filter-group="format" data-filter-value="all" aria-pressed="true">All</button>
-              <button type="button" data-filter-group="format" data-filter-value="class" aria-pressed="false">Class</button>
-              <button type="button" data-filter-group="format" data-filter-value="workshop" aria-pressed="false">Workshop</button>
-              <button type="button" data-filter-group="format" data-filter-value="camp" aria-pressed="false">Camp</button>
-              <button type="button" data-filter-group="format" data-filter-value="after-school" aria-pressed="false">After School</button>
-              <button type="button" data-filter-group="format" data-filter-value="seasonal-pass" aria-pressed="false">Seasonal Pass</button>
+            <select aria-labelledby="activity-filter-label" data-filter-group="activity">
+              <option value="all">All</option>
+              <option value="art-mixed-media">Creative Mix</option>
+              <option value="pottery">Pottery</option>
+              <option value="creative-technology">Creative Technology</option>
+              <option value="wellness-movement">Wellness & Movement</option>
+            </select>
+            <button type="button" class="programs-filter-trigger" data-filter-trigger hidden aria-haspopup="listbox" aria-expanded="false" aria-controls="activity-filter-menu" aria-labelledby="activity-filter-label activity-filter-value"><span id="activity-filter-value" data-filter-display>All</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button>
+            <div id="activity-filter-menu" class="programs-filter-menu" data-filter-menu hidden popover="auto" role="listbox" aria-labelledby="activity-filter-label">
+              <button type="button" class="programs-filter-option" role="option" data-filter-option="all" aria-selected="true" tabindex="-1"><span>All</span><span class="filter-option-check" aria-hidden="true">&check;</span></button>
+              <button type="button" class="programs-filter-option" role="option" data-filter-option="art-mixed-media" aria-selected="false" tabindex="-1"><span>Creative Mix</span><span class="filter-option-check" aria-hidden="true">&check;</span></button>
+              <button type="button" class="programs-filter-option" role="option" data-filter-option="pottery" aria-selected="false" tabindex="-1"><span>Pottery</span><span class="filter-option-check" aria-hidden="true">&check;</span></button>
+              <button type="button" class="programs-filter-option" role="option" data-filter-option="creative-technology" aria-selected="false" tabindex="-1"><span>Creative Technology</span><span class="filter-option-check" aria-hidden="true">&check;</span></button>
+              <button type="button" class="programs-filter-option" role="option" data-filter-option="wellness-movement" aria-selected="false" tabindex="-1"><span>Wellness & Movement</span><span class="filter-option-check" aria-hidden="true">&check;</span></button>
             </div>
           </div>
           <div class="programs-filter-group">
             <span id="availability-filter-label">Availability</span>
-            <div role="group" aria-labelledby="availability-filter-label">
-              <button type="button" data-filter-group="availability" data-filter-value="all" aria-pressed="true">All</button>
-              <button type="button" data-filter-group="availability" data-filter-value="registration" aria-pressed="false">Registration Available</button>
-              <button type="button" data-filter-group="availability" data-filter-value="interest-list" aria-pressed="false">Interest List</button>
-              <button type="button" data-filter-group="availability" data-filter-value="ended" aria-pressed="false">Ended</button>
-              <button type="button" data-filter-group="availability" data-filter-value="check-schedule" aria-pressed="false">Check Schedule</button>
+            <select aria-labelledby="availability-filter-label" data-filter-group="availability">
+              <option value="all">All</option>
+              <option value="registration">Registration Available</option>
+              <option value="interest-list">Interest List</option>
+              <option value="ended">Ended</option>
+              <option value="check-schedule">Check Schedule</option>
+            </select>
+            <button type="button" class="programs-filter-trigger" data-filter-trigger hidden aria-haspopup="listbox" aria-expanded="false" aria-controls="availability-filter-menu" aria-labelledby="availability-filter-label availability-filter-value"><span id="availability-filter-value" data-filter-display>All</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button>
+            <div id="availability-filter-menu" class="programs-filter-menu" data-filter-menu hidden popover="auto" role="listbox" aria-labelledby="availability-filter-label">
+              <button type="button" class="programs-filter-option" role="option" data-filter-option="all" aria-selected="true" tabindex="-1"><span>All</span><span class="filter-option-check" aria-hidden="true">&check;</span></button>
+              <button type="button" class="programs-filter-option" role="option" data-filter-option="registration" aria-selected="false" tabindex="-1"><span>Registration Available</span><span class="filter-option-check" aria-hidden="true">&check;</span></button>
+              <button type="button" class="programs-filter-option" role="option" data-filter-option="interest-list" aria-selected="false" tabindex="-1"><span>Interest List</span><span class="filter-option-check" aria-hidden="true">&check;</span></button>
+              <button type="button" class="programs-filter-option" role="option" data-filter-option="ended" aria-selected="false" tabindex="-1"><span>Ended</span><span class="filter-option-check" aria-hidden="true">&check;</span></button>
+              <button type="button" class="programs-filter-option" role="option" data-filter-option="check-schedule" aria-selected="false" tabindex="-1"><span>Check Schedule</span><span class="filter-option-check" aria-hidden="true">&check;</span></button>
             </div>
           </div>
           <div class="programs-filter-summary">
@@ -108,7 +119,7 @@ import { programCards } from '../../data/program-catalog';
         </div>
 
         <div class="programs-card-grid" data-program-grid>
-          {programCards.map((program, index) => <ProgramDiscoveryCard program={program} eager={index < 2} />)}
+          {programCards.map((program, index) => <ProgramDiscoveryCard program={program} eager={index < 2} showDetails={false} />)}
         </div>
 
         <div class="programs-empty" data-filter-empty hidden>
@@ -166,13 +177,13 @@ import { programCards } from '../../data/program-catalog';
       menuButton.focus();
     });
 
-    type FilterGroup = 'audience' | 'activity' | 'format' | 'availability';
+    type FilterGroup = 'audience' | 'activity' | 'availability';
     const cards = [...document.querySelectorAll<HTMLElement>('[data-program-card]')];
-    const filterButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-filter-group]')];
+    const filterSelects = [...document.querySelectorAll<HTMLSelectElement>('[data-filter-group]')];
     const resetButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-filter-reset]')];
     const resultCount = document.querySelector<HTMLElement>('[data-results-count]');
     const emptyState = document.querySelector<HTMLElement>('[data-filter-empty]');
-    const selections: Record<FilterGroup, string> = { audience: 'all', activity: 'all', format: 'all', availability: 'all' };
+    const selections: Record<FilterGroup, string> = { audience: 'all', activity: 'all', availability: 'all' };
 
     const updateFilters = () => {
       let visible = 0;
@@ -181,22 +192,131 @@ import { programCards } from '../../data/program-catalog';
         card.hidden = !matches;
         if (matches) visible += 1;
       });
-      filterButtons.forEach((button) => {
-        const group = button.dataset.filterGroup as FilterGroup;
-        button.setAttribute('aria-pressed', String(selections[group] === button.dataset.filterValue));
+      filterSelects.forEach((select) => {
+        const group = select.dataset.filterGroup as FilterGroup;
+        select.value = selections[group];
+        const wrapper = select.closest('.programs-filter-group');
+        const display = wrapper?.querySelector<HTMLElement>('[data-filter-display]');
+        if (display) display.textContent = select.selectedOptions[0]?.textContent || 'All';
+        wrapper?.querySelectorAll<HTMLButtonElement>('[data-filter-option]').forEach((option) => {
+          option.setAttribute('aria-selected', String(option.dataset.filterOption === select.value));
+        });
       });
       if (resultCount) resultCount.textContent = visible === cards.length ? `Showing all ${visible} programs` : `Showing ${visible} of ${cards.length} programs`;
       if (emptyState) emptyState.hidden = visible !== 0;
     };
 
-    filterButtons.forEach((button) => button.addEventListener('click', () => {
-      const group = button.dataset.filterGroup as FilterGroup;
-      selections[group] = button.dataset.filterValue || 'all';
+    filterSelects.forEach((select) => select.addEventListener('change', () => {
+      const group = select.dataset.filterGroup as FilterGroup;
+      selections[group] = select.value || 'all';
       updateFilters();
     }));
+    filterSelects.forEach((select) => {
+      const wrapper = select.closest('.programs-filter-group');
+      const trigger = wrapper?.querySelector<HTMLButtonElement>('[data-filter-trigger]');
+      const popup = wrapper?.querySelector<HTMLElement>('[data-filter-menu]');
+      if (!trigger || !popup || typeof popup.showPopover !== 'function') return;
+      const options = [...popup.querySelectorAll<HTMLButtonElement>('[data-filter-option]')];
+      select.hidden = true;
+      trigger.hidden = false;
+      popup.hidden = false;
+      const open = (last = false) => {
+        popup.showPopover();
+        const rect = trigger.getBoundingClientRect();
+        const width = Math.min(Math.max(rect.width, 230), window.innerWidth - 24);
+        popup.style.width = `${width}px`;
+        popup.style.left = `${Math.max(12, Math.min(rect.left, window.innerWidth - width - 12))}px`;
+        popup.style.maxHeight = `${Math.max(120, Math.min(320, window.innerHeight - 24))}px`;
+        const height = popup.getBoundingClientRect().height;
+        const top = rect.bottom + 8 + height <= window.innerHeight - 12 ? rect.bottom + 8 : Math.max(12, rect.top - height - 8);
+        popup.style.top = `${top}px`;
+        trigger.setAttribute('aria-expanded', 'true');
+        const selected = options.find((option) => option.dataset.filterOption === select.value);
+        (last ? options[options.length - 1] : selected || options[0])?.focus({ preventScroll: true });
+      };
+      const close = () => { popup.hidePopover(); trigger.setAttribute('aria-expanded', 'false'); };
+      trigger.addEventListener('click', () => { if (popup.matches(':popover-open')) close(); else open(); });
+      trigger.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowDown' || event.key === 'ArrowUp') { event.preventDefault(); open(event.key === 'ArrowUp'); }
+      });
+      popup.addEventListener('toggle', () => trigger.setAttribute('aria-expanded', String(popup.matches(':popover-open'))));
+      options.forEach((option) => option.addEventListener('click', () => {
+        select.value = option.dataset.filterOption || 'all';
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+        close(); trigger.focus({ preventScroll: true });
+      }));
+      let typed = '';
+      let typingTimer: ReturnType<typeof setTimeout>;
+      popup.addEventListener('keydown', (event) => {
+        const index = options.indexOf(document.activeElement as HTMLButtonElement);
+        let next = index;
+        if (event.key === 'ArrowDown') next = (index + 1) % options.length;
+        else if (event.key === 'ArrowUp') next = (index - 1 + options.length) % options.length;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = options.length - 1;
+        else if (event.key === 'Escape') { event.preventDefault(); close(); trigger.focus(); return; }
+        else if (event.key === 'Tab') {
+          event.preventDefault(); close(); trigger.focus();
+          const focusable = [...document.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), select:not([disabled]), input:not([disabled]), textarea:not([disabled]), [tabindex="0"]')].filter((element) => element.getClientRects().length > 0);
+          const target = focusable[focusable.indexOf(trigger) + (event.shiftKey ? -1 : 1)];
+          target?.focus(); return;
+        } else if (event.key.length === 1 && !event.ctrlKey && !event.altKey && !event.metaKey && event.key !== ' ') {
+          typed += event.key.toLowerCase(); clearTimeout(typingTimer);
+          typingTimer = setTimeout(() => { typed = ''; }, 600);
+          const match = options.find((option) => option.textContent?.trim().toLowerCase().startsWith(typed));
+          match?.focus(); event.preventDefault(); return;
+        } else return;
+        event.preventDefault(); options[next]?.focus();
+      });
+      window.addEventListener('resize', close);
+      document.addEventListener('scroll', (event) => { if (event.target !== popup && !popup.contains(event.target as Node)) close(); }, true);
+    });
+    updateFilters();
+
     resetButtons.forEach((button) => button.addEventListener('click', () => {
       (Object.keys(selections) as FilterGroup[]).forEach((key) => { selections[key] = 'all'; });
       updateFilters();
     }));
   </script>
 </BaseLayout>
+
+<style>
+  .programs-filter-panel { display: grid; grid-template-columns: repeat(3, minmax(140px, 1fr)) minmax(180px, 1.15fr); align-items: end; gap: 14px; overflow-x: auto; }
+  .programs-filter-group { display: grid; grid-template-columns: 1fr; gap: 8px; padding: 0; border: 0; min-width: 0; }
+  .programs-filter-group > span { padding: 0; white-space: nowrap; line-height: 16px; }
+  .programs-filter-group select { appearance: none; width: 100%; height: 44px; padding: 10px 34px 10px 12px; border: 1px solid var(--line); border-radius: 10px; background-color: var(--paper); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231e3a5f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 11px center; color: var(--ink); font: 600 13px var(--body); text-overflow: ellipsis; cursor: pointer; transition: border-color .2s, background-color .2s; }
+  .programs-filter-group select:hover { border-color: var(--ink); background-color: var(--white); }
+  .programs-filter-group select:focus-visible { border-color: var(--orange); outline: 2px solid var(--orange); outline-offset: 2px; background-color: var(--white); }
+  .programs-filter-group option { background: var(--white); color: var(--ink); font: 500 13px var(--body); }
+  .programs-filter-summary { display: grid; grid-template-columns: 1fr; align-items: end; gap: 8px; padding: 0; min-height: 0; }
+  .programs-filter-summary p { margin: 0; font-size: 11px; line-height: 16px; white-space: nowrap; }
+  .programs-filter-summary button { display: inline-flex; align-items: center; justify-content: center; width: 100%; height: 44px; padding: 10px 16px; border: 1px solid var(--ink); border-radius: 10px; background: var(--white); color: var(--ink); font: 700 13px var(--body); white-space: nowrap; cursor: pointer; transition: background-color .2s, color .2s; }
+  .programs-filter-summary button:hover { background: var(--ink); color: var(--white); }
+  .programs-filter-summary button:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { .programs-filter-group select, .programs-filter-summary button { transition: none; } }
+  .programs-filter-group [hidden] { display: none; }
+  .programs-filter-group .programs-filter-trigger { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; height: 44px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink); font: 600 13px var(--body); text-align: left; cursor: pointer; }
+  .programs-filter-trigger > span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .programs-filter-trigger svg { width: 16px; height: 16px; flex: 0 0 16px; transition: transform .2s; }
+  .programs-filter-group .programs-filter-trigger:hover { border-color: var(--ink); background: var(--white); }
+  .programs-filter-group .programs-filter-trigger[aria-expanded="true"] { border-color: var(--orange); background: var(--white); box-shadow: 0 0 0 3px rgba(232,98,44,.1); }
+  .programs-filter-trigger[aria-expanded="true"] svg { transform: rotate(180deg); }
+  .programs-filter-trigger:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+  .programs-filter-group .programs-filter-menu { position: fixed; inset: auto; margin: 0; padding: 6px; border: 1px solid var(--line); border-radius: 12px; background: var(--white); box-shadow: var(--shadow-hover); overflow-y: auto; overscroll-behavior: contain; }
+  .programs-filter-menu:not(:popover-open) { display: none; }
+  .programs-filter-group .programs-filter-menu:popover-open { display: grid; gap: 3px; }
+  .programs-filter-menu .programs-filter-option { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 42px; padding: 10px 12px; border: 0; border-radius: 7px; background: var(--white); color: var(--ink); font: 500 13px var(--body); text-align: left; cursor: pointer; }
+  .programs-filter-menu .programs-filter-option:hover, .programs-filter-menu .programs-filter-option:focus-visible { outline: none; background: var(--paper-alt); color: var(--ink); }
+  .programs-filter-menu .programs-filter-option[aria-selected="true"] { background: rgba(232,98,44,.1); color: var(--orange-deep); font-weight: 700; }
+  .programs-filter-menu .programs-filter-option[aria-selected="true"]:focus-visible { outline: 2px solid var(--orange); outline-offset: -2px; }
+  .filter-option-check { visibility: hidden; font-size: 16px; }
+  [aria-selected="true"] .filter-option-check { visibility: visible; }
+  @media (prefers-reduced-motion: reduce) { .programs-filter-trigger svg { transition: none; } }
+  .programs-filter-group .programs-filter-trigger[hidden], .programs-filter-group .programs-filter-menu[hidden] { display: none; }
+  .programs-card-grid { grid-auto-rows: 1fr; align-items: stretch; }
+  .programs-card-grid :global(.programs-card) { display: flex; flex-direction: column; }
+  .programs-card-grid :global(.programs-card[hidden]) { display: none; }
+  .programs-card-grid :global(.programs-card-image) { flex-shrink: 0; }
+  .programs-card-grid :global(.programs-card-copy) { display: flex; flex-direction: column; flex: 1; }
+  .programs-card-grid :global(.programs-card-link) { margin-top: auto; min-height: 26px; }
+</style>
