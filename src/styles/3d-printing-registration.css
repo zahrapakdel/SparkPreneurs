@@ -1,0 +1,32 @@
+.printing-page .course-registration { background: white; }
+.printing-page .course-registration-grid { grid-template-columns: minmax(0, 1fr) minmax(300px, 360px); gap: 32px; align-items: start; }
+.printing-options-heading { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 18px; }
+.printing-options-heading h3 { margin: 10px 0 0; font-size: 30px; }
+.printing-options-heading > p { max-width: 230px; margin: 0; color: var(--muted); font-size: 14px; }
+.printing-class-card { padding: 20px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); box-shadow: var(--shadow); }
+.printing-class-card.is-selected { border-color: var(--orange); box-shadow: 0 0 0 2px rgba(232,98,44,.16); }
+.printing-class-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(180px, 250px); gap: 22px; align-items: start; }
+.printing-class-main h3 { margin: 12px 0; font-size: 28px; }
+.printing-class-main p { color: var(--muted); }
+.printing-class-main .printing-class-price { color: var(--ink); font-size: 26px; font-weight: 800; margin: 16px 0 0; }
+.printing-class-main img { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: 58% center; border: 1px solid var(--line); border-radius: 12px; }
+.printing-schedule { margin-top: 30px; padding: 16px; border: 1px solid rgba(194,65,12,.18); border-radius: 16px; background: #fffaf5; }
+.printing-schedule h4 { margin: 0 0 18px; color: var(--ink); font-size: 15px; text-transform: uppercase; letter-spacing: .04em; }
+.printing-schedule ul { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; color: var(--muted); line-height: 1.35; }
+.printing-schedule p { margin: 12px 0 0; font-size: 14px; line-height: 1.45; }
+.printing-class-card > .button { margin-top: 28px; width: 100%; }
+.printing-page .course-registration-card { padding: 24px; background: #fffaf5; border-color: rgba(194,65,12,.16); }
+.printing-page .course-registration-card h3 { margin: 0 0 18px; font-size: 24px; }
+.printing-page .course-registration-card label { font-size: 14px; gap: 7px; }
+.printing-page .course-registration-card input { min-height: 52px; background: white; font-size: 16px; }
+.printing-cart-list { list-style: none; padding: 0; margin: 0 0 20px; }
+.printing-cart-list li { padding: 12px 14px; border-radius: 12px; background: white; color: var(--muted); }
+.printing-cart-list [data-printing-item]:not([hidden]) { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.printing-cart-list button { border: 0; padding: 4px 0; background: transparent; color: var(--orange-deep); text-decoration: underline; cursor: pointer; }
+.printing-cart-totals { margin-bottom: 24px; }
+.printing-cart-totals > div { display: flex; justify-content: space-between; gap: 16px; margin: 10px 0; color: var(--ink); font-size: 14px; }
+.printing-cart-totals .printing-cart-total { border-top: 1px solid var(--line); padding-top: 12px; font-size: 18px; font-weight: 800; }
+.printing-page .course-registration button:disabled { opacity: .55; cursor: not-allowed; }
+.printing-page .course-registration [hidden] { display: none; }
+@media (max-width: 980px) { .printing-page .course-registration-grid { grid-template-columns: 1fr; } .printing-page .course-registration-card { position: static; } }
+@media (max-width: 600px) { .printing-class-main { grid-template-columns: 1fr; } .printing-class-main img { max-height: 280px; } .printing-options-heading { align-items: flex-start; flex-direction: column; gap: 12px; } .printing-options-heading > p { max-width: none; } }

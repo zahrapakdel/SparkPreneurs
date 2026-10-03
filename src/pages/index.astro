@@ -10,14 +10,12 @@ const audienceChoices = [
     description: 'Explore creative programs, workshops, camps, and after-school experiences for young makers.',
     href: '/programs/kids-youth/',
     label: 'PROGRAMS BY AUDIENCE',
-    number: '01',
   },
   {
     title: 'Adults',
     description: 'Find hands-on creative experiences, from pottery to guided art workshops.',
     href: '/programs/adults/',
     label: 'PROGRAMS BY AUDIENCE',
-    number: '02',
   },
 ];
 
@@ -120,16 +118,6 @@ const gallery = [
       </div>
     </section>
 
-    <section class="audience-strip" aria-label="Programs for everyone">
-      <p>Start with what you need.</p>
-      <div class="audience-links">
-        <a href="#programs"><span>01</span> Programs <b>→</b></a>
-        <a href="/camps/"><span>02</span> Camps <b>→</b></a>
-        <a href="/workshops/"><span>03</span> Workshops <b>→</b></a>
-        <a href="#studio-rental"><span>04</span> Studio rental <b>→</b></a>
-      </div>
-    </section>
-
     <section id="programs" class="section-shell home-journeys">
       <div class="section-heading">
         <div>
@@ -141,7 +129,6 @@ const gallery = [
       <div class="home-journey-grid">
         {audienceChoices.map((choice) => (
           <a class="home-journey-card" href={choice.href}>
-            <span class="home-journey-number">{choice.number}</span>
             <span class="eyebrow">{choice.label}</span>
             <h3>{choice.title}</h3>
             <p>{choice.description}</p>
@@ -155,7 +142,7 @@ const gallery = [
       <div class="section-shell">
         <div class="section-heading">
           <div><span class="eyebrow">PROGRAM HIGHLIGHTS</span><h2>Two ways to work with clay.</h2></div>
-          <p>Compare the two locally implemented adult pottery programs. Open each program page to review its current schedule, price, and registration status. <a class="home-pottery-link" href="/programs/pottery/">Compare both pottery formats <b aria-hidden="true">→</b></a></p>
+          <p>Compare the two locally implemented adult pottery programs. Open each program page to review its current schedule, price, and registration status.</p>
         </div>
         <div class="program-grid">
           {programHighlights.map((program) => (

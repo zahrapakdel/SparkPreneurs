@@ -1,6 +1,6 @@
 ---
 interface Props {
-  current?: 'all' | 'kids-youth' | 'adults' | 'pottery' | '3d-printing' | 'zumba' | 'workshops';
+  current?: 'all' | 'kids-youth' | 'adults' | '3d-printing' | 'zumba' | 'workshops';
 }
 
 const { current } = Astro.props;
@@ -9,7 +9,6 @@ const links = [
   { key: 'all', label: 'All Programs', href: '/programs/' },
   { key: 'kids-youth', label: 'Kids & Youth', href: '/programs/kids-youth/' },
   { key: 'adults', label: 'Adults', href: '/programs/adults/' },
-  { key: 'pottery', label: 'Pottery', href: '/programs/pottery/' },
   { key: '3d-printing', label: '3D Printing', href: '/programs/3d-printing/' },
   { key: 'zumba', label: 'Zumba', href: '/programs/zumba/' },
   { key: 'workshops', label: 'Workshops', href: '/workshops/' },

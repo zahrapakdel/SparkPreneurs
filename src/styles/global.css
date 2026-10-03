@@ -70,9 +70,9 @@
 .home-header .primary-nav{gap:16px;font-size:12px}
 .home-header .nav-cta{padding:11px 16px;font-size:13px}
 .home-page .audience-links{grid-template-columns:repeat(4,1fr)}
-.home-journeys{padding-top:96px;padding-bottom:96px}
+.home-journeys{max-width:none;padding-inline:max(24px,calc((100% - 1132px)/2));padding-top:96px;padding-bottom:96px;background:var(--paper-alt)}
 .home-journey-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.home-journey-card{position:relative;min-height:310px;padding:34px;border-top:7px solid var(--orange);border-radius:var(--radius);background:white;box-shadow:var(--shadow);overflow:hidden;transition:.22s}
+.home-journey-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;padding:34px;border-top:7px solid var(--orange);border-radius:var(--radius);background:white;box-shadow:var(--shadow);overflow:hidden;transition:.22s}
 .home-journey-card:nth-child(2){border-top-color:var(--ink)}
 .home-journey-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover)}
 .home-journey-card:after{content:"";position:absolute;right:11px;bottom:11px;width:13px;height:13px;border-right:2px solid var(--orange);border-bottom:2px solid var(--orange)}
@@ -80,14 +80,23 @@
 .home-journey-card:nth-child(2) .home-journey-number{background:rgba(30,58,95,.1);color:var(--ink)}
 .home-journey-card h3{margin:13px 0 12px;font-size:34px}
 .home-journey-card p{max-width:470px;margin:0 0 28px;color:var(--muted)}
-.home-program-highlights{background:var(--paper-alt)}
+.home-page{--home-card-padding:34px;--home-card-link-gap:28px}
+.home-page :is(.home-journey-card,.card-copy,.category-card,.home-workshop-card){display:flex;flex-direction:column;align-items:flex-start;gap:0;padding:var(--home-card-padding)}
+.home-page .program-card{display:flex;flex-direction:column}
+.home-page .program-card :is(.card-stripe,.card-image){flex-shrink:0}
+.home-page .card-copy{flex:1}
+.home-page :is(.home-journey-card,.card-copy,.category-card,.home-workshop-card) h3{margin:13px 0 12px}
+.home-page :is(.home-journey-card,.card-copy,.category-card,.home-workshop-card) p{margin:0 0 var(--home-card-link-gap)}
+.home-page :is(.home-journey-card,.card-copy,.category-card) .text-link,.home-page .home-workshop-card .button{margin-top:auto}
+@media(max-width:760px){.home-page{--home-card-padding:28px}}
+.home-program-highlights{background:var(--paper)}
 .home-program-highlights .section-shell{padding-top:96px;padding-bottom:96px}
 .home-program-highlights .program-grid{grid-template-columns:repeat(2,1fr)}
 .home-program-highlights .card-image{height:260px}
-.home-pottery-link{display:inline-flex;align-items:center;gap:7px;margin-top:14px;color:var(--ink);font-size:13px;font-weight:800;border-bottom:2px solid var(--orange)}
-.home-pottery-link b{color:var(--orange);font-size:16px}
-.home-pottery-link:hover{color:var(--orange)}
 .home-family-section,.home-workshops-section,.home-events-section{padding:96px 0}
+.home-family-section,.home-events-section{background:var(--paper-alt)}
+.home-family-section .category-card:before,.home-events-section .category-card:before{content:"";position:absolute;left:12px;top:12px;width:12px;height:12px;border-left:2px solid var(--orange);border-top:2px solid var(--orange)}
+.home-workshops-section,.home-page .about-section{background:var(--paper)}
 .home-family-section .section-shell,.home-events-section .section-shell{padding-top:0;padding-bottom:0}
 .home-workshops-section .section-shell{padding:0 24px}
 .home-workshop-card{display:grid;grid-template-columns:1fr auto;align-items:center;gap:48px;position:relative;padding:38px;border:1px solid rgba(195,217,232,.8);border-radius:var(--radius);background:white;box-shadow:var(--shadow);overflow:hidden;transition:.22s}
@@ -96,7 +105,7 @@
 .home-workshop-card h3{margin:15px 0 9px;font-size:30px}
 .home-workshop-card p{max-width:700px;margin:0;color:var(--muted)}
 .home-event-card{scroll-margin-top:112px}
-.home-page .gallery-section{padding-top:96px;padding-bottom:96px}
+.home-page .gallery-section{max-width:none;padding-inline:max(24px,calc((100% - 1132px)/2));padding-top:96px;padding-bottom:96px;background:var(--paper-alt)}
 .slider-toggle{display:grid;place-items:center;width:30px;height:30px;padding:0;border:1px solid var(--line);border-radius:50%;background:white;color:var(--ink);font-size:11px;font-weight:800;cursor:pointer}
 .slider-toggle:hover{border-color:var(--orange);color:var(--orange)}
 .home-page a:focus-visible,.home-header a:focus-visible,.home-header button:focus-visible,.slider-controls button:focus-visible{outline:3px solid var(--line);outline-offset:4px}
@@ -277,6 +286,14 @@
 @media(max-width:980px){.course-hero__frame{grid-template-columns:1fr 1fr}.course-hero__copy{padding:26px 28px}.course-hero__copy h1{font-size:50px}.course-hero__facts{grid-template-columns:1fr 1fr}.course-hero__facts div:nth-child(2){border-right:0}.course-hero__facts div:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.14)}.course-feature-grid{grid-template-columns:repeat(3,1fr)}.course-registration-grid{grid-template-columns:1fr 370px}.course-skills-layout{gap:48px}}
 @media(max-width:760px){.program-shell{width:min(100% - 40px,1180px)}.course-hero{padding:10px 0 20px}.course-hero__frame{grid-template-columns:1fr;grid-template-rows:auto 160px auto;height:auto;border-radius:20px}.course-hero__copy{padding:24px 20px}.course-hero__copy h1{font-size:42px}.course-hero__copy>p{font-size:13.5px;line-height:1.48}.course-hero__media,.course-hero__motif{grid-row:2}.course-hero__media figcaption{right:14px;bottom:12px}.course-hero__facts{grid-column:1;grid-row:3}.course-section{padding:72px 0}.course-cohort-grid{grid-template-columns:1fr}.course-registration-grid{grid-template-columns:1fr}.course-registration-card{position:static}.course-feature-grid{grid-template-columns:1fr 1fr}.course-skills-layout{grid-template-columns:1fr;gap:20px}.course-skill-list{grid-template-columns:1fr 1fr}.course-process-panel{grid-template-columns:1fr;gap:28px;padding:36px 28px}.course-final-cta .program-shell{display:block}.course-final-actions{margin-top:28px}}
 @media(max-width:500px){.course-hero__frame{grid-template-rows:auto 140px auto}.course-hero__copy h1{font-size:39px}.course-hero__actions{gap:8px}.course-hero__actions .button{width:auto;padding:10px 12px;font-size:12px}.course-hero__facts{grid-template-columns:1fr 1fr}.course-hero__facts div{padding:10px 9px;gap:2px 7px}.course-hero__facts div>span{width:25px;height:25px}.course-hero__facts dd{font-size:11px}.course-cohort-card{padding:22px 18px}.course-date-list{grid-template-columns:1fr 1fr}.course-form-row{grid-template-columns:1fr}.course-feature-grid{grid-template-columns:1fr}.course-feature-grid li{min-height:0;grid-template-columns:auto 1fr;align-items:center}.course-skill-list{grid-template-columns:1fr}.course-selection-panel,.course-registration-card{padding:24px 20px}.course-selection-heading{display:block}.course-selection-heading>strong{display:block;margin-top:8px}.course-final-actions .button{width:100%}}
+
+/* 3D Printing hero spacing */
+.printing-page .course-hero__copy{padding:40px 38px}
+.printing-page .course-hero__copy h1{margin:16px 0 24px}
+.printing-page .course-hero__copy>p{margin:0 0 28px;line-height:1.7}
+.printing-page .course-hero__actions{gap:14px}
+@media(min-width:761px){.printing-page .course-hero__frame{height:auto;min-height:clamp(440px,calc(100svh - 170px),590px);grid-template-rows:auto auto}.printing-page .course-hero__media img{position:absolute;inset:0}}
+@media(max-width:760px){.printing-page .course-hero__copy{padding:32px 24px}.printing-page .course-hero__copy h1{margin:14px 0 20px}}
 
 /* Program route navigation */
 .program-route-nav{position:relative;z-index:40;border-bottom:1px solid rgba(195,217,232,.75);background:var(--ink);color:white}

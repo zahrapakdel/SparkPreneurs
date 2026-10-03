@@ -107,11 +107,6 @@ import { programCards } from '../../data/program-catalog';
           </div>
         </div>
 
-        <a class="programs-pottery-guide" href="/programs/pottery/">
-          <div><span class="eyebrow">NEED TO CHOOSE A POTTERY FORMAT?</span><strong>Compare Wheel and Hand-Building side by side.</strong></div>
-          <span>Open the Pottery Guide <b aria-hidden="true">→</b></span>
-        </a>
-
         <div class="programs-card-grid" data-program-grid>
           {programCards.map((program, index) => <ProgramDiscoveryCard program={program} eager={index < 2} />)}
         </div>
