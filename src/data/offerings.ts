@@ -5,7 +5,7 @@ const reviewed = '2026-08-23';
 
 const potteryWheelSources = [
   ['mon-evening', 'POTTERY_WHEEL_MON_EVENING', 'Monday Evenings', 'Monday', '17:30', '19:30', ['2026-08-10', '2026-08-17', '2026-08-24', '2026-08-31']],
-  ['tue-daytime', 'POTTERY_WHEEL_TUE_DAYTIME', 'Tuesday Daytime', 'Tuesday', '11:00', '13:00', ['2026-08-11', '2026-08-18', '2026-08-25', '2026-09-01']],
+  ['fri-daytime', 'POTTERY_WHEEL_TUE_DAYTIME', 'Friday Mornings', 'Friday', '11:00', '13:00', ['2026-08-14', '2026-08-21', '2026-08-28', '2026-09-04']],
   ['wed-evening', 'POTTERY_WHEEL_WED_EVENING', 'Wednesday Evenings', 'Wednesday', '17:30', '19:30', ['2026-08-12', '2026-08-19', '2026-08-26', '2026-09-02']],
   ['sat-afternoon', 'POTTERY_WHEEL_SAT_AFTERNOON', 'Saturday Afternoons', 'Saturday', '13:00', '15:00', ['2026-08-15', '2026-08-22', '2026-08-29', '2026-09-05']],
 ] as const;
@@ -35,8 +35,8 @@ export const offerings: Offering[] = [
     id: `pottery-wheel-2026-${key}`, programId: 'pottery-wheel',
     programCode: 'august_september_2026_pottery_wheel', itemCode, label, status: 'ended',
     startDate: dates[0], endDate: dates[dates.length - 1], sessionDates: [...dates], dayOfWeek, startTime, endTime,
-    numberOfSessions: 4, duration: '2 hours per session', price: 25000, currency: 'CAD', taxDisplay: null,
-    displayDataLastSynced: reviewed, registrationMode: 'checkout', location,
+    numberOfSessions: 4, duration: '2 hours per session', price: 18000, originalPrice: 25000, discountLabel: 'Offer price', currency: 'CAD', taxDisplay: null,
+    displayDataLastSynced: '2026-10-03', registrationMode: 'checkout', location,
   })),
   ...handBuildingSources.map(([itemCode, label, dayOfWeek, startTime, endTime]): Offering => ({
     id: `hand-building-${itemCode.toLowerCase()}`, programId: 'hand-building-pottery',

@@ -30,7 +30,7 @@ export const programs: Program[] = [
     inclusions: ['Clay and class tools', 'Instructor guidance', 'Glazing and kiln firing for one finished piece'],
     firingAndPickupDetails: 'Glazing and firing for one piece are included; pickup timing requires business confirmation.',
     location, availabilityMode: 'registration',
-    primaryImage: { src: '/images/pottery-wheel-hero.png', alt: 'Pottery wheel course at SparkPreneurs' },
+    primaryImage: { src: '/images/potter-wheel-hero.jpg', alt: 'Pottery wheel course at SparkPreneurs' },
     relatedPrograms: ['hand-building-pottery'],
     seoTitle: 'Pottery Wheel Classes for Adults | SparkPreneurs Toronto',
     seoDescription: 'Learn pottery wheel techniques in a guided adult course at SparkPreneurs in Midtown Toronto.',

@@ -2,6 +2,7 @@
 interface Fact {
   label: string;
   value: string;
+  originalValue?: string;
 }
 
 interface Props {
@@ -57,10 +58,14 @@ const {
       {facts.length > 0 && (
         <dl class="course-hero__facts">
           {facts.map((fact, index) => (
-            <div><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><dt>{fact.label}</dt><dd>{fact.value}</dd></div>
+            <div><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><dt>{fact.label}</dt><dd>{fact.originalValue ? <><del class="course-hero-original-price">{fact.originalValue}</del>{' '}<strong>{fact.value}</strong></> : fact.value}</dd></div>
           ))}
         </dl>
       )}
     </div>
   </div>
 </section>
+
+<style>
+  .course-hero-original-price { color: #b42318; margin-right: 0.5rem; }
+</style>

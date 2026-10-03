@@ -11,7 +11,7 @@ export interface GalleryItem {
 export const galleryItems: GalleryItem[] = [
   { src: '/images/gallery-kids-clay.jpg', alt: 'Children showing clay projects at SparkPreneurs', category: 'programs', caption: 'Kids clay projects', href: '/programs/kids-youth/' },
   { src: '/images/gallery-pottery.jpg', alt: 'An adult shaping clay by hand at SparkPreneurs', category: 'programs', caption: 'Adult pottery', href: '/programs/adults/' },
-  { src: '/images/pottery-wheel-hero.png', alt: 'A participant shaping clay on a pottery wheel', category: 'programs', caption: 'Pottery Wheel', href: '/programs/pottery-wheel/' },
+  { src: '/images/potter-wheel-hero.jpg', alt: 'A participant shaping clay on a pottery wheel', category: 'programs', caption: 'Pottery Wheel', href: '/programs/pottery-wheel/' },
   { src: '/images/hand-building-pottery.jpg', alt: 'Hand-building pottery work at SparkPreneurs', category: 'programs', caption: 'Hand-Building Pottery', href: '/programs/hand-building-pottery/' },
   { src: '/images/gallery-robotics.jpg', alt: 'A child working on a creative technology project', category: 'programs', caption: 'Creative technology', href: '/programs/3d-printing/' },
   { src: '/images/zumba.jpg', alt: 'A lively movement class at SparkPreneurs', category: 'programs', caption: 'Zumba', href: '/programs/zumba/' },
