@@ -29,7 +29,7 @@ const adultPrograms = [
   { label: 'All Adult Programs', href: '/programs/adults/' },
   { label: 'Pottery Wheel', href: '/programs/pottery-wheel/' },
   { label: 'Hand-Building Pottery', href: '/programs/hand-building-pottery/' },
-  { label: 'Zumba (Adults & Kids)', href: '/programs/zumba/' },
+  { label: 'Zumba (Adults)', href: '/programs/zumba/' },
 ];
 
 const searchItems = [
@@ -84,11 +84,11 @@ const searchItems = [
           <a class="programs-submenu-all" href="/programs/">View All Programs <span aria-hidden="true">→</span></a>
           <div class="programs-submenu-groups">
             <section aria-labelledby="kids-programs-heading">
-              <h2 id="kids-programs-heading"><span aria-hidden="true">01</span> Kids</h2>
+              <h2 id="kids-programs-heading">Kids</h2>
               {kidsPrograms.map((program) => <a href={program.href}>{program.label}</a>)}
             </section>
             <section aria-labelledby="adult-programs-heading">
-              <h2 id="adult-programs-heading"><span aria-hidden="true">02</span> Adult</h2>
+              <h2 id="adult-programs-heading">Adult</h2>
               {adultPrograms.map((program) => <a href={program.href}>{program.label}</a>)}
             </section>
           </div>

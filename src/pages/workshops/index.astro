@@ -32,7 +32,6 @@ const announcementDetails = [
   <main class="workshops-page">
     <section class="workshops-hero" aria-labelledby="workshops-title">
       <div class="programs-shell">
-        <nav class="programs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>Workshops</span></nav>
         <div class="workshops-hero-frame">
           <div class="workshops-hero-media"><img src="/images/workshops-hero.jpg" alt="A child painting with colourful art materials" /></div>
           <div class="workshops-hero-copy">
@@ -102,7 +101,6 @@ const announcementDetails = [
         <div class="workshops-interest-grid">
           {interestAreas.map((item) => (
             <article class={`workshops-interest-card workshops-interest-card-${item.accent}`}>
-              <span>{item.number}</span>
               <h3>{item.title}</h3>
               <p>{item.description}</p>
               <a href={`mailto:sparkpreneurs.ca@gmail.com?subject=${encodeURIComponent(`${item.title} Workshop Interest`)}`}>Ask about this workshop <span aria-hidden="true">→</span></a>

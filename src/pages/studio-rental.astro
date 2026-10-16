@@ -4,7 +4,7 @@ import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { studioRental } from '../data/events';
 
-const mailto = `mailto:sparkpreneurs.ca@gmail.com?subject=${encodeURIComponent(studioRental.inquirySubject)}&body=${encodeURIComponent('Intended use:\nPreferred date and time:\nDuration:\nGroup size:\nSetup or equipment needs:\nAccessibility needs:\nOther details:\n')}`;
+const mailto = `https://mail.google.com/mail/?view=cm&fs=1&to=sparkpreneurs.ca%40gmail.com&su=${encodeURIComponent(studioRental.inquirySubject)}&body=${encodeURIComponent('Intended use:\nPreferred date and time:\nDuration:\nGroup size:\nSetup or equipment needs:\nAccessibility needs:\nOther details:\n')}`;
 ---
 
 <BaseLayout title={studioRental.seoTitle} description={studioRental.seoDescription}>
