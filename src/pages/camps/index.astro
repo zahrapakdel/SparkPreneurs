@@ -5,15 +5,6 @@ import SiteFooter from '../../components/SiteFooter.astro';
 
 const summerCampUrl = '/camps/summer-camp/';
 
-const parentEssentials = [
-  { number: '01', title: 'Age fit', detail: 'The current Summer Camp detail references ages 4–10, while older hub content mentions another range. Confirm the eligible age for the session you choose.' },
-  { number: '02', title: 'Dates & hours', detail: 'Review the Summer Camp status page for the completed 2026 schedule, then request the next confirmed dates and daily hours.' },
-  { number: '03', title: 'Drop-off & pickup', detail: 'Confirm arrival, authorized pickup, late-pickup, and any extended-care arrangements before registration.' },
-  { number: '04', title: 'Food & what to bring', detail: 'Ask for the current lunch, snack, water, clothing, and personal-item guidance for the selected session.' },
-  { number: '05', title: 'Health & safety', detail: 'Confirm medication, allergy, emergency-contact, illness, and participant support procedures.' },
-  { number: '06', title: 'Changes & cancellations', detail: 'Review the applicable cancellation, refund, transfer, and missed-day policy before payment.' },
-];
-
 const campActivities = [
   { number: '01', title: 'Create', detail: 'Explore art and creative projects through hands-on making.' },
   { number: '02', title: 'Move', detail: 'Balance focused creative time with movement and active experiences.' },
@@ -32,7 +23,7 @@ const campActivities = [
   <main class="camps-page">
     <section class="camps-hero" aria-labelledby="camps-title">
       <div class="programs-shell">
-        <nav class="programs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>Camps</span></nav>
+
         <div class="camps-hero-grid">
           <div class="camps-hero-copy">
             <span class="eyebrow">SCHOOL-BREAK PROGRAMS · MIDTOWN TORONTO</span>
@@ -40,7 +31,6 @@ const campActivities = [
             <p>Explore the currently supported Summer Camp path, then confirm the session-specific ages, dates, hours, and family essentials before registering.</p>
             <div class="button-row">
               <a class="button button-primary" href={summerCampUrl}>View Summer Camp Status <span aria-hidden="true">→</span></a>
-              <a class="button button-ghost" href="#parent-essentials">Parent Essentials</a>
             </div>
           </div>
           <div class="camps-hero-visual" aria-hidden="true">
@@ -90,29 +80,6 @@ const campActivities = [
         <ol>
           {campActivities.map((activity) => <li><span>{activity.number}</span><div><h3>{activity.title}</h3><p>{activity.detail}</p></div></li>)}
         </ol>
-      </div>
-    </section>
-
-    <section id="parent-essentials" class="camps-essentials" aria-labelledby="camp-essentials-title">
-      <div class="programs-shell">
-        <div class="camps-section-heading">
-          <div><span class="eyebrow">PARENT ESSENTIALS</span><h2 id="camp-essentials-title">Confirm before registration.</h2></div>
-          <p>These practical details vary by offering or still require business confirmation. Families should not have to rely on assumptions.</p>
-        </div>
-        <div class="camps-essential-grid">
-          {parentEssentials.map((item) => <article><span>{item.number}</span><h3>{item.title}</h3><p>{item.detail}</p></article>)}
-        </div>
-        <div class="camps-contact-note"><span aria-hidden="true">i</span><p><strong>Need a clear answer?</strong> Contact SparkPreneurs with your child's age and the session you are considering.</p><a href="mailto:sparkpreneurs.ca@gmail.com?subject=Summer%20Camp%20Question">Ask a Camp Question →</a></div>
-      </div>
-    </section>
-
-    <section class="camps-compare" aria-labelledby="camp-compare-title">
-      <div class="programs-shell camps-compare-layout">
-        <div><span class="eyebrow">CAMP OR AFTER SCHOOL?</span><h2 id="camp-compare-title">Two different family needs.</h2><p>Camps and After School are connected by audience, but they answer different scheduling and care questions.</p></div>
-        <div class="camps-compare-grid">
-          <a href="/camps/" aria-current="page"><span>School breaks</span><h3>Camps</h3><p>Seasonal programming during time away from school. Choose a session, then confirm dates, ages, and daily logistics.</p><b>View Camps ↑</b></a>
-          <a href="/after-school/"><span>Weekday afternoons</span><h3>After School</h3><p>Recurring care from 3 PM to 5 PM with three-, four-, and five-day weekly plan options.</p><b>View After School →</b></a>
-        </div>
       </div>
     </section>
 

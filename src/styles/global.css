@@ -708,3 +708,82 @@
 .registration-weeks input { min-width: 0; max-width: 100%; box-sizing: border-box; }
 .registration-weeks p { font-size: .85rem; line-height: 1.5; }
 .registration-weeks ul { max-height: 12rem; overflow-y: auto; padding-left: 1.2rem; font-size: .85rem; line-height: 1.7; }
+
+/* Bring the Events, Studio Rental, and About heroes closer to the navigation. */
+:is(.events-page, .rental-page, .about-detail-page) > .standard-hero {
+  padding-top: 32px;
+}
+:is(.events-page, .rental-page, .about-detail-page) > .standard-hero .standard-hero-grid {
+  align-items: start;
+}
+@media (max-width: 560px) {
+  :is(.events-page, .rental-page, .about-detail-page) > .standard-hero {
+    padding-top: 24px;
+  }
+}
+/* Let the text determine the image height in the two-column heroes. */
+@media (min-width: 801px) {
+  :is(.events-page, .rental-page, .about-detail-page) > .standard-hero .standard-hero-grid {
+    align-items: stretch;
+  }
+  :is(.events-page, .rental-page, .about-detail-page) > .standard-hero figure {
+    position: relative;
+    min-width: 0;
+  }
+  :is(.events-page, .rental-page, .about-detail-page) > .standard-hero figure img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  :is(.events-page, .rental-page, .about-detail-page) > .standard-hero figcaption {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+  }
+}
+@media (max-width: 800px) {
+  :is(.events-page, .rental-page, .about-detail-page) > .standard-hero figure img {
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+}
+/* Match the Contact hero spacing and alignment to the other information pages. */
+.contact-detail-page > .standard-hero {
+  padding-top: 32px;
+}
+.contact-detail-page > .standard-hero .standard-hero-grid {
+  align-items: stretch;
+}
+@media (max-width: 560px) {
+  .contact-detail-page > .standard-hero {
+    padding-top: 24px;
+  }
+}
+.contact-detail-page .visit-note {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  align-items: center;
+  gap: 16px 12px;
+}
+.contact-detail-page .visit-note h3 {
+  margin: 0;
+}
+.contact-detail-page .visit-note p {
+  grid-column: 1 / -1;
+  text-align: justify;
+}
+@media (min-width: 801px) {
+  .contact-detail-page .contact-info-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+  }
+  .contact-detail-page .contact-info-grid .visit-note {
+    align-self: stretch;
+    align-content: start;
+  }
+}
