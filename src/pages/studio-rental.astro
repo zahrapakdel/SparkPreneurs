@@ -4,13 +4,13 @@ import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { studioRental } from '../data/events';
 
-const mailto = `mailto:sparkpreneurs.ca@gmail.com?subject=${encodeURIComponent(studioRental.inquirySubject)}&body=${encodeURIComponent('Intended use:\nPreferred date and time:\nDuration:\nGroup size:\nSetup or equipment needs:\nAccessibility needs:\nOther details:\n')}`;
+const mailto = `https://mail.google.com/mail/?view=cm&fs=1&to=sparkpreneurs.ca%40gmail.com&su=${encodeURIComponent(studioRental.inquirySubject)}&body=${encodeURIComponent('Intended use:\nPreferred date and time:\nDuration:\nGroup size:\nSetup or equipment needs:\nAccessibility needs:\nOther details:\n')}`;
 ---
 
 <BaseLayout title={studioRental.seoTitle} description={studioRental.seoDescription}>
   <SiteHeader current="studio-rental" ctaHref="#rental-inquiry" ctaLabel="Request Availability" />
   <main class="standard-page rental-page">
-    <section class="standard-hero"><div class="standard-shell standard-hero-grid"><div><nav class="programs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>Studio Rental</span></nav><span class="eyebrow">SPACE-ONLY BOOKING</span><h1>A flexible studio for your <em>plans.</em></h1><p class="standard-lede">{studioRental.shortDescription}</p><div class="button-row"><a class="button button-primary" href="#rental-inquiry">Request Rental Availability</a><a class="button button-ghost" href="/events/">Need a Hosted Event?</a></div></div><figure><img src={studioRental.primaryImage.src} alt={studioRental.primaryImage.alt} /><figcaption>3445 Yonge St. · Second Floor · Toronto</figcaption></figure></div></section>
+    <section class="standard-hero"><div class="standard-shell standard-hero-grid"><div><span class="eyebrow">SPACE-ONLY BOOKING</span><h1>A flexible studio for your <em>plans.</em></h1><p class="standard-lede">{studioRental.shortDescription}</p><div class="button-row"><a class="button button-primary" href="#rental-inquiry">Request Rental Availability</a><a class="button button-ghost" href="/events/">Need a Hosted Event?</a></div></div><figure><img src={studioRental.primaryImage.src} alt={studioRental.primaryImage.alt} /><figcaption>3445 Yonge St. · Second Floor · Toronto</figcaption></figure></div></section>
 
     <section class="rental-distinction"><div class="standard-shell"><div><span>SPACE ONLY</span><strong>Studio Rental</strong><p>You primarily need access to the space for your own use.</p></div><a href="/events/"><span>ACTIVITY + SPACE</span><strong>Hosted Events</strong><p>SparkPreneurs helps plan and lead the creative experience.</p></a></div></section>
 

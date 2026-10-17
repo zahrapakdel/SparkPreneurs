@@ -29,7 +29,7 @@ const adultPrograms = [
   { label: 'All Adult Programs', href: '/programs/adults/' },
   { label: 'Pottery Wheel', href: '/programs/pottery-wheel/' },
   { label: 'Hand-Building Pottery', href: '/programs/hand-building-pottery/' },
-  { label: 'Zumba (Adults & Kids)', href: '/programs/zumba/' },
+  { label: 'Zumba (Adults)', href: '/programs/zumba/' },
 ];
 
 const searchItems = [
@@ -73,6 +73,7 @@ const searchItems = [
       <span class="sr-only">Toggle menu</span><span></span><span></span><span></span>
     </button>
     <nav id="primary-nav" class="primary-nav" aria-label="Main navigation" data-menu>
+      <a href="/" aria-current={Astro.url.pathname === '/' ? 'page' : undefined}>Home</a>
       <div class="nav-programs" data-programs-menu>
         <button class="nav-programs-trigger" type="button" aria-expanded="false" aria-controls="programs-submenu" aria-current={current === 'programs' ? 'page' : undefined} data-programs-trigger>
           Programs
@@ -84,11 +85,11 @@ const searchItems = [
           <a class="programs-submenu-all" href="/programs/">View All Programs <span aria-hidden="true">→</span></a>
           <div class="programs-submenu-groups">
             <section aria-labelledby="kids-programs-heading">
-              <h2 id="kids-programs-heading"><span aria-hidden="true">01</span> Kids</h2>
+              <h2 id="kids-programs-heading">Kids</h2>
               {kidsPrograms.map((program) => <a href={program.href}>{program.label}</a>)}
             </section>
             <section aria-labelledby="adult-programs-heading">
-              <h2 id="adult-programs-heading"><span aria-hidden="true">02</span> Adult</h2>
+              <h2 id="adult-programs-heading">Adult</h2>
               {adultPrograms.map((program) => <a href={program.href}>{program.label}</a>)}
             </section>
           </div>
@@ -104,7 +105,9 @@ const searchItems = [
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
         <span class="nav-search-label">Search</span>
       </button>
+      {/* Temporarily hidden while deciding whether to keep the navbar button.
       <a class="nav-cta" href={ctaHref}>{ctaLabel}</a>
+      */}
     </nav>
   </div>
 </header>
@@ -170,8 +173,8 @@ html { scrollbar-gutter: stable; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  flex: 0 0 212px;
-  width: 212px;
+  flex: 0 0 auto;
+  width: auto;
   min-height: 44px;
   padding: 11px 12px;
   font-size: 12px;

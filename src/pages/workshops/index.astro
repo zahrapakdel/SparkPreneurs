@@ -4,13 +4,6 @@ import SiteHeader from '../../components/SiteHeader.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import ProgramNav from '../../components/ProgramNav.astro';
 
-const interestAreas = [
-  { number: '01', title: 'Art & Mixed Media', description: 'Try focused painting, drawing, collage, fabric painting, and other hands-on art projects.', accent: 'coral' },
-  { number: '02', title: 'Pottery', description: 'Explore short clay experiences when a workshop format, audience, and firing plan are announced.', accent: 'orange' },
-  { number: '03', title: 'Seasonal Activities', description: 'Make something tied to a season, school break, celebration, or special studio theme.', accent: 'blue' },
-  { number: '04', title: 'Creative Technology', description: 'Experiment with design, making, and technology through a focused short-format activity.', accent: 'green' },
-];
-
 const announcementDetails = [
   { number: '01', title: 'Who it is for', description: 'Audience and exact age range.' },
   { number: '02', title: 'When it happens', description: 'Date, start time, end time, and duration.' },
@@ -23,16 +16,15 @@ const announcementDetails = [
   title="Creative Workshops | SparkPreneurs Toronto"
   description="Explore short SparkPreneurs workshops in art, pottery, seasonal activities, and creative technology, and join the interest list for future dates."
 >
-  <a class="programs-skip-link" href="#workshop-availability">Skip to workshop availability</a>
+  <a class="programs-skip-link" href="#main-content">Skip to main content</a>
 
   <SiteHeader current="programs" variant="programs" ctaHref="mailto:sparkpreneurs.ca@gmail.com?subject=Workshop%20Interest" ctaLabel="Join Workshop Interest List" />
 
   <ProgramNav current="workshops" />
 
-  <main class="workshops-page">
+  <main id="main-content" class="workshops-page">
     <section class="workshops-hero" aria-labelledby="workshops-title">
       <div class="programs-shell">
-        <nav class="programs-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>Workshops</span></nav>
         <div class="workshops-hero-frame">
           <div class="workshops-hero-media"><img src="/images/workshops-hero.jpg" alt="A child painting with colourful art materials" /></div>
           <div class="workshops-hero-copy">
@@ -40,7 +32,6 @@ const announcementDetails = [
             <h1 id="workshops-title">Come for one idea. Leave with something <em>you made.</em></h1>
             <p>Explore hands-on workshops in art, pottery, seasonal activities, and creative technology. Workshops are short-format experiences rather than recurring classes.</p>
             <div class="button-row">
-              <a class="button button-primary" href="#workshop-availability">Check Availability <span aria-hidden="true">↓</span></a>
               <a class="button button-ghost" href="mailto:sparkpreneurs.ca@gmail.com?subject=Workshop%20Interest">Join the Interest List</a>
             </div>
             <dl>
@@ -50,24 +41,6 @@ const announcementDetails = [
             </dl>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section id="workshop-availability" class="workshops-availability" aria-labelledby="workshop-availability-title">
-      <div class="programs-shell workshops-availability-grid">
-        <div>
-          <span class="workshops-status">Interest list</span>
-          <span class="eyebrow">CURRENT WORKSHOPS</span>
-          <h2 id="workshop-availability-title">No future workshop date is confirmed yet.</h2>
-          <p>The current source page does not publish an upcoming date, exact age range, time, or price. Join the interest list and include the participant's age, preferred activity, and general availability.</p>
-          <a class="button button-primary" href="mailto:sparkpreneurs.ca@gmail.com?subject=Workshop%20Interest&body=Participant%20age%3A%0APreferred%20activity%3A%0APreferred%20days%20and%20times%3A">Tell Us What Interests You <span aria-hidden="true">→</span></a>
-        </div>
-        <aside>
-          <span aria-hidden="true">✦</span>
-          <h3>Looking for a recurring program?</h3>
-          <p>Workshops are short experiences. Use All Programs to compare recurring classes, camps, and After School.</p>
-          <a href="/programs/">Explore All Programs <span aria-hidden="true">→</span></a>
-        </aside>
       </div>
     </section>
 
@@ -89,25 +62,6 @@ const announcementDetails = [
             <div><dt>Entry</dt><dd>Free · RSVP required</dd></div>
           </dl>
           <p class="workshops-source-note">This flyer is shown as a past-workshop example only. It is not an active RSVP link.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="workshops-interests" aria-labelledby="workshop-interests-title">
-      <div class="programs-shell">
-        <div class="workshops-section-heading">
-          <div><span class="eyebrow">WORKSHOP INTEREST AREAS</span><h2 id="workshop-interests-title">What would you like to try?</h2></div>
-          <p>These are the workshop areas supported by SparkPreneurs' current published content. A category becomes bookable only when its real date, audience, and registration details are supplied.</p>
-        </div>
-        <div class="workshops-interest-grid">
-          {interestAreas.map((item) => (
-            <article class={`workshops-interest-card workshops-interest-card-${item.accent}`}>
-              <span>{item.number}</span>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-              <a href={`mailto:sparkpreneurs.ca@gmail.com?subject=${encodeURIComponent(`${item.title} Workshop Interest`)}`}>Ask about this workshop <span aria-hidden="true">→</span></a>
-            </article>
-          ))}
         </div>
       </div>
     </section>

@@ -102,18 +102,17 @@ button.booking-day.is-start { background: var(--ink); color: var(--white); borde
   .after-school-compact .after-school-afternoon-heading { grid-template-columns: 1fr; gap: 10px; }
   .after-school-compact .after-school-highlight-list { grid-template-columns: 1fr; gap: 10px; }
   .after-school-compact .after-school-step-grid { grid-template-columns: 1fr; gap: 10px; }
-  .after-school-compact .after-school-step-grid li { display: grid; grid-template-columns: 24px 1fr; gap: 4px 10px; }
-  .after-school-compact .after-school-step-grid li > span { grid-row: 1 / 3; padding-top: 3px; }
+  .after-school-compact .after-school-step-grid li { display: grid; grid-template-columns: 1fr; gap: 4px; }
   .after-school-compact .after-school-step-grid h3 { margin: 0; }
-  .after-school-compact .after-school-step-grid p { grid-column: 2; }
+  .after-school-compact .after-school-step-grid p { grid-column: 1; }
 }
 .after-school-compact .after-school-hero { padding: 32px 0 40px; }
 .after-school-compact .program-detail-hero { padding: 40px; gap: 28px 40px; border-radius: 24px; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); }
 .after-school-compact .program-title-panel { min-height: 0; }
 .after-school-compact .program-title-panel h1 { font-size: clamp(32px, 3.5vw, 46px); max-width: 560px; margin: 12px 0 16px; }
 .after-school-compact .program-title-panel > p { font-size: 16px; line-height: 1.75; margin-bottom: 24px; }
-.after-school-compact .program-photo-panel { min-height: 0; height: 230px; padding: 8px; }
-.after-school-compact .program-photo-panel img { min-height: 0; height: 214px; }
+.after-school-compact .program-photo-panel { min-height: 0; height: 270px; padding: 8px; }
+.after-school-compact .program-photo-panel img { min-height: 0; height: 254px; }
 .after-school-compact .program-photo-panel figcaption { bottom: 16px; font-size: 8px; }
 .after-school-compact .program-quick-card { gap: 10px; }
 .after-school-compact .program-quick-card p { padding: 10px 12px; box-shadow: none; }
@@ -137,8 +136,8 @@ button.booking-day.is-start { background: var(--ink); color: var(--white); borde
   .after-school-compact .after-school-hero { padding: 16px 0 20px; }
   .after-school-compact .program-detail-hero { grid-template-columns: 1fr; grid-template-rows: auto auto; padding: 22px 18px; gap: 18px; }
   .after-school-compact .program-title-panel h1 { font-size: 33px; }
-  .after-school-compact .program-photo-panel { display: block; height: 160px; padding: 0; }
-  .after-school-compact .program-photo-panel img { height: 160px; width: 100%; border-radius: 16px; }
+  .after-school-compact .program-photo-panel { display: block; height: 190px; padding: 0; }
+  .after-school-compact .program-photo-panel img { height: 190px; width: 100%; border-radius: 16px; }
   .after-school-compact .program-quick-card { grid-column: 1; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
   .after-school-compact .program-quick-card p { padding: 9px; grid-template-columns: 1fr; gap: 3px; }
   .after-school-compact .program-quick-card i { display: none; }
