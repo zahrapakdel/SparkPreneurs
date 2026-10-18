@@ -94,7 +94,7 @@ const skills = [
         { label: 'Course', value: '4 sessions' },
         { label: 'Class length', value: '2 hours' },
         { label: 'Experience', value: 'Beginner friendly' },
-        { label: 'Offer price', originalValue: '$250', value: '$180' },
+        { label: 'Course price', value: '$250' },
       ]}
     >
       <Fragment slot="actions">
@@ -167,7 +167,7 @@ const skills = [
                 <li>Glazing and firing for one piece</li>
               </ul>
             </div>
-            <div class="pottery-registration-price"><div><span class="eyebrow">COURSE OFFER</span><span class="pottery-offer-price"><del>$250</del><strong>$180</strong></span></div><span>For all four sessions</span></div>
+            <div class="pottery-registration-price"><div><span class="eyebrow">COURSE PRICE</span><span class="pottery-offer-price"><strong>$250</strong></span></div><span>For all four sessions</span></div>
           </div>
 
           <aside class="course-registration-card" aria-label="Complete your Pottery Wheel registration">
@@ -181,6 +181,17 @@ const skills = [
               </div>
               <div class="course-form-row"><label>Email<input type="email" name="email" autocomplete="email" required /></label><label>Phone<input type="tel" name="phone" autocomplete="tel" required /></label></div>
               <label>Experience level<select name="experienceLevel" required><option value="">Choose one</option><option value="beginner">Beginner</option><option value="some-experience">Some experience</option><option value="experienced">Experienced</option></select></label>
+              <div class="pottery-discount" data-pottery-discount hidden>
+                <label>Discount code (optional)<input name="discountCode" type="text" maxlength="40" autocomplete="off" autocapitalize="characters" aria-describedby="pottery-discount-help" /></label>
+                <button class="button button-ghost" type="button" data-pottery-discount-apply>Apply code</button>
+                <p id="pottery-discount-help">Each code can be used once per email across all registrations.</p>
+              </div>
+              <dl class="pottery-discount-summary" data-pottery-discount-summary hidden aria-live="polite">
+                <div><dt>Course price</dt><dd data-pottery-discount-subtotal></dd></div>
+                <div><dt>Discount</dt><dd data-pottery-discount-saving></dd></div>
+                <div><dt>Tax</dt><dd data-pottery-discount-tax></dd></div>
+                <div><dt>Total</dt><dd data-pottery-discount-total></dd></div>
+              </dl>
               <details class="pottery-message"><summary>Add a message (optional)</summary><label>Message<textarea name="message" rows="2"></textarea></label></details>
               <label class="course-consent"><input type="checkbox" name="consent" value="yes" required /><span>I agree to the registration and privacy terms.</span></label>
             </form>
@@ -241,6 +252,17 @@ const skills = [
       const returnPageUrl = 'https://sparkpreneurs.ca/pottery-wheel/';
       let backendReady = false;
       let isSubmitting = false;
+      let discountsSupported = false;
+      let appliedQuote = null;
+      const discountPanel = registration.querySelector('[data-pottery-discount]');
+      const quotePanel = registration.querySelector('[data-pottery-discount-summary]');
+      const discountInput = form.querySelector('[name="discountCode"]');
+      const emailInput = form.querySelector('[name="email"]');
+      const quoteKey = () => JSON.stringify([
+        selectedInput()?.dataset.itemCode || '', emailInput.value.trim().toLowerCase(),
+        discountInput.value.trim().toUpperCase(),
+      ]);
+      const resetQuote = () => { appliedQuote = null; quotePanel.hidden = true; };
 
       const setStatus = (message, type = '') => { status.textContent = message || ''; status.dataset.status = type; };
       const selectedInput = () => cohortInputs.find((input) => input.checked) || null;
@@ -277,10 +299,42 @@ const skills = [
       const checkBackend = async () => {
         if (!appsScriptUrl || !programCode) { setStatus('Secure checkout is temporarily unavailable. Please contact SparkPreneurs.', 'warning'); updateSelection(); return; }
         setStatus('Preparing secure checkout…', 'pending');
-        try { const result = await post({ action: 'ping', programCode }); backendReady = result.programCode === programCode && result.stripeMode === requiredStripeMode; setStatus(backendReady ? '' : 'Secure checkout is temporarily unavailable. Please contact SparkPreneurs.', backendReady ? '' : 'warning'); }
+        try { const result = await post({ action: 'ping', programCode }); backendReady = result.programCode === programCode && result.stripeMode === requiredStripeMode; discountsSupported = backendReady && result.discountsSupported === true; discountPanel.hidden = !discountsSupported; setStatus(backendReady ? '' : 'Secure checkout is temporarily unavailable. Please contact SparkPreneurs.', backendReady ? '' : 'warning'); }
         catch { backendReady = false; setStatus('Secure checkout is temporarily unavailable. Please contact SparkPreneurs.', 'warning'); }
         updateSelection();
       };
+      const requestQuote = async () => {
+        const input = selectedInput();
+        if (!input) throw new Error('Please choose a schedule before applying a discount.');
+        if (!emailInput.reportValidity()) throw new Error('Enter your email before applying a discount.');
+        const key = quoteKey();
+        const result = await post({ action: 'quoteCheckout', programCode,
+          selectedItemCodes: [input.dataset.itemCode], email: emailInput.value.trim(),
+          discountCode: discountInput.value.trim() });
+        if (key !== quoteKey()) throw new Error('Your details changed. Please apply the code again.');
+        for (const field of ['subtotalCents', 'discountCents', 'taxCents', 'expectedAmountCents']) {
+          if (!Number.isSafeInteger(result[field]) || result[field] < 0) throw new Error('The registration service returned an invalid total.');
+        }
+        if (result.subtotalCents - result.discountCents + result.taxCents !== result.expectedAmountCents || result.expectedAmountCents <= 0) {
+          throw new Error('The registration service returned an invalid total.');
+        }
+        appliedQuote = { ...result, key };
+        const money = cents => new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(cents / 100);
+        registration.querySelector('[data-pottery-discount-subtotal]').textContent = money(result.subtotalCents);
+        registration.querySelector('[data-pottery-discount-saving]').textContent = '-' + money(result.discountCents);
+        registration.querySelector('[data-pottery-discount-tax]').textContent = money(result.taxCents);
+        registration.querySelector('[data-pottery-discount-total]').textContent = money(result.expectedAmountCents);
+        quotePanel.hidden = false;
+      };
+      registration.querySelector('[data-pottery-discount-apply]').addEventListener('click', async () => {
+        if (!discountsSupported || isSubmitting) return;
+        resetQuote(); isSubmitting = true; updateSelection(); setStatus('Checking your code and total…', 'pending');
+        try { await requestQuote(); setStatus('Your total is ready. Continue to secure payment when you are ready.', 'success'); }
+        catch (error) { resetQuote(); setStatus(error.message || 'The discount could not be checked.', 'error'); }
+        finally { isSubmitting = false; updateSelection(); }
+      });
+      emailInput.addEventListener('input', resetQuote);
+      discountInput.addEventListener('input', resetQuote);
       const replaceCheckoutQuery = () => { const url = new URL(location.href); url.searchParams.delete('session_id'); url.searchParams.delete('payment'); history.replaceState({}, document.title, url.pathname + url.search + url.hash); };
       const verifyReturn = async () => {
         const params = new URLSearchParams(location.search); const sessionId = params.get('session_id'); const payment = params.get('payment');
@@ -292,24 +346,32 @@ const skills = [
         finally { replaceCheckoutQuery(); }
       };
       const beginCheckout = async () => {
+        if (isSubmitting) return;
         const input = selectedInput();
         if (!input) { setStatus('Please choose one four-session cohort before continuing.', 'warning'); document.querySelector('#schedule')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
         if (!backendReady) { setStatus('Secure checkout is temporarily unavailable. Please contact SparkPreneurs.', 'warning'); return; }
         if (!form.reportValidity()) { setStatus('Please complete the required registration fields before continuing.', 'warning'); return; }
+        if (discountsSupported && (!appliedQuote || appliedQuote.key !== quoteKey())) {
+          isSubmitting = true; updateSelection();
+          try { await requestQuote(); setStatus('Review the total above, then click Continue to Secure Payment again.', 'pending'); }
+          catch (error) { resetQuote(); setStatus(error.message || 'Your total could not be checked.', 'error'); }
+          finally { isSubmitting = false; updateSelection(); }
+          return;
+        }
         const values = new FormData(form);
         const itemCode = input.dataset.itemCode;
         if (!itemCode) { setStatus('Please choose a valid cohort before continuing.', 'warning'); return; }
         isSubmitting = true; submitButton.textContent = 'Opening Secure Payment…'; updateSelection(); setStatus('Checking your cohort and registration total…', 'pending');
         try {
-          const result = await post({ action: 'createCheckoutSession', programCode, selectedItemCodes: [itemCode], displayedAmountCents: 25000, successUrl: `${returnPageUrl}?payment=success&session_id={CHECKOUT_SESSION_ID}`, cancelUrl: `${returnPageUrl}?payment=cancelled#registration`, firstName: String(values.get('firstName') || '').trim(), lastName: String(values.get('lastName') || '').trim(), email: String(values.get('email') || '').trim(), phone: String(values.get('phone') || '').trim(), experienceLevel: String(values.get('experienceLevel') || '').trim(), message: String(values.get('message') || '').trim(), consent: values.get('consent') === 'yes' });
+          const result = await post({ action: 'createCheckoutSession', programCode, selectedItemCodes: [itemCode], discountCode: discountsSupported ? appliedQuote.discountCode : '', displayedAmountCents: discountsSupported ? appliedQuote.expectedAmountCents : 25000, successUrl: `${returnPageUrl}?payment=success&session_id={CHECKOUT_SESSION_ID}`, cancelUrl: `${returnPageUrl}?payment=cancelled#registration`, firstName: String(values.get('firstName') || '').trim(), lastName: String(values.get('lastName') || '').trim(), email: String(values.get('email') || '').trim(), phone: String(values.get('phone') || '').trim(), experienceLevel: String(values.get('experienceLevel') || '').trim(), message: String(values.get('message') || '').trim(), consent: values.get('consent') === 'yes' });
           const checkoutUrl = new URL(result.checkoutUrl);
           if (checkoutUrl.protocol !== 'https:' || checkoutUrl.hostname !== 'checkout.stripe.com') throw new Error('Stripe returned an invalid payment link.');
           location.assign(checkoutUrl.href);
         } catch (error) { isSubmitting = false; submitButton.textContent = 'Continue to Secure Payment'; setStatus(error.message || 'Payment could not be started. Please try again.', 'error'); updateSelection(); }
       };
 
-      cohortInputs.forEach((input) => input.addEventListener('change', () => { setStatus(''); updateSelection(); }));
-      clearButton.addEventListener('click', () => { cohortInputs.forEach((input) => { input.checked = false; }); form.reset(); setStatus('Your cohort selection and form details were cleared.', 'warning'); updateSelection(); });
+      cohortInputs.forEach((input) => input.addEventListener('change', () => { resetQuote(); setStatus(''); updateSelection(); }));
+      clearButton.addEventListener('click', () => { cohortInputs.forEach((input) => { input.checked = false; }); form.reset(); resetQuote(); setStatus('Your cohort selection and form details were cleared.', 'warning'); updateSelection(); });
       form.addEventListener('submit', (event) => { event.preventDefault(); beginCheckout(); });
       submitButton.addEventListener('click', beginCheckout);
       updateSelection(); checkBackend(); verifyReturn();
@@ -318,6 +380,14 @@ const skills = [
 </BaseLayout>
 
 <style>
+  .pottery-discount { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: end; }
+  .pottery-discount[hidden], .pottery-discount-summary[hidden] { display: none; }
+  .pottery-discount .button { padding: 10px 12px; font-size: 12px; }
+  .pottery-discount p { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: 12px; }
+  .pottery-discount-summary { margin: 0; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+  .pottery-discount-summary > div { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; }
+  .pottery-discount-summary dd { margin: 0; font-weight: 700; }
+  .pottery-discount-summary > div:last-child { border-top: 1px solid var(--line); margin-top: 6px; padding-top: 10px; }
   .pottery-offer-price { display: inline-flex; flex-wrap: wrap; gap: 0.5rem; align-items: baseline; }
   .pottery-offer-price del { color: #b42318; }
   .pottery-offer-price strong { font-weight: 700; }

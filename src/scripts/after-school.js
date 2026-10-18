@@ -35,12 +35,16 @@ if (shop) {
   const renderCalendar = createBookingCalendar(find('[data-booking-calendar]'), value => { start.value = value; render(); });
   const money = cents => new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(cents / 100);
   const status = (message, type = '') => { find('[data-status]').textContent = message; find('[data-status]').dataset.type = type; };
+  let discountController;
   const post = async payload => {
+    if (payload.action === 'createCheckoutSession' && discountController) payload = await discountController.checkoutPayload(payload);
     const response = await fetch(shop.dataset.endpoint, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
     const data = await response.json();
     if (!response.ok || data.success === false) throw new Error(data.error || 'Registration could not be processed.');
     return data;
   };
+  discountController = globalThis.createRegistrationDiscount?.(form, { programCode: shop.dataset.programCode, post, selection: () => ({ ...Object.fromEntries(new FormData(form)), selectedItemCodes: selected ? [selected.code] : [], startDate: start.value, weekCount: Number(count.value) }) });
+
   function selection() {
     return bookingWeeks(start.value, Number(count.value), calendar || { firstWeek: start.min });
   }
@@ -151,6 +155,7 @@ if (shop) {
   async function initialize() {
     try {
       const health = await post({ action: 'ping' });
+      discountController?.setSupported(health.discountsSupported === true);
       if (!health.success || health.programCode !== shop.dataset.programCode || health.bookingVersion !== 1 || health.stripeMode !== 'live') throw new Error('Weekly checkout is being updated. Please contact SparkPreneurs to register.');
       calendar = await post({ action: 'getBookingCalendar', programCode: shop.dataset.programCode });
       start.min = calendar.firstWeek > nextMonday() ? calendar.firstWeek : nextMonday();

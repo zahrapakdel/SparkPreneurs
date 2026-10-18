@@ -1,0 +1,26 @@
+---
+import controller from '../scripts/registration-discounts.js?raw';
+---
+<div class="registration-discount" data-registration-discount hidden>
+  <label>Discount code (optional)<input name="discountCode" type="text" maxlength="40" autocomplete="off" autocapitalize="characters" /></label>
+  <button type="button" class="button button-ghost" data-discount-apply>Apply code</button>
+  <p>Each code can be used once per email across all registrations.</p>
+  <p data-discount-status role="status" aria-live="polite"></p>
+  <dl data-discount-summary hidden>
+    <div><dt>Subtotal</dt><dd data-discount-subtotal></dd></div>
+    <div><dt>Discount</dt><dd data-discount-saving></dd></div>
+    <div><dt>Tax</dt><dd data-discount-tax></dd></div>
+    <div><dt>Total</dt><dd data-discount-total></dd></div>
+  </dl>
+</div>
+<script is:inline set:html={controller} />
+<style>
+  .registration-discount { display: grid; gap: 10px; min-width: 0; margin: 16px 0; }
+  .registration-discount[hidden], .registration-discount [hidden] { display: none; }
+  .registration-discount .button { justify-self: start; padding: 9px 14px; font-size: 12px; }
+  .registration-discount p { margin: 0; color: var(--muted); font-size: 12px; }
+  .registration-discount p[data-status="error"] { color: #b42318; }
+  .registration-discount dl { margin: 0; padding: 14px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; }
+  .registration-discount dl > div { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; }
+  .registration-discount dd { margin: 0; font-weight: 700; }
+</style>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import RegistrationDiscount from '../../components/RegistrationDiscount.astro';
 import ProgramHero from '../../components/ProgramHero.astro';
 import ProgramNav from '../../components/ProgramNav.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
@@ -92,6 +93,7 @@ const endpoint = 'https://script.google.com/macros/s/AKfycbwVPX0ZPegfSM4mZzcrOrV
               <label>Parent/guardian name<input type="text" name="parentName" autocomplete="name" required /></label>
               <label>Parent/guardian email<input type="email" name="parentEmail" autocomplete="email" required /></label>
               <label>Parent/guardian phone<input type="tel" name="phone" autocomplete="tel" required /></label>
+            <RegistrationDiscount />
             </form>
             <p class="course-registration-note">Registration is confirmed only after Stripe verifies payment.</p>
             <p class="course-registration-status" data-printing-status role="status" aria-live="polite"></p>
@@ -127,8 +129,11 @@ const endpoint = 'https://script.google.com/macros/s/AKfycbwVPX0ZPegfSM4mZzcrOrV
         checkout.disabled = !selected || !ready || submitting;
         clear.disabled = !selected || submitting;
       };
-      const post = async (payload) => { const response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) }); const text = await response.text(); let result; try { result = JSON.parse(text); } catch { throw new Error('The registration service returned an unreadable response.'); } if (!response.ok || result.success === false) throw new Error(result.error || 'Registration could not be processed.'); return result; };
-      const checkBackend = async () => { try { const result = await post({ action: 'ping', programCode }); ready = Array.isArray(result.programs) && result.programs.includes(programCode) && result.stripeMode === 'live'; if (!ready) setStatus('Secure checkout is being updated. Please contact SparkPreneurs.', 'warning'); } catch { setStatus('Secure checkout is temporarily unavailable. Please contact SparkPreneurs.', 'warning'); } render(); };
+      let discountController;
+      const post = async (payload) => { if (payload.action === 'createCheckoutSession' && discountController) payload = await discountController.checkoutPayload(payload); const response = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) }); const text = await response.text(); let result; try { result = JSON.parse(text); } catch { throw new Error('The registration service returned an unreadable response.'); } if (!response.ok || result.success === false) throw new Error(result.error || 'Registration could not be processed.'); return result; };
+      discountController = globalThis.createRegistrationDiscount?.(form, { programCode, post, selection: () => ({ selectedItemCodes: selected ? [itemCode] : [], parentEmail: String(new FormData(form).get('parentEmail') || '') }) });
+
+      const checkBackend = async () => { try { const result = await post({ action: 'ping', programCode }); discountController?.setSupported(result.discountsSupported === true); ready = (result.programCode === programCode || (Array.isArray(result.programs) && result.programs.includes(programCode))) && result.stripeMode === 'live'; if (!ready) setStatus('Secure checkout is being updated. Please contact SparkPreneurs.', 'warning'); } catch { setStatus('Secure checkout is temporarily unavailable. Please contact SparkPreneurs.', 'warning'); } render(); };
       const clearQuery = () => history.replaceState({}, document.title, location.pathname + '#registration');
       const verifyReturn = async () => { const params = new URLSearchParams(location.search); if (params.get('payment') === 'canceled') { setStatus('Payment was canceled. No charge was made.', 'warning'); clearQuery(); return; } const sessionId = params.get('session_id'); if (params.get('payment') !== 'success' || !sessionId) return; setStatus('Checking payment status…', 'pending'); try { const result = await post({ action: 'verifyCheckoutSession', programCode, stripeSessionId: sessionId }); if (!(result.paid || result.paymentStatus === 'paid')) throw new Error('Stripe has not confirmed this payment yet.'); selected = false; setStatus('Payment verified. Your registration has been received.', 'success'); } catch (error) { setStatus(error.message || 'Payment could not be verified. Please contact SparkPreneurs.', 'error'); } finally { clearQuery(); render(); } };
       select.addEventListener('click', () => { selected = !selected; if (ready) setStatus(''); render(); }); clear.addEventListener('click', () => { selected = false; setStatus(''); render(); });

@@ -3,7 +3,7 @@ const PROGRAM_CODE = "after_school_program";
 const PROGRAM_NAME = "After School Program";
 const MINIMUM_WEEKS = 4;
 const CURRENCY = "cad";
-const SCRIPT_VERSION = "2026-09-19-1";
+const SCRIPT_VERSION = "2026-10-18-after_school_program-discounts-1";
 const STRIPE_API_BASE = "https://api.stripe.com/v1";
 const MAX_REQUEST_BYTES = 30000;
 const DEFAULT_ENROLLMENT_NOTIFICATION_EMAILS = "sparkpreneurs.ca@gmail.com";
@@ -106,7 +106,7 @@ function doGet() {
     minimumWeeks: MINIMUM_WEEKS,
     bookingVersion: 1,
     version: SCRIPT_VERSION,
-    stripeMode: getStripeMode_()
+    discountsSupported: discountServiceConfigured_(), stripeMode: getStripeMode_()
   });
 }
 
@@ -124,13 +124,17 @@ function doPost(event) {
         minimumWeeks: MINIMUM_WEEKS,
     bookingVersion: 1,
         version: SCRIPT_VERSION,
-        stripeMode: getStripeMode_()
+        discountsSupported: discountServiceConfigured_(), stripeMode: getStripeMode_()
       });
     }
 
     if (action === "getBookingCalendar") {
       requireProgramCode_(data.programCode);
       return jsonResponse_(Object.assign({ success: true }, getBookingCalendar_()));
+    }
+
+    if (action === "quoteCheckout") {
+      return jsonResponse_(quoteCheckout_(data));
     }
 
     if (action === "createCheckoutSession") {
@@ -184,6 +188,7 @@ function createCheckoutSession_(data) {
   const registration = Object.assign(normalizeRegistration_(data), booking, { programCode: PROGRAM_CODE });
   const selectedItemCodes = normalizeSelectedItemCodes_(data.selectedItemCodes || data.items || data.itemCode);
   const pricing = calculateTrustedPricing_(selectedItemCodes, booking);
+  discountApplyPricing_(data, pricing, Number(getActiveProducts_()[selectedItemCodes[0]].taxRatePercent || 0));
   const displayedAmountCents = toOptionalInteger_(data.displayedAmountCents);
 
   if (displayedAmountCents !== null && displayedAmountCents !== pricing.expectedAmountCents) {
@@ -216,7 +221,9 @@ function createCheckoutSession_(data) {
   }
 
   try {
+    discountReservePricing_(pricing, orderId);
     const session = createStripeCheckoutSession_(orderId, pricing, registration, urls);
+    discountAttachSession_(pricing, orderId, session);
     updateAttemptByOrderId_(orderId, {
       updatedAt: nowIso_(),
       stripeSessionId: session.id || "",
@@ -284,6 +291,7 @@ function verifyCheckoutSessionLocked_(data) {
     throw clientError_("Paid amount does not match the registration total.");
   }
 
+  discountConfirmSession_(sessionId);
   const registrationsSheet = getSpreadsheet_().getSheetByName(REGISTRATIONS_SHEET_NAME);
   const existing = registrationsSheet
     ? readRows_(registrationsSheet, REGISTRATION_HEADERS).filter(function(row) {
@@ -882,4 +890,85 @@ function reconcilePendingPayments() {
     try { verifyCheckoutSession_({ sessionId: String(attempt.stripeSessionId) }); }
     catch (error) { console.log("Payment reconciliation failed for order " + attempt.orderId); }
   });
+}
+
+function quoteCheckout_(data) {
+  if (data.programCode !== PROGRAM_CODE) throw clientError_("Invalid program.");
+  const booking = normalizeBooking_(data);
+  const codes = normalizeSelectedItemCodes_(data.selectedItemCodes);
+  const pricing = calculateTrustedPricing_(codes, booking);
+  return discountPricingResponse_(discountApplyPricing_(data, pricing, Number(getActiveProducts_()[codes[0]].taxRatePercent || 0)));
+}
+
+// BEGIN SHARED DISCOUNT CLIENT
+// Embedded unchanged at the end of each standalone registration backend.
+// Only server-side Script Properties contain the shared service credentials.
+function discountServiceConfigured_() {
+  const properties = PropertiesService.getScriptProperties();
+  return Boolean(properties.getProperty("DISCOUNT_SERVICE_URL") && properties.getProperty("DISCOUNT_SERVICE_KEY"));
+}
+
+function discountMode_() {
+  const mode = String(PropertiesService.getScriptProperties().getProperty("STRIPE_MODE") || "").trim().toLowerCase();
+  if (mode !== "test" && mode !== "live") throw new Error("Invalid Stripe mode.");
+  return mode;
+}
+
+function discountServiceRequest_(action, data) {
+  const properties = PropertiesService.getScriptProperties();
+  const url = properties.getProperty("DISCOUNT_SERVICE_URL");
+  const key = properties.getProperty("DISCOUNT_SERVICE_KEY");
+  if (!url || !/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(url) || !key) throw clientError_("Discounts are temporarily unavailable. Please try again later.");
+  const response = UrlFetchApp.fetch(url, { method: "post", contentType: "text/plain;charset=utf-8", muteHttpExceptions: true,
+    payload: JSON.stringify(Object.assign({}, data, { action: action, programCode: PROGRAM_CODE, stripeMode: discountMode_(), serviceKey: key })) });
+  const result = JSON.parse(response.getContentText());
+  if (response.getResponseCode() !== 200 || !result || result.success !== true) throw clientError_(result.error || "The discount could not be checked.");
+  return result;
+}
+
+function discountApplyPricing_(data, pricing, taxRatePercent) {
+  pricing.discountCode = String(data.discountCode || "").trim().toUpperCase();
+  pricing.discountCents = 0;
+  if (!pricing.discountCode) return pricing;
+  if (!/^[A-Z0-9][A-Z0-9_-]{0,39}$/.test(pricing.discountCode)) throw clientError_("Enter a valid discount code.");
+  const email = String(data.parentEmail || data.email || "").trim().toLowerCase();
+  const quote = discountServiceRequest_("quote", { discountCode: pricing.discountCode, email: email });
+  if (!Number.isSafeInteger(quote.discountCents) || quote.discountCents <= 0 || !Number.isFinite(taxRatePercent) || taxRatePercent < 0 || taxRatePercent > 100) throw new Error("Invalid discount quote.");
+  if (quote.discountCents >= pricing.subtotalCents) throw clientError_("This discount cannot be used with this registration.");
+  pricing.discountCents = quote.discountCents;
+  pricing.taxCents = Math.round((pricing.subtotalCents - quote.discountCents) * taxRatePercent / 100);
+  pricing.totalCents = pricing.subtotalCents - quote.discountCents + pricing.taxCents;
+  pricing.expectedAmountCents = pricing.totalCents;
+  pricing.discountEmail = email;
+  if (pricing.items && pricing.items.length === 1) {
+    pricing.items[0].taxCents = pricing.taxCents;
+    pricing.items[0].totalCents = pricing.totalCents;
+  }
+  return pricing;
+}
+
+function discountPricingResponse_(pricing) {
+  return { success: true, discountCode: pricing.discountCode || "", discountCents: pricing.discountCents || 0,
+    subtotalCents: pricing.subtotalCents, taxCents: pricing.taxCents,
+    expectedAmountCents: pricing.expectedAmountCents === undefined ? pricing.totalCents : pricing.expectedAmountCents };
+}
+
+function discountReservePricing_(pricing, orderId) {
+  if (!pricing.discountCode) return;
+  const reservation = discountServiceRequest_("reserve", { discountCode: pricing.discountCode, discountCents: pricing.discountCents,
+    email: pricing.discountEmail, orderId: orderId, expectedAmountCents: pricing.totalCents });
+  if (!reservation.token) throw new Error("The discount reservation could not be created.");
+  pricing.discountReservation = reservation.token;
+}
+
+function discountAttachSession_(pricing, orderId, session) {
+  if (!pricing.discountCode) return;
+  discountServiceRequest_("attach", { discountCode: pricing.discountCode, email: pricing.discountEmail,
+    orderId: orderId, token: pricing.discountReservation, stripeSessionId: session.id });
+}
+
+function discountConfirmSession_(sessionId) {
+  if (!discountServiceConfigured_()) return;
+  try { discountServiceRequest_("confirm", { stripeSessionId: sessionId }); }
+  catch (_) { console.log("Discount usage will be reconciled on the next discount request."); }
 }
