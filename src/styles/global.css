@@ -787,3 +787,43 @@
     align-content: start;
   }
 }
+
+/* Consistent space above every page hero, including below the program navigation. */
+:root { --page-hero-top-space: 32px; }
+main[class] > section:is(
+  .hero,
+  .course-hero,
+  .programs-hero,
+  .kids-hero,
+  .adults-hero,
+  .pottery-hero,
+  .camps-hero,
+  .summer-detail-hero,
+  .workshops-hero,
+  .standard-hero,
+  .waiver-hero
+) {
+  margin-top: 0;
+  padding-top: var(--page-hero-top-space);
+}
+@media (max-width: 780px) {
+  :root { --page-hero-top-space: 24px; }
+}
+
+/* Keep adult program actions aligned at the bottom of each card. */
+.adults-page .programs-card {
+  display: flex;
+  flex-direction: column;
+}
+.adults-page .programs-card-image {
+  flex-shrink: 0;
+}
+.adults-page .programs-card-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.adults-page .programs-card-link {
+  margin-top: auto;
+  align-self: flex-start;
+}

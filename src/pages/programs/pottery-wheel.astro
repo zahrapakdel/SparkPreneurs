@@ -12,10 +12,10 @@ const cohorts = [
     label: 'Monday Evening Cohort',
     name: 'Monday Evenings',
     time: '5:30 PM–7:30 PM',
-    datesText: 'August 10, 17, 24 and 31',
+    datesText: 'October 5, 12, 19 and 26',
     dates: [
-      ['2026-08-10', 'August 10'], ['2026-08-17', 'August 17'],
-      ['2026-08-24', 'August 24'], ['2026-08-31', 'August 31'],
+      ['2026-10-05', 'October 5'], ['2026-10-12', 'October 12'],
+      ['2026-10-19', 'October 19'], ['2026-10-26', 'October 26'],
     ],
   },
   {
@@ -25,10 +25,10 @@ const cohorts = [
     label: 'Friday Morning Cohort',
     name: 'Friday Mornings',
     time: '11:00 AM–1:00 PM',
-    datesText: 'August 14, 21 and 28; September 4',
+    datesText: 'October 2, 9, 16 and 23',
     dates: [
-      ['2026-08-14', 'August 14'], ['2026-08-21', 'August 21'],
-      ['2026-08-28', 'August 28'], ['2026-09-04', 'September 4'],
+      ['2026-10-02', 'October 2'], ['2026-10-09', 'October 9'],
+      ['2026-10-16', 'October 16'], ['2026-10-23', 'October 23'],
     ],
   },
   {
@@ -37,10 +37,10 @@ const cohorts = [
     label: 'Wednesday Evening Cohort',
     name: 'Wednesday Evenings',
     time: '5:30 PM–7:30 PM',
-    datesText: 'August 12, 19 and 26; September 2',
+    datesText: 'October 7, 14, 21 and 28',
     dates: [
-      ['2026-08-12', 'August 12'], ['2026-08-19', 'August 19'],
-      ['2026-08-26', 'August 26'], ['2026-09-02', 'September 2'],
+      ['2026-10-07', 'October 7'], ['2026-10-14', 'October 14'],
+      ['2026-10-21', 'October 21'], ['2026-10-28', 'October 28'],
     ],
   },
   {
@@ -49,10 +49,10 @@ const cohorts = [
     label: 'Saturday Afternoon Cohort',
     name: 'Saturday Afternoons',
     time: '1:00 PM–3:00 PM',
-    datesText: 'August 15, 22 and 29; September 5',
+    datesText: 'October 3, 10, 17 and 24',
     dates: [
-      ['2026-08-15', 'August 15'], ['2026-08-22', 'August 22'],
-      ['2026-08-29', 'August 29'], ['2026-09-05', 'September 5'],
+      ['2026-10-03', 'October 3'], ['2026-10-10', 'October 10'],
+      ['2026-10-17', 'October 17'], ['2026-10-24', 'October 24'],
     ],
   },
 ];
@@ -237,7 +237,8 @@ const skills = [
       const appsScriptUrl = registration.dataset.appsScriptUrl || '';
       const programCode = registration.dataset.programCode || '';
       const requiredStripeMode = registration.dataset.requiredStripeMode || 'test';
-      const returnPageUrl = 'https://sparkpreneurs.ca/programs/pottery-wheel/';
+      // The payment service allows the original route; Netlify redirects it to this page.
+      const returnPageUrl = 'https://sparkpreneurs.ca/pottery-wheel/';
       let backendReady = false;
       let isSubmitting = false;
 

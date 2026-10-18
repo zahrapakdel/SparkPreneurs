@@ -29,7 +29,7 @@ const audienceLabels: Record<Audience, string> = {
   'kids-youth': 'Kids & Youth', adults: 'Adults', 'all-ages': 'All ages', unspecified: 'Audience to be confirmed',
 };
 const activityLabels: Record<Activity, string> = {
-  'art-mixed-media': 'Creative Mix', pottery: 'Pottery', 'creative-technology': 'Creative Technology', 'wellness-movement': 'Wellness & Movement',
+  'art-mixed-media': 'Creative Mix', pottery: 'Pottery', 'creative-technology': 'Creative Technology', 'wellness-movement': 'Wellness',
 };
 const formatLabels: Record<ProgramFormat, string> = {
   class: 'Class', workshop: 'Short workshop', camp: 'Camp', 'after-school': 'After School', 'seasonal-pass': 'Session or seasonal pass',

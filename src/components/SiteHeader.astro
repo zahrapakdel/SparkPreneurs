@@ -155,6 +155,7 @@ const searchItems = [
 html { scrollbar-gutter: stable; }
 
 .site-header .nav-shell {
+  max-width: 1260px;
   height: 88px;
   gap: 24px;
 }
@@ -162,13 +163,14 @@ html { scrollbar-gutter: stable; }
 .site-header .brand { flex: 0 0 168px; }
 .site-header .brand img { width: 168px; height: auto; }
 .site-header .primary-nav {
-  gap: 16px;
+  gap: 24px;
   font-size: 12px;
   line-height: 1.6;
   font-weight: 600;
 }
 .site-header .primary-nav > a,
 .site-header .nav-programs-trigger { white-space: nowrap; }
+.site-header .nav-programs-trigger { gap: 4px; }
 .site-header .nav-cta {
   display: inline-flex;
   align-items: center;
@@ -219,7 +221,7 @@ html { scrollbar-gutter: stable; }
   .site-header .nav-programs { width: 100%; }
   .site-header .nav-programs-trigger {
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 12px;
   }
   .site-header .programs-submenu {

@@ -37,88 +37,92 @@ const potteryComparison = [
   <ProgramNav current="adults" />
 
   <main class="adults-page">
-    <section class="adults-hero" aria-labelledby="adults-title">
+    <section class="kids-hero" aria-labelledby="adults-title">
       <div class="programs-shell">
-        <div class="adults-hero-frame">
-          <div class="adults-hero-copy">
+        <div class="kids-hero-grid">
+          <div class="kids-hero-copy">
             <span class="eyebrow">ADULT PROGRAMS · MIDTOWN TORONTO</span>
             <h1 id="adults-title">Make time to make <em>something.</em></h1>
             <p>Step away from the everyday and work with clay in a guided, hands-on setting. Compare SparkPreneurs' two current adult pottery courses or ask about other creative interests.</p>
             <div class="button-row">
               <a class="button button-primary" href="#current-programs">View Current Programs <span aria-hidden="true">↓</span></a>
             </div>
+            <ul class="kids-hero-facts" aria-label="Adult program highlights">
+              <li><span>01</span><strong>Pottery classes</strong></li>
+              <li><span>02</span><strong>Guided making</strong></li>
+              <li><span>03</span><strong>Creative time</strong></li>
+            </ul>
           </div>
-          <figure class="adults-hero-image"><img src="/images/gallery-pottery.jpg" alt="An adult working with clay at SparkPreneurs" /><figcaption><span aria-hidden="true">✦</span> Hands-on creative time</figcaption></figure>
-          <dl class="adults-hero-facts">
-            <div><dt>Current focus</dt><dd>Adult pottery</dd></div>
-            <div><dt>Choose between</dt><dd>Wheel or hand-building</dd></div>
-            <div><dt>Course format</dt><dd>Four sessions</dd></div>
-            <div><dt>Studio</dt><dd>3445 Yonge St.</dd></div>
-          </dl>
+          <div class="kids-hero-gallery">
+            <figure class="kids-hero-gallery-main"><img src="/images/gallery-pottery.jpg" alt="An adult working with clay at SparkPreneurs" /></figure>
+            <figure class="kids-hero-gallery-top"><img src="/images/potter-wheel-hero.jpg" alt="Pottery wheel practice at SparkPreneurs" /></figure>
+            <figure class="kids-hero-gallery-bottom"><img src="/images/hand-building-pottery.jpg" alt="Hand-building pottery in the studio" /></figure>
+            <span aria-hidden="true">&#10022;</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="current-programs" class="adults-current" aria-labelledby="adults-current-title">
+    <section class="kids-fit-note" aria-labelledby="adult-fit-title">
       <div class="programs-shell">
-        <div class="adults-section-heading">
+        <span aria-hidden="true">i</span>
+        <div><h2 id="adult-fit-title">Check the details before registering.</h2><p>Review the selected program page for current schedules, pricing, firing information, and pickup details.</p></div>
+        <a href="mailto:sparkpreneurs.ca@gmail.com?subject=Adult%20Program%20Fit">Ask About Fit <span aria-hidden="true">&#8594;</span></a>
+      </div>
+    </section>
+    <section id="current-programs" class="kids-current" aria-labelledby="adults-current-title">
+      <div class="programs-shell">
+        <div class="kids-section-heading">
           <div><span class="eyebrow">CURRENT ADULT PROGRAMS</span><h2 id="adults-current-title">Two ways to work with clay.</h2></div>
           <p>Both current adult paths are four-session pottery courses. Open either program to review its latest schedules, price, and registration options.</p>
         </div>
-        <div class="programs-card-grid adults-program-grid">
+        <div class="programs-card-grid kids-program-grid">
           {adultProgramCards.map((program, index) => <ProgramDiscoveryCard program={program} eager={index === 0} />)}
         </div>
       </div>
     </section>
 
-    <section id="compare-pottery" class="adults-comparison" aria-labelledby="comparison-title">
-      <div class="programs-shell">
-        <div class="adults-comparison-heading">
+    <section id="compare-pottery" class="kids-formats" aria-labelledby="comparison-title">
+      <div class="programs-shell kids-formats-layout">
+        <div class="kids-formats-heading">
           <span class="eyebrow">WHEEL OR HAND-BUILDING?</span>
           <h2 id="comparison-title">Choose how you want to shape clay.</h2>
           <p>The main difference is the making process. Compare the emphasis of each course, then check its detail page for current practical information.</p>
         </div>
-        <div class="adults-comparison-grid">
+        <div class="kids-format-list">
           {potteryComparison.map((option) => (
-            <article class="adults-comparison-card">
-              <div class="adults-comparison-image"><img src={option.image} alt={`${option.title} pottery process at SparkPreneurs`} loading="lazy" decoding="async" /><span>{option.number}</span></div>
-              <div class="adults-comparison-copy">
-                <h3>{option.title}</h3>
-                <p>{option.approach}</p>
-                <ul>{option.techniques.map((technique) => <li><span aria-hidden="true">✦</span>{technique}</li>)}</ul>
-                <a href={option.href}>Explore {option.title} <span aria-hidden="true">→</span></a>
-              </div>
-            </article>
+            <a href={option.href}>
+              <span>{option.number}</span>
+              <div><small>Four-session pottery course</small><h3>{option.title}</h3><p>{option.approach}</p><p>{option.techniques.join(' · ')}</p></div>
+              <b aria-hidden="true">&#8594;</b>
+            </a>
           ))}
         </div>
-        <div class="adults-comparison-note"><span aria-hidden="true">i</span><p><strong>Before registering:</strong> review the selected program page for current schedules, pricing, firing information, and pickup details.</p></div>
       </div>
     </section>
 
-    <section class="adults-interest" aria-labelledby="adults-interest-title">
-      <div class="programs-shell adults-interest-layout">
-        <div class="adults-interest-copy">
+    <section class="kids-interest" aria-labelledby="adults-interest-title">
+      <div class="programs-shell kids-interest-layout">
+        <div class="kids-interest-copy">
           <span class="eyebrow">BY REQUEST & INTEREST</span>
           <h2 id="adults-interest-title">Interested in another creative direction?</h2>
           <p>Acrylic painting, watercolour, drawing, and sketching are request or interest areas. Papier-Mâché and adult 3D Printing still require current availability confirmation, so they are not presented as bookable programs.</p>
-          <a class="button button-primary" href="mailto:sparkpreneurs.ca@gmail.com?subject=Adult%20Program%20Interest">Share Your Interest <span aria-hidden="true">→</span></a>
+          <a class="button button-secondary" href="mailto:sparkpreneurs.ca@gmail.com?subject=Adult%20Program%20Interest">Share Your Interest <span aria-hidden="true">→</span></a>
         </div>
-        <div class="adults-interest-list" aria-label="Adult creative interest areas">
-          <div><span>01</span><strong>Acrylic & Watercolour</strong><small>By request / interest</small></div>
-          <div><span>02</span><strong>Drawing & Sketching</strong><small>By request / interest</small></div>
-          <div><span>03</span><strong>Papier-Mâché</strong><small>Availability to confirm</small></div>
-          <div><span>04</span><strong>Adult 3D Printing</strong><small>Availability to confirm</small></div>
+        <div class="kids-interest-board" aria-label="Adult creative interest areas">
+          <span>Acrylic &amp; Watercolour</span><span>Drawing &amp; Sketching</span><span>Papier-M&#226;ch&#233;</span><span>Adult 3D Printing</span>
+          <p>Painting and drawing by request or interest. Papier-M&#226;ch&#233; and adult 3D Printing availability to confirm.</p>
         </div>
       </div>
     </section>
 
-    <section class="adults-gallery" aria-labelledby="adults-gallery-title">
+    <section class="kids-gallery-preview" aria-labelledby="adults-gallery-title">
       <div class="programs-shell">
-        <div class="adults-section-heading compact">
+        <div class="kids-section-heading compact">
           <div><span class="eyebrow">AT THE STUDIO</span><h2 id="adults-gallery-title">Hands-on, social, and creative.</h2></div>
           <p>Explore materials, develop techniques, and make something tangible in SparkPreneurs' Midtown Toronto studio.</p>
         </div>
-        <div class="adults-gallery-grid">
+        <div class="kids-gallery-grid">
           <figure><img src="/images/gallery-pottery.jpg" alt="An adult hand-building with clay at SparkPreneurs" loading="lazy" /></figure>
           <figure><img src="/images/potter-wheel-hero.jpg" alt="Clay being shaped on a pottery wheel" loading="lazy" /></figure>
           <figure><img src="/images/studio.jpg" alt="The SparkPreneurs creative studio" loading="lazy" /></figure>
@@ -126,10 +130,10 @@ const potteryComparison = [
       </div>
     </section>
 
-    <section class="adults-faq" aria-labelledby="adults-faq-title">
-      <div class="programs-shell adults-faq-layout">
+    <section class="kids-faq" aria-labelledby="adults-faq-title">
+      <div class="programs-shell kids-faq-layout">
         <div><span class="eyebrow">CHOOSING A PROGRAM</span><h2 id="adults-faq-title">A few useful distinctions.</h2><p>For schedule-specific questions, use the current details on the relevant program page.</p></div>
-        <div class="adults-faq-list">
+        <div class="kids-faq-list">
           <details><summary>What is the difference between wheel and hand-building pottery?</summary><p>Wheel pottery focuses on centring and shaping clay while it rotates. Hand-building creates forms directly through techniques such as pinching, coiling, and slab-building.</p></details>
           <details><summary>Where can I find current dates and prices?</summary><p>Open the individual pottery program page. Current cohorts, schedules, pricing, and registration actions belong there rather than on this audience overview.</p></details>
           <details><summary>Can I ask about painting or drawing?</summary><p>Yes. These are interest or by-request areas rather than confirmed current programs. Email SparkPreneurs with the medium you are interested in and your general availability.</p></details>

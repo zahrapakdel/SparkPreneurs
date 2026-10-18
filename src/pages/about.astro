@@ -7,10 +7,16 @@ import SiteFooter from '../components/SiteFooter.astro';
 <BaseLayout title="About SparkPreneurs | Creative Community Studio Toronto" description="Learn about SparkPreneurs' mission to build creativity, confidence, well-being, and entrepreneurial thinking through hands-on experiences in Midtown Toronto.">
   <SiteHeader current="about" />
   <main class="standard-page about-detail-page">
-    <section class="standard-hero">
-      <div class="standard-shell standard-hero-grid">
-        <div><span class="eyebrow">ABOUT SPARKPRENEURS</span><h1>Every great idea begins with a <em>spark.</em></h1><p class="standard-lede">Our mission is to inspire creativity, confidence, well-being, and entrepreneurial thinking through hands-on experiences that empower people of all ages.</p><div class="button-row"><a class="button button-primary" href="/programs/">Explore Programs <span aria-hidden="true">→</span></a><a class="button button-ghost" href="/contact/">Contact Us</a></div></div>
-        <figure><img src="/images/studio.jpg" alt="The SparkPreneurs studio space in Midtown Toronto" /><figcaption>3445 Yonge St. · Second Floor · Toronto</figcaption></figure>
+    <section class="camps-hero" aria-labelledby="about-title">
+      <div class="programs-shell">
+        <div class="camps-hero-grid">
+          <div class="camps-hero-copy"><span class="eyebrow">ABOUT SPARKPRENEURS</span><h1 id="about-title">Every great idea begins with a <em>spark.</em></h1><p>Our mission is to inspire creativity, confidence, well-being, and entrepreneurial thinking through hands-on experiences that empower people of all ages.</p><div class="button-row"><a class="button button-primary" href="/programs/">Explore Programs <span aria-hidden="true">→</span></a><a class="button button-ghost" href="/contact/">Contact Us</a></div></div>
+          <div class="camps-hero-visual">
+            <figure class="camps-hero-main"><img src="/images/studio.jpg" alt="The SparkPreneurs studio space in Midtown Toronto" /></figure>
+            <figure class="camps-hero-small"><img src="/images/hero-collage.jpg" alt="The SparkPreneurs creative community" /></figure>
+            <span aria-hidden="true">&#10022;</span>
+          </div>
+        </div>
       </div>
     </section>
 
