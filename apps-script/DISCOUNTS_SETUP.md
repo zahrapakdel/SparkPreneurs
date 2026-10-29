@@ -1,8 +1,9 @@
 # KUMON25: $25 off, once per email across registrations
 
 All active checkout forms support this discount: Pottery Wheel, Hand-Building
-Pottery, 3D Printing, Zumba, and After School. The Summer Camp page currently
-shows historical information and has no active checkout to connect.
+Pottery, 3D Printing, Zumba, and After School. Summer Camp uses its original
+shared checkout service, whose deployed API does not advertise discount support;
+its checkout does not offer this discount.
 
 Pottery Wheel's base price is $250. KUMON25 reduces it to $225 before any
 applicable tax. The other programs retain their trusted Products-tab prices.

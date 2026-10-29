@@ -43,7 +43,7 @@ if (shop) {
     if (!response.ok || data.success === false) throw new Error(data.error || 'Registration could not be processed.');
     return data;
   };
-  discountController = globalThis.createRegistrationDiscount?.(form, { programCode: shop.dataset.programCode, post, selection: () => ({ ...Object.fromEntries(new FormData(form)), selectedItemCodes: selected ? [selected.code] : [], startDate: start.value, weekCount: Number(count.value) }) });
+  discountController = globalThis.createRegistrationDiscount?.(form, { programCode: shop.dataset.programCode, post, selection: () => ({ parentEmail: form.querySelector('[name="parentEmail"]').value, selectedItemCodes: selected ? [selected.code] : [], startDate: start.value, weekCount: Number(count.value) }) });
 
   function selection() {
     return bookingWeeks(start.value, Number(count.value), calendar || { firstWeek: start.min });

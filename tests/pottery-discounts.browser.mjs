@@ -104,6 +104,8 @@ try {
           ? { success: true, version: 'test', programCode: code, programs: [code], stripeMode: 'live', discountsSupported: true, bookingVersion: 1 }
           : data.action === 'getBookingCalendar'
             ? { success: true, firstWeek: '2026-01-05', lastWeek: '2099-12-28', closedWeeks: [] }
+            : data.action === 'verifyCheckoutSession'
+              ? { success: true, paid: true, paymentStatus: 'paid' }
             : data.action === 'quoteCheckout'
               ? data.email === 'used@example.test'
                 ? { success: false, error: 'This discount code has already been used with this email.' }
@@ -139,10 +141,54 @@ try {
       assert.equal(checkout.discountCode, 'KUMON25');
       assert.equal(checkout.parentEmail, 'new@example.test');
       assert.equal(checkout.displayedAmountCents, 22500);
+      await page.goto(`http://127.0.0.1:${server.address().port}${program.route}?payment=success&session_id=cs_live_mock`);
+      await page.waitForFunction(() => [...document.querySelectorAll('[data-status], [data-course-status], [data-zumba-status], [data-printing-status]')].some(element => element.dataset.type === 'success' || element.dataset.status === 'success'));
+      assert.ok(requests.some(request => request.action === 'verifyCheckoutSession'));
       assert.deepEqual(errors, [], program.route);
       console.log(`${program.route} ${viewport.width}px: applied discount, reuse error, checkout and layout OK`);
       await context.close();
     }
+  }
+  for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844 }]) {
+    const context = await browser.newContext({ viewport });
+    await context.addInitScript(() => sessionStorage.setItem('sparkpreneurs-featured-offers-v1', 'dismissed'));
+    const page = await context.newPage();
+    const requests = [], errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    await page.route('https://fonts.googleapis.com/**', route => route.fulfill({ contentType: 'text/css', body: '' }));
+    await page.route('https://script.google.com/**', async route => {
+      const data = route.request().postDataJSON(); requests.push(data);
+      const body = data.action === 'ping'
+        ? { success: true, programs: ['summer2026_4_10_sessions'] }
+        : data.action === 'verifyCheckoutSession' ? { success: true, paymentStatus: 'paid' }
+          : { success: true, checkoutUrl: 'https://checkout.stripe.com/c/pay/mock' };
+      await route.fulfill({ contentType: 'application/json', headers: { 'Access-Control-Allow-Origin': '*' }, body: JSON.stringify(body) });
+    });
+    await page.route('https://checkout.stripe.com/**', route => route.fulfill({ contentType: 'text/html', body: '<h1>Mock Stripe checkout</h1>' }));
+    const campUrl = `http://127.0.0.1:${server.address().port}/camps/summer-camp/`;
+    await page.goto(campUrl);
+    assert.equal(await page.locator('.is-ended [data-camp-session]').count(), 0);
+    const poster = page.locator('[data-camp-week="07"] [data-camp-poster-toggle]');
+    await poster.focus();
+    await page.waitForFunction(() => document.querySelector('[data-camp-week="07"] [data-camp-poster-toggle]').getAttribute('aria-expanded') === 'true');
+    await page.locator('[data-week="7"][data-session="FULL"]').click();
+    await page.locator('[name="studentName"]').fill('Test Camper');
+    await page.locator('[name="parentName"]').fill('Test Parent');
+    await page.locator('[name="parentEmail"]').fill('camp@example.test');
+    await page.locator('[name="phone"]').fill('4165550100');
+    assert.equal(await page.locator('[data-camp-total]').textContent(), '$237.30');
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth), false, 'Camp horizontal overflow');
+    await page.locator('[data-camp-checkout]').click();
+    await page.waitForURL('https://checkout.stripe.com/**');
+    const checkout = requests.find(data => data.action === 'createCheckoutSession');
+    assert.deepEqual(checkout.selectedWeeks, ['W7AM', 'W7PM']);
+    assert.equal(checkout.displayedAmountCents, 23730);
+    await page.goto(campUrl + '?payment=success&session_id=cs_live_mock');
+    await page.waitForFunction(() => document.querySelector('[data-camp-status]').dataset.status === 'success');
+    assert.equal(requests.find(data => data.action === 'verifyCheckoutSession').stripeSessionId, 'cs_live_mock');
+    assert.deepEqual(errors, []);
+    console.log(`Summer Camp ${viewport.width}px: full-day checkout, backend verification and layout OK`);
+    await context.close();
   }
 } finally {
   if (browser) await browser.close();

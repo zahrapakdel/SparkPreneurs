@@ -42,6 +42,12 @@
   force = true
 
 [[redirects]]
+  from = "/summer-camp/*"
+  to = "/camps/summer-camp/"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/about-us/*"
   to = "/about/"
   status = 301
