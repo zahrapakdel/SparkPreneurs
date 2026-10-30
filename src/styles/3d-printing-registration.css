@@ -16,7 +16,7 @@
 .printing-schedule p { margin: 12px 0 0; font-size: 14px; line-height: 1.45; }
 .printing-class-card > .button { margin-top: 28px; width: 100%; }
 .printing-page .course-registration-card { padding: 24px; background: #fffaf5; border-color: rgba(194,65,12,.16); }
-.printing-page .course-registration-card h3 { margin: 0 0 18px; font-size: 24px; }
+.printing-page .course-registration-card h3 { margin: 0 0 18px; font-size: 20px; }
 .printing-page .course-registration-card label { font-size: 14px; gap: 7px; }
 .printing-page .course-registration-card input { min-height: 52px; background: white; font-size: 16px; }
 .printing-cart-list { list-style: none; padding: 0; margin: 0 0 20px; }

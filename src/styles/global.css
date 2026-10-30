@@ -439,20 +439,59 @@
 
 /* Summer Camp source-content migration */
 .summer-detail-hero-poster img{object-position:center 27%}
-.summer-week-grid-with-art article{display:flex;flex-direction:column;padding:0;border-top:0}
-.summer-week-art{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;background:#f4efe5}
-.summer-week-art img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .35s ease}
-.summer-week-art span{position:absolute;right:12px;bottom:12px;padding:7px 10px;border-radius:100px;background:rgba(20,40,66,.9);color:white;font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;opacity:0;transform:translateY(5px);transition:opacity .25s ease,transform .25s ease}
-.summer-week-art:hover img{transform:scale(1.025)}
-.summer-week-art:hover span,.summer-week-art:focus-visible span{opacity:1;transform:none}
-.summer-week-copy{display:flex;flex:1;flex-direction:column;padding:22px}
-.summer-week-copy .summer-week-meta{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.summer-week-copy .summer-week-meta span{color:var(--orange-deep);font-size:8px;font-weight:800;letter-spacing:.06em}
-.summer-week-copy .summer-week-meta b{padding:4px 7px;border-radius:100px;background:rgba(139,47,39,.09);color:#8b2f27;font-size:8px;text-transform:uppercase}
-.summer-week-copy h3{min-height:0;margin:16px 0 7px}
-.summer-week-copy .summer-week-date{margin:0 0 12px;color:var(--summer-green-deep);font-weight:800}
-.summer-week-copy>p:not(.summer-week-date){margin:0 0 14px;color:var(--muted);font-size:12px}
-.summer-week-copy small{margin-top:auto;color:var(--orange-deep);font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+/* Full posters reveal their details on hover, keyboard focus, or tap. */
+.camp-week-group+.camp-week-group{margin-top:56px}
+.camp-week-group-heading{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.camp-week-group-heading h3{margin:0;font-size:27px;letter-spacing:-.025em}
+.camp-week-group-heading>span{padding:5px 10px;border:1px solid var(--line);border-radius:100px;color:var(--muted);font-size:11px;font-weight:600}
+.camp-week-group:not(.camp-week-group--ended) .camp-poster-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:704px;margin-inline:auto}
+.camp-poster-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start;max-width:1068px;margin-inline:auto}
+.camp-poster-card{position:relative;min-width:0;overflow:hidden;border:1px solid #dedbd2;border-radius:20px;background:#eeeae1;box-shadow:0 8px 24px rgba(30,58,95,.08)}
+.camp-poster-art{position:relative;display:block;width:100%;aspect-ratio:5/7;padding:0;border:0;background:white;font:inherit;text-align:inherit;cursor:pointer}
+.camp-poster-art img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;background:white}
+.camp-poster-stamp{position:absolute;right:16px;top:16px;display:inline-flex;align-items:center;gap:7px;padding:8px 12px;border:1px solid rgba(255,255,255,.3);border-radius:100px;background:var(--ink);color:white;box-shadow:0 3px 10px rgba(30,58,95,.12);font-size:10px;font-weight:700;letter-spacing:.025em}
+.camp-poster-stamp--available{background:var(--summer-green-deep)}
+.camp-poster-info{position:absolute;z-index:1;inset:auto 12px 12px;margin:0;padding:16px;border:1px solid rgba(255,255,255,.95);border-radius:14px;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);box-shadow:0 5px 24px rgba(30,58,95,.17);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(20px);transition:opacity .25s ease,transform .3s cubic-bezier(.2,.7,.2,1),visibility .3s}
+.camp-poster-card.is-open .camp-poster-info{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
+.camp-poster-art:focus-visible{outline:3px solid var(--orange);outline-offset:-5px;border-radius:20px}
+.camp-poster-close{display:grid;place-items:center;flex:0 0 24px;width:24px;height:24px;padding:0;border:0;border-radius:50%;background:var(--paper-alt);color:var(--ink);cursor:pointer}
+.camp-poster-close:hover{background:var(--line)}
+.camp-poster-close:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.camp-poster-info{transition:none;transform:none}}
+.camp-poster-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:21px}
+.camp-poster-meta>span{color:var(--orange-deep);font:700 10px var(--mono);letter-spacing:.1em}
+.camp-poster-note{display:inline-block;margin:7px 0 0;color:var(--muted);font-size:10px}
+.camp-poster-date{margin:0;color:var(--ink);font-size:11px;font-weight:600;text-align:right}
+.camp-poster-sessions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:12px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.camp-poster-sessions>div{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;padding:0 3px;text-align:center}
+.camp-poster-sessions>div+div{border-left:1px solid var(--line)}
+.camp-poster-sessions span{color:var(--ink);font-size:10px;font-weight:700}
+.camp-poster-sessions small{color:var(--muted);font-size:9px;white-space:nowrap}
+.camp-poster-sessions strong{margin-top:2px;color:var(--ink);font:700 22px var(--display);letter-spacing:-.025em}
+.camp-poster-footer{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
+.camp-poster-footer>span{color:var(--muted);font-size:9px}
+.camp-poster-footer>a{display:inline-flex;align-items:center;gap:12px;padding:10px 14px;border-radius:8px;background:var(--ink);color:white;font-size:11px;font-weight:700}
+.camp-poster-footer>a:hover{background:var(--orange-deep)}
+.camp-poster-footer>a:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.camp-poster-footer button{padding:8px 10px;border:1px solid #deddd5;border-radius:7px;background:#eeeee8;color:#64675f;font:600 10px var(--body);cursor:not-allowed}
+.camp-poster-card.is-ended{background:#eeede8}
+.camp-poster-card.is-ended .camp-poster-art img{filter:grayscale(.8) saturate(.4);opacity:.66}
+.camp-poster-card.is-ended .camp-poster-meta>span{color:var(--muted)}
+.camp-poster-card.is-ended .camp-poster-sessions strong{color:#626962}
+@media(min-width:681px) and (max-width:1050px){.camp-poster-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:704px;gap:24px}}
+@media(max-width:680px){.camp-poster-grid,.camp-week-group:not(.camp-week-group--ended) .camp-poster-grid{grid-template-columns:minmax(0,1fr);gap:24px;max-width:320px;margin-inline:auto}.camp-poster-info{padding:14px}.camp-poster-sessions small{font-size:10px}.camp-poster-footer>span{font-size:10px}}
+@media(max-width:360px){.camp-poster-info{inset:auto 8px 8px;padding:10px}.camp-poster-sessions{gap:2px;margin-top:8px;padding-block:8px}.camp-poster-sessions>div{gap:2px}.camp-poster-sessions small{font-size:8px}.camp-poster-sessions strong{font-size:18px}.camp-poster-date{font-size:10px}.camp-poster-footer{flex-wrap:nowrap;gap:6px}.camp-poster-footer>span{font-size:8px}.camp-poster-footer>a{gap:7px;padding:8px 10px;font-size:10px}}
+/* Ended weeks: a single row with three posters between round controls. */
+.camp-poster-slider{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;align-items:center;gap:16px;max-width:1188px;margin-inline:auto}
+.camp-poster-slider .camp-poster-grid{display:flex;flex-wrap:nowrap;gap:24px;max-width:none;width:100%;margin:0;padding-block:4px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none}
+.camp-poster-slider .camp-poster-grid::-webkit-scrollbar{display:none}
+.camp-poster-slider .camp-poster-card{flex:0 0 calc((100% - 48px)/3);scroll-snap-align:start;scroll-snap-stop:always}
+.camp-slider-arrow{display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid var(--line);border-radius:50%;background:white;color:var(--ink);box-shadow:0 3px 10px rgba(30,58,95,.06);cursor:pointer;transition:background .2s,color .2s}
+.camp-slider-arrow:hover:not(:disabled){border-color:var(--ink);background:var(--ink);color:white}
+.camp-slider-arrow:disabled{opacity:.35;box-shadow:none;cursor:default}
+.camp-slider-arrow:focus-visible,.camp-poster-slider .camp-poster-grid:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+@media(min-width:681px) and (max-width:1050px){.camp-poster-slider{gap:12px}.camp-poster-slider .camp-poster-card{flex-basis:calc((100% - 24px)/2)}}
+@media(max-width:680px){.camp-poster-slider{grid-template-columns:1fr 44px 44px 1fr;gap:16px 12px;max-width:320px}.camp-poster-slider .camp-poster-grid{grid-column:1/-1;grid-row:1}.camp-poster-slider .camp-poster-card{flex-basis:100%}.camp-slider-prev{grid-column:2;grid-row:2}.camp-slider-next{grid-column:3;grid-row:2}}
 .summer-session-grid s{margin-right:5px;color:var(--muted);font-size:13px;font-weight:600}
 .summer-registration-summary{padding:96px 0;background:var(--ink);color:white}
 .summer-registration-layout{display:grid;grid-template-columns:1fr .85fr;align-items:center;gap:90px}
@@ -469,7 +508,7 @@
 .summer-registration-card>p{margin:17px 0 0;padding:13px;border-left:3px solid var(--orange);background:var(--paper);color:var(--muted);font-size:10px}
 @media(max-width:880px){.summer-registration-layout{grid-template-columns:1fr;gap:42px}.summer-registration-card{max-width:620px}}
 @media(max-width:780px){.summer-registration-summary{padding:72px 0}}
-@media(max-width:560px){.summer-week-art span{opacity:1;transform:none}.summer-registration-card{padding:22px 18px}.summer-registration-card ul{grid-template-columns:1fr}}
+@media(max-width:560px){.summer-registration-card{padding:22px 18px}.summer-registration-card ul{grid-template-columns:1fr}}
 
 /* Workshops listing */
 .workshops-page{--workshop-coral:#e9574f;--workshop-blue:#2659a5;--workshop-green:#3b7857;background:var(--paper)}
@@ -786,4 +825,44 @@
     align-self: stretch;
     align-content: start;
   }
+}
+
+/* Consistent space above every page hero, including below the program navigation. */
+:root { --page-hero-top-space: 32px; }
+main[class] > section:is(
+  .hero,
+  .course-hero,
+  .programs-hero,
+  .kids-hero,
+  .adults-hero,
+  .pottery-hero,
+  .camps-hero,
+  .summer-detail-hero,
+  .workshops-hero,
+  .standard-hero,
+  .waiver-hero
+) {
+  margin-top: 0;
+  padding-top: var(--page-hero-top-space);
+}
+@media (max-width: 780px) {
+  :root { --page-hero-top-space: 24px; }
+}
+
+/* Keep adult program actions aligned at the bottom of each card. */
+.adults-page .programs-card {
+  display: flex;
+  flex-direction: column;
+}
+.adults-page .programs-card-image {
+  flex-shrink: 0;
+}
+.adults-page .programs-card-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.adults-page .programs-card-link {
+  margin-top: auto;
+  align-self: flex-start;
 }

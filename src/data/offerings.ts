@@ -35,7 +35,7 @@ export const offerings: Offering[] = [
     id: `pottery-wheel-2026-${key}`, programId: 'pottery-wheel',
     programCode: 'august_september_2026_pottery_wheel', itemCode, label, status: 'ended',
     startDate: dates[0], endDate: dates[dates.length - 1], sessionDates: [...dates], dayOfWeek, startTime, endTime,
-    numberOfSessions: 4, duration: '2 hours per session', price: 18000, originalPrice: 25000, discountLabel: 'Offer price', currency: 'CAD', taxDisplay: null,
+    numberOfSessions: 4, duration: '2 hours per session', price: 25000, currency: 'CAD', taxDisplay: null,
     displayDataLastSynced: '2026-10-03', registrationMode: 'checkout', location,
   })),
   ...handBuildingSources.map(([itemCode, label, dayOfWeek, startTime, endTime]): Offering => ({

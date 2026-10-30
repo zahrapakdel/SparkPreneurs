@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import RegistrationDiscount from '../components/RegistrationDiscount.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import '../styles/after-school-registration.css';
@@ -106,6 +107,7 @@ const registrationSteps = [
                 <label>Parent or guardian’s name<input name="parentName" type="text" autocomplete="section-parent name" placeholder="First and last name" required /></label>
                 <label>Email address<input name="parentEmail" type="email" autocomplete="email" placeholder="you@example.com" required /></label>
                 <label>Phone number<input name="phone" type="tel" autocomplete="tel" placeholder="Your best contact number" required /></label>
+                <RegistrationDiscount />
               </fieldset>
             </form>
             <div class="registration-totals" data-totals hidden><p><span data-subtotal-label>Subtotal (4 weeks)</span><strong data-subtotal></strong></p><p><span>HST</span><strong data-tax></strong></p><p class="total"><span>Total</span><strong data-total></strong></p></div>

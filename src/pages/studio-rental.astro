@@ -10,7 +10,18 @@ const mailto = `https://mail.google.com/mail/?view=cm&fs=1&to=sparkpreneurs.ca%4
 <BaseLayout title={studioRental.seoTitle} description={studioRental.seoDescription}>
   <SiteHeader current="studio-rental" ctaHref="#rental-inquiry" ctaLabel="Request Availability" />
   <main class="standard-page rental-page">
-    <section class="standard-hero"><div class="standard-shell standard-hero-grid"><div><span class="eyebrow">SPACE-ONLY BOOKING</span><h1>A flexible studio for your <em>plans.</em></h1><p class="standard-lede">{studioRental.shortDescription}</p><div class="button-row"><a class="button button-primary" href="#rental-inquiry">Request Rental Availability</a><a class="button button-ghost" href="/events/">Need a Hosted Event?</a></div></div><figure><img src={studioRental.primaryImage.src} alt={studioRental.primaryImage.alt} /><figcaption>3445 Yonge St. · Second Floor · Toronto</figcaption></figure></div></section>
+    <section class="camps-hero" aria-labelledby="rental-title">
+      <div class="programs-shell">
+        <div class="camps-hero-grid">
+          <div class="camps-hero-copy"><span class="eyebrow">SPACE-ONLY BOOKING</span><h1 id="rental-title">A flexible studio for your <em>plans.</em></h1><p>{studioRental.shortDescription}</p><div class="button-row"><a class="button button-primary" href="#rental-inquiry">Request Rental Availability</a><a class="button button-ghost" href="/events/">Need a Hosted Event?</a></div></div>
+          <div class="camps-hero-visual">
+            <figure class="camps-hero-main"><img src={studioRental.primaryImage.src} alt={studioRental.primaryImage.alt} /></figure>
+            <figure class="camps-hero-small"><img src="/images/events.jpg" alt="A creative gathering setup in the studio" /></figure>
+            <span aria-hidden="true">&#10022;</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section class="rental-distinction"><div class="standard-shell"><div><span>SPACE ONLY</span><strong>Studio Rental</strong><p>You primarily need access to the space for your own use.</p></div><a href="/events/"><span>ACTIVITY + SPACE</span><strong>Hosted Events</strong><p>SparkPreneurs helps plan and lead the creative experience.</p></a></div></section>
 
